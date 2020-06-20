@@ -1,0 +1,110 @@
+<div class="work-order-detail">
+  <!--标题-->
+  <div>
+    <span class="work-order-detail-title">{{pageTitle}}</span>
+  </div>
+  <div style="padding-left: 20px">
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+    <div style="padding-left: 20px">
+      <button class="link-button" nz-button
+              nzType="primary"
+              (click)="submit()"
+              type="button"
+              *ngIf="isShowBtn"
+              [nzLoading]="isLoading" [disabled]="!formStatus.getValid()"
+              style="margin-right: 20px">{{commonLanguage.confirm}}
+      </button>
+      <button type="button" class="link-button" nz-button nzType="danger" (click)="goBack()">{{commonLanguage.cancel}}</button>
+    </div>
+  </div>
+</div>
+<!--单位模板-->
+<ng-template #accountabilityUnit let-formGroup="formGroup" let-col="col">
+  <div style="width: 300px">
+    <input class="area-name" [disabled]="unitDisabled" [title]="selectUnitName?selectUnitName:''"
+           [(ngModel)]="selectUnitName" readonly>
+    <span class="open-button" [class.btn-disabled]="unitDisabled" (click)="showSelectorModal()"><i
+      class="icon-fiLink fiLink-search-index iconfont"></i></span>
+  </div>
+</ng-template>
+<!--告警模板-->
+<ng-template #alarmTemp let-formGroup="formGroup" let-col="col">
+  <div>
+    <input class="area-name" [title]="alarmName?alarmName:''" [disabled]="unitDisabled"
+           readonly [(ngModel)]="alarmName" >
+    <span class="open-button"  (click)="showAlarmSelectorModal()" [class.btn-disabled]="unitDisabled"><i
+      class="icon-fiLink fiLink-search-index iconfont"></i></span>
+  </div>
+</ng-template>
+
+<!--告警选择-->
+<ng-template #alarmSelectorModalTemp>
+  <div style="margin-top: -35px;">
+    <xc-table [dataSet]="_dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)">
+    </xc-table>
+  </div>
+</ng-template>
+
+<!--单位选择-->
+<ng-template #selectorModalTemp>
+  <div class="facility-type-config-box">
+    <div class="facility-type-config-item facility-type-config-title">
+      <div class="checkbox">
+        <!--<label nz-checkbox [(ngModel)]="isAllChecked" [nzIndeterminate]="isIndeterminate" (ngModelChange)="checkAll($event)">
+        </label>-->
+      </div>
+      <div class="split-line"></div>
+      <div class="text">
+        {{workOrderLanguage.accountabilityUnitName}}
+      </div>
+    </div>
+    <div class="accountabilityUnit-list">
+      <nz-radio-group [(ngModel)]="unitRadioValue">
+        <div class="facility-type-config-item config-item-content" *ngFor="let item of accountabilityUnitList">
+          <!--<div class="checkbox">
+            &lt;!&ndash;<label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="change()"></label>&ndash;&gt;
+            <label nz-radio [(ngModel)]="item.checked" (ngModelChange)="change()"></label>
+          </div>
+          <div class="text hidden" [title]="item.label">{{item.label}}</div>-->
+          <label nz-radio [nzValue]="item.value">
+            <span class="text  hidden" [title]="item.label">{{item.label}}</span>
+          </label>
+        </div>
+      </nz-radio-group>
+    </div>
+  </div>
+</ng-template>
+
+<!--告警单选框-->
+<ng-template #radioTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedAlarmId" (ngModelChange)="selectedAlarmChange($event, data)">
+    <label nz-radio [nzValue]="data.id"></label>
+  </nz-radio-group>
+</ng-template>
+<!--期望完工时间-->
+<ng-template #ecTimeTemp let-formGroup="formGroup" let-col="col">
+  <form [formGroup]="formGroup">
+    <nz-date-picker [nzDisabledDate]="disabledEndDate"  nzShowTime formControlName="ecTime"></nz-date-picker>
+  </form>
+</ng-template>
+<!--工单状态-->
+<ng-template #statusTemp let-data="data">
+  <div class="hidden" title="{{data.statusName}}" [ngStyle]="data.rowStyle">
+    <span [ngClass]="data.statusClass" style="margin-right: 5px;"></span>
+    {{data.statusName}}
+  </div>
+</ng-template>
+<!--单位搜索-->
+<ng-template #UnitNameSearch let-filterValue="filterValue">
+  <span class="area-name" (click)="showModal(filterValue)" [title]="selectUnitName?selectUnitName:''"
+        [class.placeholder]="!selectUnitName">{{selectUnitName ? selectUnitName : commonLanguage.clickSelect}}</span>
+</ng-template>
+<!--树配置-->
+<xc-tree-selector
+  [(xcVisible)]="isVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-selector>

@@ -1,0 +1,34 @@
+@import "../../css/config";
+//工单类型选择样式
+.leasee-group {
+  $text-margin: 0px 5px;
+  border: none;
+  width: $left-panel-width;
+  .leasee-group-title {
+    display: flex;
+    padding: 5px 4px;
+    height: 40px;
+    align-items: center;
+    .leasee-group-title-text {
+      float: left;
+      width: 65px;
+      margin: $text-margin;
+      color: #ff6027;
+    }
+    .leasee-group-title-select {
+      float: left;
+      width: 280px;
+      margin: $text-margin;
+    }
+  }
+  //checkbox选择器样式
+  .select-container {
+    display: flex;
+    .select {
+      text-align: center;
+      font-size: 12px;
+      height: 30px;
+      width: 55px;
+    }
+  }
+}

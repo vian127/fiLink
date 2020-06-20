@@ -1,0 +1,22 @@
+.photo-view-filter {
+  display: flex;
+  margin-top: 20px;
+
+  input {
+    width: 180px;
+    margin: 0 10px;
+  }
+
+  i {
+    font-size: 18px;
+    margin-left: 15px;
+  }
+}
+
+:host ::ng-deep .pic-device-selector {
+  .area-name {
+    height: 32px !important;
+    width: 180px !important;
+    padding-top: 7px !important;
+  }
+}

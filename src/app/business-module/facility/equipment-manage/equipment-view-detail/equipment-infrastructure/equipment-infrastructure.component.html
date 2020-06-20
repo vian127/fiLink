@@ -1,0 +1,185 @@
+<nz-card nzTitle="{{language.equipmentDetail}}" [nzExtra]="extraTemplate">
+  <!--设备详情-->
+  <div class="equipment-tabs">
+    <nz-tabset (nzSelectChange)="onTabChange($event)">
+      <nz-tab nzTitle="{{language.detail}}">
+        <div class="device-detail-info">
+          <ul class="device-ul">
+            <li class="facility-item">
+              <!--资产编号-->
+              <span class="label">{{language.assetNumbers}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.equipmentCode}}">
+                {{equipmentDetailInfo.equipmentCode}}
+              </span>
+            </li>
+            <!--第三方编号-->
+            <li class="facility-item">
+              <span class="label">{{language.otherSystemNumber}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.otherSystemNumber}}">
+                {{equipmentDetailInfo.otherSystemNumber}}
+              </span>
+            </li>
+            <!--设备名称-->
+            <li class="facility-item">
+              <span class="label">{{language.name}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.equipmentName}}">
+                {{equipmentDetailInfo.equipmentName}}
+              </span>
+            </li>
+            <!--设备类型-->
+            <li class="facility-item">
+              <span class="label">{{language.type}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.equipmentType | equipmentType}}">
+                <i [class]="getEquipmentTypeIcon(equipmentDetailInfo.equipmentType)"></i>
+                {{equipmentDetailInfo.equipmentType | equipmentType}}
+              </span>
+            </li>
+            <!--设备状态-->
+            <li class="facility-item">
+              <span class="label">{{language.deviceStatus}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.equipmentStatus | equipmentStatus}}">
+                 <i  [class]="getStatusIcon(equipmentDetailInfo.equipmentStatus)"></i>
+                {{equipmentDetailInfo.equipmentStatus | equipmentStatus}}
+              </span>
+            </li>
+            <!--设备型号-->
+            <li class="facility-item">
+              <span class="label">{{language.model}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.equipmentModel}}">
+                {{equipmentDetailInfo.equipmentModel}}
+              </span>
+            </li>
+            <!--供应商-->
+            <li class="facility-item">
+              <span class="label">{{language.supplierName}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.supplier}}">
+                {{equipmentDetailInfo.supplier}}
+              </span>
+            </li>
+            <!--报废时间-->
+            <li class="facility-item">
+              <span class="label">{{language.scrapTime}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.scrapTime}}">
+                {{equipmentDetailInfo.scrapTime}}
+              </span>
+            </li>
+            <!--所属设施-->
+            <li class="facility-item">
+              <span class="label">{{language.affiliatedDevice}}：</span>
+              <span class="value hidden" title="{{deviceInfo?deviceInfo.deviceName: ''}}">
+                {{deviceInfo ? deviceInfo.deviceName : ''}}
+              </span>
+            </li>
+            <!--挂载位置-->
+            <li class="facility-item">
+              <span class="label">{{language.mountPosition}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.mountPosition}}">
+                {{equipmentDetailInfo.mountPosition}}
+              </span>
+            </li>
+            <!--所属公司-->
+            <li class="facility-item">
+              <span class="label">{{language.company}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.company}}">
+                {{equipmentDetailInfo.company}}
+              </span>
+            </li>
+            <!--安装时间-->
+            <li class="facility-item">
+              <span class="label">{{language.installationDate}}：</span>
+              <span class="value hidden" title="">
+                 {{equipmentDetailInfo.installationDate | dynamic: 'date' : null}}
+              </span>
+            </li>
+            <!--租赁方-->
+            <li class="facility-item">
+              <span class="label">{{language.lessee}}：</span>
+              <span class="value hidden" [title]=""></span>
+            </li>
+            <!--租赁开始时间-->
+            <li class="facility-item">
+              <span class="label">{{language.lesseeStartTime}}：</span>
+              <span class="value hidden" [title]=""></span>
+            </li>
+            <!--租赁结束时间-->
+            <li class="facility-item">
+              <span class="label">{{language.lesseeEndTime}}：</span>
+              <span class="value hidden" [title]=""></span>
+            </li>
+            <!--业务状态-->
+            <li class="facility-item">
+              <span class="label">{{language.businessStatus}}：</span>
+              <span class="value hidden" [title]=""></span>
+            </li>
+            <!--所属网关-->
+            <li class="facility-item">
+              <span class="label">{{language.gatewayName}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.gatewayName}}">
+                {{equipmentDetailInfo.gatewayName}}
+              </span>
+            </li>
+            <!--所属区域-->
+            <li class="facility-item">
+              <span class="label">{{language.affiliatedArea}}：</span>
+              <span class="value hidden" [title]=""></span>
+            </li>
+            <!--网关端口-->
+            <li class="facility-item">
+              <span class="label">{{language.gatewayPort}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.portNo}}">{{equipmentDetailInfo.portNo}}</span>
+            </li>
+            <!--所属回路-->
+            <li class="facility-item">
+              <span class="label">{{language.loop}}：</span>
+              <span class="value hidden" [title]=""></span>
+            </li>
+            <!--分组-->
+            <li class="facility-item">
+              <span class="label">{{language.equipmentRefGroup}}：</span>
+              <span class="value hidden" [title]=""></span>
+            </li>
+            <!--应用策略-->
+            <li class="facility-item">
+              <span class="label">{{language.applicationStrategy}}：</span>
+              <span class="value hidden" [title]=""></span>
+            </li>
+            <!--电源控制器设备-->
+            <li class="facility-item">
+              <span class="label">{{language.powerControlEquipment}}：</span>
+              <span class="value hidden" [title]=""></span>
+            </li>
+            <!--电源控制器设备端口-->
+            <li class="facility-item">
+              <span class="label">{{language.powerControlEquipmentPort}}：</span>
+              <span class="value hidden" [title]=""></span>
+            </li>
+            <!--备注-->
+            <li class="facility-item">
+              <span class="label">{{language.remarks}}：</span>
+              <span class="value hidden" title="{{equipmentDetailInfo.remarks}}">
+                {{equipmentDetailInfo.remarks}}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="{{language.realisticPicture}}">
+        <!--实景图-->
+        <div class="img-container">
+          <img class="info-img" *ngIf="equipmentPicUrl" (click)="onClickImage()" [src]="equipmentPicUrl"
+               alt="">
+        </div>
+      </nz-tab>
+      <!--缩略图-->
+        <nz-tab nzTitle="{{language.thumbnail}}">
+          <app-thumbnail #thumbnail [deviceId]="equipmentId" [baseInfo]="deviceInfo" [mapType]="mapType"></app-thumbnail>
+        </nz-tab>
+    </nz-tabset>
+  </div>
+</nz-card>
+
+
+<!--更新时间-->
+<ng-template #extraTemplate>
+  <span class="update-time">{{language.updateTime}}: {{this.updateTime | dynamic: 'date' : null}} </span>
+</ng-template>

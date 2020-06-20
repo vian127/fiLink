@@ -1,0 +1,21 @@
+.area-detail-title {
+  border-left: 2px solid #7cb0dd;
+  padding-left: 18px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.strategy-btn {
+  padding: 20px;
+  width: 540px;
+  text-align: right;
+
+  .prev-step {
+    margin-right: 10px;
+  }
+
+  .next-step {
+    margin-right: 10px;
+  }
+}

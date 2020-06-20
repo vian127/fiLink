@@ -1,0 +1,169 @@
+@import "../../../../../style-module/config";
+
+.pageTitle {
+  border-left: 2px solid #7cb0dd;
+  padding-left: 18px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.user-detail{
+  padding: 10px;
+}
+
+.area-name {
+  display: inline-block;
+  width: 50%;
+  border: 1px solid #ccc;
+  height: 32px;
+  padding: 4px 11px;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.open-button {
+  border: none;
+  outline: none;
+  background: #ffffff;
+}
+
+
+.alarm-level {
+  display: inline-block;
+  text-align: center;
+  width: 32px;
+  height: 20px;
+  color: #333;
+}
+
+.alarm-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  font-family: 'Microsoft YaHei';
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+
+
+.box-warp {
+  padding: 0px 10px 10px 10px;
+}
+
+.box-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  align-self: center;
+}
+
+.alarm-urgent {
+  background: #e61017
+}
+
+.alarm-main {
+  background: #ff6600;
+}
+
+.alarm-secondary {
+  background: #f1c620;
+}
+
+.alarm-prompt {
+  background: #58c1f0
+}
+
+
+//
+//:host ::ng-deep form > div > div:nth-child(1) {
+//  position: relative;
+//  width: 100%;
+//  height: 40px;
+//}
+//
+//:host ::ng-deep  form > div > div:nth-child(4) {
+//  position: relative;
+//  width: 100%;
+//  height: 40px;
+//}
+//
+//:host ::ng-deep form > div > div:nth-child(1) > div:nth-child(2) {
+//  position: static !important;
+//}
+//:host ::ng-deep form > div > div:nth-child(4) > div:nth-child(2) {
+//  position: static !important;
+//}
+//
+//::ng-deep nz-modal.alarmFiltration .ant-modal-body {
+//  padding: 0 5px;
+//}
+//
+//::ng-deep nz-modal.alarmFiltration .table-top-button {
+//  padding: 8px 0 5px;
+//}
+//
+//::ng-deep nz-modal.alarmFiltration .ant-table-pagination.ant-pagination {
+//  float: none;
+//  text-align: center;
+//  margin: 0;
+//}
+
+.titleData {
+  border-bottom: 1px solid rgb(232,232,232);
+  position: absolute;
+  width: 100%;
+  left: 0;
+
+  span {
+    background: rgb(54,207,202);
+    color: #fff;
+    padding: 2px;
+  }
+}
+
+.status-text {
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.facility-alarm-c {
+  color: $status-alarm;
+}
+
+.facility-normal-c {
+  color: $status-normal;
+
+}
+
+.facility-offline-c {
+  color: $status-offline;
+
+}
+
+.facility-lost-c {
+  color: $status-lost;
+
+}
+
+.facility-unknown-c {
+  color: $status-unknown;
+}
+
+//// 表单 并排放
+//::ng-deep xc-form.currentAlarmAdd form > div > div:nth-child(odd) {
+//  width: 40%;
+//  height: 50px;
+//}
+//
+//::ng-deep xc-form.currentAlarmAdd form > div > div:nth-child(even) {
+//  width: 40%;
+//  float: right;
+//  margin-right: 50px;
+//  height: 50px;
+//}

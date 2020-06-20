@@ -1,0 +1,22 @@
+.barChart{
+  margin-top: 10px;
+  display: flex;
+  //height: 500px;
+  padding: 0 20px;
+  .app-echart-column,
+  app-echart-column {
+    flex: 1;
+    background-color: #f7f7f7;
+    margin-right: 10px;
+  }
+  .app-echart-column {
+    text-align: center;
+    height: 400px;
+    line-height: 400px;
+    font-size: 20px;
+  }
+}
+
+::ng-deep xc-table.alarmStatistical > div.xc-table {
+  margin: 0 20px 20px;
+}

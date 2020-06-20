@@ -1,0 +1,62 @@
+.camera-title{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.camera-config {
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 400px;
+
+  .camera-img {
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .img-content {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      div {
+        width: 150px;
+        height: 150px;
+        border: 1px solid #666;
+        border-radius: 50%;
+      }
+
+    }
+
+    .configure {
+      width: 50%;
+      text-align: center;
+      .box{
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+      span{
+        margin: 20px 10px;
+      }
+    }
+  }
+
+  .camera-details {
+    height: 180px;
+
+    h5 {
+      margin-bottom: 20px;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    .details {
+      margin-left: 40px;
+      margin-bottom: 20px;
+
+      span {
+        margin-right: 20px;
+      }
+    }
+  }
+}

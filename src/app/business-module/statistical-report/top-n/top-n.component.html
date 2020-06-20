@@ -1,0 +1,79 @@
+<div class="odn-device-resources" [appBarProgress]="ProgressShow">
+  <!--选择区域-->
+  <span class="select-area" [title]="areaName?areaName:statisticalLanguage.selectArea"
+        [class.placeholder]="areaName?false:true"
+        (click)="showAreaSelect()">{{areaName ? areaName : statisticalLanguage.selectArea}}</span>
+  <nz-select *ngIf="pageTypeTitle !==ConstValue.TopPort"  [(ngModel)]="radioValue" [nzPlaceHolder]="statisticalLanguage.deviceType"
+             style="width: 170px;margin-right: 10px">
+    <nz-option *ngFor="let item of radioSelectInfo" [nzDisabled]="item.isDisable" [nzLabel]="item.label"
+               [nzValue]="item.code"></nz-option>
+  </nz-select>
+  <nz-select *ngIf="pageTypeTitle ===ConstValue.TopSensor" [(ngModel)]="radioSensor" [nzPlaceHolder]="statisticalLanguage.selectSensor"
+             style="width: 170px;margin-right: 10px">
+    <nz-option *ngFor="let item of radioSensorSelectInfo" [nzLabel]="item.label"
+               [nzValue]="item.code"></nz-option>
+  </nz-select>
+  <check-select-input [placeholder]="statisticalLanguage.selectAlarm" *ngIf="pageTypeTitle===ConstValue.TopAlarm"
+                      style="display:inline-block;margin-right: 10px" [isAllChecked]="true"
+                      [(ngModel)]="alarmList" [checkList]="selectInfo"></check-select-input>
+  <!--设施类型-->
+  <check-select-input [placeholder]="statisticalLanguage.deviceType" *ngIf="pageTypeTitle===ConstValue.TopPort"
+                      style="display:inline-block;margin-right: 10px" [isAllChecked]="true"
+                      [(ngModel)]="deviceList" [checkList]="selectInfo"></check-select-input>
+  <nz-range-picker *ngIf="pageTypeTitle ===ConstValue.TopAlarm||pageTypeTitle ===ConstValue.TopWorkOrder||pageTypeTitle ===ConstValue.TopLock"
+                   style="margin-right: 10px;width: 286px"
+                   [(ngModel)]="rangDateValue"
+                   [nzDisabledDate]="disabledEndDate"
+                   (ngModelChange)="rangValueChange($event)"
+                   (nzOnOpenChange)="onOpenChange($event)"
+  ></nz-range-picker>
+ <!--统计数量-->
+  <span style="position: relative;">{{statisticalLanguage.statisticalNumber}}
+    <nz-select [(ngModel)]="statisticalNumber" style="width: 70px;margin-right: 10px">
+      <nz-option [nzLabel]="ConstValue.Ten" [nzValue]="ConstValue.Ten"></nz-option>
+      <nz-option [nzLabel]="ConstValue.Twenty" [nzValue]="ConstValue.Twenty"></nz-option>
+     </nz-select>
+  </span>
+  <!--统计-->
+  <button type="button"
+          class="link-button" nz-button
+          nzType="primary"
+          [disabled]="isDisable()"
+          (click)="statistical()">{{statisticalLanguage.statistical}}
+  </button>
+</div>
+<!--eChart-->
+<div *ngIf="hide" style="padding: 0 10px;">
+  <div *ngIf="pageTypeTitle === ConstValue.TopSensor">
+    <nz-switch [(ngModel)]="switchValue" (click)="clickSwitch(switchValue)"></nz-switch>
+    <span *ngIf="switchValue" style="margin-left: 15px">{{statisticalLanguage.top}}</span>
+    <span *ngIf="!switchValue" style="margin-left: 15px">{{statisticalLanguage.bottom}}</span>
+  </div>
+  <div class="barChart" *ngIf="hasData">
+    <app-echart-column style="background-color: #f7f7f7;padding: 10px; margin-right: 10px;flex: 1;width: 50%"
+                       (chartInstance)="getBarChartInstance($event)"></app-echart-column>
+    <xc-table style="flex: 1;width: 50%"
+              [dataSet]="_dataset"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)">
+    </xc-table>
+  </div>
+  <!--<div *ngIf="!hasData">-->
+    <!--<nz-empty style="padding: 50px 0"></nz-empty>-->
+  <!--</div>-->
+</div>
+<!--<div *ngIf="!hide&&!showLoading">-->
+  <!--<nz-spin style="height: 300px"></nz-spin>-->
+<!--</div>-->
+
+<!--区域选择器-->
+<xc-tree-selector
+  [(xcVisible)]="isVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-selector>
+
+<ng-template #deviceTemp let-data="data">
+  <div class="hidden" (click)="goDevice(data)" style="cursor: pointer">{{data.deviceName}}</div>
+</ng-template>

@@ -1,0 +1,28 @@
+<!--访问控制-->
+<div class="access-control-list">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</div>
+
+<!--todo 是否开启-->
+<ng-template  #templateStatus let-data="data">
+  <nz-switch [ngModel]="data.rangeStatus === '1'"
+             (click)="changeStatue(data)"
+             [nzLoading]="data.clicked"
+             [nzControl]="true"
+             appAccessPermission="04-4-1-4"
+             ></nz-switch>
+  <span *ngIf="data.rangeStatus ===  '1'" style="margin-left: 15px">启用</span>
+  <span *ngIf="data.rangeStatus ===  '0'" style="margin-left: 15px">禁用</span>
+</ng-template>
+
+<app-access-control-detial
+  *ngIf="isVisible"
+  [isVisible]="isVisible"
+  [ipInfo]="curIpInfo"
+  [title]="title"
+  (cancel)="detailCancel($event)"
+></app-access-control-detial>

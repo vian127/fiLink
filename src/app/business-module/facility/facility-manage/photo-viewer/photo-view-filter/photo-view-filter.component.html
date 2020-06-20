@@ -1,0 +1,21 @@
+<div class="photo-view-filter" (keydown)="keydown($event)">
+  <input type="text" nz-input placeholder="{{language.picInfo.name}}" [(ngModel)]="filterObj.picName">
+  <app-alarm-object class="pic-device-selector"
+                    [title]="language.select+language.device"
+                    [placeholder]="language.picInfo.pleaseChooseFacility"
+                    [alarmObjectConfig]="deviceObjectConfig" ></app-alarm-object>
+  <input type="text" nz-input placeholder="{{language.picInfo.pleaseChooseArea}}" (click)="openAreaSelector()" [(ngModel)]="filterObj.areaName">
+  <xc-nz-select style="width: 180px" nzAllowClear nzPlaceHolder="{{language.picInfo.pleaseChooseSource}}" [(ngModel)]="filterObj.resource">
+    <xc-nz-option *ngFor="let option of resourceList" [nzValue]="option.value" [nzLabel]="option.label"></xc-nz-option>
+  </xc-nz-select>
+  <i class="iconfont icon fiLink-search" (click)="handleSearch()"></i>
+  <i class="iconfont icon fiLink-reset" (click)="handleReset()"></i>
+</div>
+
+<xc-tree-area-selector
+  [(xcVisible)]="areaSelectVisible"
+  [pageType]="'区域'"
+  [treeSelectorConfig]="areaSelectorConfig"
+  (selectDataChange)="areaSelectChange($event)"
+>
+</xc-tree-area-selector>

@@ -1,0 +1,57 @@
+<!-- 告警名称 -->
+<!-- 当在表单提交时 使用 -->
+<div *ngIf="_type === 'form'" class="screenRender {{ _type }}">
+  <span class="area-name" [title]="checkAlarmName.name">{{checkAlarmName.name}}</span>
+  <button class="open-button" [disabled]="display.alarmNameDisabled"
+          (click)="display.nameTable=true;refreshNameData()">
+    <i class="icon-fiLink fiLink-search-index iconfont"></i></button>
+</div>
+
+<!-- 当在列表 筛选时 使用 -->
+<div *ngIf="_type === 'table'" class="screenRender {{ _type }}">
+      <span class="area-name" [title]="checkAlarmName.name"
+            (click)="display.nameTable=true;refreshNameData()">
+      <span class="title" *ngIf="!checkAlarmName.name">{{language.clickSelect}}</span>
+      {{checkAlarmName.name}}</span>
+</div>
+
+<nz-modal
+  class="alarmFiltration alarmName"
+  [(nzVisible)]="display.nameTable"
+  [nzTitle]="language.alarmName"
+  [nzMaskClosable]="false"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="close()">
+  <ng-template #modalContent>
+    <span class="selected-count">{{commonLanguage.selected}}：{{checkAlarmNameBackups.ids.length}} {{commonLanguage.count}}</span>
+    <xc-table #xcTableName
+              [dataSet]="_dataSetName"
+              [pageBean]="pageBeanName"
+              [tableConfig]="tableConfigName"
+              (pageChange)="pageNameChange($event)">
+    </xc-table>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" class="link-button"  (click)="nameConfirm()">{{language.okText}}</button>
+    <button nz-button nzType="danger" class="link-button"  (click)="close()">{{language.cancelText}}</button>
+    <button nz-button nzType="danger" class="link-button" (click)="clearSelectData()">{{commonLanguage.cleanUp}}</button>
+  </ng-template>
+</nz-modal>
+<!-- </ng-template> -->
+
+<!-- 告警名称中的默认级别 -->
+<ng-template #alarmDefaultLevelTemp let-data="data">
+  <div *ngIf="data.alarmDefaultLevel === '1'" style="display: flex"><div class="box-icon" [ngStyle]="data.defaultStyle"></div><span style="margin-left: 5px">{{this.language.urgent}}</span></div>
+  <div *ngIf="data.alarmDefaultLevel === '2'" style="display: flex"><div class="box-icon" [ngStyle]="data.defaultStyle"></div><span style="margin-left: 5px">{{this.language.main}}</span></div>
+  <div *ngIf="data.alarmDefaultLevel === '3'" style="display: flex"><div class="box-icon" [ngStyle]="data.defaultStyle"></div><span style="margin-left: 5px">{{this.language.secondary}}</span></div>
+  <div *ngIf="data.alarmDefaultLevel === '4'" style="display: flex"><div class="box-icon" [ngStyle]="data.defaultStyle"></div><span style="margin-left: 5px">{{this.language.prompt}}</span></div>
+</ng-template>
+
+<!-- 告警名称中的定制级别 -->
+<ng-template #alarmLevel let-data="data">
+  <div *ngIf="data.alarmLevel === '1'" style="display: flex"><div class="box-icon" [ngStyle]="data.style"></div><span style="margin-left: 5px">{{this.language.urgent}}</span></div>
+  <div *ngIf="data.alarmLevel === '2'" style="display: flex"><div class="box-icon" [ngStyle]="data.style"></div><span style="margin-left: 5px">{{this.language.main}}</span></div>
+  <div *ngIf="data.alarmLevel === '3'" style="display: flex"><div class="box-icon" [ngStyle]="data.style"></div><span style="margin-left: 5px">{{this.language.secondary}}</span></div>
+  <div *ngIf="data.alarmLevel === '4'" style="display: flex"><div class="box-icon" [ngStyle]="data.style"></div><span style="margin-left: 5px">{{this.language.prompt}}</span></div>
+</ng-template>

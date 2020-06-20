@@ -1,0 +1,95 @@
+<!--设备统计滑块-->
+<xc-statistical-slider [sliderConfig]="sliderConfig"
+                       (selectChange)="onSliderChange($event)"
+                       (slideShowChange)="slideShowChange($event)">
+</xc-statistical-slider>
+
+<!--设备列表-->
+<div class="box-warp">
+  <div class="table-container">
+    <xc-table #tableComponent
+              [dataSet]="dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)"
+    ></xc-table>
+  </div>
+</div>
+
+<!--设备状态模板-->
+<ng-template #equipmentStatusTemp let-data="data">
+  <div class="area-level">
+    <i [class]="'icon-fiLink-l iconfont '+data.equipmentStatusIconClass+' '+data.equipmentStatusColorClass"
+    ></i>
+    <span class="status-text"
+          [ngStyle]="data.rowStyle"
+          [title]="data.equipmentStatusName">
+          {{data.equipmentStatusName}}
+    </span>
+  </div>
+</ng-template>
+<!--设备类型模板-->
+<ng-template #equipmentTypeTemp let-data="data">
+  <i [ngClass]="data.iconClass" class="device-type-icon"></i>
+  <span class="status-text" [ngStyle]="data.rowStyle"
+        [title]="data.equipmentTypeName">{{data.equipmentTypeName}}</span>
+</ng-template>
+
+<!-- 报废时间过滤模版 -->
+<ng-template #scrapTimeTemp let-filterValue="filterValue">
+  <span class="input-box">
+    <input type="text" class="filter-num-width num-input"
+           [placeholder]="language.pleaseEnter"
+           [(ngModel)]="filterValue.filterValue" oninput="value=value.replace(/\D/g,'')">
+    <xc-nz-select style="width: 110px;"
+                  [(ngModel)]="scrapTimeSelectValue"
+                  [disabled]="!filterValue.filterValue">
+      <xc-nz-option nzValue="{{filterOperateEnum.gt}}" nzLabel="{{filterSelectEnum.gt}}"></xc-nz-option>
+      <xc-nz-option nzValue="{{filterOperateEnum.eq}}" nzLabel="{{filterSelectEnum.eq}}"></xc-nz-option>
+      <xc-nz-option nzValue="{{filterOperateEnum.lt}}" nzLabel="{{filterSelectEnum.lt}}"></xc-nz-option>
+    </xc-nz-select>
+  </span>
+</ng-template>
+
+<!--设备设置-->
+<nz-modal [(nzVisible)]="equipmentSettingShow"
+          nzTitle="{{language.setting}}"
+          nzWidth="600"
+          (nzOnCancel)="onCloseSetting()"
+          (nzOnOk)="onOkSetting()"
+>
+  <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+</nz-modal>
+
+<!--设备配置模型-->
+<nz-modal *ngIf="equipmentDeployShow"
+          [(nzVisible)]="equipmentDeployShow"
+          nzTitle="{{language.deviceConfiguration}}"
+          ngSwitch="600"
+          (nzOnCancel)="onCloseDeploy()"
+          (nzOnOk)="onOkDeploy()">
+  <xc-form [column]="deployFormColumn"></xc-form>
+</nz-modal>
+
+<!--设施过滤选择器-->
+<facility-list-selector-component [(facilityVisible)]="facilityVisible"
+                                  [multiple]="true"
+                                  (selectDataChange)="onFacilityChange($event)">
+</facility-list-selector-component>
+
+<!--设施过滤输入框-->
+<ng-template #facilityTemplate let-filterValue="filterValue">
+  <input (click)="onShowFacility()"
+         nz-input
+         type="text"
+         [placeholder]="language.picInfo.pleaseChoose"
+         [(ngModel)]="filterDeviceName">
+</ng-template>
+<!--设施列表展示-->
+<ng-template #deviceNameTemplate let-data="data">
+  <div class="device-name" [title]="data.deviceName">
+   <span  [ngStyle]="data.rowStyle">{{data.deviceName}}</span>
+  </div>
+</ng-template>
+
+

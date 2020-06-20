@@ -1,0 +1,30 @@
+<!-- 设施日志-->
+  <nz-card class="card" *ngIf="hasControl" nzTitle="{{language.deviceLog}}">
+    <xc-table [dataSet]="facilityLogSet"
+              [pageBean]="facilityLogPageBean"
+              [tableConfig]="facilityLogTableConfig"
+              (pageChange)="facilityLogPageChange($event)">
+    </xc-table>
+    <span class="more" (click)="navigatorTo('business/facility/facility-log')">{{commonLanguage.more}} >></span>
+  </nz-card>
+<!--操作日志-->
+  <nz-card class="card-right"  nzTitle="{{language.operateLog}}">
+    <xc-table [dataSet]="operationLogSet"
+              [pageBean]="operationLogPageBean"
+              [tableConfig]="operationLogTableConfig"
+              (pageChange)="operationLogPageChange($event)">
+    </xc-table>
+    <span class="more" (click)="navigatorTo('business/system/log')">{{commonLanguage.more}} >></span>
+  </nz-card>
+
+<!--操作结果-->
+<ng-template #optResult let-data="data">
+  <div *ngIf="data.optResult === 'failure'" class="result-container">
+    <i class="icon-fiLink fiLink-fail iconfont "></i>
+    <span>{{logLanguage.failure}}</span>
+  </div>
+  <div *ngIf="data.optResult === 'success'" class="result-container">
+    <i class="icon-fiLink fiLink-success iconfont "></i>
+    <span>{{logLanguage.success}}</span>
+  </div>
+</ng-template>

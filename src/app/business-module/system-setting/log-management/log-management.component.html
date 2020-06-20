@@ -1,0 +1,42 @@
+<div class="log-list">
+  <xc-table
+            #tableComponent
+            [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</div>
+
+<!--todo 危险等级-->
+<ng-template #dangerLevel let-data="data">
+  <div class="hidden" *ngIf="data.dangerLevel === 3 || data.dangerLevel === 3"><i
+    style="color: red;vertical-align:inherit " class="icon fiLink-dangerous iconfont"></i> <span
+    style="margin-left: 10px">{{language.log.danger}}</span></div>
+  <div class="hidden" *ngIf="data.dangerLevel === 1 || data.dangerLevel === 1"><i
+    style="color: rgb(255, 102, 0);vertical-align:inherit" class="icon fiLink-no-more iconfont"></i><span
+    style="margin-left: 10px">{{language.log.prompt}}</span></div>
+  <div class="hidden" *ngIf="data.dangerLevel === 2 || data.dangerLevel === 2"><i
+    style="color: cornflowerblue;vertical-align:inherit" class="icon fiLink-prompt-w iconfont"></i><span
+    style="margin-left: 10px">{{language.log.general}}</span></div>
+</ng-template>
+
+<!--todo 操作结果-->
+<ng-template #optResult let-data="data">
+  <div class="hidden" *ngIf="data.optResult === 'failure' || data.optResult === '失败'"><i style="vertical-align: inherit"
+                                                                                         class="icon fiLink-fail iconfont"></i>
+    <span style="margin-left: 10px">{{language.log.failure}}</span></div>
+  <div class="hidden" *ngIf="data.optResult === 'success' || data.optResult === '成功'"><i style="vertical-align: inherit"
+                                                                                         class="icon fiLink-success iconfont"></i><span
+    style="margin-left: 10px">{{language.log.success}}</span></div>
+</ng-template>
+
+<!--todo 操作类型-->
+<ng-template #optType let-data="data">
+  <!--<ng-container [ngSwitch]="data.optType">-->
+  <!--<span *ngSwitchCase="'web'">{{language.log.web}}</span>-->
+  <!--<span *ngSwitchCase="'pda'">{{language.log.pda}}</span>-->
+  <!--</ng-container>-->
+  <div class="hidden" *ngIf="data.optType === 'web'">{{language.log.web}}</div>
+  <div class="hidden" *ngIf="data.optType === 'pda'">{{language.log.pda}}</div>
+</ng-template>

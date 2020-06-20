@@ -1,0 +1,21 @@
+.dump-policy-title {
+  border-left: 2px solid #7cb0dd;
+  padding-left: 18px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.dump-policy {
+  padding: 10px;
+}
+
+.btn-implement {
+  &:disabled {
+    color: rgba(0, 0, 0, 0.25) !important;
+    background-color: #f5f5f5 !important;
+    border-color: #d9d9d9 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+}

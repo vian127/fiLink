@@ -1,0 +1,38 @@
+<div class="left-panel" >
+  <div class="left-panel-tabs">
+
+    <div class="left-panel-tab left-panel-border"
+         [ngClass]="{'tab-selected': isExpandFacilityList}"
+         (click)="tabClick(indexLeftPanel.facilitiesList)">
+      <div class="icon-type iconfont fiLink-facility-type"></div>
+      <div class="text-content hidden" title="{{indexLanguage.facilityAndEquipmentList}}">{{indexLanguage.facilityAndEquipmentList}}</div>
+    </div>
+
+    <div class="left-panel-tab left-panel-border"
+         [ngClass]="{'tab-selected': isExpandMyCollection}"
+         (click)="tabClick(indexLeftPanel.myCollection)">
+      <div class="icon-type iconfont fiLink-facility-type"></div>
+      <div class="text-content hidden" title="{{indexLanguage.myCollection}}">{{indexLanguage.myCollection}}</div>
+    </div>
+
+    <div class="left-panel-tab"
+         [ngClass]="{'tab-selected': isExpandWorkOrder}"
+         (click)="tabClick(indexLeftPanel.workOrderList)">
+      <div class="icon-type iconfont fiLink-facility-type"></div>
+      <div class="text-content hidden" title="{{indexLanguage.facilityAndEquipmentWorkOrderOfList}}">{{indexLanguage.facilityAndEquipmentWorkOrderOfList}}</div>
+    </div>
+  </div>
+
+  <div *ngIf="isExpandFacilityList">
+    <app-facilities-list></app-facilities-list>
+  </div>
+
+  <div *ngIf="isExpandMyCollection">
+    <app-my-attention></app-my-attention>
+  </div>
+
+  <div *ngIf="isExpandWorkOrder">
+    <app-facilities-work-order-list></app-facilities-work-order-list>
+  </div>
+
+</div>

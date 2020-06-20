@@ -1,0 +1,145 @@
+<!--为了减少性能消耗采用手写弹框-->
+<div class="map-selector-modal-disk" [hidden]="!xcVisible">
+  <div class="map-selector-modal">
+    <div class="map-selector-title">
+      <span style="padding-left: 26px;font-weight: bold;">{{mapSelectorConfig.title}}</span>
+      <span style="float: right;width: 50px;text-align: center;cursor: pointer" (click)="handleCancel()">
+        <i style="font-size: 14px;color: #36cfc9" nz-icon type="close" theme="outline"></i>
+      </span>
+    </div>
+    <div [ngStyle]="{width:mapSelectorConfig.width}" style="display: flex;margin: 0 auto" #mapSelectorDom>
+      <div style="flex: 1;margin-left: 10px">
+        <div style="line-height: 42px;padding-left: 18px">
+          <i class="map-util icon-fiLink-l iconfont fiLink-arrow-select" [class.background]="drawType==='arrow'"
+             (click)="chooseUtil('arrow')"></i>
+          <i class="map-util icon-fiLink-l iconfont fiLink-box-select" [class.background]="drawType==='rectangle'"
+             (click)="chooseUtil('rectangle')"></i>
+        </div>
+        <nz-card style="position: relative" [ngStyle]="{height:mapSelectorConfig.height}">
+          <div id="_mapContainer" style="height: 425px">
+          </div>
+          <!--左上角选择框-->
+          <div class="select-container">
+            <div class="map-select">
+              <nz-dropdown>
+                <a nz-dropdown><span style="min-width: 50px;color:#13c2c2;">{{searchTypeName}}</span><i nz-icon type="down" style="color: #13c2c2;"></i> </a>
+                <ul nz-menu nzSelectable>
+                  <li nz-menu-item (click)="searchFacilityName()">
+                    <a>{{indexLanguage.searchDeviceName}}</a>
+                  </li>
+                  <li nz-menu-item (click)="searchAddress()">
+                    <a>{{indexLanguage.searchAddress}}</a>
+                  </li>
+                </ul>
+              </nz-dropdown>
+            </div>
+            <div class="map-search">
+              <!--设施名称搜索-->
+              <div class="map-search-name" [ngStyle]="{'zIndex': IndexObj.facilityNameIndex}">
+                <input
+                  placeholder="{{indexLanguage.enterFacilityName}}"
+                  nz-input
+                  [(ngModel)]="inputValue"
+                  (input)="onInput($event.target?.value)"
+                  [nzAutocomplete]="auto"
+                  (keydown)="keyDownEvent($event)"/>
+                <nz-autocomplete nzBackfill #auto>
+                  <nz-auto-option *ngFor="let option of options"
+                                  (click)="optionChange($event,option.deviceId)"
+                                  [nzValue]="option.deviceId"
+                                  [nzLabel]="option.deviceName">
+                    {{ option.deviceName }}
+                  </nz-auto-option>
+                </nz-autocomplete>
+              </div>
+              <!--百度地图地址搜索-->
+              <div class="b-map-location-search" [ngStyle]="{'zIndex': IndexObj.bMapLocationSearch}">
+                <div id="r-result">
+                  <input type="text" placeholder="{{indexLanguage.enterPlace}}" id="_suggestId" size="20" value=""/>
+                </div>
+                <div id="_searchResultPanel"></div>
+              </div>
+              <!--谷歌地图地址搜索-->
+              <div class="g-map-location-search" [ngStyle]="{'zIndex': IndexObj.gMapLocationSearch}">
+                <input #input [(ngModel)]="searchKey" placeholder="{{indexLanguage.enterPlace}}" (keyup.enter)="location()"/>
+                <div class="iconfont icon-fiLink fiLink-search location-icon" (click)="location()"></div>
+              </div>
+            </div>
+          </div>
+
+          <!--提示框-->
+          <div *ngIf="isShowInfoWindow" class="info-window-container" [ngStyle]="{left: infoWindowLeft, top: infoWindowTop}">
+            <div *ngIf="infoData.type === 'c'" class="info-window-c" [ngClass]="{'width-items': infoData.data.length > 1}">
+              <div class="info-window-item" *ngFor="let data of infoData.data">
+                <div class="info-window-item-icon" [ngClass]="data.className"></div>
+                <div class="info-window-item-name">{{data.deviceTypeName}}</div>
+                <div class="info-window-item-count">{{data.count}}</div>
+              </div>
+            </div>
+            <div *ngIf="infoData.type === 'm'" class="info-window-m">
+              <div class="info-window-m-name">
+                <div>
+                  <span class="info-data-w" [ngStyle]="{'background-color': infoData.data.deviceStatusColor,'color':'#fff'}">{{infoData.data.deviceStatusName}}</span>
+                  <span>{{infoData.data.deviceName}}</span>
+                </div>
+              </div>
+              <div>
+                <span class="info-data-w" [ngStyle]="{'background-color': infoData.data.areaLevelColor,'color':'#fff'}">{{infoData.data.areaLevelName}}{{typeLg === 'US'?'':InspectionLanguage.area}}</span>
+                <span>{{infoData.data.areaName}}</span>
+              </div>
+              <div>
+                <span class="iconfont icon-fiLink-s fiLink-filink-location-icon disabled-red-icon"></span>
+                <span>{{infoData.data.address}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="zoom-control">
+            <div class="zoom-control-item iconfont icon-fiLink fiLink-zoom-in" style="margin-top: 8px;"  (click)="zoomIn()" title="{{indexLanguage.narrow}}"></div>
+            <div class="zoom-control-item iconfont icon-fiLink fiLink-zoom-out" (click)="zoomOut()" title="{{indexLanguage.magnify}}"></div>
+          </div>
+
+          <div class="progress-bar" *ngIf="isShowProgressBar">
+            <p>{{language.loading}}...</p>
+            <nz-progress [nzPercent]="percent" nzStatus="active"></nz-progress>
+          </div>
+        </nz-card>
+      </div>
+      <div class="table-left" style="width: 50%">
+        <div style="padding:0 10px;display: flex;justify-content: space-between">
+          <span
+            style="line-height: 32px">{{language.selected}}：{{selectData.length}}/{{treeNodeSum}}{{language.count}}</span>
+        </div>
+        <div class="table-content" style="padding: 10px">
+          <div style="width: 100%;overflow: auto">
+            <nz-card style="" [ngStyle]="{height:mapSelectorConfig.height}">
+              <xc-table style="width: 100%" [dataSet]="selectPageData"
+                        [pageBean]="selectPageBean"
+                        [tableConfig]="selectorConfig"
+                        (pageChange)="selectPageChange($event)">
+              </xc-table>
+            </nz-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="map-selector-footer" style="height: 58px;padding-right:8px;text-align: right">
+      <button class="link-button" [nzLoading]="isLoading" nz-button nzType="primary" (click)="handleOk()">
+        {{language.confirm}}
+      </button>
+      <button class="link-button" nz-button nzType="danger" (click)="handleCancel()">{{language.cancel}}</button>
+      <button class="link-button" nz-button nzType="danger" (click)="restSelectData()">{{language.reset}}</button>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #handleTemp let-data="data">
+  <span class="handle-icon" nz-tooltip [nzTitle]="language.unSelect" (click)="handleDelete(data)">
+    <i nz-icon type="minus-square" theme="outline"></i>
+  </span>
+</ng-template>
+
+
+
+

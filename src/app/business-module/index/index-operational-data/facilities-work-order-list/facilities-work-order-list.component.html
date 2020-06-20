@@ -1,0 +1,49 @@
+<!--工单列表-->
+<div class="work-order-list-panel">
+  <!--选择区域-->
+  <div class="app-logic-area">
+    <app-logic-area #workOrderAreaComponent
+                    (areaDataEvent)="areaDataChange($event)"
+                    [treeName]="'orderZTree'"
+                    [isShowNoData]="isShowNoData"
+    ></app-logic-area>
+  </div>
+
+  <!--工单类型-->
+  <div class="app-order-state-radio">
+    <app-facility-equipment-type
+      [facilityEquipmentConfig]="orderTypeComponent"
+      [areaData]="areaData"
+      [setWorkOrderData]="workOrderTypeList"
+      (workOrderTypeData)="workOrderTypeChange($event)"
+    ></app-facility-equipment-type>
+  </div>
+
+  <!--工单状态-->
+  <div class="app-order-state-checkbox">
+    <app-facility-equipment-type
+      [facilityEquipmentConfig]="orderStateComponent"
+      [areaData]="areaData"
+      [setWorkOrderStatusData]="workOrderStateList"
+      (workOrderStatusData)="workOrderStatusChange($event)"
+    ></app-facility-equipment-type>
+  </div>
+
+  <!--工单列表-->
+  <app-index-order-table [areaData]="areaData"
+                         [orderTypeData]="orderTypeRadioValue"
+                         [orderStateData]="orderStateCheckValue"
+                         [titleName]="titleName"
+                         [selectOption] = 'selectOption'
+                         [defaultShowTable]="isShowTable"></app-index-order-table>
+
+</div>
+
+<!--工单状态装换模板-->
+<ng-template #statusTemp let-data="data">
+  <div class="hidden" title="{{data.statusName}}">
+    <span [ngClass]="data.statusClass"></span>
+    {{data.statusName}}
+  </div>
+</ng-template>
+

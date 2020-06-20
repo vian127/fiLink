@@ -1,0 +1,130 @@
+<div class="box-warp">
+  <!-- 表格 -->
+  <div class="table-container" id="warp">
+    <xc-table [dataSet]="_dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)">
+
+    </xc-table>
+    <!--启用状态-->
+    <ng-template #templateStatus let-data="data">
+      <nz-switch [ngModel]="data.isOpen === Status.enable"
+                 [nzLoading]="data.clicked"
+                 [appAccessPermission] = "data.isOpen === Status.enable ? Permission.disable : Permission.enable"
+                 [nzControl]="true"
+                 [nzDisabled]="data.isDisabled"
+                 (click)="clickSwitch(data)">
+      </nz-switch>
+      <span *ngIf="data.isOpen === Status.enable" style="margin-left: 15px" >{{language.enable}}</span>
+      <span *ngIf="data.isOpen === Status.disable" style="margin-left: 15px" >{{language.disable}}</span>
+    </ng-template>
+  </div>
+</div>
+<!--关联工单模态框-->
+<nz-modal [(nzVisible)]="isAssociatedWorkOrderVisible"
+          [nzMaskClosable]="false"
+          [nzWidth]="1200"
+          [nzTitle]="inspectionTaskTitle"
+          (nzOnCancel)="close()"
+          [nzFooter]="associatedWorkOrderFooter">
+  <xc-table #tableComponent
+            [dataSet]="associatedWorkOrder_dataSet"
+            [pageBean]="associatedWorkOrderPageBean"
+            [tableConfig]="associatedWorkOrderTableConfig"
+            (pageChange)="pageChangeAssociatedWorkOrder($event)">
+  </xc-table>
+  <ng-template #associatedWorkOrderFooter>
+    <button class="link-button" nz-button nzType="primary" type="button" (click)="close()">{{language.handleOk}}</button>
+    <button class="link-button" nz-button nzType="danger" type="button" (click)="close()">{{language.handleCancel}}</button>
+  </ng-template>
+</nz-modal>
+<!--关联工单的工单状态 -->
+<ng-template #statusTemp let-data="data">
+  <div class="hidden" title="{{data.statusName}}">
+    <span [ngClass]="data.statusClass"
+          style="margin-right: 5px;">
+    </span>
+    {{data.statusName}}
+  </div>
+</ng-template>
+<!--进度-->
+<nz-modal [(nzVisible)]="scheduleIsVisible"
+          [nzMaskClosable]="false"
+          [nzWidth]="1200"
+          [nzTitle]="title"
+          (nzOnCancel)="scheduleClose()"
+          [nzFooter]="scheduleModalFooter">
+
+  <xc-table [dataSet]="schedule_dataSet"
+            [pageBean]="schedulePageBean"
+            [tableConfig]="scheduleTableConfig"
+            (pageChange)="schedulePageChange($event)">
+  </xc-table>
+
+  <ng-template #scheduleModalFooter>
+    <div style="float: left;margin-left: 10px ">
+      <span>{{language.completedInspection}}: </span><span>{{patroled}}</span>
+      <span style="margin-left: 10px">{{language.notInspected}}: </span><span>{{notInspected}}</span>
+    </div>
+    <button class="link-button" nz-button nzType="primary" (click)="scheduleClose()">{{language.handleOk}}</button>
+    <button class="link-button" nz-button nzType="danger" (click)="scheduleClose()">{{language.handleCancel}}</button>
+  </ng-template>
+</nz-modal>
+<!--进度-->
+<ng-template #schedule let-data="data">
+  <div title="{{data.progressSpeed}}">
+    <nz-progress [nzPercent]="data.progressSpeed" nzSize="small" (click)="showCompleted(data)"></nz-progress>
+  </div>
+</ng-template>
+
+<!--责任单位 -->
+<ng-template #UnitNameSearch let-filterValue = "filterValue">
+  <input readonly="readonly" class="area-name" type="text" (click)="showModal(filterValue)" [title]="selectUnitName"
+         placeholder="{{language.pleaseClickToSelect}}" [(ngModel)]="selectUnitName">
+</ng-template>
+
+<xc-tree-area-selector
+  [(xcVisible)]="isVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-area-selector>
+
+<!-- 区域 -->
+<ng-template #areaSelector  let-filterValue = "filterValue" >
+  <app-area [areaConfig]='areaConfig'  [filterValue]="filterValue" ></app-area>
+</ng-template>
+
+<!-- 巡检周期筛选带操作符模板 -->
+<ng-template #taskPeriodPeTemp let-filterValue = "filterValue">
+  <span class="inputBox">
+    <input type="text" class="widthStyle" class = "numberInput"  [placeholder]="language.pleaseEnter"
+           [(ngModel)]="filterValue.filterValue" oninput="setInputValue(value)">
+    <xc-nz-select style="width: 110px;" [(ngModel)]="taskPeriodSelectedValue" [disabled]="!filterValue.filterValue">
+       <xc-nz-option *ngFor="let item of searchNumber" [nzLabel]="item.label" [nzValue]="item.value"></xc-nz-option>
+    </xc-nz-select>
+  </span>
+</ng-template>
+
+<!-- 期望用时筛选带操作符模板 -->
+<ng-template #procPlanDateTemp let-filterValue = "filterValue">
+  <span class="inputBox">
+    <input type="text" class="widthStyle" class = "numberInput" [placeholder]="language.pleaseEnter"
+           [(ngModel)]="filterValue.filterValue" oninput="setInputValue(value)">
+    <xc-nz-select style="width: 110px;" [(ngModel)]="procPlanDateSelectedValue" [disabled]="!filterValue.filterValue">
+       <xc-nz-option *ngFor="let item of searchNumber" [nzLabel]="item.label" [nzValue]="item.value"></xc-nz-option>
+    </xc-nz-select>
+  </span>
+</ng-template>
+
+<!-- 设施总数筛选带操作符模板 -->
+<ng-template #deviceCountTemp let-filterValue = "filterValue">
+  <span class="inputBox">
+    <input type="text" class="widthStyle" class = "numberInput"  [placeholder]="language.pleaseEnter"
+           [(ngModel)]="filterValue.filterValue" oninput="setInputValue(value)">
+    <xc-nz-select style="width: 110px;" [(ngModel)]="deviceCountSelectedValue" [disabled]="!filterValue.filterValue">
+       <xc-nz-option *ngFor="let item of searchNumber" [nzLabel]="item.label" [nzValue]="item.value"></xc-nz-option>
+    </xc-nz-select>
+  </span>
+</ng-template>
+

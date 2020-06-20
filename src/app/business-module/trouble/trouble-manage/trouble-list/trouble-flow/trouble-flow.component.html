@@ -1,0 +1,20 @@
+<div class="trouble-view-title" style="">{{title}}</div>
+<div class="flow-warp">
+  <div class="view-item">
+    <div class="flow-content">
+      <nz-spin class="spins" [nzSpinning]="isSpinning" *ngIf="isSpinning"></nz-spin>
+      <img [src]="imgSrc" alt="">
+    </div>
+  </div>
+  <div class="view-item">
+    <nz-card nzTitle="{{language.historyProcessRecord}}">
+      <xc-table [dataSet]="troubleRecord"
+                [pageBean]="troubleRecordPageBean"
+                [tableConfig]="troubleRecordTableConfig"
+                (pageChange)="troubleRecordPageChange($event)">
+      </xc-table>
+    </nz-card>
+
+  </div>
+</div>
+

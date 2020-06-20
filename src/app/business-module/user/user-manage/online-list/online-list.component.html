@@ -1,0 +1,30 @@
+<div class="box-warp">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</div>
+
+<ng-template #loginSourseTemp let-data="data">
+  <span *ngIf="data.loginSource === '1'">{{this.language.pcTerminal}}</span>
+  <span *ngIf="data.loginSource === '0'">{{this.language.mobileTerminal}}</span>
+</ng-template>
+
+<ng-template #UnitNameSearch let-filterValue = "filterValue">
+  <span class="unit-name hidden" (click)="showModal(filterValue)" [class.placeholder]="!selectUnitName"
+       [title]="selectUnitName">{{selectUnitName?selectUnitName:commonLanguage.clickSelect}}</span>
+</ng-template>
+
+<!-- 单位选择器 -->
+<xc-tree-selector
+  [(xcVisible)]="isVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-selector>
+
+<!-- 进度条 -->
+<div class="progress-bar" *ngIf="isShowProgressBar">
+  <p>{{commonLanguage.loading}}...</p>
+  <nz-progress [nzPercent]="percent" nzStatus="active"></nz-progress>
+</div>

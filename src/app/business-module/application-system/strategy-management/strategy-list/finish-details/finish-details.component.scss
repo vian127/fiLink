@@ -1,0 +1,23 @@
+.strategy{
+  padding: 0 20px;
+  width: 500px;
+  .trigger{
+    margin: 20px 10px;
+  }
+  .implement{
+    .implement-list{
+      margin: 20px 10px;
+    }
+  }
+  .screen{
+    .screen-list{
+      margin: 20px 0;
+      .program-title{
+        margin-right: 20px;
+      }
+      .program-list{
+        width: 200px;
+      }
+    }
+  }
+}

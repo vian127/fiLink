@@ -1,0 +1,66 @@
+.alarm-level {
+  display: inline-block;
+  text-align: center;
+  width: 32px;
+  height: 20px;
+  color: #333;
+}
+
+.alarm-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  font-family: 'Microsoft YaHei';
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+
+.box-warp {
+  padding: 0px 10px 10px 10px;
+}
+
+
+:host ::ng-deep .left-button {
+  width: 130px;
+}
+
+.box-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  align-self: center;
+}
+
+.alarm-urgent {
+  background: #e61017
+}
+
+.alarm-main {
+  background: #ff6600;
+}
+
+.alarm-secondary {
+  background: #f1c620;
+}
+
+.alarm-prompt {
+  background: #58c1f0
+}
+
+// 修改备注
+::ng-deep .updateRemarkPopUp form > div {
+  padding: 0 !important;
+}
+::ng-deep .updateRemarkPopUp  .xc-item{
+  width: 100%;
+}
+::ng-deep .updateRemarkPopUp .xc-label {
+  min-width: 0;
+  height: 0;
+  line-height: 40px;
+}
+::ng-deep .updateRemarkPopUp textarea {
+  height: 100px !important;
+}
+

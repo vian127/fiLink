@@ -1,0 +1,25 @@
+<!--  表单-->
+<xc-form [column]="formColumn"
+         (formInstance)="formInstance($event)">
+</xc-form>
+
+<!--单选模板-->
+<ng-template #statusEnable>
+  <nz-radio-group [(ngModel)]="sslStatus" (ngModelChange)="setStatus()">
+    <label nz-radio nzValue="1">是</label>
+    <label nz-radio nzValue="0">否</label>
+  </nz-radio-group>
+</ng-template>
+
+<!--单选模板-->
+<ng-template #dropDownBox>
+  <nz-select [(ngModel)]="accessType" (ngModelChange)="selected()">
+    <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+    <nz-option nzValue="disabled" nzLabel="Disabled"></nz-option>
+  </nz-select>
+</ng-template>
+
+
+
+

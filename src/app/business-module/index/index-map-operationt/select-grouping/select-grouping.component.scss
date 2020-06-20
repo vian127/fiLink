@@ -1,0 +1,148 @@
+.select-grouping {
+  cursor: pointer;
+  display: inline-table;
+  border: 1px #efeaea solid;
+  border-radius: 3px;
+
+  //地图框选按钮
+  .select-grouping-show {
+    background: white;
+    position: absolute;
+    text-align: center;
+    right: 10px;
+    bottom: 165px;
+    width: 33px;
+    height: 35px;
+    font-size: 22px;
+  }
+
+  //添加到分组按钮
+  .add-grouping-show {
+    background: white;
+    position: absolute;
+    text-align: center;
+    right: 50px;
+    bottom: 165px;
+    width: 90px;
+    height: 35px;
+    font-size: 14px;
+    line-height: 33px;
+  }
+
+}
+
+//弹框主体内容
+.content {
+  height: 300px;
+  //步骤条
+  .step {
+    display: inline-block;
+    float: left;
+    border-right: 1px solid #e0dfdf;
+    width: 200px;
+    height: 100%;
+
+    .one {
+      height: 150px;
+      margin-top: 50px;
+    }
+
+    .two {
+    }
+
+    .ant-steps-item-process .ant-steps-item-icon {
+      background: #13C2C2 !important;
+    }
+  }
+
+  //第一步显示表格 #13C2C2
+  .table {
+    display: inline-block;
+    float: left;
+    margin-left: 30px;
+
+    .title {
+      padding-left: 10px;
+      margin: 10px 0 20px 0;
+      font-size: 16px;
+      font-weight: bold;
+      height: 25px;
+      border-left: 2px solid #56a9f5c4;
+
+      .title-text {
+      }
+    }
+  }
+
+  //第二步操作内容
+  .addGroup {
+    display: inline-block;
+    float: left;
+    margin-left: 30px;
+
+    .title {
+      padding-left: 10px;
+      margin: 10px 0 20px 0;
+      font-size: 16px;
+      font-weight: bold;
+      height: 25px;
+      border-left: 2px solid #56a9f5c4;
+    }
+
+    //单选切换
+    .addGroup-radio {
+      width: 400px;
+      height: 50px;
+
+      span {
+        margin: 0 40px 0 10px;
+      }
+
+      .ant-radio-wrapper {
+        margin-right: 35px;
+      }
+    }
+
+    //下拉选择分组
+    .addGroup-select {
+      width: 430px;
+      height: 50px;
+
+      .addGroup-select-option {
+        width: 300px
+      }
+
+      span {
+        margin: 0 55px 0 10px;
+      }
+    }
+
+    //分组名称input
+    .group-input {
+      width: 430px;
+      height: 30px;
+
+      span {
+        margin: 0 55px 0 10px;
+      }
+
+      .ant-input {
+        width: 300px;
+      }
+    }
+
+    //备注框
+    .group-remark {
+      display: flex;
+      width: 430px;
+
+      div {
+        display: inline-block;
+      }
+
+      span {
+        margin: 0 85px 0 10px;
+      }
+    }
+  }
+}

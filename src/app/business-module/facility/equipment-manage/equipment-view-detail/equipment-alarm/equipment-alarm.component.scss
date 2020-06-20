@@ -1,0 +1,99 @@
+.box-container {
+  background: #ffffff;
+  position: relative;
+  .alarm-info{
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    z-index: 99;
+    color: #0ac929;
+  }
+}
+//  选择时间容器样式
+.timer-container {
+  margin-top: 12px;
+  margin-right: 10px;
+}
+// 告警级别
+.alarm-level-icon{
+  display: inline-block;margin-right: 5px;
+}
+// 统计图样式
+.demo-chart {
+  width: 300px;
+  height: 300px;
+}
+
+//  环形图样式
+.ring {
+  flex: 2;
+}
+
+.chart {
+  flex: 3;
+}
+.columnar {
+  flex: 4;
+}
+.box-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  align-self: center;
+}
+/*:host ::ng-deep {
+  .ant-tabs-nav {
+    padding-left: 15px;
+    line-height: 41px;
+  }
+
+  .ant-tabs-nav .ant-tabs-tab-active {
+    color: #36cfc9;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .ant-tabs-ink-bar {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    box-sizing: border-box;
+    height: 3px;
+    background-color: #36cfc9;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+}*/
+
+// 修改备注
+::ng-deep .updateRemarkPopUp form > div {
+  padding: 0 !important;
+}
+
+::ng-deep .updateRemarkPopUp .xc-item {
+  width: 100%;
+}
+
+::ng-deep .updateRemarkPopUp .xc-label {
+  min-width: 0;
+  height: 0;
+  line-height: 40px;
+}
+
+::ng-deep .updateRemarkPopUp textarea {
+  height: 100px !important;
+}
+
+.alarm-container {
+  position: relative;
+  padding: 0 32px 40px;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%
+}
+

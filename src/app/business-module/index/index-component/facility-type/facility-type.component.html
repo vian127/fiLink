@@ -1,0 +1,23 @@
+<!--设施类型-->
+<div class="facility-type-checkbox">
+  <div class="facility-type-title" title="{{indexLanguage.facilityTypeTitle}}">
+    <div class="text" (click)="fold()">{{indexLanguage.facilityTypeTitle}}</div>
+    <div class="icon-setting" (click)="openFacilityTypeSetting()"></div>
+  </div>
+  <div class="checkbox-container">
+    <div class="checkbox">
+      <label nz-checkbox [(ngModel)]="isFacilityTypeAllChecked" (ngModelChange)="facilityTypeChange($event, 0)">
+      </label>
+      <div class="text">{{indexLanguage.allCheck}}</div>
+      <div class="text">{{countObj['0'] || 0}}</div>
+    </div>
+    <ng-container *ngFor="let type of list">
+      <div class="checkbox">
+        <label nz-checkbox [(ngModel)]="type.checked" (ngModelChange)="facilityTypeChange($event, type.value)">
+        </label>
+        <div class="text">{{type.label}}</div>
+        <div class="text">{{countObj[type.value] || 0}}</div>
+      </div>
+    </ng-container>
+  </div>
+</div>

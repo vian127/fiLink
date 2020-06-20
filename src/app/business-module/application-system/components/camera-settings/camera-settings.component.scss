@@ -1,0 +1,105 @@
+
+.camera-config {
+  border: 1px solid black;
+  height: 400px;
+
+  .camera-img {
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .img-content {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      div {
+        width: 150px;
+        height: 150px;
+        border: 1px solid black;
+        border-radius: 50%;
+        position: relative;
+      }
+
+    }
+
+    .configure {
+      width: 50%;
+      text-align: center;
+
+      .box {
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+
+      span {
+        margin: 20px;
+      }
+    }
+  }
+
+  .camera-details {
+    height: 180px;
+
+    h5 {
+      margin-bottom: 20px;
+    }
+
+    .details {
+      margin-left: 20px;
+      margin-bottom: 20px;
+
+      span {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+
+.icon-up{
+  position: absolute;
+  top: 0;
+  left: 43.3%;
+}
+.icon-right{
+  position: absolute;
+  top: 43.3%;
+  right: 0;
+}
+.icon-down{
+  position: absolute;
+  bottom: 0;
+  left: 43.3%;
+}
+.icon-left{
+  position: absolute;
+  top: 43.3%;
+  left: 0;
+}
+.logo{
+  font-size: 20px;
+  cursor: pointer;
+}
+.rotate-up{
+  transform: rotate(45deg);
+  top: 13%;
+  left: 76%;
+}
+.rotate-right{
+  transform: rotate(45deg);
+  top: 76%;
+  right: 13%;
+}
+.rotate-down{
+  transform: rotate(45deg);
+  bottom: 13%;
+  left: 11%;
+}
+.rotate-left{
+  transform: rotate(45deg);
+  top: 11%;
+  left: 13%;
+}

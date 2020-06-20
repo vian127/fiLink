@@ -1,0 +1,85 @@
+// @import "../../../../../style-module/config";
+
+.pageTitle {
+  border-left: 2px solid #7cb0dd;
+  padding-left: 18px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.user-detail{
+  padding: 10px;
+}
+
+.alarm-urgent {
+  background: #e61017
+}
+
+.alarm-main {
+  background: #ff6600;
+}
+
+.alarm-secondary {
+  background: #f1c620;
+}
+
+.alarm-prompt {
+  background: #58c1f0
+}
+
+:host ::ng-deep form > div > div:nth-child(1) {
+  position: relative;
+  width: 100%;
+  height: 40px;
+}
+
+:host ::ng-deep  form > div > div:nth-child(4) {
+  position: relative;
+  width: 100%;
+  height: 40px;
+}
+
+:host ::ng-deep form > div > div:nth-child(1) > div:nth-child(2) {
+  position: static !important;
+}
+:host ::ng-deep form > div > div:nth-child(4) > div:nth-child(2) {
+  position: static !important;
+}
+
+// 统一时间控件的长度
+::ng-deep nz-date-picker.timeData span.ant-calendar-picker {
+  width: 280px !important;
+}
+.titleData {
+  border-bottom: 1px solid rgb(232,232,232);
+  position: absolute;
+  width: 100%;
+  left: 0;
+
+  span {
+    background: rgb(54,207,202);
+    color: #fff;
+    padding: 2px;
+  }
+}
+
+
+div.alarmMenu {
+  position: relative;
+}
+
+button.alarmFiltrationRule {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  color: #fff;
+  background-color: #36cfc9;
+  border-color: #36cfc9;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 0 rgba(0,0,0,.045);
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}

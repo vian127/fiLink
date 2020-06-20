@@ -1,0 +1,169 @@
+.alarm-level {
+  display: inline-block;
+  text-align: center;
+  width: 32px;
+  height: 20px;
+  color: #333;
+}
+
+.alarm-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  font-family: 'Microsoft YaHei';
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+
+.box-warp {
+  padding: 0px 10px 10px 10px;
+}
+
+
+.box-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  align-self: center;
+}
+
+.alarm-urgent {
+  background: #e61017
+}
+
+.alarm-main {
+  background: #ff6600;
+}
+
+.alarm-secondary {
+  background: #f1c620;
+}
+
+.alarm-prompt {
+  background: #58c1f0
+}
+
+.particulars-popUp > p > span {
+  margin-left: 10px;
+}
+
+.filtration-condition{
+  cursor: pointer;
+}
+.device-type-icon{
+  vertical-align: middle;
+  font-size: 19px;
+}
+.status-text {
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+span.deviceType:not(:last-child) > span.status-text:after {
+  content: ',';
+}
+.area-name {
+  display: inline-block;
+  width: 50%;
+  border: 1px solid #ccc;
+  height: 22px;
+  line-height: 15px;
+  padding: 4px 11px;
+  border-radius: 4px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  outline: none;
+  white-space: nowrap;
+}
+div.screenRender  {
+
+  button.open-button {
+    border: none;
+    outline: none;
+    background: #ffffff;
+    cursor: pointer;
+  }
+}
+
+::ng-deep nz-modal.alarmFiltration .ant-modal-body {
+  padding: 0 5px;
+}
+
+::ng-deep nz-modal.alarmFiltration .table-top-button {
+  padding: 8px 0 5px;
+}
+
+::ng-deep nz-modal.alarmFiltration .ant-table-pagination.ant-pagination {
+  float: none;
+  text-align: center;
+  margin: 0;
+}
+
+::ng-deep #listAreaTree {
+  overflow-x: auto;
+  height: 300px;
+}
+
+.area-name {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 11px;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.complateionTime {
+  border-radius: 2px;
+  border: 1px solid #e2e2e2;
+}
+
+input::-webkit-input-placeholder{
+  color:#BFBFBF;
+}
+
+
+.numberInput{
+  display: inline-block;
+  border: 1px solid #ccc;
+  height: 22px;
+  padding: 4px 11px;
+  border-radius: 4px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  outline: none;
+  cursor: default;
+  &:hover{
+    border-color: #36cfc9;
+  }
+
+  &:disabled{
+    cursor: no-drop;
+    background-color: #f5f5f5;
+    color: rgba(0,0,0,0.25);
+  }
+}
+
+.inputBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.widthStyle {
+  width: 100%;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

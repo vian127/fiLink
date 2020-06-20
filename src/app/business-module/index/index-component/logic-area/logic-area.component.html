@@ -1,0 +1,25 @@
+<!--选择区域-->
+<div class="logic-area-container">
+  <div class="logic-area-title" title="{{indexLanguage.selectArea}}">
+    <div class="text hidden" >{{title}}</div>
+    <div class="iconfont fiLink-SelectAll-icon select_all"  style="margin-left: 250px;"
+         (click)="clickSelectAll(true)"
+         title="{{indexLanguage.allCheck}}" ></div>
+    <div class="iconfont fiLink-UnselectAll select_all"
+         (click)="clickSelectAll(false)"
+         title="{{indexLanguage.cancelCheck}}" ></div>
+  </div>
+  <!--搜索框-->
+  <div class="search">
+    <xc-search-input
+      [selectInfo]="selectInfo"
+      [searchValue]="searchKey"
+      (modelChange)="modelChange($event)"
+      (inputChange)="inputChange($event)"
+      [inputStyle]="{height:'24px',borderRadius:'10px',fontSize:'12px'}"
+    ></xc-search-input>
+  </div>
+  <div class="tree">
+    <ul [id]="treeName" class="ztree link-tree selector-table-tree"></ul>
+  </div>
+</div>

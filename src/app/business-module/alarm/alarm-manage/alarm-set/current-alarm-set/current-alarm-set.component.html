@@ -1,0 +1,55 @@
+<div class="box-warp">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+  <button nz-button nzType="default"  appAccessPermission="02-3-1-1-1"
+          style="margin-top:20px;" (click)="navigateToLevelSet()">
+    {{this.language.alarmLevelSet}}</button>
+</div>
+
+<ng-template #alarmDefaultLevelTemp let-data="data">
+  <div *ngIf="data.alarmDefaultLevel === '1'" style="display: flex"><div class="box-icon" [ngStyle]="data.defaultStyle"></div><span style="margin-left: 5px">{{this.language.urgent}}</span></div>
+  <div *ngIf="data.alarmDefaultLevel === '2'" style="display: flex"><div class="box-icon" [ngStyle]="data.defaultStyle"></div><span style="margin-left: 5px">{{this.language.main}}</span></div>
+  <div *ngIf="data.alarmDefaultLevel === '3'" style="display: flex"><div class="box-icon" [ngStyle]="data.defaultStyle"></div><span style="margin-left: 5px">{{this.language.secondary}}</span></div>
+  <div *ngIf="data.alarmDefaultLevel === '4'" style="display: flex"><div class="box-icon" [ngStyle]="data.defaultStyle"></div><span style="margin-left: 5px">{{this.language.prompt}}</span></div>
+</ng-template>
+
+<ng-template #alarmLevelTemp let-data="data">
+  <div *ngIf="data.alarmLevel === '1'" style="display: flex"><div class="box-icon" [ngStyle]="data.style"></div> <span style="margin-left: 5px">{{this.language.urgent}}</span></div>
+  <div *ngIf="data.alarmLevel === '2'" style="display: flex"><div class="box-icon" [ngStyle]="data.style"></div><span style="margin-left: 5px">{{this.language.main}}</span></div>
+  <div *ngIf="data.alarmLevel === '3'" style="display: flex"><div class="box-icon" [ngStyle]="data.style"></div><span style="margin-left: 5px">{{this.language.secondary}}</span></div>
+  <div *ngIf="data.alarmLevel === '4'" style="display: flex"><div class="box-icon" [ngStyle]="data.style"></div><span style="margin-left: 5px">{{this.language.prompt}}</span></div>
+</ng-template>
+
+<ng-template #alarmConfirmTemp let-data="data">
+  <div *ngIf="data.alarmAutomaticConfirmation ==='1'">{{language.yes}}</div>
+  <div *ngIf="data.alarmAutomaticConfirmation ==='0'">{{language.no}}</div>
+</ng-template>
+
+<!-- 编辑 -->
+<nz-modal [(nzVisible)]="isVisibleEdit"
+          [nzTitle]="editModalTitle"
+          [nzContent]="editModalContent"
+          [nzFooter]="editModalFooter"
+          (nzOnCancel)="editHandleCancel()">
+  <ng-template #editModalTitle>
+    {{modalTitle}}
+  </ng-template>
+  <ng-template #editModalContent>
+    <xc-form [column]="tableColumnEdit" (formInstance)="formInstance2($event)"></xc-form>
+  </ng-template>
+  <ng-template #editModalFooter>
+    <button nz-button nzType="primary" class="link-button" (click)="editHandle()" [nzLoading]="isLoading"  [disabled]="!formStatusEdit.getValid()">{{language.okText}}</button>
+    <button nz-button nzType="danger" class="link-button" (click)="editHandleCancel()">{{language.cancelText}}</button>
+  </ng-template>
+</nz-modal>
+<ng-template #tableDefaultTemp let-formGroup="formGroup" let-col="col">
+  <input type="text" [disabled]="noAlarmLevel" [ngModel]="alarmDefaultLevel" [placeholder]="language.pleaseEnter" nz-input>
+</ng-template>
+<!--  告警类别  -->
+<ng-template #alarmTypeTemp let-data="data">
+<!--  <div>{{ data.alarmTypeName }}</div>-->
+  <div>{{ typeStatus[data.alarmType] }}</div>
+</ng-template>

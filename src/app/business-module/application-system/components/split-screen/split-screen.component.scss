@@ -1,0 +1,64 @@
+.monitor {
+  width: 100%;
+}
+
+/**
+ *分屏1*1
+ */
+.one {
+  width: 100%;
+}
+
+/**
+ *分屏2*2
+ */
+.two {
+  width: 49%;
+  margin-left: 1%;
+}
+
+/**
+ *分屏3*3
+ */
+.three {
+  width: 32%;
+  margin-left: 1%;
+}
+
+/**
+ *分屏4*4
+ */
+.four {
+  width: 24%;
+  margin-left: 1%;
+}
+
+/**
+ * 设备列表
+ */
+.equipmentList {
+  width: 60%;
+  text-align: center;
+  cursor: pointer;
+}
+
+/**
+ * 被选中的设备列表
+ */
+.selectedEquipmentList {
+  background: #36cfc9;
+}
+
+/**
+ * 搜索框样式
+ */
+.search {
+  width: 60%;
+}
+/**
+ * 搜索图标样式
+ */
+.searchIcon{
+  cursor: pointer;
+  font-size: 24px;
+}

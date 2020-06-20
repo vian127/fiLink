@@ -1,0 +1,31 @@
+<div>
+  <ul class="tree">
+    <ng-container *ngFor="let treeNode of data ">
+      <li (click)="clickNode($event,treeNode)"
+          (dblclick)="dblClickNode($event,treeNode)"
+      >
+        <i class="tree-icon" *ngIf="treeNode.children.length>0" [class.close]="treeNode.isExpanded" nz-icon
+           type="caret-right"
+           theme="outline" (click)="toggleStatus($event,treeNode)"></i>
+        <ng-container *ngIf="option.xcCheckAble">
+          <span
+            class="ant-tree-checkbox"
+            [class.ant-tree-checkbox-checked]="treeNode.isChecked"
+            [class.ant-tree-checkbox-indeterminate]="treeNode.isHalfChecked"
+            [class.ant-tree-checkbox-disabled]="(treeNode.isDisabled || treeNode.isDisableCheckbox)"
+            (click)="_clickCheckBox($event,treeNode)">
+            <span class="ant-tree-checkbox-inner"></span>
+          </span>
+        </ng-container>
+        <span class="tree-title">{{treeNode.title}}</span>
+        <ng-container *ngIf="treeNode.children.length>0&&treeNode.isExpanded">
+          <xc-tree-node [data]="treeNode.children"
+                        [option]="option"
+                   (clickTreeNode)="clickTreeNode.emit($event)"
+                   (dblClickTreeNode)="dblClickTreeNode.emit($event)"
+          ></xc-tree-node>
+        </ng-container>
+      </li>
+    </ng-container>
+  </ul>
+</div>

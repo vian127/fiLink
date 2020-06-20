@@ -1,0 +1,37 @@
+<div class="log-order-panel-container">
+  <!--  设施日志  5-->
+  <div class="facility-log" >
+    <div class="facility-log-title">
+      <div class="facility-log-title-text">{{indexLanguage.facilityLog}}</div>
+      <div class="facility-log-title-more" (click)="goToFacilityLogList()">{{commonLanguage.more}}>></div>
+    </div>
+    <div class="facility-log-table">
+      <app-facility-log-table [facilityId]="facilityId"
+                               ></app-facility-log-table>
+    </div>
+  </div>
+
+  <!--  操作记录 7-->
+  <div class="facility-log" >
+    <div class="facility-log-title">
+      <div class="facility-log-title-text">{{indexLanguage.operationRecordTitle}}</div>
+      <div class="facility-log-title-more" (click)="navigatorTo('business/system/log')">{{commonLanguage.more}}>></div>
+    </div>
+    <div class="facility-log-table">
+      <app-operation-record [facilityId]="facilityId"
+                             ></app-operation-record>
+    </div>
+  </div>
+
+  <!--工单表格-->
+  <div class="facility-log" >
+    <app-index-facility-order-list #facilityOrderList
+                                   [facilityId]="facilityId"
+                                   [isShowStatistics]="true"
+                                   [isShowMore]="false"
+                                   [isSelect]="true"
+                                   [isStyleSwitch]="true"></app-index-facility-order-list>
+  </div>
+</div>
+
+

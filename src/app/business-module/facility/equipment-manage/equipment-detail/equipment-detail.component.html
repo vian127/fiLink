@@ -1,0 +1,181 @@
+<!--新增或编辑设备信息表单-->
+<nz-spin class="equipment-detail" [nzSpinning]="pageLoading">
+  <div *ngIf="isHasTitle">
+    <span class="equipment-detail-title">
+      {{pageTitle}}
+    </span>
+  </div>
+  <div>
+    <xc-form [column]="formColumn"
+             (formInstance)="formInstance($event)">
+    </xc-form>
+    <div class="button-container" *ngIf="isHasButton">
+      <button class="link-button margin-right20"
+              nz-button nzType="primary"
+              [nzLoading]="isLoading"
+              [disabled]="!formStatus.getValid()"
+              (click)="onClickSaveEquipment()">
+        {{commonLanguage.confirm}}
+      </button>
+      <button class="link-button"
+              nz-button nzType="danger"
+              (click)="onClickCancel()">
+        {{commonLanguage.cancel}}
+      </button>
+    </div>
+  </div>
+</nz-spin>
+<ng-template #uploadImgTemp>
+  <upload-img #uploadImg></upload-img>
+</ng-template>
+
+<!--设备名称表单模版-->
+<ng-template #equipmentNameTemp>
+  <nz-input-group nzSearch
+                  nzSize="default"
+                  [nzAddOnAfter]="suffixButton">
+      <input type="text" nz-input
+             [(ngModel)]="saveEquipmentModel.equipmentName"
+             (ngModelChange)="onNameChange($event)"
+             placeholder="{{language.pleaseEnter}}"/>
+  </nz-input-group>
+  <ng-template #suffixButton>
+    <button *ngIf="operateType==='add' || isAddOperate"
+            nz-button nzType="primary"
+            nzSize="default" nzSearch
+            (click)="onClickAuto()">{{language.autoGenerate}}</button>
+  </ng-template>
+</ng-template>
+
+<!--设施模板-->
+<ng-template #facilitiesSelector
+             let-formGroup="formGroup"
+             let-col="col">
+  <div>
+    <label>
+      <input readonly="readonly"
+             class="facility-name"
+             [title]="saveEquipmentModel.deviceName"
+             [(ngModel)]="saveEquipmentModel.deviceName">
+    </label>
+    <button type="button"
+            class="open-button"
+            (click)="onShowFacilityModal()"><i><span
+      class="icon-fiLink fiLink-search-index iconfont"></span></i></button>
+  </div>
+</ng-template>
+<!--区域选择模板-->
+<ng-template #areaSelector
+             let-formGroup="formGroup"
+             let-col="col">
+  <div>
+    <span class="facility-name"
+          [title]="saveEquipmentModel.areaName">
+      {{saveEquipmentModel.areaName}}
+    </span>
+    <button type="button"
+            class="open-button"
+            (click)="onShowAreaModal()"><i
+      class="icon-fiLink fiLink-search-index iconfont"></i></button>
+  </div>
+</ng-template>
+<!--区域选择器-->
+<xc-tree-area-selector
+  [(xcVisible)]="areaSelectVisible"
+  [treeSelectorConfig]="areaSelectorConfig"
+  [canClear]="false"
+  (selectDataChange)="areaSelectChange($event)"
+>
+</xc-tree-area-selector>
+
+<!--挂载位置-->
+<ng-template #positionByDeviceTemplate let-formGroup="formGroup" let-col="col">
+  <nz-select nzShowSearch nzAllowClear
+             nzPlaceHolder="{{language.picInfo.pleaseChoose}}"
+             [(ngModel)]="saveEquipmentModel.mountPosition"
+             (ngModelChange)="onPositionChange($event)"
+  >
+    <nz-option *ngFor="let item of positionSelectList"
+               [nzLabel]="item"
+               [nzValue]="item">
+    </nz-option>
+  </nz-select>
+</ng-template>
+
+<!--型号-->
+<ng-template #modelByTypeTemplate let-formGroup="formGroup" let-col="col">
+  <nz-select nzShowSearch
+             nzAllowClear
+             nzPlaceHolder="{{language.picInfo.pleaseChoose}}"
+             [(ngModel)]="saveEquipmentModel.equipmentModel"
+             (ngModelChange)="onSelectedModelChange($event)"
+  >
+    <nz-option *ngFor="let item of modelChangeValue"
+               [nzLabel]="item.model"
+               [nzValue]="item.model">
+    </nz-option>
+  </nz-select>
+</ng-template>
+<!--网关端口选择器-->
+<ng-template #gatewayPortTemp
+             let-formGroup="formGroup"
+             let-col="col">
+  <nz-select nzShowSearch
+             nzAllowClear
+             nzPlaceHolder="{{language.picInfo.pleaseChoose}}"
+             [(ngModel)]="saveEquipmentModel.portNo"
+             (ngModelChange)="onGatewayDataChange($event)"
+  >
+    <nz-option *ngFor="let item of gatewayPortList"
+               [nzLabel]="item"
+               [nzValue]="item">
+    </nz-option>
+  </nz-select>
+</ng-template>
+<!--网关-->
+<ng-template #gatewaySelectorTemp
+             let-formGroup="formGroup"
+             let-col="col">
+  <div>
+    <span class="facility-name"
+          [title]="saveEquipmentModel.gatewayName">
+      {{saveEquipmentModel.gatewayName}}
+    </span>
+    <button type="button"
+            class="open-button"
+            (click)="onShowGateway()">
+      <i class="icon-fiLink fiLink-search-index iconfont">
+    </i>
+    </button>
+  </div>
+</ng-template>
+
+<!--设施列表选择器-->
+<facility-list-selector-component [(facilityVisible)]="mapVisible"
+                                  [multiple]="false"
+                                  title="{{language.facilityList}}"
+                                  (selectDataChange)="selectDataChange($event)">
+</facility-list-selector-component>
+
+<!--网关选择器-->
+<equipment-list-selector-component [(equipmentVisible)]="gatewayVisible"
+                                   [filterConditions]="gatewayFilter"
+                                   [selectEquipmentId]="saveEquipmentModel.equipmentId"
+                                   (selectDataChange)="onGatewayDataChange($event)">
+</equipment-list-selector-component>
+<!--电源控制设备-->
+<ng-template #powerControlTemp let-formGroup="formGroup" let-col="col">
+  <div>
+    <span class="facility-name"
+          [title]="saveEquipmentModel.gatewayName">
+      {{saveEquipmentModel.gatewayName}}
+    </span>
+    <button type="button" class="open-button"
+            (click)="onShowGateway()"><i
+      class="icon-fiLink fiLink-search-index iconfont">
+    </i>
+    </button>
+  </div>
+</ng-template>
+
+

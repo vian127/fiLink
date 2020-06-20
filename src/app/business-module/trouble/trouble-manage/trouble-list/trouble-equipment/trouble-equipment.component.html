@@ -1,0 +1,51 @@
+<!-- 当在表单提交时 使用 -->
+<div *ngIf="_type === 'form'" class="screenRender {{ _type }}">
+  <span class="area-name" [title]="checkTroubleObject.name">{{checkTroubleObject.name}}</span>
+  <button class="open-button" (click)="display.objTable=true;refreshObjectData();">
+    <i class="icon-fiLink fiLink-search-index iconfont"></i></button>
+</div>
+<!-- 当在列表 筛选时 使用 -->
+<div *ngIf="_type === 'table'" class="screenRender {{ _type }}">
+  <span class="area-name" [title]="checkTroubleObject.name"
+        (click)="display.objTable=true;refreshObjectData();">
+  <span class="title" *ngIf="!checkTroubleObject.name">{{placeholder||language.clickSelect}}</span>
+  {{checkTroubleObject.name}}</span>
+</div>
+
+<!-- icon-l icon-search  -->
+<nz-modal
+  class="alarmFiltration alarmObj"
+  [(nzVisible)]="display.objTable"
+  [nzTitle]="title||language.troubleEquipment"
+  [nzContent]="modalContent"
+  [nzMaskClosable]="false"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="closeObj()">
+  <ng-template #modalContent>
+    <span class="selected-count">{{commonLanguage.selected}}：{{checkTroubleObjectBackups.ids.length}} {{commonLanguage.count}}</span>
+    <xc-table #xCTableComp
+              [dataSet]="_dataSetObject"
+              [pageBean]="pageBeanObject"
+              [tableConfig]="tableConfigObject"
+              (pageChange)="pageObjectChange($event)">
+    </xc-table>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" class="link-button" (click)="objConfirm()">{{language.okText}}</button>
+    <button nz-button nzType="danger" class="link-button" (click)="closeObj()">{{language.cancelText}}</button>
+    <button nz-button nzType="danger" class="link-button" (click)="clearSelectData()">{{commonLanguage.cleanUp}}</button>
+  </ng-template>
+</nz-modal>
+
+<!-- 告警对象弹框 状态 -->
+<ng-template #deviceStatusTemp let-data="data">
+  <div class="area-level">
+    <i [class]="'icon-fiLink-l iconfont '+data['deviceStatusIconClass']+' '+data['deviceStatusColorClass']"
+    ></i>
+    <span class="status-text" [title]="data['deviceStatus']">{{data['deviceStatus']}}</span>
+  </div>
+</ng-template>
+<ng-template #deviceTypeTemp let-data="data">
+  <i [ngClass]="data['iconClass']" class="device-type-icon"></i>
+  <span class="status-text" [title]="data['deviceType']">{{data['deviceType']}}</span>
+</ng-template>

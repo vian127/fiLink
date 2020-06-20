@@ -1,0 +1,41 @@
+<!--工单-->
+<nz-card nzTitle="{{language.picInfo.worker}}" [nzExtra]="extraTemplate">
+  <div class="equipment-tabs">
+    <nz-tabset>
+      <nz-tab nzTitle="{{workOrderLanguage.inspectionWorkOrder}}" (nzClick)="onClickInspection()">
+        <!--巡检工单-->
+        <div class="box-warp">
+          <div class="table-container">
+            <xc-table
+              [dataSet]="dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+            ></xc-table>
+          </div>
+        </div>
+      </nz-tab>
+      <!--消障工单-->
+      <nz-tab nzTitle="{{workOrderLanguage.clearBarrierWorkOrder}}"
+              (nzClick)="onClickClearBarrier()">
+        <xc-table
+          [dataSet]="clearBarrierDataSet"
+          [pageBean]="pageBean"
+          [tableConfig]="clearBarrierTableConfig"
+        ></xc-table>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+</nz-card>
+<!--工单状态模版-->
+<ng-template #statusTemp let-data="data">
+  <div class="hidden" title="{{data.statusName}}">
+    <span [ngClass]="data.statusClass">
+    </span>
+    {{data.statusName}}
+  </div>
+</ng-template>
+
+<!--更多-->
+<ng-template #extraTemplate>
+  <a (click)="onClickShowMoreWorkOrder()"><span>{{language.more}} >></span></a>
+</ng-template>

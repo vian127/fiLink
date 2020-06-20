@@ -1,0 +1,16 @@
+@import "../../../style-module/config";
+
+.active {
+  background: #0e77ca;
+}
+
+.search-list {
+  background: #fff;
+  border: 1px solid #ccc;
+  overflow: scroll;
+  max-height: 300px
+}
+
+.search-icon {
+  color: $color;
+}

@@ -1,0 +1,125 @@
+//共用样式
+.filter-top-filter {
+  background-color: white;
+  border: 1px #efeaea solid;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-table;
+}
+
+//设施展示按钮
+.facility-show {
+  @extend .filter-top-filter;
+  position: absolute;
+  right: 10px;
+  bottom: 120px;
+  width: 33px;
+  height: 35px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.zoom-show {
+  @extend .filter-top-filter;
+  position: absolute;
+  right: 10px;
+  bottom: 210px;
+  width: 33px;
+  height: 35px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.zoom-slider {
+  @extend .filter-top-filter;
+  position: absolute;
+  padding: 10px;
+  right: 50px;
+  bottom: 200px;
+  width: 200px;
+  height: 34px;
+}
+
+//.facility-equipment-Card-transition {
+//  //visibility: 1;
+//  //opacity: 1;
+//  width: 400px !important;
+//  border-radius: 0.4px;
+//}
+
+//设施设备选择卡片
+.facility-equipment-Card {
+
+  @extend .filter-top-filter;
+  position: absolute;
+  width: 250px;
+  right: 60px;
+  bottom: 120px;
+  //卡片头部切换
+  .facility-equipment-radio {
+    text-align: center;
+    //文字
+    label {
+      font-size: 12px;
+    }
+
+    .radio-group {
+      width: 100% !important;
+
+      div {
+        display: inline-block;
+        width: 50%
+      }
+
+      //设施切换边框
+      .facility-radio {
+        border-bottom: 1px solid #13c2c2;
+      }
+
+      //设备切换边框
+      .equipment-radio {
+        border-bottom: 1px solid #13c2c2;
+      }
+    }
+  }
+
+  //切换内容
+  .card-body {
+    margin: 10px 0px 10px 10px;
+    width: 230px;
+
+    .equipment-radio {
+      display: flex;
+
+      .equipment-radio {
+        display: inline-block;
+
+        .equipment-radio-child {
+          display: inline-block;
+
+          .ant-radio-wrapper {
+            display: inline-block;
+            width: 100px;
+          }
+        }
+
+      }
+    }
+
+    div {
+      label {
+        display: block;
+        height: 30px;
+        lineHeight: 30px
+      }
+    }
+
+    [nz-radio] {
+      display: block;
+    }
+
+    label {
+      font-size: 12px;
+    }
+  }
+}

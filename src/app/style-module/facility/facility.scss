@@ -1,0 +1,232 @@
+@import "../config";
+
+
+// 配线架
+.icon-patchPanel {
+  background: url("assets/facility-icon/icon_patchPanel.png") no-repeat center;
+  height: 14px;
+  width: 14px;
+  background-size: 100% 100%;
+}
+
+// 光交箱
+.icon-opticalBox {
+  background: url("assets/facility-icon/icon_opticalBox.png") no-repeat center;
+  height: 14px;
+  width: 14px;
+  background-size: 100% 100%;
+}
+
+// 人井
+.icon-manWell {
+  background: url("assets/facility-icon/icon_manWell.png") no-repeat center;
+  height: 14px;
+  width: 14px;
+  background-size: 100% 100%;
+}
+
+// 接头盒
+.icon-jointClosure {
+  background: url("assets/facility-icon/icon_jointClosure.png") no-repeat center;
+  height: 14px;
+  width: 14px;
+  background-size: 100% 100%;
+}
+
+
+// 分纤箱
+.icon-fiberBox {
+  background: url("assets/facility-icon/icon_fiberBox.png") no-repeat center;
+  height: 14px;
+  width: 14px;
+  background-size: 100% 100%;
+}
+
+// 室外柜
+.icon-outDoorCabinet {
+  background: url("assets/facility-icon/icon-shiwaigui.png") no-repeat center;
+  height: 14px;
+  width: 14px;
+  background-size: 100% 100%;
+}
+
+// 智慧杆
+.icon-wisdom {
+  background: url('~assets/facility-icon/icon_wisdom.png') no-repeat center;
+  height: 14px;
+  width: 14px;
+  background-size: 100% 100%;
+}
+
+// 配电箱
+.icon-distributionPanel {
+  background: url('assets/facility-icon/icon_distributionPanel.png') no-repeat center;
+  height: 14px;
+  width: 14px;
+  background-size: 100% 100%;
+}
+
+// 布防
+.icon_deploy_arm {
+  background: url("assets/facility-icon/icon_deploy_arm.png") no-repeat center;
+  height: 16px;
+  width: 16px;
+  background-size: 100% 100%;
+}
+
+// 未布防
+.icon_deploy_unarm {
+  background: url("assets/facility-icon/icon_deploy_unarm.png") no-repeat center;
+  height: 16px;
+  width: 16px;
+  background-size: 100% 100%;
+}
+
+// 拆除
+.icon_deploy_remove {
+  background: url("assets/facility-icon/icon_deploy_remove.png") no-repeat center;
+  height: 16px;
+  width: 16px;
+  background-size: 100% 100%;
+}
+
+// 停用
+.icon_deploy_disable {
+  background: url("assets/facility-icon/icon_deploy_disable.png") no-repeat center;
+  height: 16px;
+  width: 16px;
+  background-size: 100% 100%;
+}
+
+// 维护
+.icon_deploy_maintain {
+  background: url("assets/facility-icon/icon_deploy_maintain.png") no-repeat center;
+  height: 16px;
+  width: 16px;
+  background-size: 100% 100%;
+}
+
+// 设施告警
+.icon_facility_alarm {
+  background: url("assets/img/facility/icon_facility_alarm.png") no-repeat center;
+}
+
+// 正常
+.icon_facility_normal {
+  background: url("assets/img/facility/icon_normal.png") no-repeat center;
+}
+
+// 离线
+.icon_facility_offline {
+  background: url("assets/img/facility/icon_offline.png") no-repeat center;
+}
+
+// 失联
+.icon_facility_out_of_contact {
+  background: url("assets/img/facility/icon_out_of_contact.png") no-repeat center;
+}
+
+// 其他
+.icon_facility_unknown {
+  background: url("assets/img/facility/icon_unknown.png") no-repeat center;
+}
+
+
+.facility-icon {
+  font-size: $status-icon-width;
+}
+
+.all-facility-icon {
+  font-size: $status-icon-width;
+  color: $statistics-facility-all;
+}
+
+.opticalBox-color {
+  color: $statistics-opticalBox;
+}
+
+.patchPanel-color {
+  color: $statistics-patchPanel;
+}
+
+.fiberBox-color {
+  color: $statistics-fiberBox;
+}
+
+.outDoorCabinet-color {
+  color: $statistics-fiberBox;
+}
+
+.manWell-color {
+  color: $statistics-manWell;
+}
+
+.jointClosure-color {
+  color: $statistics-jointClosure;
+}
+
+.wisdom-color {
+  color: $statistics-wisdom;
+}
+
+.distributionPanel-color {
+  color: $statistics-distributionPanel;
+}
+
+.all-facility-color {
+  color: $statistics-facility-all;
+}
+
+//解决bug413
+.ant-form-item-label label::after {
+  content: ' ' !important;
+  position: relative;
+  top: -0.5px;
+  margin: 0 8px 0 2px;
+}
+
+.facility-alarm-c {
+  color: $status-alarm;
+}
+
+.facility-normal-c {
+  color: $status-normal;
+
+}
+
+.facility-offline-c {
+  color: $status-offline;
+
+}
+
+.facility-lost-c {
+  color: $status-lost;
+
+}
+
+.facility-unknown-c {
+  color: $status-unknown;
+}
+// 摄像头
+.camera-color {
+  color: $statistics-camera;
+}
+// 信息屏
+.informationboard-color {
+  color: $statistics-informationboard;
+}
+// 单灯控制器
+.singlelightcon-color {
+  color: $statistics-singlelightcon;
+}
+// 网关
+.gateway-color {
+  color: $statistics-gateway;
+}
+// 集中控制器
+.centralwlancon-color {
+  color: $statistics-centralwlancon;
+}
+
+
+

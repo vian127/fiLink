@@ -1,0 +1,19 @@
+.box-warp {
+  padding: 10px;
+}
+
+.table-container {
+  width: 100%;
+}
+
+// 状态文字样式
+.status-text {
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.device-name{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 200px;
+}

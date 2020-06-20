@@ -1,0 +1,115 @@
+<nz-layout id="fiLink" class="index-layout">
+  <nz-sider [(nzCollapsed)]="isCollapsed"
+            nzWidth="190"
+            nzCollapsedWidth="50"
+            (mouseenter)="isCollapsed = false"
+            (mouseleave)="isCollapsed = true">
+
+    <div (click)="goIndex()" style="cursor: pointer" [ngClass]="isCollapsed?'logo-1':'logo'">
+      <img [src]="logoUrl" alt="logo"
+           class="logo-img">
+      <i *ngIf="!isCollapsed" class="icon-fiLink fiLink-FiLink iconfont"
+         style="font-size: 22px !important; color: white !important;"></i>
+    </div>
+
+    <!--todo 左侧菜单-->
+    <app-first-menu
+      [menuList]="menuList"
+      [isCollapsed]="isCollapsed"
+      (changeThreeMenu)="showThreeMenu($event)"
+    ></app-first-menu>
+  </nz-sider>
+
+  <!--右侧-->
+  <nz-layout>
+    <!--头部用户信息-->
+    <nz-header class="header-layout">
+      <div class="top-title">
+        <div class="cTitle" *ngIf="typeLg !== 'US'">基础设施物联管理平台</div>
+        <div class="eTitle" *ngIf="typeLg === 'US'">FiLink IoT Management Platform</div>
+      </div>
+      <div class="top-menu">
+        <div class="top-menu-operate">
+          <div class="top-menu-search">
+            <input type="text" nz-input [(ngModel)]="searchValue" #searchInput (focus)="searchChange()"
+                   (ngModelChange)="searchChange()" placeholder="{{indexLanguage.menuSearch}}">
+            <i class="iconfont icon fiLink-search" (click)="searchChange()"></i>
+          </div>
+          <i class="iconfont icon fiLink-export" title="{{indexLanguage.exportManagement}}" (click)="linkTo('/business/download')"></i>
+          <i class="iconfont icon fiLink-about mr-16" title="{{indexLanguage.about}}" (click)="linkTo('/business/system/about')"></i>
+        </div>
+        <ul class="top-menu-ul">
+          <li>
+            <div class="warning-red" [ngStyle]="alarmStyle.urgency.style"></div>
+            <span>{{alarmStyle.urgency.data}}</span></li>
+          <li>
+            <div class="warning-orange" [ngStyle]="alarmStyle.main.style"></div>
+            <span>{{alarmStyle.main.data}}</span></li>
+          <li>
+            <div class="warning-yellow" [ngStyle]="alarmStyle.secondly.style"></div>
+            <span>{{alarmStyle.secondly.data}}</span></li>
+          <li>
+            <div class="warning-blue" [ngStyle]="alarmStyle.remind.style"></div>
+            <span>{{alarmStyle.remind.data}}</span></li>
+        </ul>
+        <div class="user-info">
+            <span style="position: relative;display: block;height: 100%;">
+              <i style="position: absolute;" class="icon fiLink-user-menu iconfont"></i>
+              <!--<p class="user-nickname" [title]="userName">{{userName}}</p>-->
+              <nz-dropdown  [nzPlacement]="'bottomRight'">
+            <a nz-dropdown class="user-nickname">{{userName}}<i nz-icon type="down" style="color: #36cfc9"></i> </a>
+            <ul nz-menu>
+              <li nz-menu-item (click)="updatePassword()">{{indexLanguage.changePassword}}</li>
+              <li nz-submenu>
+                <span title style="vertical-align: middle;">{{indexLanguage.changeLanguage}}</span>
+                <ul>
+                  <li nz-menu-item *ngFor="let option of languageAll" (click)="languageCheck(option)">
+                  <a>{{option.label}}</a>
+                  </li>
+                  </ul>
+              </li>
+              <li nz-menu-item (click)="logout()">{{indexLanguage.logOff}}</li>
+            </ul>
+          </nz-dropdown>
+            </span>
+        </div>
+      </div>
+    </nz-header>
+
+
+    <div class="nz-layout-content">
+
+      <app-three-menu *ngIf="threeMenuInfo.menuName"
+                      [threeMenuList]="threeMenuInfo.children"
+                      [title]="threeMenuInfo.menuId"
+                      #threeMenu
+      ></app-three-menu>
+
+      <!--中间主页面-->
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+    </div>
+
+  </nz-layout>
+</nz-layout>
+
+<!-- 密码修改-->
+<app-update-password *ngIf="isUpdatePassword" [passwordCheckObj]="passwordCheckObj"
+                     (cancelEvent)="updatePassword()"></app-update-password>
+
+<!--首页收索-->
+<ng-template #searchTemplate>
+  <nz-list [nzDataSource]="indexSearchList"
+           nzBordered nzSize="small"
+           [nzRenderItem]="item">
+    <ng-template #item let-item>
+      <div class="search-list" (click)="clickSearchItem(item.menuHref,typeLg === 'US'? item.eName : item.menuName)">
+        <nz-list-item [nzContent]="typeLg === 'US'? item.eName : item.menuName"></nz-list-item>
+      </div>
+    </ng-template>
+  </nz-list>
+</ng-template>
+
+
+

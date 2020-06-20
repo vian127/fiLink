@@ -1,0 +1,27 @@
+.passageway{
+  .config-list{
+    border: 1px solid black;
+    padding: 20px;
+    //height: 300px;
+    .title{
+      display: flex;
+      justify-content: space-between;
+      .t-right{
+        .config-btn{
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * 标题样式
+ */
+.area-detail-title {
+  border-left: 2px solid #7cb0dd;
+  padding-left: 18px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 900;
+}

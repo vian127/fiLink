@@ -1,0 +1,19 @@
+.passageway{
+  display: flex;
+  flex-wrap: wrap;
+  .config-list{
+    border: 1px solid black;
+    padding: 20px;
+    width: 50%;
+    height: 300px;
+    .title{
+      display: flex;
+      justify-content: space-between;
+      .t-right{
+        .config-btn{
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,132 @@
+<div class="ifSpin">
+  <xc-statistical-slider
+    [sliderConfig]="sliderConfig"
+    (slideShowChange)="slideShowChange($event)"
+    (selectChange)="sliderChange($event)">
+  </xc-statistical-slider>
+  <div class="box-warp">
+    <div style="width: 100%;">
+      <div class="selectAlarm">
+        <span>{{ this.language.displayUsage }}</span>
+        <nz-select
+          nzPlaceHolder="{{language.pleaseChoose}}"
+          [(ngModel)]="alarmHintValue"
+          (ngModelChange)="alarmHintValueModelChange()">
+          <nz-option *ngFor="let option of alarmHintList" [nzLabel]="option.label"
+                     [nzValue]="option.code"></nz-option>
+        </nz-select>
+      </div>
+      <xc-table #table
+                *ngIf="isShowTable"
+                [dataSet]="_dataSet"
+                [pageBean]="pageBean"
+                [tableConfig]="tableConfig"
+                (pageChange)="pageChange($event)">
+      </xc-table>
+    </div>
+  </div>
+
+  <ng-template #alarmFixedLevelTemp let-data="data">
+    <div style="display: flex">
+      <div class="box-icon" [ngStyle]="data.style"></div>
+      <span style="margin-left: 5px">{{ data.alarmFixedLevelName }} </span>
+    </div>
+  </ng-template>
+
+  <ng-template #isCleanTemp let-data="data">
+    <div>{{ data.alarmCleanStatusName }}</div>
+  </ng-template>
+
+  <ng-template #isConfirmTemp let-data="data">
+    <div>{{ data.alarmConfirmStatusName }}</div>
+  </ng-template>
+
+  <ng-template #alarmSourceTypeTemp let-data="data">
+    <div>{{ data.alarmSourceTypeName }}</div>
+  </ng-template>
+  <!-- 修改备注弹框 -->
+  <nz-modal
+    class="updateRemarkPopUp"
+    [(nzVisible)]="display.remarkTable"
+    [nzTitle]="modalTitle"
+    [nzMaskClosable]="false"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    (nzOnCancel)="display.remarkTable=false">
+    <ng-template #modalTitle>
+      {{language.updateRemark}}
+    </ng-template>
+    <ng-template #modalContent>
+      <xc-form [column]="formColumnRemark" (formInstance)="formInstanceRemark($event)"></xc-form>
+    </ng-template>
+    <ng-template #modalFooter>
+      <button nz-button nzType="primary" class="link-button" [disabled]="!formStatusRemark.getValid()"
+              (click)="updateAlarmRemark();display.remarkTable=false">{{language.okText}}
+      </button>
+      <button nz-button nzType="danger" class="link-button" (click)="display.remarkTable=false">{{language.cancelText}}</button>
+    </ng-template>
+  </nz-modal>
+
+  <!-- 按照模板查询 -->
+  <div class="box-warp" *ngIf="display.templateTable">
+    <app-template-table (resultAndClose)="templateTable($event)"></app-template-table>
+  </div>
+
+  <!-- 创建工单 -->
+  <app-create-work-order *ngIf="display.creationWorkOrder"
+                         [areaId] = "areaId"
+                         [creationWorkOrderData]="creationWorkOrderData"
+                         (close)="display.creationWorkOrder=false"></app-create-work-order>
+
+
+  <!-- 告警名称 -->
+  <ng-template #alarmName let-filterValue="filterValue">
+    <app-alarm-name [alarmNameConfig]='alarmNameConfig' [filterValue]="filterValue"></app-alarm-name>
+  </ng-template>
+  <!--  告警类别  -->
+  <ng-template #alarmTypeTemp let-data="data">
+    <div>{{ typeStatus[data.alarmType] }}</div>
+  </ng-template>
+
+  <!--  告警详情  -->
+  <ng-template #alarmDetailsTemp let-data="data">
+    <div [title]="getAlarmDetails(data)">详情</div>
+  </ng-template>
+
+  <!-- 区域 -->
+  <ng-template #areaSelector let-data="data" let-filterValue="filterValue">
+    <app-area [areaConfig]='areaConfig' [filterValue]="filterValue"></app-area>
+  </ng-template>
+
+  <!-- 告警对象 -->
+  <ng-template #department let-filterValue="filterValue">
+    <app-alarm-object [alarmObjectConfig]="alarmObjectConfig" [filterValue]="filterValue"></app-alarm-object>
+  </ng-template>
+  <!-- 诊断设置 -->
+  <nz-modal [(nzVisible)]="display.diagnoseSet"
+            [nzMaskClosable]="false"
+            [nzTitle]="setModalTitle"
+            [nzContent]="setModalContent"
+            [nzFooter]="editModalFooter"
+            (nzOnCancel)="setHandleCancel()">
+    <ng-template #setModalTitle>
+      {{language.alarmDiagnosticSet}}
+    </ng-template>
+    <ng-template #setModalContent>
+      <xc-form [column]="tableColumnSet" (formInstance)="formInstanceSet($event)"></xc-form>
+    </ng-template>
+    <ng-template #editModalFooter>
+      <button nz-button nzType="primary" class="link-button" (click)="setHandle()" [nzLoading]="isLoading"  [disabled]="!formStatusSet.getValid()">{{language.okText}}</button>
+      <button nz-button nzType="danger" class="link-button" (click)="setHandleCancel()">{{language.cancelText}}</button>
+    </ng-template>
+  </nz-modal>
+</div>
+<div *ngIf="ifSpin" class="ifSpin" style="position: absolute;top: 0px;left: 0px;background-color: gray;opacity: 0.4;z-index: 20;width: 100%;height: 100%;"></div>
+<nz-spin [nzSimple]="true"
+         *ngIf="ifSpin"
+         style="position: absolute; top: 400px; left: 50%; z-index: 999;"
+         [nzSpinning]="true"
+         [nzSize]="'large'"
+></nz-spin>
+
+

@@ -1,0 +1,24 @@
+<div class="lighting-details">
+  <app-steps-details
+    [lightingData] = "lightingData"
+    [strategyId] = "strategyId"
+    [isOperation]="isOperation"
+    (downNotify)="handleDown($event)"
+    (editNotify)="handEdit()"
+    (deleteNotify)="handDelete()">
+  </app-steps-details>
+  <div class="details">
+    <h3>策略详情</h3>
+    <div class="details-content">
+      <app-policy-add-details [strategyDetails]="strategyDetails"></app-policy-add-details>
+    </div>
+  </div>
+</div>
+<nz-modal
+  [(nzVisible)]="isStrategy"
+  nzTitle="删除策略"
+  nzWidth="500"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()">
+  <p>是否确定删除?</p>
+</nz-modal>

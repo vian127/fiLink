@@ -1,0 +1,26 @@
+<div class="group-warp">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</div>
+
+<!--亮度调整-->
+<nz-modal [(nzVisible)]="isBrightness" nzTitle="亮度调整" nzWidth="500" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-row>
+    <nz-col nzSpan="19">
+      <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="dimmingLightValue"></nz-slider>
+    </nz-col>
+    <div nz-col nzSpan="4">
+      <nz-input-number
+        [nzMin]="1"
+        [nzMax]="20"
+        [ngStyle]="{ marginLeft: '16px' }"
+        [(ngModel)]="dimmingLightValue"
+      ></nz-input-number>
+    </div>
+  </nz-row>
+</nz-modal>
+
+

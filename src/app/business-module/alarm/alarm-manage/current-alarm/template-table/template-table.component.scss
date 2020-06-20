@@ -1,0 +1,11 @@
+
+::ng-deep .alarm-template-table .ant-modal-wrap > .ant-modal {
+  width: 720px !important;
+}
+::ng-deep nz-modal.alarm-template-table .ant-modal-body {
+  padding: 0 5px;
+}
+
+::ng-deep nz-modal.alarm-template-table .table-top-button {
+  padding: 8px 0 8px;
+}

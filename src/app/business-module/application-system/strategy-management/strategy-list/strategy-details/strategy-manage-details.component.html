@@ -1,0 +1,24 @@
+<div class="lighting-details">
+  <app-steps-details
+    [isShowTable]="isShowTable"
+    [lightingData] = "lightingData"
+    [isOperation]="isOperation"
+    (downNotify)="handleDown()"
+    (editNotify)="handEdit()"
+    (deleteNotify)="handDelete()">
+  </app-steps-details>
+  <div class="details">
+    <h3>策略详情</h3>
+    <div class="details-content">
+      <app-finish-details></app-finish-details>
+    </div>
+  </div>
+</div>
+<nz-modal
+  [(nzVisible)]="isStrategy"
+  nzTitle="删除策略"
+  nzWidth="500"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()">
+  <p>是否确定删除?</p>
+</nz-modal>

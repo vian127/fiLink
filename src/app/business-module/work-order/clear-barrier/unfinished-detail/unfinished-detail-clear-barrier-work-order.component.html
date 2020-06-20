@@ -1,0 +1,94 @@
+<div class="work-order-detail">
+<!--  title标题  -->
+  <div>
+    <span class="work-order-detail-title">{{pageTitle}}</span>
+  </div>
+<!--  内容  -->
+  <div class="detail-warp">
+    <div>
+      <div nz-row class="grid-row">
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.name}}：</label><span>{{resultData.title}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.status}}：</label><span>{{InspectionLanguage[resultData.status]}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label" style="width: 23%;">{{workOrderLanguage.expectedCompleteTime}}：</label><span>{{formatterDate(resultData.expectedCompletedTime)}}</span></div>
+      </div>
+      <div nz-row class="grid-row">
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.createTime}}：</label><span>{{formatterDate(resultData.createTime)}}</span></div>
+        <div nz-col nzSpan="8">
+          <div *ngIf="!isFinished"><label class="row-label">{{workOrderLanguage.lastDays}}：</label><span>{{resultData.lastDays}}</span></div>
+          <div *ngIf="isFinished"><label class="row-label"  style="width: 23%;">{{workOrderLanguage.realCompleteTime}}：</label><span>{{formatterDate(resultData.realityCompletedTime)}}</span></div>
+        </div>
+        <div nz-col nzSpan="8">
+          <label class="row-label" style="width: 25%;">{{refFaultAndAlarm}}：</label>
+          <span>{{resultData.refAlarmFaultName}}</span>
+        </div>
+      </div>
+      <div nz-row class="grid-row">
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.deviceType}}：</label><span>{{facilityTypeNames[resultData.deviceType]}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.deviceName}}：</label><span>{{resultData.deviceName}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.deviceArea}}：</label><span>{{resultData.deviceAreaName}}</span></div>
+      </div>
+      <div nz-row class="grid-row">
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.equipmentName}}：</label><span>{{resultData.equipmentName}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.equipmentType}}：</label><span>{{resultData.equipmentType}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.accountabilityUnitName}}：</label><span>{{resultData.accountabilityDeptName}}</span></div>
+      </div>
+      <div nz-row class="grid-row">
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.assignName}}：</label><span>{{resultData.assignName}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.carInfo}}：</label><span>{{resultData.carName}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.materialInfo}}：</label><span>{{resultData.materielName}}</span></div>
+      </div>
+      <div nz-row class="grid-row" *ngIf="isFinished">
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.feeInformation}}：</label><span>{{resultData.costName}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.errorReason}}：</label><span>{{resultData.concatErrorReason}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.processingScheme}}：</label><span>{{resultData.concatProcessingScheme}}</span></div>
+      </div>
+      <div nz-row class="grid-row">
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.remark}}：</label><span>{{resultData.remark}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.turnReason}}：</label><span>{{resultData.turnReason}}</span></div>
+        <div nz-col nzSpan="8"><label class="row-label">{{workOrderLanguage.singleBackReason}}：</label><span>{{resultData.concatSingleBackReason}}</span></div>
+      </div>
+      <div nz-row class="grid-row" *ngIf="isFinished">
+        <div nz-col nzSpan="14">
+          <label class="row-label" style="width: 10.5%;">{{workOrderLanguage.orderEvaluation}}：</label>
+          <span>{{resultData.evaluateInfo}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="detail-title">
+      <span class="work-order-detail-title" *ngIf="isShowTable">{{workOrderLanguage.relevancyAlarm}}</span>
+      <span class="work-order-detail-title" *ngIf="!isShowTable">{{workOrderLanguage.relevancyFault}}</span>
+    </div>
+    <!-- 告警/故障表格 -->
+    <div class="froTable" *ngIf="isShowTable">
+      <xc-table [dataSet]="alarm_dataSet"
+                [pageBean]="alarmPageBean"
+                [tableConfig]="alarmTableConfig"
+                (pageChange)="tablePageChange($event, 1)">
+      </xc-table>
+    </div>
+    <div class="froTable" *ngIf="!isShowTable">
+      <xc-table [dataSet]="fault_dataSet"
+                [pageBean]="faultPageBean"
+                [tableConfig]="faultTableConfig"
+                (pageChange)="tablePageChange($event, 2)">
+      </xc-table>
+    </div>
+    <!--底部按钮-->
+    <div nz-row class="grid-row mb20">
+      <button type="button" class="link-button" nz-button nzType="danger" (click)="goBack()">{{commonLanguage.cancel}}</button>
+    </div>
+  </div>
+  <!--告警-->
+  <ng-template #refAlarm>
+    <h2>查看告警信息</h2>
+  </ng-template>
+  <!--告警等级-->
+  <ng-template #alarmLevel let-data="data">
+    <div class="hidden" title="{{data.levelName}}">
+      <span class="alarm-level" [ngClass]="data.levelClass"> </span>
+      {{data.levelName}}
+    </div>
+  </ng-template>
+</div>
+

@@ -1,0 +1,71 @@
+.first-menu {
+  .bgc {
+    background-color: #13c2c2 !important;
+  }
+
+  .disLi {
+    display: none;
+  }
+
+  .first-ul li {
+    position: relative;
+    line-height: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #001429;
+
+    p {
+      position: relative;
+      left: 40px;
+      color: #FFFFFF;
+
+      .menu-icon {
+        position: absolute;
+        font-size: 16px;
+        top: 0;
+        color: #fff;
+        right: 195px;
+      }
+
+      .up-down {
+        position: absolute;
+        font-size: 10px;
+        top: 20px;
+        right: 50px;
+      }
+    }
+
+    .second-ul li {
+      cursor: pointer;
+      background-color: #000c18;
+
+      p {
+        position: relative;
+        color: #FFFFFF;
+        left: 58px;
+        width: 142px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .second-ul li:not(.bgc) p:hover {
+      color: #13c2c2;
+    }
+  }
+
+  .collapsed li {
+    line-height: 50px;
+
+    i {
+      position: relative;
+      top: -20px;
+      font-size: 16px;
+      color: #FFFFFF;
+      margin-left: 16px;
+    }
+  }
+}

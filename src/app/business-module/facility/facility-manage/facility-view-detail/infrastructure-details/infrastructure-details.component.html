@@ -1,0 +1,158 @@
+<nz-card nzTitle="{{language.InfrastructureDetails}}" [nzExtra]="extraTemplate">
+  <nz-tabset class="detail-content" (nzSelectChange)="selectChange($event)">
+    <!--详情-->
+    <nz-tab nzTitle="详情">
+      <!--一期设施基本信息-->
+      <div *ngIf="deviceDetailType">
+        <ul class="detail-col">
+          <!--基础设施名称-->
+          <li class="facility-item">
+            <span class="label">{{language.infrastructureName}}：</span>
+            <span class="value hidden" [title]="facilityInfo.deviceName">{{facilityInfo.deviceName}}</span>
+          </li>
+          <!--资产编码-->
+          <li class="facility-item">
+            <span class="label">{{language.infrastructureCode}}：</span>
+            <span class="value hidden" [title]="facilityInfo.deviceCode">{{facilityInfo.deviceCode}}</span>
+          </li>
+          <!--设施类型-->
+          <li class="facility-item">
+            <span class="label">{{language.deviceType_a}}：</span>
+            <span class="value hidden" [title]="facilityInfo.deviceType" [appDeviceType]="deviceType">
+            </span>
+            <p class="value">{{facilityInfo.deviceType}}</p>
+          </li>
+          <!--省市区-->
+          <li class="facility-item">
+            <span class="label">{{language.region}}：</span>
+            <span class="value hidden"
+                  [title]="facilityInfo.provinceName+facilityInfo.cityName+facilityInfo.districtName">{{facilityInfo.provinceName}}{{facilityInfo.cityName}}{{facilityInfo.districtName}}</span>
+          </li>
+          <!--逻辑区域-->
+          <li class="facility-item">
+            <span class="label">{{language.logicalArea}}：</span>
+            <span class="value hidden"
+                  [title]="facilityInfo.areaInfo?.areaName">{{facilityInfo.areaInfo?.areaName}}</span>
+          </li>
+          <!--详细地址-->
+          <li class="facility-item">
+            <span class="label">{{language.address}}：</span>
+            <span class="value hidden" [title]="facilityInfo.address">{{facilityInfo.address}}</span>
+          </li>
+          <!--责任单位-->
+          <li class="facility-item">
+            <span class="label">{{language.accountabilityUnit}}：</span>
+            <span class="value hidden"
+                  [title]="facilityInfo.areaInfo?.accountabilityUnitName">{{facilityInfo.areaInfo?.accountabilityUnitName}}</span>
+          </li>
+        </ul>
+      </div>
+      <!--二期设施基本信息-->
+      <div *ngIf="!deviceDetailType">
+        <ul class="detail-col">
+          <!--资产编码-->
+          <li class="facility-item">
+            <span class="label">{{language.deviceCode}}：</span>
+            <span class="value hidden" [title]="facilityInfo.deviceCode">{{facilityInfo.deviceCode}}</span>
+          </li>
+          <!--类型-->
+          <li class="facility-item">
+            <span class="label">{{language.deviceType}}：</span>
+            <span [title]="facilityInfo.deviceType" [appDeviceType]="deviceType"></span>
+            <p class="value hidden">{{facilityInfo.deviceType}}</p>
+          </li>
+          <!--供应商-->
+          <li class="facility-item">
+            <span class="label">{{language.supplierName}}：</span>
+            <span class="value hidden" [title]="facilityInfo.supplier">{{facilityInfo.supplier}}</span>
+          </li>
+          <!--所属区域-->
+          <li class="facility-item">
+            <span class="label">{{language.areaId}}：</span>
+            <span class="value hidden" [title]="facilityInfo.areaName">{{facilityInfo.areaName}}</span>
+          </li>
+          <!--权属公司-->
+          <li class="facility-item">
+            <span class="label">{{language.company}}：</span>
+            <span class="value hidden" [title]="facilityInfo.company">{{facilityInfo.company}}</span>
+          </li>
+        </ul>
+        <ul class="detail-col">
+          <!--第三方编码-->
+          <li class="facility-item">
+            <span class="label">{{language.otherSystemNumber}}：</span>
+            <span class="value hidden"
+                  [title]="facilityInfo.otherSystemNumber">{{facilityInfo.otherSystemNumber}}</span>
+          </li>
+          <!--状态-->
+          <li class="facility-item">
+            <span class="label">{{language.status}}：</span>
+            <span [title]="facilityInfo.deviceStatusZh" [appDeviceStatus]="'1'"></span>
+            <p class="value hidden">{{facilityInfo.deviceStatusZh}}</p>
+          </li>
+          <!--报废年限-->
+          <li class="facility-item">
+            <span class="label">{{language.scrapTime}}：</span>
+            <span class="value hidden" [title]="facilityInfo.scrapTime">{{facilityInfo.scrapTime}}</span>
+          </li>
+          <!--详细地址-->
+          <li class="facility-item">
+            <span class="label">{{language.address}}：</span>
+            <span class="value hidden" [title]="">{{facilityInfo.address}}</span>
+          </li>
+          <!--安装日期-->
+          <li class="facility-item">
+            <span class="label">{{language.installationDate}}：</span>
+            <span class="value hidden" [title]="facilityInfo.installationDate">{{facilityInfo.installationDate | dynamic: 'date' : null}}</span>
+          </li>
+        </ul>
+        <ul class="detail-col">
+          <!--名称-->
+          <li class="facility-item">
+            <span class="label">{{language.deviceName}}：</span>
+            <span class="value hidden" [title]="facilityInfo.deviceName">{{facilityInfo.deviceName}}</span>
+          </li>
+          <!--型号-->
+          <li class="facility-item">
+            <span class="label">{{language.deviceModel}}：</span>
+            <span class="value hidden" [title]="facilityInfo.deviceModel">{{facilityInfo.deviceModel}}</span>
+          </li>
+          <!--项目名称-->
+          <li class="facility-item">
+            <span class="label">{{language.projectName}}：</span>
+            <span class="value hidden" [title]="facilityInfo.projectId">{{facilityInfo.projectId}}</span>
+          </li>
+          <!--备注-->
+          <li class="facility-item">
+            <span class="label">{{language.remarks}}：</span>
+            <span class="value hidden" [title]="facilityInfo.remarks">{{facilityInfo.remarks}}</span>
+          </li>
+          <li class="facility-item">
+            <span class="label">所属回路：</span>
+            <span class="value hidden"></span>
+          </li>
+        </ul>
+      </div>
+
+    </nz-tab>
+    <!--实景图-->
+    <nz-tab nzTitle="{{language.realisticPicture}}">
+      <div class="realistic-picture">
+        <div class="img-container" style="width: 33.3%;margin: 0 auto;">
+          <img class="info-img" *ngIf="devicePicUrl" (click)="clickImage()" [src]="devicePicUrl"
+               alt="">
+        </div>
+      </div>
+    </nz-tab>
+    <!-- 缩略图-->
+    <nz-tab nzTitle="{{language.thumbnail}}">
+      <app-thumbnail #thumbnail [deviceId]="deviceId" [baseInfo]="baseInfo" [mapType]="mapType"></app-thumbnail>
+    </nz-tab>
+  </nz-tabset>
+</nz-card>
+
+
+<ng-template #extraTemplate>
+  <span class="update-time">{{language.updateTime}}： {{facilityInfo.utime | dynamic: 'date' : null}}</span>
+</ng-template>
+

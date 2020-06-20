@@ -1,0 +1,25 @@
+<nz-card>
+    <nz-tabset>
+      <nz-tab *ngIf="hasControl" nzTitle="{{workOrderLanguage.clearBarrierWorkOrder}}">
+        <!--销账工单-->
+        <div  class="card" >
+          <app-clear-barrier-table [facilityId]="deviceId" [tableFieldWidth]="tableFieldWidth"></app-clear-barrier-table>
+          <span class="more"
+                (click)="navigatorTo('/business/work-order/clear-barrier/unfinished-list')">{{commonLanguage.more}} >></span>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="{{workOrderLanguage.inspectionWorkOrder}}">
+        <!--巡检工单-->
+        <div class="card-right" >
+          <app-inspection-table #inspectionTable [facilityId]="deviceId" [tableFieldWidth]="tableFieldWidth"></app-inspection-table>
+          <span class="more"
+                (click)="navigatorTo('/business/work-order/inspection/unfinished-list')">{{commonLanguage.more}} >></span>
+        </div>
+      </nz-tab>
+    </nz-tabset>
+  </nz-card>
+
+
+
+
+

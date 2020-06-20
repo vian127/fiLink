@@ -1,0 +1,86 @@
+.detail-container {
+  display: flex;
+  height: 250px;
+
+  .device-detail-info {
+    flex: 1;
+    width: 33%;
+  }
+
+  .realistic-picture {
+    flex: 1;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    padding: 0 22px
+  }
+
+  .thumbnail {
+    flex: 1;
+    padding: 0 22px
+  }
+}
+
+.info-img {
+  height: 200px;
+  display: inline-block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.facility-item {
+  display: flex;
+  align-items: center;
+
+  .label {
+    width: 30%;
+    display: inline-block;
+    line-height: 30px
+  }
+
+  .value {
+    margin-left: 5px;
+    max-width: 68%;
+    line-height: 30px;
+  }
+
+
+  .device-type-icon {
+    vertical-align: middle;
+    font-size: 19px;
+  }
+}
+
+:host ::ng-deep .ant-card-head .ant-card-head-title {
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+:host ::ng-deep .ant-card-body {
+  padding: 20px 32px;
+}
+
+.update-time {
+  color: #bbbbbb;
+  min-width: 202px;
+  display: block;
+}
+
+
+// 二期新加样式
+
+:host ::ng-deep .ant-card-head {
+  margin-bottom: -27px;
+  border-bottom: 0 solid #e8e8e8;
+}
+
+.detail-content {
+  height: 285px;
+
+  .detail-col {
+    width: 33.3%;
+    display: inline-block;
+  }
+}
+
+

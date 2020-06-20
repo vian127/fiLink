@@ -1,0 +1,98 @@
+div.screenRender {
+  .area-name {
+    display: inline-block;
+    width: 50%;
+    border: 1px solid #ccc;
+    // height: 32px;
+    line-height: 15px;
+    padding: 4px 11px;
+    border-radius: 4px;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    .title {
+      color: rgb(191, 191, 191);
+    }
+  }
+
+  button.open-button {
+    border: none;
+    outline: none;
+    background: #ffffff;
+    cursor: pointer;
+  }
+
+}
+
+div.form {
+  .area-name {
+    height: 32px;
+    line-height: 24px;
+  }
+
+  width: 400px;
+}
+
+div.table {
+  .area-name {
+    height: 22px;
+    width: 100%;
+  }
+
+}
+
+.box-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  align-self: center;
+}
+
+.alarm-urgent {
+  background: #e61017
+}
+
+.alarm-main {
+  background: #ff6600;
+}
+
+.alarm-secondary {
+  background: #f1c620;
+}
+
+.alarm-prompt {
+  background: #58c1f0
+}
+
+
+::ng-deep nz-modal.alarmFiltration .ant-modal-body {
+  padding: 0 5px;
+}
+
+::ng-deep nz-modal.alarmFiltration .table-top-button {
+  padding: 8px 0 5px;
+}
+
+::ng-deep nz-modal.alarmFiltration .ant-table-pagination.ant-pagination {
+  float: none;
+  text-align: center;
+  margin: 0;
+}
+
+button.open-button[disabled] > i {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+::ng-deep nz-modal.alarmName .ant-modal {
+  width: 620px !important;
+  top: 70px;
+}
+
+.selected-count {
+  line-height: 32px;
+  float: left
+}

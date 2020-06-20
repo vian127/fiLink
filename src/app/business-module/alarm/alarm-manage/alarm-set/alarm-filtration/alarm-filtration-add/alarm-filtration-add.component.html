@@ -1,0 +1,81 @@
+<div class="user-detail">
+  <div>
+    <span class="pageTitle">
+      {{ title }}
+    </span>
+  </div>
+  <div class="alarmMenu">
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+    <div style="padding-left: 20px;padding-top:40px; padding-bottom:10px;">
+      <button class="link-button" nz-button nzType="primary"
+              [nzLoading]="isLoading" style="margin-right: 20px"
+              (click)="submit()" [disabled]="!formStatus.getValid()"
+              >{{language.okText}}
+      </button>
+      <!--appAccessPermission="02-3-4-1"-->
+      <button class="link-button" nz-button nzType="danger" (click)="cancel()">{{language.cancelText}}</button>
+    </div>
+    <button class="alarmFiltrationRule" (click)="display.rulePopUp = true">{{ language.alarmFiltrationRule }}</button>
+  </div>
+</div>
+
+<!-- 告警过滤规则 -->
+<div class="user-detail" *ngIf="display.rulePopUp">
+  <app-alarm-filtration-rule (resultAndClose)="ruleTable($event)"></app-alarm-filtration-rule>
+</div>
+
+<!-- 告警对象选择 -->
+<ng-template #department let-formGroup="formGroup" let-col="col">
+  <app-alarm-object [alarmObjectConfig]="alarmObjectConfig"></app-alarm-object>
+</ng-template>
+
+<!-- 告警名称 -->
+<ng-template #alarmName let-formGroup="formGroup" let-col="col">
+  <app-alarm-name [isFilter]="true" [alarmNameConfig]='alarmNameConfig' ></app-alarm-name>
+</ng-template>
+
+<!-- 是否启用 -->
+<ng-template #isNoStartUsing let-data="data">
+  <nz-switch [ngModel]="isNoStartData"
+             [nzControl]="true"
+             (click)="isNoStartData = !isNoStartData">
+  </nz-switch>
+</ng-template>
+
+<!-- 起始时间 -->
+<ng-template #startTime let-data="data">
+  <nz-date-picker
+    nzShowTime
+    class="timeData"
+    [(ngModel)]="startTimeModel"
+    nzPlaceHolder=""
+    (ngModelChange)="startModelChange($event)"
+    (nzOnOpenChange)="startTimeOnOpenChange($event)"
+  ></nz-date-picker>
+</ng-template>
+<!--[nzAllowClear]='false'-->
+<!-- 结束时间 -->
+<ng-template #endTime let-data="data">
+  <nz-date-picker
+    class="timeData"
+    nzShowTime
+    [(ngModel)]="endTimeModel"
+    nzPlaceHolder=""
+    (ngModelChange)="endModelChange($event)"
+    (nzOnOpenChange)="endTimeOnOpenChange($event)"
+  ></nz-date-picker>
+</ng-template>
+
+<!-- 基本信息 -->
+<ng-template #titleDataTemplate>
+  <p class="titleData">
+    <span>{{ language.fundamental }}</span>
+  </p>
+</ng-template>
+
+<!-- 过滤条件信息 -->
+<ng-template #filtrationDataTemplate>
+  <p class="titleData">
+    <span>{{ language.filtration }}</span>
+  </p>
+</ng-template>

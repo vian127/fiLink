@@ -1,0 +1,63 @@
+<div class="box-warp">
+  <!--地图部分-->
+  <div class="map-box-warp" [style.height]="mapHeight" >
+    <!--地图-->
+    <xc-map #mainMap
+            class="map-content"
+            *ngIf="isShowMap"
+            [mapConfig]="mapConfig"
+            [data]="data"
+            [iconSize]="iconSize"
+            [facilityId]="mapFacilityId"
+            [areaData]="areaData"
+            (mapEvent)="mapEvent($event)">
+    </xc-map>
+    <!-- 框选图标-->
+    <div class="zoom-control-item iconfont icon-fiLink fiLink-box-select"  title = '框选'
+         (click)="mapSelectData()"
+    ></div>
+    <!--地图右下角移入移出按钮-->
+    <div class="map-right-button" *ngIf="isShowButton">
+      <ul class="button-ul">
+        <li type="button" (click)="moveIntoLoop()">移入回路</li>
+        <li type="button" (click)="moveOutLoop()">移出回路</li>
+      </ul>
+    </div>
+    <!-- 地图大小变化的触发图标按钮-->
+    <div class="map-icon-part">
+      <div>
+        <i nz-icon *ngIf="showUpIcon" type="double-left" class="ant-pagination-item-link-icon"
+           (click)="mapMinHeightChange()"
+        ></i>
+      </div>
+      <div>
+        <i nz-icon type="double-right" class="ant-pagination-item-link-icon"
+           (click)="mapBigHeightChange()"
+        ></i>
+      </div>
+    </div>
+  </div>
+
+  <!--回路列表弹框-->
+  <app-move-into-loop-list
+    [title] ="loopModalTitle"
+    [(xcVisible)]="isVisible"
+    (selectListDataChange)="selectLoopData($event)"
+  >
+  </app-move-into-loop-list>
+
+
+  <!--回路列表部分-->
+  <div class="table-container" *ngIf="isShowTable">
+    <xc-table #tableComponent
+                [dataSet]="dataSet"
+                [pageBean]="pageBean"
+                [tableConfig]="tableConfig"
+                (pageChange)="pageChange($event)">
+
+    </xc-table>
+  </div>
+
+</div>
+
+

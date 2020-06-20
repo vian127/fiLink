@@ -1,0 +1,24 @@
+<div class="facility-alarm-panel-container">
+   <!--当前告警  4-->
+  <div class="current-alarm">
+    <div class="current-alarm-title">
+      <div class="current-alarm-title-text">{{indexLanguage.currentAlarm}}</div>
+      <div class="current-alarm-title-more" (click)="goToCurrentAlarmList()">{{commonLanguage.more}}>></div>
+    </div>
+    <div class="current-alarm-table">
+      <app-current-alarm-table [facilityId]="facilityId"
+                               ></app-current-alarm-table>
+    </div>
+  </div>
+   <!--历史告警  4-->
+  <div class="history-alarm">
+    <div class="history-alarm-title">
+      <div class="history-alarm-title-text">{{indexLanguage.historyAlarm}}</div>
+      <div class="history-alarm-title-more" (click)="goToHistoryAlarmList()">{{commonLanguage.more}}>></div>
+    </div>
+    <div class="history-alarm-table">
+      <app-history-alarm-table [facilityId]="facilityId"
+                              ></app-history-alarm-table>
+    </div>
+  </div>
+</div>

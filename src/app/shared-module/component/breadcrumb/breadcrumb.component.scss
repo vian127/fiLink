@@ -1,0 +1,21 @@
+.breadcrumbs {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: #bbbbbb;
+  .breadcrumbs-item {
+    span {
+      outline: none;
+      cursor: pointer;
+    }
+  }
+  .separator {
+    margin: 0 8px;
+  }
+  .active {
+    color: #333333;
+    font-weight: 900;
+  }
+}
+

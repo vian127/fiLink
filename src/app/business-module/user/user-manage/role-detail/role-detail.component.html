@@ -1,0 +1,38 @@
+<nz-spin class="user-detail" [nzSpinning]="pageLoading">
+  <div>
+    <span class="pageTitle">
+      {{pageTitle}}
+    </span>
+  </div>
+  <div>
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+    <div style="padding-left: 20px;padding-top:40px; padding-bottom:10px;">
+      <button class="link-button" nz-button nzType="primary" style="margin-right: 20px" [nzLoading]="isLoading" [disabled]="!formStatus.getValid()" (click)="submit()">{{language.okText}}</button>
+      <button class="link-button" nz-button nzType="danger" (click)="goBack()">{{language.cancelText}}</button>
+    </div>
+  </div>
+</nz-spin>
+
+
+<!--权限和设施选择模版-->
+<ng-template #operateSelector let-formGroup="formGroup" let-col="col">
+  <form [formGroup]="formGroup">
+    <button type="button" class="buttonStyle"  nz-button (click)="showSelectorModal()">
+      <i class="icon-fiLink-l iconfont fiLink-facility-list"></i>
+      <span style="vertical-align: middle;margin-left: 5px">{{language.permissionAndFacility}}</span>
+    </button>
+  </form>
+</ng-template>
+<!-- <ng-template #operateSelector let-formGroup="formGroup" let-col="col">
+    <div>
+      <span class="operate-name" [title]="permissionName">{{permissionName}}</span>
+      <button class="open-button"  (click)="showSelectorModal()"><i
+        class="icon-fiLink fiLink-search-index iconfont"></i></button>
+    </div>
+</ng-template> -->
+<xc-tree-role-selector [(xcVisible)]="roleSelectorVisible"
+                       [treeSelectorConfig]="roleSelectorConfig"
+                       (selectDataChange)="selectDataChange($event)">
+</xc-tree-role-selector>
+
+

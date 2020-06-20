@@ -1,0 +1,32 @@
+$left-panel-width: 400px;
+
+//设施设备模块样式
+.facility-list-panel{
+  width: $left-panel-width;
+  background-color: white;
+  border-radius: 4px;
+  border-top: 1px solid #e0dbdb;
+
+  //区域选择器样式
+  .app-logic-area {
+    width:  $left-panel-width;
+    height: 160px;
+    border-bottom: 1px solid #e0dbdb;
+  }
+  //设施设备类型选择器
+  .app-facility-type {
+    width:  $left-panel-width;
+    height: 120px;
+    border-bottom: 1px solid #e0dbdb;
+  }
+  //分组和租赁方选择器
+  .app-facility-group {
+    width:  $left-panel-width;
+    border-bottom: 1px solid #e0dbdb;
+  }
+  //设施设备列表
+  .app-facility-list {
+    width:  $left-panel-width;
+    min-height: 10px;
+  }
+}

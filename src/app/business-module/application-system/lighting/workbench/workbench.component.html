@@ -1,0 +1,146 @@
+<div class="workbench-warp">
+  <div class="workbench-header">
+    <div class="card-content">
+      <nz-card [nzBordered]="false" [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
+        <div class="card-box">
+          <div class="box-left">
+            <div class="equipment-title">
+              <div class="title">
+                <p class="text">使用中的策略</p>
+                <a href="javascript:void(0);" class="equipment-add" (click)="handGoPage()">+</a>
+              </div>
+              <a href="javascript:void(0);" (click)="handPolicyPage()">全部策略</a>
+            </div>
+            <div class="equipment-content">
+              <nz-card class="equipment-card"
+                       *ngFor="let item of dataSet"
+                       (click)="handShowConvenient(item)">
+                <div class="content" (click)="handStrategyDetails(item)">
+                  <i nz-icon [nzType]="'home'" class="img-icon"></i>
+                  <span class="details">{{item.strategyName}}</span>
+                  <nz-switch
+                    [ngModel]="item.strategyStatus === '1' ? true : false"
+                    nzCheckedChildren="开"
+                    nzUnCheckedChildren="关"
+                    [nzDisabled]="true">
+                  </nz-switch>
+                </div>
+                <p>执行周期:每天</p>
+                <p>应用范围:分组A,分组B</p>
+                <p style="margin-top: 20px">照明策略:{{item.startEndTime}}</p>
+              </nz-card>
+            </div>
+            <div class="pagination">
+              <nz-pagination
+                [(nzPageIndex)]="pageNum"
+                (nzPageSizeChange)="pageSizeChange($event)"
+                (nzPageIndexChange)="pageIndexChange($event)"
+                [nzTotal]="totalCount"
+                [nzSize]="'small'"
+                nzShowSizeChanger
+                nzShowQuickJumper
+              ></nz-pagination>
+            </div>
+          </div>
+          <div class="box-right">
+            <div>
+              <h4>便捷入口</h4>
+              <nz-card class="convenient" *ngIf="isConvenient">
+                <h4>照明</h4>
+                <nz-switch
+                  (ngModelChange)="switchChange($event)"
+                  [ngModel]="convenientData.strategyStatus === '1' ? true : false"
+                  nzCheckedChildren="开"
+                  nzUnCheckedChildren="关"></nz-switch>
+                <nz-row>
+                  <nz-col nzSpan="12">
+                    <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="convenientVal"></nz-slider>
+                  </nz-col>
+                  <div nz-col nzSpan="4">
+                    <nz-input-number
+                      [nzMin]="1"
+                      [nzMax]="20"
+                      [ngStyle]="{ marginLeft: '16px' }"
+                      [(ngModel)]="convenientVal"
+                    ></nz-input-number>
+                  </div>
+                </nz-row>
+                <div style="overflow: auto">
+                  <p>应用范围：</p>
+                  <div style="height: 100px">
+                    <nz-tree [nzData]="nodes" nzDraggable nzBlockNode (nzOnDrop)="nzEvent($event)"
+                             [nzExpandAll]="false"></nz-tree>
+                  </div>
+                </div>
+              </nz-card>
+              <nz-card class="convenient checked" *ngIf="!isConvenient">
+                <p>暂未选中策略</p>
+              </nz-card>
+            </div>
+          </div>
+        </div>
+      </nz-card>
+    </div>
+    <div class="chart-list">
+      <div class="charts-content">
+        <div class="statistics">
+          <h4>亮灯率</h4>
+          <nz-radio-group [(ngModel)]="selectedTags" (ngModelChange)="handleChange()">
+            <label nz-radio-button nzValue="1"><span>本周</span></label>
+            <label nz-radio-button nzValue="2"><span>本月</span></label>
+            <label nz-radio-button nzValue="3"><span>本年</span></label>
+          </nz-radio-group>
+          <div echarts [options]="lightingRateData"></div>
+        </div>
+        <div class="statistics">
+          <h4>设备状态</h4>
+          <div echarts [options]="equipmentStatusData"></div>
+        </div>
+        <div class="statistics">
+          <h4>告警统计</h4>
+          <div echarts [options]="emergencyData"></div>
+        </div>
+        <div class="statistics">
+          <h4>工单增量</h4>
+          <div echarts [options]="workOrderData"></div>
+        </div>
+        <div class="statistics">
+          <h4>用电量</h4>
+          <div class="electricity">
+            <nz-radio-group
+              class="radio-select"
+              [(ngModel)]="selectedElectricity"
+              (ngModelChange)="handleElectricityChange()">
+              <label nz-radio-button nzValue="4"><span>日</span></label>
+              <label nz-radio-button nzValue="5"><span>周</span></label>
+              <label nz-radio-button nzValue="6"><span>月</span></label>
+              <label nz-radio-button nzValue="7"><span>季度</span></label>
+              <label nz-radio-button nzValue="8"><span>年</span></label>
+            </nz-radio-group>
+            <nz-range-picker [(ngModel)]="dateRange" (ngModelChange)="onDateChange($event)" nzShowTime></nz-range-picker>
+          </div>
+          <div echarts [options]="electricity"></div>
+        </div>
+      </div>
+    </div>
+    <ng-template #cardTitle>
+
+    </ng-template>
+    <ng-template #extraTemplate>
+      <div class="card-right">
+        <div class="equipment-number">
+          <div class="content">单灯数量</div>
+          <div class="number">{{equipmentCountList.singleControllerCount}}</div>
+        </div>
+        <div class="equipment-number">
+          <div class="content">集控数量</div>
+          <div class="number">{{equipmentCountList.centralControllerCount}}</div>
+        </div>
+        <div class="equipment-number border-display">
+          <div class="content">智慧杆数量</div>
+          <div class="number">{{multiFunctionPoleCount}}</div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

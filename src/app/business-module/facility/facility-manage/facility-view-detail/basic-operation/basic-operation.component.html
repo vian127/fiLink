@@ -1,0 +1,92 @@
+<nz-card nzTitle="{{language.basicOperation}}">
+  <!--配置策略-->
+  <button class="operate-btn " *ngIf="hasControl" (click)="clickButton()" [appAccessPermission]="'03-1-6'">
+    <i class="icon-fiLink-l iconfont fiLink-setting configuration"></i>
+    <span class="configuration">{{language.configurationStrategy}}</span>
+  </button>
+  <!--授权-->
+  <button class="operate-btn " *ngIf="hasControl" (click)="authorization()" [appAccessPermission]="'01-5-1-2'">
+    <i class="icon-fiLink-l iconfont fiLink-authorization authorization"></i>
+    <span class="authorization">{{language.authorization}}</span>
+  </button>
+  <!--编辑设施-->
+  <button class="operate-btn " (click)="updateFacility()" [appAccessPermission]="'03-1-3'">
+    <i class="icon-fiLink-l iconfont fiLink-edit-facility facility-edit"></i>
+    <span class="facility-edit">{{language.facilityEdit}}</span>
+  </button>
+  <!--删除设施-->
+  <button class="operate-btn " (click)="deleteFacility()" [appAccessPermission]="'03-1-4'">
+    <i class="icon-fiLink-l iconfont fiLink-delete-facility facility-delete"></i>
+    <span class="facility-delete">{{language.facilityDelete}}</span>
+  </button>
+  <!--布防-->
+  <button class="operate-btn" *ngIf="hasControl" [appAccessPermission]="'03-1-14'"
+          (click)="updateDeviceStatus('1',language.editDeployStatusMsg)">
+    <i class="icon-fiLink-l iconfont fiLink-defense deploy"></i>
+    <span class="deploy">{{language.deployed}}</span>
+  </button>
+  <!--撤防-->
+  <button class="operate-btn" *ngIf="hasControl" [appAccessPermission]="'03-1-15'"
+          (click)="updateDeviceStatus('2',language.editNoDefenceStatusMsg)">
+    <i class="icon-fiLink-l iconfont fiLink-protection-u removal"></i>
+    <span class="removal">{{language.removal}}</span>
+  </button>
+  <!--停用-->
+  <button class="operate-btn" *ngIf="hasControl" [appAccessPermission]="'03-1-16'"
+          (click)="updateDeviceStatus('3',language.editNotUsedStatusMsg)">
+    <i class="icon-fiLink-l iconfont fiLink-disabled facility-off"></i>
+    <span class="facility-off">{{language.facilityOff}}</span>
+  </button>
+  <!--查看光缆-->
+  <button (click)="viewCable()" *ngIf="isCoreFusion && intelligentLabelDetail" [appAccessPermission]="'03-1-5-3'"
+          class="operate-btn ">
+    <i class="icon-fiLink-l iconfont fiLink-view-optical-cable view-cable"></i>
+    <span class="view-cable">{{language.viewCable}}</span>
+  </button>
+  <!--查看设施-->
+  <button (click)="viewFacilities()" *ngIf="isCoreFusion && isJointClosure && intelligentLabelDetail"
+          [appAccessPermission]="'03-1-5-4'" class="operate-btn ">
+    <i class="icon-fiLink-l iconfont fiLink-my-collection view-facilities"></i>
+    <span class="view-facilities">{{language.ViewFacilities}}</span>
+  </button>
+  <!--纤芯成端-->
+  <button class="operate-btn" *ngIf="isCoreEnd && intelligentLabelDetail" (click)="coreEnd()"
+          [appAccessPermission]="'03-1-5-1'">
+    <i class="icon-fiLink-l iconfont  fiLink-fiber-socket-item fiber-socket-item"></i>
+    <span class="fiber-socket-item">{{language.coreEnd}}</span>
+  </button>
+  <!--查看纤芯成端-->
+  <button class="operate-btn " *ngIf="isCoreEnd && intelligentLabelDetail" (click)="viewCoreEnd()"
+          [appAccessPermission]="'03-1-5-2'">
+    <i class="icon-fiLink-l iconfont fiLink-view-fiber-socket view-fiber-socket"></i>
+    <span class="view-fiber-socket">{{language.viewCoreEnd}}</span>
+  </button>
+  <!--上传设施图片  -->
+  <nz-upload
+    [nzAction]="actionUrl"
+    [nzData]='formData'
+    [nzShowUploadList]="false"
+    [nzBeforeUpload]="beforeUpload"
+  >
+    <ng-container>
+      <button class="operate-btn" [appAccessPermission]="'03-1-3'">
+        <i class="icon-fiLink-l iconfont fiLink-upload view-image"></i>
+        <span class="view-image">{{this.language.uploadImg}}</span>
+      </button>
+    </ng-container>
+  </nz-upload>
+</nz-card>
+<!--纤芯成端-->
+<app-core-end [coreEndIsVisible]="isEndVisible" (closeCoreEnd)="isEndVisible=false" *ngIf="show"></app-core-end>
+<app-core-end-view [viewCoreEndIsVisible]="viewIsEndVisible" (viewCloseCoreEnd)="viewIsEndVisible=false"
+                   *ngIf="ViewShow"></app-core-end-view>
+<!--设施授权弹框-->
+<ng-template #openLockTemp>
+  <div>
+    <xc-table [dataSet]="lockInfo"
+              [pageBean]="pageBean"
+              [tableConfig]="lockInfoConfig"
+    >
+    </xc-table>
+  </div>
+</ng-template>

@@ -1,0 +1,21 @@
+<div class="box-warp">
+  <div class="table-container">
+    <xc-table [dataSet]="dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)">
+    </xc-table>
+  </div>
+</div>
+<ng-template #deviceName let-data="data">
+  <span class="navigate table-text-td" [title]="data['deviceName']" (click)="navigateToDetail(data)">
+    {{data['deviceName']}}</span>
+</ng-template>
+<ng-template #deviceCode let-data="data">
+  <span class="navigate table-text-td" [title]="data['deviceCode']" (click)="navigateToDetail(data)">
+    {{data['deviceCode']}}</span>
+</ng-template>
+<ng-template #deviceTypeTemp let-data="data">
+  <i [ngClass]="data['iconClass']" class="device-type-icon"></i>
+  <span class="status-text" [title]="data['deviceType']">{{data['deviceType']}}</span>
+</ng-template>

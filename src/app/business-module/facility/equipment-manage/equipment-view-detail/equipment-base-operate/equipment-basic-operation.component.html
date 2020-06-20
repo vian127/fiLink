@@ -1,0 +1,28 @@
+<!--设备操作-->
+<nz-card nzTitle="{{language.equipmentBasicOperation}}">
+  <!--编辑设备-->
+  <button class="operate-btn " (click)="onClickEditButton()" [appAccessPermission]="'03-1-6'">
+    <i class="icon-fiLink-l iconfont fiLink-edit-facility facility-edit"></i>
+    <span class="facility-edit">{{language.editEquipment}}</span>
+  </button>
+  <!--删除设备-->
+  <button class="operate-btn " (click)="onClickDelete()" [appAccessPermission]="'03-1-6'">
+    <i class="icon-fiLink-l iconfont fiLink-delete-facility facility-delete"></i>
+    <span class="facility-delete">{{language.deleteEquipment}}</span>
+  </button>
+  <!--配置-->
+  <button class="operate-btn " [appAccessPermission]="'03-1-6'">
+    <i class="icon-fiLink-l iconfont  fiLink-peizhi"></i>
+    <span class="deploy">{{language.configuration}}</span>
+  </button>
+  <!--上传图片-->
+  <nz-upload [nzShowUploadList]="false"
+             [nzCustomRequest]="uploadImg"
+             [nzBeforeUpload]="beforeUpload"
+  >
+    <button class="operate-btn " [appAccessPermission]="'03-1-6'">
+      <i class="icon-fiLink-l iconfont fiLink-upload view-image"></i>
+      <span class="view-image">{{language.uploadImg}}</span>
+    </button>
+  </nz-upload>
+</nz-card>

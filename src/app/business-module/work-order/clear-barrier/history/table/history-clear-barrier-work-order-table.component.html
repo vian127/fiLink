@@ -1,0 +1,56 @@
+<!-- 表格 -->
+<xc-table [dataSet]="_dataSet"
+          [pageBean]="pageBean"
+          [tableConfig]="tableConfig"
+          (pageChange)="pageChange($event)">
+</xc-table>
+<!-- 状态模板 -->
+<ng-template #statusTemp let-data="data">
+  <div class="hidden" title="{{data.statusName}}">
+    <span [ngClass]="data.statusClass" class="mr5" style="margin-right: 5px;"></span>
+    {{data.statusName}}
+  </div>
+</ng-template>
+<!-- 单位模板 -->
+<ng-template #UnitNameSearch let-filterValue = "filterValue">
+  <span class="area-name" (click)="showModal(filterValue)" [title]="selectUnitName?selectUnitName:''"
+        [class.placeholder]="!selectUnitName">{{selectUnitName?selectUnitName:commonLanguage.clickSelect}}</span>
+</ng-template>
+<!--  树选择 -->
+<xc-tree-selector
+  [(xcVisible)]="isVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-selector>
+
+<!--关联告警模板-->
+<ng-template #refAlarmTemp let-data="data">
+  <div (click)="showRefAlarmModal(data)" class="hidden cursor-pointer" style="cursor: pointer">{{data.refAlarmFaultName}}</div>
+</ng-template>
+
+<!--关联告警modal框内容-->
+<ng-template #showAlarmTemp>
+  <app-ref-alarm [refAlarmMessage]="alarmData"></app-ref-alarm>
+</ng-template>
+
+
+<!--设施名称弹框-->
+<ng-template #DeviceNameSearch let-filterValue="filterValue">
+  <app-alarm-object class="pic-device-selector"
+                    [placeholder]="workOrderLanguage.pleaseSelect"
+                    [alarmObjectConfig]="deviceObjectConfig"
+                    [filterValue]="filterValue"></app-alarm-object>
+</ng-template>
+<!--设施区域弹框-->
+<ng-template #AreaSearch let-filterValue="filterValue">
+  <input type="text" nz-input placeholder="{{workOrderLanguage.pleaseSelect}}"
+         (click)="showArea(filterValue)" [(ngModel)]="filterObj.areaName">
+</ng-template>
+<!-- 区域树选择 -->
+<xc-tree-area-selector
+  [(xcVisible)]="areaSelectVisible"
+  [pageType]="'区域'"
+  [treeSelectorConfig]="areaSelectorConfig"
+  (selectDataChange)="areaSelectChange($event)">
+</xc-tree-area-selector>
+

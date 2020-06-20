@@ -1,0 +1,52 @@
+// 告警详情卡样式
+.facility-alarm-panel-container {
+  overflow: auto;
+  max-height: calc(100vh - 175px);
+  font-size: 12px;
+  padding: 0 15px;
+
+  // 当前告警
+  .current-alarm {
+
+    .current-alarm-title {
+      display: flex;
+      align-items: center;
+      height: 30px;
+
+      .current-alarm-title-text {
+        flex: 1;
+      }
+      .current-alarm-title-more {
+        cursor: pointer;
+        color: #b3b3b3;
+      }
+    }
+    .current-alarm-table {
+
+    }
+  }
+  // 历史告警
+  .history-alarm {
+    margin: 15px 0;
+    max-height: 280px;
+    .history-alarm-title {
+      display: flex;
+      align-items: center;
+      height: 30px;
+
+      .history-alarm-title-text {
+        flex: 1;
+      }
+      .history-alarm-title-more {
+        cursor: pointer;
+        color: #b3b3b3;
+      }
+    }
+    .history-alarm-table {
+       .chart-style {
+          max-height: 200px;
+          width: 100%;
+       }
+    }
+  }
+}

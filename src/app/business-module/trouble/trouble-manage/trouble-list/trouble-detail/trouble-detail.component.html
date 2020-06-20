@@ -1,0 +1,47 @@
+<div class="trouble-view-title" style="">{{language.troubleDetail}}
+</div>
+<div class="detail-height" *ngIf="isShow">
+  <div class="view-item">
+    <!--故障详情-->
+    <app-fault-details [troubleInfo] = "troubleInfo"></app-fault-details>
+  </div>
+  <div class="view-item">
+    <!--基本故障操作-->
+    <app-fault-operation *ngIf="isShow"
+      [troubleId] = "troubleId"
+      [flowId] = "flowId"
+      [handleStatus] = "handleStatus"
+      [instanceId] = "instanceId"
+      [currentHandleProgress] = "currentHandleProgress"
+    >
+    </app-fault-operation>
+  </div>
+  <div class="view-item">
+    <!--故障维护经验-->
+    <app-fault-experience [alarmCode]="alarmCode"></app-fault-experience>
+  </div>
+  <div class="view-item">
+    <!--资源调配-->
+    <app-resource-allocation
+      [person] = "troubleInfo.staff"
+      [car] = 'troubleInfo.car'
+      [equipment] = 'troubleInfo.equipment'
+    >
+    </app-resource-allocation>
+  </div>
+  <div class="view-item">
+    <!--历史流程记录-->
+    <app-history-process-record-table></app-history-process-record-table>
+  </div>
+  <div class="view-item">
+    <!--故障照片-->
+    <app-trouble-img-view [deviceId] = "troubleInfo.deviceId"></app-trouble-img-view>
+  </div>
+</div>
+<nz-spin [nzSimple]="true"
+         *ngIf="ifSpin"
+         style="position: absolute; top: 400px; left: 50%; z-index: 999;"
+         [nzSpinning]="true"
+         [nzSize]="'large'"
+></nz-spin>
+

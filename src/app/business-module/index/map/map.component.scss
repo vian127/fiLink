@@ -1,0 +1,555 @@
+@import "../css/config";
+
+.index-map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 50px;
+  bottom: 0;
+  height: auto;
+  overflow: hidden;
+}
+
+.statistics-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  bottom: 0;
+  height: auto;
+  &:hover {
+    z-index: 101;
+  }
+  .statistics-panel-charts {
+    position: absolute;
+    z-index: 11;
+    right: 54px;
+    top: 15px;
+    width: 350px;
+    max-height: calc(100vh - 85px);
+    background-color: white;
+    overflow: auto;
+  }
+  .statistics-panel-switch {
+    height: 100%;
+    background-color: white;
+    padding-top: 10px;
+    .statistics-panel-switch-item {
+      width: 35px;
+      border-bottom: solid 1px #e8e8e8;
+      margin: 4px 6px;
+      cursor: pointer;
+      font-size: 12px;
+      text-align: center;
+      &:hover {
+        font-weight: bold;
+      }
+    }
+    .statistics-panel-switch-item:first-child{
+      border-top: solid 1px #e8e8e8;
+    }
+  }
+}
+
+.facility-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 450px;
+  z-index: 20;
+  &:hover {
+    z-index: 101;
+  }
+  .tab-container {
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+    background-color: white;
+    width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    -moz-box-shadow:2px 2px 5px #888888;
+    -webkit-box-shadow:2px 2px 5px #888888;
+    box-shadow:2px 2px 5px #888888;
+  }
+}
+
+:host ::ng-deep {
+ .tab-container .ant-tabs-nav .ant-tabs-tab {
+    padding: 12px 14px;
+  }
+}
+
+.operate-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.title {
+  cursor: pointer;
+}
+
+.refresh-btn {
+  position: absolute;
+  right: 100px;
+  bottom: 8px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  .icon-refresh {
+    background: url("../../../../assets/img/index/icon-refresh.png") no-repeat center;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.unfold-btn {
+  position: absolute;
+  left: 220px;
+  top: 14px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  .icon-up {
+    width: 100%;
+    height: 100%;
+    background: url("../../../../assets/img/index/icon-up.png") no-repeat center;
+    background-size: 100% 100%;
+  }
+  .icon-expand {
+    transform:rotate(0deg);
+    -ms-transform:rotate(0deg); 	/* IE 9 */
+    -moz-transform:rotate(0deg); 	/* Firefox */
+    -webkit-transform:rotate(0deg); /* Safari 和 Chrome */
+    -o-transform:rotate(0deg); 	/* Opera */
+  }
+  .icon-collapse {
+    transform:rotate(180deg);
+    -ms-transform:rotate(180deg); 	/* IE 9 */
+    -moz-transform:rotate(180deg); 	/* Firefox */
+    -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+    -o-transform:rotate(180deg); 	/* Opera */
+  }
+}
+
+.filter-top-filter {
+  background-color: white;
+  border: 1px #efeaea solid;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-table;
+}
+
+.left-panel {
+  position: absolute;
+  left: 10px;
+  top: 46px;
+  max-height: calc(100vh - 85px);
+  overflow: auto;
+  .left-panel-tabs {
+    display: flex;
+    width: $left-panel-width;
+    background-color: white;
+    border-radius: 4px;
+    .left-panel-border {
+      border-right: 1px solid #e0dbdb;
+    }
+    .left-panel-tab {
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+      line-height: 30px;
+      height: 30px;
+      .icon-type {
+        width: 20px;
+        height: 20px;
+        float: left;
+        margin-left: 20px;
+        color: #ff6027;
+      }
+      .text-content{
+        float: left;
+        width: 90px;
+      }
+    }
+  }
+  .left-panel-content {
+    width: $left-panel-width;
+    background-color: white;
+    border-radius: 4px;
+    border-top: 1px solid #e0dbdb;
+    .app-logic-area {
+      width:  $left-panel-width;
+      height: 180px;
+      border-bottom: 1px solid #e0dbdb;
+    }
+    .app-facility-type {
+      width:  $left-panel-width;
+      height: 120px;
+      border-bottom: 1px solid #e0dbdb;
+    }
+    .app-facility-order-state {
+      width:  $left-panel-width;
+      height: 100px;
+      border-bottom: 1px solid #e0dbdb;
+    }
+    .app-facility-group {
+      width:  $left-panel-width;
+      border-bottom: 1px solid #e0dbdb;
+    }
+    .app-facility-list {
+      width:  $left-panel-width;
+      min-height: 10px;
+    }
+    .confirm-button {
+      width: 400px;
+      height: 40px;
+      border-bottom: 1px solid #e0dbdb;
+      button{
+        width: 350px;
+        margin: 5px 20px
+      }
+    }
+  }
+}
+
+.filter-top {
+  position: absolute;
+  left: 260px;
+  top: 15px;
+  display: flex;
+  font-size: 12px;
+}
+
+
+// 设施状态
+.facility-status {
+  @extend .filter-top-filter;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  $text-margin: 0 5px;
+  .facility-status-title {
+    display: flex;
+    padding: 0 6px;
+    height: 32px;
+    align-items: center;
+    .icon-facility-status {
+      width: 20px;
+      height: 20px;
+      background: url("../../../../assets/img/index/icon-facility-status.png") no-repeat center 100%;
+    }
+    .text {
+      margin: $text-margin;
+      display: none;
+    }
+  }
+  .facility-status-checkbox {
+    .facility-status-title {
+      .text {
+        display: block;
+        color: #f6d683;
+      }
+    }
+    .text {
+      font-size: 12px;
+      padding: 0 10px;
+    }
+    .c-w {
+      color: white;
+    }
+  }
+}
+
+//地图设置
+.map-setting {
+  position: absolute;
+  right: 15px;
+  bottom: 8px;
+  display: flex;
+  cursor: pointer;
+}
+.out-topology{
+  bottom: 38px;
+  cursor: pointer;
+  right: 13px;
+  position: absolute;
+  padding-right: -18px;
+  display: flex;
+}
+
+.filter-left-filter {
+  position: absolute;
+  background-color: white;
+  border: 1px #efeaea solid;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+.facility-list {
+  left: 70px;
+  top: 80px;
+  font-size: 12px;
+  $text-margin: 0 5px;
+  @extend .filter-left-filter;
+  .facility-list-title {
+    display: flex;
+    padding: 5px;
+    height: 30px;
+    align-items: center;
+    .icon-facility-list {
+      width: 20px;
+      height: 20px;
+      background: url("../../../../assets/img/index/icon-facility-list.png") no-repeat center 100%;
+    }
+    .text {
+      display: none;
+      margin: $text-margin;
+    }
+  }
+
+  &:hover {
+    .facility-list-title {
+      .text {
+        display: block;
+      }
+    }
+  }
+}
+
+.my-collection {
+  display: inline-table;
+  font-size: 12px;
+  background-color: white;
+  border: 1px #efeaea solid;
+  border-radius: 3px;
+  cursor: pointer;
+  $text-margin: 0 5px;
+  .my-collection-title {
+    display: flex;
+    padding: 5px;
+    height: 28px;
+    align-items: center;
+    .icon-facility-list {
+      width: 20px;
+      height: 20px;
+      background: url("../../../../assets/img/index/icon-facility-list.png") no-repeat center 100%;
+    }
+    .text {
+      display: none;
+      margin: $text-margin;
+    }
+  }
+  .my-collection-list {
+    min-width: 180px;
+    min-height: 20px;
+  }
+  &:hover {
+    .my-collection-title {
+      .text {
+        display: block;
+      }
+    }
+  }
+}
+
+[nz-carousel-content] {
+  text-align: center;
+  height: 160px;
+  line-height: 160px;
+  background: #364d79;
+  color: #fff;
+  overflow: hidden;
+}
+
+h3 {
+  color: #fff;
+}
+
+.marr10 {
+  margin-right: 10px;
+}
+.BMap_CityListCtrl {
+  min-height: 26px;
+  min-width: 66px;
+}
+
+.info-window-container {
+  position: absolute;
+  z-index: 100;
+  transform: translate(-50%, -100%);
+  margin-top: -10px;
+  .info-window-c {
+    display: flex;
+    max-width: 270px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: rgba(256, 256, 256, 0.8);
+    box-shadow: 5px 5px 5px #d0c9c9;
+    .info-window-item {
+      width: 120px;
+      height: 25px;
+      align-items: center;
+      font-size: 14px;
+      display: flex;
+      .info-window-item-icon {
+        margin-right: 5px;
+      }
+      .info-window-item-name {
+        flex: 1;
+      }
+      .info-window-item-count {
+        color: #b3b3b3;
+      }
+    }
+  }
+  .info-window-m {
+    font-size: 12px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: rgba(256, 256, 256, 0.8);
+    box-shadow: 5px 5px 5px #d0c9c9;
+    .info-window-m-name {
+      display: flex;
+      height: 25px;
+      align-items: center;
+      font-size: 14px;
+      .info-window-m-icon {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.clusterer-facility-table {
+  position: absolute;
+  z-index: 100;
+  left: calc(50% + 30px);
+  top: calc(50% - 25px);
+}
+
+// 有箭头的提示框
+.info-window {
+  $height: 200px;
+  position: absolute;
+  z-index: 100;
+  width: 200px;
+  height: $height;
+  border: 1px green solid;
+  background-color: white;
+  color: green;
+  margin-left: -100px;
+  margin-top: -$height;
+  border-radius: 5px;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 0;
+    height: 0;
+    margin-left: -9px;
+    border-left: 9px solid transparent;
+    border-top: 12px solid;
+    border-right: 9px solid transparent;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 0;
+    height: 0;
+    margin-left: -8px;
+    border-left: 8px solid transparent;
+    border-top: 11px solid #fff;
+    border-right: 8px solid transparent;
+  }
+}
+
+
+.facility-type-config-container {
+  padding: 20px 100px 45px 100px;
+  font-size: 12px;
+  .facility-type-config-box {
+    border: 1px solid #e7e8ec;
+    .facility-type-config-item {
+      display: flex;
+      height: 30px;
+      .text {
+        flex: 1;
+        line-height: 30px;
+        padding-left: 10px;
+      }
+      .checkbox {
+        flex: 1;
+        padding: 5px 9px;
+        font-size: 12px;
+        margin-left: 10px;
+      }
+    }
+    .facility-type-config-title {
+      background-color: #eaedf2;
+      .split-line {
+        width: 1px;
+        height: 20px;
+        margin-top: 5px;
+        background-color: #dbdbdb;
+      }
+    }
+  }
+}
+.map-config-container {
+  padding: 40px 25px;
+  font-size: 12px;
+  .map-config-box {
+    .map-config-item {
+      display: flex;
+      height: 30px;
+      align-items: center;
+      .map-config-item-text {
+        width: 100px;
+      }
+      .map-config-item-content {
+        width: 300px;
+      }
+    }
+  }
+}
+
+.hide {
+  z-index: 0;
+}
+
+.number {
+  font-size: 20px !important;
+}
+.height-number {
+  font-size: 24px;
+  line-height: 24px;
+}
+.width-all {
+  width: 100%;
+}
+.progress-bar {
+  width: 300px;
+  position: absolute;
+  left: 50%;
+  margin-left: -150px;
+  top: 49%;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 5px 15px 5px 10px;
+}
+
+.tab-selected {
+  color: #13c2c2;
+}
+.card-selected {
+  color: #13c2c2;
+}

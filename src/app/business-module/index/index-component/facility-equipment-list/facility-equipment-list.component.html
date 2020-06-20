@@ -1,0 +1,43 @@
+<!--设施设备列表-->
+<div class="facility-list-container">
+
+  <!--选择设施列表-->
+  <div class="left-panel-tabs">
+    <div class="left-panel-tab"  [ngClass]="{'tab-selected': defaultHandleTab}" (click)="tabClick(facilityEquipmentList.facilitiesList)">
+      <div class="text-content hidden" title="{{indexLanguage.facilitiesList}}">{{indexLanguage.facilitiesList}}</div>
+    </div>
+    <div class="segmentation">|</div>
+    <!--选择设备列表-->
+    <div class="left-panel-tab" [ngClass]="{'tab-selected': !defaultHandleTab}" (click)="tabClick(facilityEquipmentList.equipmentList)">
+      <div class="text-content hidden" title="{{indexLanguage.equipmentList}}">{{indexLanguage.equipmentList}}</div>
+    </div>
+
+    <!--批量操作按钮-->
+    <div class="facility-list-title">
+      <button class="batch-handle-button" nz-button nzType="primary" [disabled]="buttonDisabled" [nzSize]="'small'" (click)="handleBatchOperation()">{{indexLanguage.batchOperation}}</button>
+      <div class="facility-list-title-more " title="{{more}}" (click)="goToFacilityList()">{{more}}<span>>></span></div>
+    </div>
+
+  </div>
+
+  <!--设施列表表格-->
+  <div [hidden]="!defaultShowTable" class="facility-table" >
+    <xc-table [dataSet]="facilityListDataSet"
+              [pageBean]="facilityListPageBean"
+              [tableConfig]="facilityListTableConfig"
+              (pageChange)="pageFacilityList($event)"
+    >
+    </xc-table>
+  </div>
+
+  <!--设备列表表格-->
+  <div [hidden]="defaultShowTable" class="facility-table" >
+    <xc-table [dataSet]="equipmentListDataSet"
+              [pageBean]="equipmentListPageBean"
+              [tableConfig]="equipmentListTableConfig"
+              (pageChange)="pageEquipmentList($event)"
+    >
+    </xc-table>
+  </div>
+
+</div>

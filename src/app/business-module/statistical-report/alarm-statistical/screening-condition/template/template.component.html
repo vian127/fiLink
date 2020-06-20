@@ -1,0 +1,101 @@
+<nz-modal
+  class="alarmFiltration"
+  [(nzVisible)]="display.templateTable"
+  [nzTitle]="language.templateQuery"
+  [nzMaskClosable]="false"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="colsePopUp()">
+  <ng-template #modalTitle>
+    {{language.templateQuery}}
+  </ng-template>
+  <ng-template #modalContent>
+    <xc-table
+      class="thisAlarm"
+      [dataSet]="_dataSettemplate"
+      [pageBean]="pageBeantemplate"
+      [tableConfig]="tableConfigTemplate"
+      (pageChange)="pageTemplateChange($event)"
+    >
+    </xc-table>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" [disabled]="!_selectedAlarm" (click)="okText()">{{language.okText}}</button>
+    <button nz-button nzType="default" (click)="colsePopUp()">{{language.cancelText}}</button>
+  </ng-template>
+</nz-modal>
+
+<!-- 模板列表  单选框 -->
+<ng-template #radioTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedAlarmId" (ngModelChange)="selectedAlarmChange($event, data)">
+    <label nz-radio [nzValue]="data.id"></label>
+  </nz-radio-group>
+</ng-template>
+
+
+<!--新增模板-->
+<nz-modal
+  class="addAlarmTemplate"
+  [(nzVisible)]="display.creationTemplate"
+  [nzTitle]="templateTitle"
+  [nzMaskClosable]="false"
+  [nzContent]="modalContentWork"
+  [nzFooter]="modalFooterWork"
+  (nzOnCancel)="closePopUp()">
+  <ng-template #modalTitle>
+    {{language.addStatisticalTemplate}}
+  </ng-template>
+  <ng-template #modalContentWork>
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+  </ng-template>
+  <ng-template #modalFooterWork>
+    <!--[nzLoading]="isLoading"  [disabled]="!formStatus.getValid()"-->
+    <button class="link-button" nz-button nzType="primary"
+            style="margin-right: 20px"
+            (click)="submitWork()" [disabled]="!formStatus.getValid()">{{language.okText}}
+    </button>
+    <button class="link-button" nz-button nzType="danger" (click)="closePopUp()">{{language.cancelText}}</button>
+  </ng-template>
+</nz-modal>
+
+<!-- 区域 -->
+<ng-template #areaSelector let-formGroup="formGroup" let-col="col">
+  <app-area [areaConfig]='areaConfig'></app-area>
+</ng-template>
+
+<!-- 时间 -->
+<ng-template #recentlyTimeTemp let-formGroup="formGroup" let-data="data">
+  <nz-range-picker
+    class="templateList"
+    [(ngModel)]="timeModel.recentlyTimeModel"
+    [nzDisabledDate]="disabledEndDate"
+    (ngModelChange)="recentlyTimeChange($event)"
+    (nzOnOpenChange)="recentlyTimeOnOpenChange($event)"
+    ngModel></nz-range-picker>
+</ng-template>
+
+<!-- 列表设施类型 -->
+<ng-template #deviceTypeTemp let-data="data">
+    <span *ngFor="let type of data.alarmForwardRuleDeviceTypeList" class="deviceType">
+        <i [ngClass]="type['iconClass']" class="device-type-icon"></i>
+        <span class="status-text" [title]="type">{{type}}</span>
+    </span>
+</ng-template>
+
+<!-- 设施类型 -->
+<ng-template #addDeviceTypeTemp let-formGroup="formGroup" let-selectedList>
+  <!--style="width: 350px"-->
+  <nz-select
+    [nzMaxTagCount]="5"
+    [nzMaxMultipleCount]="this.selectNumber"
+    style="width: 420px"
+    nzMode="multiple"
+    [nzAllowClear]="true"
+    nzPlaceHolder="{{language.pleaseChoose}}"
+    (ngModelChange)="deviceTypeChange($event)"
+    [(ngModel)]="deviceTypeListValue"
+  >
+    <nz-option *ngFor="let option of deviceTypeList" [nzLabel]="option.label"
+               [nzValue]="option.code"></nz-option>
+  </nz-select>
+</ng-template>

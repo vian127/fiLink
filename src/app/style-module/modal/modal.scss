@@ -1,0 +1,78 @@
+// 表格删除确认框 (所有确认框通用)
+.ant-modal-confirm-btns {
+  button {
+    //padding: 0 30px;
+    width: 90px;
+  }
+  button:nth-of-type(1) {
+    color: #fff;
+    background-color: #36cfc9;
+    border-color: #36cfc9;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+    &:hover {
+      color: #fff;
+      background-color: $button-hover-color;
+      border-color: $button-hover-color;
+    }
+  }
+  button:nth-of-type(1) {
+
+  }
+}
+
+// 自定义创建modal样式
+.custom-create-modal {
+  .ant-modal-footer {
+    button {
+      width: 90px;
+      //padding: 0 30px;
+    }
+    button:nth-of-type(1) {
+      color: #fff;
+      background-color: #36cfc9;
+      border-color: #36cfc9;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+      &:hover, &:focus {
+        color: #fff;
+        background-color: $button-hover-color;
+        border-color: $button-hover-color;
+      }
+    }
+    button[disabled] {
+      color: rgba(0, 0, 0, 0.25) !important;
+      background-color: #f5f5f5 !important;
+      border-color: #d9d9d9 !important;
+      text-shadow: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.ant-modal-close:focus, .ant-modal-close:hover {
+  color: rgba(0, 0, 0, 0.75);
+  text-decoration: none;
+  outline: none;
+}
+
+// 地图选择器下面的
+.map-selector-position {
+  #cur_city_name {
+    width: 58px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+  }
+  .ui_city_change_top .ui_city_change_inner i, .ui_city_change_bottom .ui_city_change_inner i {
+    width: 8px;
+    height: 6px;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    left: 5px;
+    -webkit-transition: all ease-in-out .15s;
+    transition: all ease-in-out .15s;
+  }
+}

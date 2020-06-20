@@ -1,0 +1,75 @@
+<nz-card nzTitle="{{language.basicDetail}}"  [nzExtra]="extraTemplate">
+  <div  class="detail-container">
+    <div class="trouble-detail-info">
+      <ul class="detail-warp">
+            <li class="trouble-item">
+              <span class="label">{{language.troubleCode}}：</span>
+              <span class="value hidden" [title]="troubleInfo.troubleCode">{{ troubleInfo.troubleCode }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.handleStatus}}：</span>
+              <span class="value hidden" [title]="troubleInfo.handleStatusName">{{ troubleInfo.handleStatusName }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.troubleType}}：</span>
+              <span class="value hidden" [title]="typeStatus[troubleInfo.troubleType]">{{ typeStatus[troubleInfo.troubleType] }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.troubleLevel}}：</span>
+              <span class="value hidden" [title]="troubleInfo.troubleLevelName">{{ troubleInfo.troubleLevelName }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.troubleSource}}：</span>
+              <span class="value hidden" [title]="troubleInfo.troubleSourceName">{{ troubleInfo.troubleSourceName }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.troubleFacility}}：</span>
+              <span class="value hidden" [title]="troubleInfo.troubleFacility">{{ troubleInfo.troubleFacility }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.troubleEquipment}}：</span>
+              <span class="value hidden" [title]="troubleInfo.troubleEquipment">{{ troubleInfo.troubleEquipment }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.troubleDescribe}}：</span>
+              <span class="value hidden" [title]="troubleInfo.troubleDescribe">{{ troubleInfo.troubleDescribe }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.reportUserName}}：</span>
+              <span class="value hidden" [title]="troubleInfo.reportUserName">{{ troubleInfo.reportUserName }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.remark}}：</span>
+              <span class="value hidden" [title]="troubleInfo.remark">{{ troubleInfo.remark }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.happenTime}}：</span>
+              <span class="value hidden" [title]="troubleInfo.happenTime">{{ troubleInfo.happenTime | dynamic: 'date' : null}}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.deptName}}：</span>
+              <span class="value hidden" [title]="troubleInfo.deptName">{{ troubleInfo.deptName }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.handlingTime}}：</span>
+              <span class="value hidden" [title]="troubleInfo.handlingTime">{{ troubleInfo.handlingTime }}</span>
+            </li>
+            <li class="trouble-item">
+              <span class="label">{{language.currentProgress}}：</span>
+              <span class="progress hidden" [title]="troubleInfo.currentProgress">
+                  <nz-progress [nzPercent]="troubleInfo.currentProgress"></nz-progress>
+              </span>
+            </li>
+          </ul>
+    </div>
+    <div class="thumbnail">
+      <p>{{language.thumbnail}}</p>
+      <div class="img-container" id="thumbnail"></div>
+    </div>
+  </div>
+</nz-card>
+<ng-template #extraTemplate>
+  <span class="update-time">{{language.updateTime}}： {{ troubleInfo.utime | dynamic: 'date' : null}}</span>
+</ng-template>
+
+

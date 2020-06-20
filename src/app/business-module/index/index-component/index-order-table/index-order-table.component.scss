@@ -1,0 +1,24 @@
+// 工单表格表头样式
+.order-list-title-text {
+  display: flex;
+  margin: 0 5px;
+  color: #ff6027;
+
+  .text-title {
+    flex: 1;
+    padding-top: 2px;
+
+  }
+
+  .text-more {
+    cursor: pointer;
+    padding-top: 4px;
+    color: #36cfca;
+    font-size: 12px;
+  }
+}
+
+// 表格padding
+.work-order-table {
+  padding: 5px 10px 10px 10px;
+}

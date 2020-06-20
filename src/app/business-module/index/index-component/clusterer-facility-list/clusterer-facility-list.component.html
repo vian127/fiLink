@@ -1,0 +1,35 @@
+<div class="facility-list-container">
+  <!--设施列表-->
+  <div class="facility-table">
+    <xc-table [dataSet]="_dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig">
+    </xc-table>
+  </div>
+</div>
+<ng-template #facilityNameTemp let-data="data">
+  <div class="template-item hidden" (mouseover)="itemMouseOver($event, data)" (mouseout)="itemMouseOut($event)" (click)="openFacilityInfoPanel(data)">
+    {{data.deviceName}}
+  </div>
+</ng-template>
+<!--提示框-->
+<div *ngIf="isShowInfoWindow" class="info-window-container" [ngStyle]="{left: infoWindowLeft, top: infoWindowTop}">
+  <div class="info-window-m">
+    <div class="info-window-m-name">
+      <div>
+        <span class="info-data-w" [ngStyle]="{'background-color': infoData.data.deviceStatusColor,'color':'#fff'}">{{infoData.data.deviceStatusName}}</span>
+        <span>{{infoData.data.deviceName}}</span>
+      </div>
+     </div>
+    <div>
+      <span class="info-data-w" [ngStyle]="{'background-color': infoData.data.areaLevelColor,'color':'#fff'}">{{infoData.data.areaLevelName}}{{typeLg === 'US'?'':facilityLanguage.area}}</span>
+      <span>{{infoData.data.areaName}}</span>
+    </div>
+    <div>
+      <span class="iconfont icon-fiLink-s fiLink-filink-location-icon disabled-red-icon"></span>
+      <span>{{infoData.data.address}}</span>
+    </div>
+   </div>
+ </div>
+
+

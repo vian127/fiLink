@@ -1,0 +1,46 @@
+:host ::ng-deep .ant-table{
+  .ant-table-thead{
+    tr>th:first-child {
+      left: 0 !important;;
+    }
+  }
+  .ant-table-body{
+    tr>td:first-child {
+      left: 0 !important;;
+    }
+  }
+}
+.allocation-warp{
+  background-color: #fff;
+  border: 1px solid #e8e8e8;
+  box-sizing: border-box;
+  .allocation-title{
+    font-weight: bold;
+    padding: 16px 0 0 32px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+  }
+  .view {
+    cursor: pointer;
+    color: #3BD0CA;
+  }
+}
+
+.box-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  align-self: center;
+}
+
+:host ::ng-deep .ant-tabs-nav-wrap{
+  padding-left: 34px;
+}
+:host ::ng-deep  .ant-tabs .ant-tabs-top-content > .ant-tabs-tabpane,
+:host ::ng-deep  .ant-tabs .ant-tabs-bottom-content > .ant-tabs-tabpane {
+  padding: 0 32px 20px 32px;
+}
+:host ::ng-deep .ant-tabs .ant-tabs-large-bar .ant-tabs-nav-container {
+  font-size: 14px;
+}

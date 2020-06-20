@@ -1,0 +1,125 @@
+<div class="release-work">
+  <div class="card-content">
+    <nz-card [nzBordered]="false">
+      <div class="card-box">
+        <div class="box-left">
+          <div class="equipment-title">
+            <div class="title">
+              <p class="text">使用中的策略</p>
+              <a href="javascript:void(0);" class="equipment-add" (click)="addStrategy()">+</a>
+            </div>
+            <a href="javascript:void(0);" (click)="goStrategyList()">全部策略</a>
+          </div>
+          <!--列表数据-->
+          <div class="equipment-content">
+            <nz-card *ngFor="let data of listData, let i = index" class="equipment-card" (click)="handShowConvenient(i)">
+              <div class="content">
+                <i nz-icon [nzType]="'home'" class="img-icon"></i>
+                <span class="details" (click)="strategyDetails()">{{data.strategyName}}</span>
+                <nz-switch [ngModel]="data.strategyStatus" nzCheckedChildren="开" nzUnCheckedChildren="关"></nz-switch>
+              </div>
+              <p>执行周期:{{data.execCron}}</p>
+              <p style="margin-top: 20px">有效期:{{data.effectivePeriodTime}}</p>
+            </nz-card>
+          </div>
+          <!--分页-->
+          <div class="pagination">
+            <nz-pagination
+              [(nzPageIndex)]="current"
+              [nzTotal]="50"
+              [nzSize]="'small'"
+              nzShowSizeChanger
+              nzShowQuickJumper
+            ></nz-pagination>
+          </div>
+        </div>
+        <div class="box-right">
+          <div>
+            <h4>便捷入口</h4>
+            <nz-card *ngIf="convenientEntranceSwitch">
+              <nz-row>
+                <h4 nz-col nzSpan="4">{{detailData.strategyName}}</h4>
+                <nz-switch nz-col nzSpan="4" [ngModel]="detailData.strategyStatus" nzCheckedChildren="开" nzUnCheckedChildren="关"></nz-switch>
+              </nz-row>
+              <video class="video" src="/i/movie.ogg" controls="controls"></video>
+              <nz-row>
+                <nz-col nzSpan="12">
+                  <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="sliderBoundValue"></nz-slider>
+                </nz-col>
+                <div nz-col nzSpan="4">
+                  <nz-input-number class="adjustBox"
+                                   [nzMin]="1"
+                                   [nzMax]="20"
+                                   [ngStyle]="{ marginLeft: '16px' }"
+                                   [(ngModel)]="sliderBoundValue"
+                  ></nz-input-number>
+                </div>
+                <div nz-col nzSpan="4" class="explain">
+                  亮度
+                </div>
+              </nz-row>
+              <nz-row>
+                <nz-col nzSpan="12">
+                  <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="sliderBoundValue"></nz-slider>
+                </nz-col>
+                <div nz-col nzSpan="4">
+                  <nz-input-number class="adjustBox"
+                                   [nzMin]="1"
+                                   [nzMax]="20"
+                                   [ngStyle]="{ marginLeft: '16px' }"
+                                   [(ngModel)]="sliderBoundValue"
+                  ></nz-input-number>
+                </div>
+                <div nz-col nzSpan="4" class="explain">
+                  音量
+                </div>
+              </nz-row>
+              <div style="overflow: auto">
+                <p>是否循环：是</p>
+                <p>有效期：20191030至20200301</p>
+                <p>执行状态：执行中</p>
+              </div>
+            </nz-card>
+            <nz-card class="convenient checked" *ngIf="!convenientEntranceSwitch">
+              <p>暂未选中策略</p>
+            </nz-card>
+          </div>
+        </div>
+      </div>
+    </nz-card>
+  </div>
+  <div class="charts-list">
+    <!--统计图搜索条件-->
+    <div class="date-title">
+      <span class="date-start">
+        开始时间:
+        <nz-date-picker nzFormat="yyyy-MM-dd HH:mm:ss"></nz-date-picker>
+      </span>
+      <span class="date-end">
+        结束时间:
+        <nz-date-picker nzFormat="yyyy-MM-dd HH:mm:ss"></nz-date-picker>
+      </span>
+      <span class="date-btn">
+        <button nz-button nzType="primary">开始统计</button>
+      </span>
+    </div>
+    <!--统计图-->
+    <div class="charts-content">
+      <div class="statistics">
+        <app-application-charts [chartsId]="'workOrderId'"></app-application-charts>
+      </div>
+      <div class="statistics">
+        <app-application-charts [chartsId]="'workOrderId1'"></app-application-charts>
+      </div>
+      <div class="statistics">
+        <app-application-charts [chartsId]="'workOrderId2'"></app-application-charts>
+      </div>
+      <div class="statistics">
+        <app-application-charts [chartsId]="'workOrderId3'" [imageType]="imageType"></app-application-charts>
+      </div>
+      <div class="statistics">
+        <app-application-charts [chartsId]="'workOrderId4'" [imageType]="imageType"></app-application-charts>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<nz-row>
+  <!--设备列表-->
+  <div nz-col nzSpan="8">
+    <input [(ngModel)]="searchValue" class="search" />
+    <i nz-icon nzType="search" class="searchIcon" (click)="search()" nzTheme="outline"></i>
+    <p class="equipmentList">设备列表</p>
+    <p *ngFor="let data of equipmentData.equipmentList, let index = index"
+       [ngClass]="{'equipmentList': true,'selectedEquipmentList':data.state}"
+       (click)="changeEquipment(index)">
+      {{data.equipmentName}}
+    </p>
+    <nz-pagination (nzPageIndexChange)="nzPageIndexChange($event)" [nzPageIndex]="equipmentData.paging.pageNum"
+                   [nzTotal]="equipmentData.paging.totalCount" nzSimple></nz-pagination>
+  </div>
+  <!--分频-->
+  <div nz-col nzSpan="16">
+    <div class="monitor">
+      <video *ngFor="let data of screenData" [class]="splitScreen" [src]="data.src" controls="controls"></video>
+    </div>
+    <!--分屏设置-->
+    <nz-row>
+      <span nz-col nzSpan="4">分屏设置</span>
+      <span nz-col nzSpan="2" (click)="splitView('one')">1*1</span>
+      <span nz-col nzSpan="2" (click)="splitView('two')">2*2</span>
+      <span nz-col nzSpan="2" (click)="splitView('three')">3*3</span>
+      <span nz-col nzSpan="2" (click)="splitView('four')">4*4</span>
+      <div nz-col nzSpan="4">
+        <i nz-icon nzType="left" nzTheme="outline"></i>
+        <i nz-icon nzType="right" nzTheme="outline"></i>
+      </div>
+    </nz-row>
+  </div>
+</nz-row>

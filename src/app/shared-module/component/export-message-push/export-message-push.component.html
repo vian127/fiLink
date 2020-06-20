@@ -1,0 +1,15 @@
+<ng-template #exportOkTemp let-notification>
+  <div class="ant-notification-notice-content">
+    <div>
+      <div class="ant-notification-notice-message">{{exportLanguage.websocketMsg.backgroundMessage}}</div>
+      <div class="ant-notification-notice-description">
+        {{exportLanguage.websocketMsg[exportMsg]}}
+      </div>
+      <span class="ant-notification-notice-btn">
+            <button nz-button nzType="primary" nzSize="small" (click)="goExportHTML()">
+              <span>{{exportLanguage.websocketMsg.go}}</span>
+            </button>
+          </span>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,51 @@
+<div class="odn-device-resources" [appBarProgress]="ProgressShow">
+  <span class="select-area" [title]="areaName?areaName:language.selectArea"
+        [class.placeholder]="areaName?false:true"
+        (click)="showAreaSelect()">{{areaName ? areaName : language.selectArea}}</span>
+  <check-select-input  style="display:inline-block;" [isAllChecked]="true"
+                      [(ngModel)]="deviceTypeList" [placeholder]="language.pleaseChoose"
+                      [checkList]="selectInfo"></check-select-input>
+  <nz-range-picker
+    style="margin-left: 10px"
+    nzShowTime
+    [(ngModel)]="rangDateValue"
+    (ngModelChange)="rangValueChange($event)"
+    (nzOnOpenChange)="onOpenChange($event)"
+  ></nz-range-picker>
+  <button type="button"
+          style="margin-left: 10px"
+          [disabled]="(areaName?!areaName:!deviceName)||
+          (radioValue?(!radioValue): deviceTypeList.length===0) || rangDateValue.length === 0"
+          class="link-button" nz-button
+          nzType="primary"
+          (click)="statistical()">{{language.statistical}}
+  </button>
+  <div *ngIf="!hide&&showLoading">
+    <div class="barChart">
+      <app-echart-group style="flex: 1;margin-right: 10px"
+                         (chartInstance)="getRingChartInstance($event)"></app-echart-group>
+      <!--<nz-spin *ngIf="isNoData" style="flex: 1;background-color: #f7f7f7;height: 400px;padding: 10px;"></nz-spin>-->
+      <app-echart-group style="flex: 1"
+                         (chartInstance)="getBarChartInstance($event)"></app-echart-group>
+    </div>
+    <br>
+<!--    <xc-table-->
+<!--      [dataSet]="__dataset"-->
+<!--      [pageBean]="pageBean"-->
+<!--      [tableConfig]="tableConfig"-->
+<!--      (pageChange)="pageChange($event)">-->
+<!--    </xc-table>-->
+    <xc-table [dataSet]="__dataset"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)">
+    </xc-table>
+  </div>
+</div>
+<!--区域选择器-->
+<xc-tree-selector
+  [(xcVisible)]="isVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-selector>
+

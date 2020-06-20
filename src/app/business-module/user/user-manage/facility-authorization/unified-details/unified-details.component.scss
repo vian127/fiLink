@@ -1,0 +1,89 @@
+@import "../../../../../style-module/config";
+.pageTitle {
+  border-left: 2px solid #7cb0dd;
+  padding-left: 18px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.user-detail {
+  padding: 10px;
+}
+
+.area-name {
+  display: inline-block;
+  width: 50%;
+  border: 1px solid #ccc;
+  height: 32px;
+  padding: 4px 11px;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.open-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #ffffff;
+}
+
+.buttonStyle{
+  color: #36cfc9;
+  padding: 0 10px;
+  &:hover{
+    border-color: #36cfc9;
+  }
+}
+
+.door{
+  margin-right: 24px;
+}
+.lock {
+  margin-right: 22px;
+}
+
+.labelStyle{
+  display: inline-block;
+  width:70px;
+  margin-right:5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.status-text {
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.facility-alarm-c {
+  color: $status-alarm;
+}
+
+.facility-normal-c {
+  color: $status-normal;
+
+}
+
+.facility-offline-c {
+  color: $status-offline;
+
+}
+
+.facility-lost-c {
+  color: $status-lost;
+
+}
+
+.facility-unknown-c {
+  color: $status-unknown;
+}
+.device-type-icon{
+  vertical-align: middle;
+  font-size: 19px;
+}

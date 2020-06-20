@@ -1,0 +1,19 @@
+<!--光缆列表-->
+<div class="facility-list-container">
+  <div class="facility-list-title">
+    <div class="icon-facility-list" title="{{title}}"></div>
+    <div class="text" title="{{title}}">{{title}}</div>
+  </div>
+  <div class="facility-table">
+    <xc-table [dataSet]="_dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)"
+              #xcTable>
+    </xc-table>
+  </div>
+</div>
+<ng-template #fibreName let-data="data">
+  <span class="navigate table-text-td" [title]="data['opticCableName']" (click)="ToDeviceIdDetail(data)">
+    {{data['opticCableName']}}</span>
+</ng-template>

@@ -1,0 +1,62 @@
+
+.work-order-detail {
+  padding: 10px;
+  .work-order-detail-title {
+    border-left: 2px solid #7cb0dd;
+    padding-left: 18px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 900;
+  }
+  .clear{
+    clear: both;
+  }
+  .detail-warp{
+    padding: 0 20px;
+    margin-top: 8px;
+    .grid-row{
+      height: 40px;
+      line-height: 40px;
+      .row-label{
+        display: inline-block;
+        width: 18%;
+        height: 40px;
+        line-height: 40px;
+      }
+    }
+    .detail-title{
+      margin-left: -20px;
+      margin-top: 20px;
+    }
+    .mb20{
+      margin-bottom: 20px;
+    }
+    .froTable{
+      margin-top: -20px;
+      position: relative;
+      ::ng-deep .table-top-button{
+        width: 100%;
+      }
+    }
+  }
+  .alarm-level{
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    margin-right: 5px;
+    &.level1{
+      background: #e61017;
+    }
+    &.level2{
+      background: #ff6600;
+    }
+    &.level3{
+      background: #f1c620;
+    }
+    &.level4{
+      background: #58c1f0;
+    }
+  }
+
+}

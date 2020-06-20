@@ -1,0 +1,195 @@
+<!--地图相关-->
+<div class="index-map-container">
+  <!--地图-->
+  <xc-map #mainMap
+          [mapConfig]="mapConfig"
+          [data]="data"
+          [iconSize]="iconSize"
+          [facilityId]="mapFacilityId"
+          [centerPoint]="centerPoint"
+          [areaData]="areaData"
+          (mapEvent)="mapEvent($event)"></xc-map>
+
+  <!--聚合点设施详情-->
+  <div *ngIf="isShowClustererFacilityTable" class="clusterer-facility-table">
+    <app-clusterer-facility-list [facilityList]="clustererFacilityList"
+                                 [areaData]="areaData"
+                                 (facilityListEvent)="clustererFacilityListEvent($event)"
+                                 (isShowTopogy)="isShowTopogy($event)">
+    </app-clusterer-facility-list>
+  </div>
+
+
+  <!--详情卡-->
+  <div  *ngIf="isShowFacilityPanel && facilityId" class="facility-panel">
+    <div class="tab-container">
+      <app-facility-particulars-card [facilityId]="facilityId"
+                                     [facilityPowerCode]="facilityPowerCode"
+                                     [isShowBusinessPicture]="isShowBusinessPicture"
+                                     [facilityType]="facilityType">
+      </app-facility-particulars-card>
+    </div>
+  </div>
+
+
+  <!--设施详情展示-->
+  <!--<div *ngIf="isShowFacilityPanel && facilityId" class="facility-panel">-->
+    <!--&lt;!&ndash;<app-index-particulars-card></app-index-particulars-card>&ndash;&gt;-->
+    <!--<div class="tab-container">-->
+      <!--<nz-tabset [nzTabPosition]="'top'" [nzSelectedIndex]="selectedIndex"-->
+                 <!--(nzSelectedIndexChange)="selectedIndexChange($event)">-->
+
+        <!--<nz-tab [nzTitle]="indexLanguage.facilityDetailPanelTitle">-->
+          <!--<ng-template nz-tab>-->
+            <!--<app-facility-detail-panel #facilityDetailPanelComponent-->
+                                       <!--[facilityId]="facilityId"-->
+                                       <!--[facilityPowerCode]="facilityPowerCode"-->
+                                       <!--[isShowBusinessPicture]="isShowBusinessPicture"-->
+                                       <!--(facilityDetailEvent)="facilityDetailEvent($event)"-->
+                                       <!--*ngIf="isShowFacilityDetailTab">-->
+            <!--</app-facility-detail-panel>-->
+          <!--</ng-template>-->
+        <!--</nz-tab>-->
+
+        <!--<nz-tab [nzTitle]="indexLanguage.facilityAlarmPanelTitle">-->
+          <!--<ng-template nz-tab>-->
+            <!--<app-facility-alarm-panel [facilityId]="facilityId"></app-facility-alarm-panel>-->
+          <!--</ng-template>-->
+        <!--</nz-tab>-->
+
+        <!--<nz-tab [nzTitle]="indexLanguage.facilityLogAndOrderPanelTitle">-->
+          <!--<ng-template nz-tab>-->
+            <!--<app-log-order-panel [facilityId]="facilityId"-->
+                                 <!--[facilityPowerCode]="facilityPowerCode"></app-log-order-panel>-->
+          <!--</ng-template>-->
+        <!--</nz-tab>-->
+
+        <!--<nz-tab [nzTitle]="indexLanguage.facilityRealScenePicture"-->
+                <!--*ngIf="isShowBusinessPicture && facilityPowerCode.includes(powerCode.intelligentLabelDetail) && facilityPowerCode.includes(powerCode.intelligentLabelSetting)">-->
+          <!--<ng-template nz-tab>-->
+            <!--<app-business-picture [deviceID]="facilityId" canSelectFrame="false"></app-business-picture>-->
+          <!--</ng-template>-->
+        <!--</nz-tab>-->
+      <!--</nz-tabset>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--刷新按钮-->
+  <div class="refresh-btn" (click)="refresh()" title="{{indexLanguage.refresh}}">
+    <div class="icon-refresh"></div>
+  </div>
+
+  <!--左侧浮窗-->
+  <app-index-operational-data></app-index-operational-data>
+
+  <!--设施状态-->
+  <div class="facility-status">
+    <!--<div *ngIf="!isExpandFacilityStatus"-->
+    <!--class="facility-status-title"-->
+    <!--(click)="expandFacilityStatus()"-->
+    <!--title="{{indexLanguage.facilityStatusTitle}}">-->
+    <!--<div class="icon-facility-status"></div>-->
+    <!--<div class="text">{{indexLanguage.facilityStatusTitle}}</div>-->
+    <!--</div>-->
+    <!--<div *ngIf="isExpandFacilityStatus" class="facility-status-checkbox">-->
+    <!--<app-facility-status (facilityStatusEvent)="facilityStatusEvent($event)"></app-facility-status>-->
+    <!--</div>-->
+    <!--<app-index-map-operationt></app-index-map-operationt>-->
+
+
+    <app-index-map-operationt></app-index-map-operationt>
+  </div>
+
+  <!--批量操作-->
+  <div [hidden]="isShowBatchOperationPanel" class="facility-panel">
+    <nz-modal [(nzVisible)]="isShowBatchOperationPanel" (nzOnCancel)="closeBatchOperationPanel()"
+              (nzOnOk)="closeBatchOperationPanel()"
+              nzTitle="{{indexLanguage.batchOperation}}">
+      <app-index-batch-operation #batchOperation></app-index-batch-operation>
+    </nz-modal>
+  </div>
+
+</div>
+
+<!--统计相关-->
+<div class="statistics-panel" *ngIf="false">
+  <div class="statistics-panel-charts">
+    <ng-container *ngFor="let item of statisticsConfig">
+      <app-index-statistics *ngIf="item.isShow" [title]="item.title" [type]="item.type"
+                            [data]="data"></app-index-statistics>
+    </ng-container>
+  </div>
+  <div class="statistics-panel-switch">
+    <div class="statistics-panel-switch-item iconfont fiLink-overview number"
+         [ngClass]="isShowCard? 'card-selected' : ''"
+         (click)="ClickAllItems()"></div>
+    <div *ngFor="let item of statisticsConfig"
+         class="statistics-panel-switch-item"
+         [ngClass]="item.isShow ? 'card-selected' : ''"
+         (click)="statisticsItemClick(item)">
+      {{item.label}}
+    </div>
+    <!--地图设置-->
+    <div class="map-setting">
+      <i class="iconfont icon-fiLink fiLink-map-setting  bg-c-w height-number"
+         title="{{indexLanguage.mapConfigTitle}}"
+         (click)="openMapSettingModal()">
+      </i>
+    </div>
+    <div class="out-topology" *ngIf='isLightButton'>
+      <i class="iconfont icon-fiLink fiLink-esc-con1  bg-c-w height-number"
+         title="{{indexLanguage.exitTopologyHighlighting}}"
+         (click)="exitTopology()">
+      </i>
+    </div>
+  </div>
+</div>
+
+<!--进度条-->
+<div class="progress-bar" *ngIf="isShowProgressBar">
+  <p>{{commonLanguage.loading}}...</p>
+  <nz-progress [nzPercent]="percent" nzStatus="active"></nz-progress>
+</div>
+
+<!--地图设置temp-->
+<ng-template #MapConfigTemp>
+  <div class="map-config-container">
+    <div class="map-config-box">
+      <div class="map-config-item">
+        <div class="map-config-item-text">{{indexLanguage.iconSize}}</div>
+        <div class="map-config-item-content">
+          <nz-select class="width-all" [(ngModel)]="facilityIconSizeValue"
+                     nzPlaceHolder="{{indexLanguage.pleaseSelect}}">
+            <ng-container *ngFor="let option of facilityIconSizeConfig">
+              <nz-option nzValue="{{option.value}}" nzLabel="{{option.label}}"></nz-option>
+            </ng-container>
+          </nz-select>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!--设施类型设置temp-->
+<ng-template #facilityTypeConfigTemp>
+  <div class="facility-type-config-container">
+    <div class="facility-type-config-box">
+      <div class="facility-type-config-item facility-type-config-title">
+        <div class="text">
+          {{commonLanguage.options}}
+        </div>
+        <div class="split-line"></div>
+        <div class="text">
+          {{indexLanguage.runState}}
+        </div>
+      </div>
+      <div class="facility-type-config-item" *ngFor="let type of facilityTypeConfig">
+        <div class="text">{{type.label}}</div>
+        <div class="checkbox">
+          <label nz-checkbox [(ngModel)]="type.checked">
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,62 @@
+<div class="facility-show iconfont icon-fiLink fiLink-facilities-display"
+     (click)="showFacilityAndEquipmentCard()" title="设施展示">
+  <!--设施展示-->
+</div>
+<div class="zoom-show iconfont icon-fiLink fiLink-minus"
+     (click)="showZoom()" title="縮放級別">
+  <!--縮放級別-->
+</div>
+<div class="zoom-slider" *ngIf="showSlider">
+  <nz-slider [(ngModel)]="sliderValue" [nzMax]="18" [nzMin]="1" (ngModelChange)="sliderChange($event)"></nz-slider>
+</div>
+<!--设施设备卡片悬浮窗-->
+<div class="facility-equipment-Card"
+     *ngIf="isShowFacilityEquipmentCard">
+  <!--头部切换-->
+  <div class="facility-equipment-radio">
+    <nz-radio-group class="radio-group" [(ngModel)]="radioValue">
+      <div [ngClass]="{'facility-radio': facilityRadioGroup}">
+        <label nz-radio nzValue="A" (click)="showFacilityCard()">{{indexLanguage.facilitiesToShow}}</label>
+      </div>
+      <div [ngClass]="{'equipment-radio': equipmentRadioGroup}">
+        <label nz-radio nzValue="D" (click)="showEquipmentCard()">{{indexLanguage.equipmentToShow}}</label>
+      </div>
+    </nz-radio-group>
+  </div>
+  <!--设施部分-->
+  <div class="card-body" *ngIf="facilityRadioGroup">
+    <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="facilityCheckChange($event)">
+      <div nz-row *ngFor="let item of deviceTypeList">
+        <div nz-row nzSpan="8"><label nz-checkbox [nzValue]="item.deviceType" [ngModel]="item.isModel">
+          <span
+            [class]="'iconfont icon-fiLink' + ' ' + indexDeviceIcon[item.deviceType]"></span>{{indexDeviceType[item.deviceType]}}
+        </label>
+        </div>
+      </div>
+    </nz-checkbox-wrapper>
+  </div>
+  <!--设备部分-->
+  <div class="card-body" *ngIf="equipmentRadioGroup">
+    <nz-radio-group class="equipment-radio" [(ngModel)]="equipmentRadioValue"
+                    (ngModelChange)="equipmentCheckChange($event)">
+      <div class="equipment-radio">
+       <div class="equipment-radio-child" *ngFor="let item of equipmentTypeList">
+         <label nz-radio nzValue="{{item.equipmentType}}">
+           <span [class]="'iconfont icon-fiLink ' + 'fiLink-gateway'"></span>{{indexEquipmentType[item.equipmentType]}}
+         </label>
+       </div>
+        <!--<label nz-radio nzValue="A">-->
+          <!--<span class="iconfont icon-fiLink fiLink-camera"></span>摄像头</label>-->
+        <!--<label nz-radio nzValue="j">-->
+          <!--<span class="iconfont icon-fiLink fiLink-centralized-control"></span>集中控制器</label>-->
+        <!--<label nz-radio nzValue="g">-->
+          <!--<span class="iconfont icon-fiLink fiLink-informationboard"></span>信息屏</label>-->
+        <!--<label nz-radio nzValue="B">-->
+          <!--<span class="iconfont icon-fiLink fiLink-single-lamp-control"></span>单灯控制器</label>-->
+      </div>
+      <!--<div class="equipment-radio-left">-->
+
+      <!--</div>-->
+    </nz-radio-group>
+  </div>
+</div>

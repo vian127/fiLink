@@ -1,0 +1,38 @@
+<div>
+  <h4>证书配置</h4>
+
+  <!--证书表单-->
+  <xc-form [column]="certificateFormColumn"
+           (formInstance)="certificateFormInstance($event)">
+  </xc-form>
+
+  <!--  文件上传模板-->
+  <ng-template #certUpload>
+    <!--<button (click)="uploadClick('certificate')">上传文件</button>-->
+    <app-upload-component [fileList]="certificateFileList"
+                          [uploadBtnDisabled]="certificateUploadBtnDisabled"
+                          [fileInfo]="certificateFileInfo"
+                          (removeFileChange)="removeFileChange($event)"
+                          (uploadChange)="uploadFile($event)"></app-upload-component>
+  </ng-template>
+
+  <!--  文件上传模板-->
+  <ng-template #keyUpload>
+    <button (click)="uploadClick('secretKey')">上传文件</button>
+  </ng-template>
+
+  <!--单选模板-->
+  <ng-template #statusEnable>
+    <nz-radio-group [(ngModel)]="sslStatus" (ngModelChange)="setStatus()">
+      <label nz-radio nzValue="A">是</label>
+      <label nz-radio nzValue="B">否</label>
+    </nz-radio-group>
+  </ng-template>
+
+  <h4>第三方接入平台</h4>
+
+  <!--接入平台表单-->
+  <xc-form [column]="platformFormColumn"
+           (formInstance)="platformFormInstance($event)">
+  </xc-form>
+</div>

@@ -1,0 +1,55 @@
+.input-box {
+  display: flex;
+  justify-content: space-between;
+}
+// 过滤框宽度
+.filter-num-width {
+  width: 100%;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+// 数字输入框样式
+.num-input{
+  display: inline-block;
+  border: 1px solid #ccc;
+  height: 22px;
+  padding: 4px 11px;
+  border-radius: 4px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  outline: none;
+  cursor: default;
+  &:hover{
+    border-color: #36cfc9;
+  }
+
+  &:disabled{
+    cursor: no-drop;
+    background-color: #f5f5f5;
+    color: rgba(0,0,0,0.25);
+  }
+}
+/*// 摄像头
+.camera-color {
+  color: #5ed8a9;
+}
+// 信息屏
+.information-screen-color {
+  color: #4fc5ea;
+}
+// 单灯控制器
+.single-lamp-control-color {
+  color: #f7d205;
+}
+// 网关
+.gateway-color {
+  color: #fa6308;
+}
+// 集中控制器
+.centralized-control-color {
+ color: #8588e7;
+}*/

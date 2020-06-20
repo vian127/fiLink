@@ -1,0 +1,95 @@
+<div class="operation-btn" *ngIf="isOperation">
+    <span style="margin-right: 10px;cursor: pointer" (click)="handEdit()">
+      <i nz-icon nzType="edit" nzTheme="outline" style="color: #36cfc9"></i>
+    </span>
+  <span style="margin-right: 10px;cursor: pointer" (click)="handDown()">
+      <i nz-icon nzType="colum-height" nzTheme="outline"></i>
+    </span>
+  <span style="margin-right: 10px;cursor: pointer" (click)="handDelete()">
+      <i nz-icon nzType="delete" nzTheme="outline" style="color: red"></i>
+    </span>
+  <span style="cursor: pointer">
+      <nz-switch
+        (ngModelChange)="switchChange($event)"
+        [ngModel]="lightingData.strategyStatus === '1' ? true : false" nzCheckedChildren="开"
+        nzUnCheckedChildren="关"></nz-switch>
+    </span>
+</div>
+<div class="information">
+  <h3 class="title">策略基本信息</h3>
+  <div class="information-content">
+    <div class="content-left">
+      <div class="details-info">
+        <span class="info-title">策略名称:</span>
+        <span class="info-content">{{lightingData.strategyName}}</span>
+      </div>
+      <div class="details-info">
+        <span class="info-title">策略状态:</span>
+        <span class="info-content">{{lightingData.strategyStatus}}</span>
+      </div>
+      <div class="details-info">
+        <span class="info-title">策略类型:</span>
+        <span class="info-content">{{lightingData.strategyType}}</span>
+      </div>
+      <div class="details-info">
+        <span class="info-title">有效期:</span>
+        <span class="info-content">{{lightingData.effectivePeriodStart}}-{{lightingData.effectivePeriodEnd}}</span>
+      </div>
+      <div class="details-info">
+        <span class="info-title">执行状态:</span>
+        <span class="info-content">{{lightingData.execStatus}}</span>
+      </div>
+      <div class="details-info">
+        <span class="info-title">创建人:</span>
+        <span class="info-content">{{lightingData.createUser}}</span>
+      </div>
+      <div class="details-info">
+        <span class="info-title">创建时间:</span>
+        <span class="info-content">{{lightingData.createTime}}</span>
+      </div>
+      <div class="details-info">
+        <span class="info-title">申请人:</span>
+        <span class="info-content">{{lightingData.applyUser}}</span>
+      </div>
+      <div class="details-info">
+        <span class="info-title">备注:</span>
+        <span class="info-content">{{lightingData.remark}}</span>
+      </div>
+      <div class="details-info" style="margin-bottom: 30px">
+        <span class="info-title">控制类型:</span>
+        <span class="info-content">{{lightingData.controlType}}</span>
+      </div>
+    </div>
+    <div class="content-right">
+
+    </div>
+  </div>
+</div>
+<div class="application" *ngIf="isShowTable">
+  <h3>应用范围</h3>
+  <div class="application-content">
+    <nz-tabset>
+      <nz-tab nzTitle="设备列表">
+        <xc-table [dataSet]="lightingData.strategyRefList || []"
+                  [pageBean]="pageBean"
+                  [tableConfig]="tableConfig"
+                  (pageChange)="pageChange($event)">
+        </xc-table>
+      </nz-tab>
+      <nz-tab nzTitle="分组列表">
+        <!--        <xc-table [dataSet]="_dataSet"-->
+        <!--                  [pageBean]="pageBean"-->
+        <!--                  [tableConfig]="tableConfig"-->
+        <!--                  (pageChange)="pageChange($event)">-->
+        <!--        </xc-table>-->
+      </nz-tab>
+      <nz-tab nzTitle="回路列表">
+        <!--        <xc-table [dataSet]="_dataSet"-->
+        <!--                  [pageBean]="pageBean"-->
+        <!--                  [tableConfig]="tableConfig"-->
+        <!--                  (pageChange)="pageChange($event)">-->
+        <!--        </xc-table>-->
+      </nz-tab>
+    </nz-tabset>
+  </div>
+</div>

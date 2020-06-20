@@ -1,0 +1,32 @@
+<!--工单列表头-->
+<div class="order-list-title-text" title="{{titleName}}">
+  <div class="text-title">{{titleName}}</div>
+  <div class="text-more" (click)="goToWorkOrderPage()">{{indexLanguage.more}}<span>>></span></div>
+</div>
+
+<!--巡检工单列表-->
+<div [hidden]="defaultShowTable" class="work-order-table">
+  <xc-table [dataSet]="workOrderInspectionDataSet"
+            [pageBean]="workOrderInspectionPageBean"
+            [tableConfig]="workOrderInspectionTableConfig"
+            (pageChange)="pageWorkOrderInspection($event)"
+           >
+  </xc-table>
+</div>
+
+<!--销障工单列表-->
+<div [hidden]="!defaultShowTable" class="work-order-table">
+  <xc-table [dataSet]="workOrderClearDataSet"
+            [pageBean]="workOrderClearPageBean"
+            [tableConfig]="workOrderClearTableConfig"
+            (pageChange)="pageWorkOrderClear($event)">
+  </xc-table>
+</div>
+
+<!--工单状态装换模板-->
+<ng-template #statusTemp let-data="data">
+  <div class="hidden" title="{{data.statusName}}">
+    <span [ngClass]="data.statusClass"></span>
+    {{data.statusName}}
+  </div>
+</ng-template>

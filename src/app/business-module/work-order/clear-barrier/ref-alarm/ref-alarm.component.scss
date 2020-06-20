@@ -1,0 +1,31 @@
+.refAlarm {
+  div {
+    width: 45%;
+    margin: 20px 2.5% 5px 0;
+    float: left;
+    font-size: 13px;
+    color: #333;
+
+    label {
+      display: inline-block;
+      width: 30%;
+    }
+
+    span {
+      margin-left: 3%;
+      font-weight: bold;
+      width: 67%;
+      white-space: pre;
+      overflow: hidden;
+      display: inline-block;
+      text-overflow: ellipsis;
+      vertical-align:top;
+    }
+  }
+
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}

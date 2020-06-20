@@ -1,0 +1,8 @@
+<nz-card nzTitle="{{language.historyProcessRecord}}">
+  <xc-table [dataSet]="troubleRecord"
+            [pageBean]="troubleRecordPageBean"
+            [tableConfig]="troubleRecordTableConfig"
+            (pageChange)="troubleRecordPageChange($event)">
+  </xc-table>
+</nz-card>
+

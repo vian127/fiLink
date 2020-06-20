@@ -1,0 +1,24 @@
+<div class="template-warp">
+  <!-- 主页页面模板表格 -->
+  <div class="table-container"  id="warp">
+    <xc-table [dataSet]="tableDataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)">
+    </xc-table>
+  </div>
+  <!-- 设施总数筛选带操作符模板 -->
+  <ng-template #deviceCountTemp let-filterValue = "filterValue">
+  <span class="inputBox">
+    <input type="text" class="widthStyle" class = "numberInputs"  [placeholder]="InspectionLanguage.pleaseEnter"
+           [(ngModel)]="filterValue.filterValue" oninput="setInputVal(value)">
+    <xc-nz-select style="width: 110px;" [(ngModel)]="deviceCountSelectedValue" [disabled]="!filterValue.filterValue">
+       <xc-nz-option *ngFor="let item of searchNumber" [nzLabel]="item.label" [nzValue]="item.value"></xc-nz-option>
+    </xc-nz-select>
+  </span>
+  </ng-template>
+  <!-- 责任人 -->
+  <ng-template #roleTemp let-data="data">
+    <span class="widthStyle" title="{{data.assign?.userName}}">{{data.assign?.userName}}</span>
+  </ng-template>
+</div>

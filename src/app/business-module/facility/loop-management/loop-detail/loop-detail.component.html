@@ -1,0 +1,73 @@
+<!--回路新增、编辑组件-->
+<nz-spin class="loop-warp" [nzSpinning]="pageLoading">
+  <div>
+    <span class="detail-title">
+      {{pageTitle}}
+    </span>
+  </div>
+  <div>
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+    <div class="button-container">
+      <button class="link-button margin-right20" nz-button nzType="primary"
+              [nzLoading]="isLoading"
+              [disabled]="!formStatus.getValid()"
+              (click)="addOrEditLoop()">{{language.handleOk}}
+      </button>
+      <button class="link-button" nz-button nzType="danger" (click)="goBack()">{{language.handleCancel}}</button>
+    </div>
+  </div>
+</nz-spin>
+
+<!--所属配电箱模板-->
+<ng-template #distributionBoxTemp let-formGroup="formGroup" let-col="col">
+  <div>
+    <input readonly="readonly" class="area-name" [title]="distributionBoxName" [(ngModel)]="distributionBoxName">
+    <button type="button" class="open-button"
+            (click)="showDistributionBoxModal()">
+      <i><span class="icon-fiLink fiLink-search-index iconfont"></span></i>
+    </button>
+  </div>
+</ng-template>
+<!--配电箱列表选择器-->
+<facility-list-selector-component
+  [title]="'配电箱列表'"
+  [(facilityVisible)]="distributionBoxVisible"
+  [filterConditions]="distributionBoxFilter"
+  [multiple]="false"
+  (selectDataChange)="selectDataChange($event)">
+</facility-list-selector-component>
+
+
+
+<!--关联设施模板-->
+<ng-template #linkDeviceTemp let-formGroup="formGroup" let-col="col">
+  <div>
+    <input readonly="readonly" class="area-name" [title]="linkDeviceName" [(ngModel)]="linkDeviceName">
+    <button type="button" class="open-button"
+            (click)="showLinkDeviceModal()">
+      <i><span class="icon-fiLink fiLink-search-index iconfont"></span></i>
+    </button>
+  </div>
+</ng-template>
+<!--关联设施弹框-->
+<app-link-device-table
+  [(xcVisible)]="linkDeviceVisible"
+  (selectListDataChange)="selectLinkDeviceData($event)"
+>
+</app-link-device-table>
+
+
+<!--控制对象-->
+<ng-template #controlObjectTemp let-formGroup="formGroup" let-col="col">
+  <nz-select nzShowSearch
+             nzAllowClear
+             nzPlaceHolder="{{language.picInfo.pleaseChoose}}"
+             [(ngModel)]="controlObjectName"
+             (ngModelChange)="onSelectedObjectChange($event)"
+  >
+    <nz-option *ngFor="let item of controlObjectValue"
+               [nzLabel]="item.label"
+               [nzValue]="item.code">
+    </nz-option>
+  </nz-select>
+</ng-template>

@@ -1,0 +1,59 @@
+<div class="allocation-warp">
+  <div class="allocation-title">{{language.redeployInfo}}</div>
+  <nz-tabset nzSize="large">
+    <nz-tab nzTitle="{{language.confirmOrder}}">
+      <p>{{language.confirmOrder}}</p>
+    </nz-tab>
+    <nz-tab nzTitle="{{language.eliminateWork}}">
+      <xc-table [dataSet]="eliminateData"
+                [pageBean]="eliminatePageBean"
+                [tableConfig]="eliminateTableConfig"
+                (pageChange)="eliminatePageChange($event)">
+      </xc-table>
+    </nz-tab>
+    <nz-tab nzTitle="{{language.trouble}}">
+      <xc-table [dataSet]="troubleData"
+                [pageBean]="troublePageBean"
+                [tableConfig]="troubleTableConfig"
+                (pageChange)="troublePageChange($event)">
+      </xc-table>
+    </nz-tab>
+  </nz-tabset>
+  <!--工单类型-->
+  <ng-template #statusTemp let-data="data">
+    <div class="hidden" title="{{data.statusName}}" [ngStyle]="data.rowStyle">
+    <span [ngClass]="data.statusClass"
+          style="margin-right: 5px;">
+    </span>
+      {{data.statusName}}
+    </div>
+  </ng-template>
+</div>
+<!--关联告警模板-->
+<ng-template #refAlarmTemp let-data="data">
+  <div (click)="showRefAlarmModal(data)" class="hidden"  class="view" >{{language.view}}</div>
+</ng-template>
+<!--关联告警modal框内容-->
+<ng-template #showAlarmTemp>
+  <app-ref-alarm [refAlarmMessage]="alarmData"></app-ref-alarm>
+</ng-template>
+<!--  故障级别 -->
+<ng-template #troubleLevelTemp let-data="data">
+  <div style="display: flex">
+    <div class="box-icon" [ngStyle]="data.style"></div>
+    <span style="margin-left: 5px">{{ data.troubleLevelName }} </span>
+  </div>
+</ng-template>
+<!--  故障来源  -->
+<ng-template #troubleSourceTemp let-data="data">
+  <div>{{ data.troubleSourceTypeName }}</div>
+</ng-template>
+<!--  故障类型  -->
+<ng-template #troubleTypeTemp let-data="data">
+  <div>{{ typeStatus[data.troubleType] }}</div>
+</ng-template>
+<!--  处理状态  -->
+<ng-template #handleStatusTemp let-data="data">
+  <div>{{ data.handleStatusName }}</div>
+</ng-template>
+

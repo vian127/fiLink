@@ -1,0 +1,13 @@
+<div class="photo-info" [ngStyle]="{'color': pColor}">
+  <p class="photo-info-title">{{language.picDetails}}</p>
+  <p><span class="label">{{language.picInfo.name}}</span><span class="value" [title]="picInfo.picName" >{{picInfo.picName}}</span></p>
+  <p><span class="label">{{language.picInfo.facilityName}}</span><span class="value" [title]="picInfo.deviceName">{{picInfo.deviceName}}</span></p>
+  <p><span class="label">{{language.picInfo.facilityType}}</span><span class="value" [title]="picInfo.deviceType | deviceType:deviceList">{{picInfo.deviceType | deviceType:deviceList}}</span></p>
+  <p><span class="label">{{language.picInfo.facilityNo}}</span><span class="value" [title]="picInfo.deviceCode">{{picInfo.deviceCode}}</span></p>
+  <p><span class="label">{{language.picInfo.area}}</span><span class="value" [title]="picInfo.areaName">{{picInfo.areaName}}</span></p>
+  <p><span class="label">{{language.picInfo.address}}</span><span class="value" [title]="picInfo.address">{{picInfo.address}}</span></p>
+  <p><span class="label">{{language.picInfo.picSize}}</span><span class="value" [title]="picInfo.picSize">{{picInfo.picSize}}</span></p>
+  <p><span class="label">{{language.picInfo.imgType}}</span><span class="value" [title]="picInfo.type">{{picInfo.type}}</span></p>
+  <p><span class="label">{{language.picInfo.time}}</span><span class="value" [title]="picInfo.ctime | dynamic : 'date'">{{picInfo.ctime | dynamic : 'date'}}</span></p>
+  <p><span class="label">{{language.picInfo.source}}</span><span class="value selected" (click)="linkTo()" [title]="picInfo.resourceName">{{picInfo.resourceName}}</span></p>
+</div>

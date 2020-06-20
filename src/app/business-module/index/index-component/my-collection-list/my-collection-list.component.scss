@@ -1,0 +1,75 @@
+//我的关注设施设备列表样式
+.facility-list-container {
+  background-color: white;
+  $text-margin: 0 5px;
+
+  .facility-table {
+    padding: 5px 10px 10px 10px;
+  }
+
+  .left-panel-tabs {
+    display: flex;
+    background-color: white;
+
+    .segmentation {
+      font-size: 12px;
+      margin-top: 5px;
+      color: #bcbaba;
+    }
+
+    .left-panel-border {
+      border-right: 1px solid #e0dbdb;
+    }
+
+    .left-panel-tab {
+      text-align: center;
+      line-height: 30px;
+      height: 30px;
+
+      .icon-type {
+        width: 20px;
+        height: 20px;
+        float: left;
+        margin-left: 20px;
+        color: #ff6027;
+      }
+
+      .text-content {
+        cursor: pointer;
+        float: left;
+        width: 70px;
+      }
+    }
+  }
+
+  .facility-list-title {
+    display: flex;
+    padding: 5px;
+    height: 30px;
+    align-items: center;
+
+    .text {
+      margin: $text-margin;
+      color: #ff6027;
+      flex: 1;
+    }
+
+    .facility-list-title-more {
+      cursor: pointer;
+      color: #36cfca;
+      margin: 0 5px;
+      font-size: 12px;
+    }
+
+    .batch-handle-button {
+      margin-left: 125px;
+      width: 70px;
+    }
+  }
+}
+
+//tab切换表样式
+.tab-selected {
+  color: #ff6027;
+}
+

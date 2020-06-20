@@ -1,0 +1,12 @@
+<div class="equipment-warp">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</div>
+<nz-modal [(nzVisible)]="isCamera" nzTitle="设备详情" nzWidth="500" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <app-camera-details></app-camera-details>
+</nz-modal>
+
+

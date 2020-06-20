@@ -1,0 +1,65 @@
+<div class="box-warp">
+  <div>
+    <span class="pageTitle">
+      {{ pageTitle }}
+    </span>
+  </div>
+  <div style="padding-bottom: 60px;">
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+    <div style="padding-left: 20px">
+<!--      [disabled]="!formStatus.getValid()"-->
+      <button class="link-button" nz-button nzType="primary"
+              style="margin-right: 20px" (click)="submit()" [disabled]="!formStatus.getValid()">{{language.okText}}
+      </button>
+      <button class="link-button" nz-button nzType="danger" (click)="cancel()">{{language.cancelText}}</button>
+    </div>
+  </div>
+  <!-- 故障设备 -->
+  <ng-template #equipmentTemp let-formGroup="formGroup" let-col="col">
+    <app-trouble-equipment [troubleObjectConfig]="troubleObjectConfig"></app-trouble-equipment>
+  </ng-template>
+
+  <!-- 故障设施 -->
+  <ng-template #facilityTemp let-filterValue="filterValue">
+    <app-trouble-facility [troubleFacilityConfig]="troubleFacilityConfig" [filterValue]="filterValue"></app-trouble-facility>
+  </ng-template>
+
+<!--  状态-->
+  <ng-template #troubleStatusTemp let-data="data">
+    <div style="display: flex">
+      <div class="box-icon" [ngStyle]="data.style"></div>
+<!--      <span style="margin-left: 5px">{{ data.troubleStatus }} </span>-->
+    </div>
+  </ng-template>
+  <!--发生时间-->
+  <ng-template #happenDate let-formGroup="formGroup" let-col="col">
+    <form [formGroup]="formGroup">
+      <nz-date-picker [nzDisabledDate]="disabledDate" nzShowTime formControlName="happenDate"></nz-date-picker>
+    </form>
+  </ng-template>
+
+  <!-- 责任单位 -->
+  <ng-template #department let-formGroup="formGroup" let-col="col">
+    <div>
+      <span class="area-name" [title]="areaName">{{areaName}}</span>
+      <button type="button" class="open-button"
+              (click)="showAreaSelectorModal()"><i
+        class="icon-fiLink fiLink-search-index iconfont"></i></button>
+    </div>
+  </ng-template>
+
+  <!--单位选择器-->
+  <xc-tree-area-selector
+    [(xcVisible)]="areaSelectVisible"
+    [treeSelectorConfig]="areaSelectorConfig"
+    [canClear]="false"
+    (selectDataChange)="areaSelectChange($event)"
+  >
+  </xc-tree-area-selector>
+</div>
+<nz-spin [nzSimple]="true"
+         *ngIf="ifSpin"
+         style="position: absolute; top: 400px; left: 50%; z-index: 999;"
+         [nzSpinning]="true"
+         [nzSize]="'large'"
+></nz-spin>

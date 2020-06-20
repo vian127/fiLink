@@ -1,0 +1,116 @@
+<!--设施设备类型-->
+<div class="facility-equipment-type-panel">
+  <!--设施设备类型选择-->
+  <div class="left-panel-tabs">
+
+    <div class="left-panel-tab" *ngIf="facilityEquipmentConfig.showFacilitiesComponent"
+         [ngClass]="{'tab-selected': isExpandFacilityEquipment}"
+         (click)="tabClick(facilityEquipmentType.facilityTypeTitle)">
+      <div class="text-content"
+           title="{{facilityEquipmentConfig.facilityTitleName}}">{{facilityEquipmentConfig.facilityTitleName}}</div>
+    </div>
+    <div class="segmentation"
+         *ngIf="facilityEquipmentConfig.showFacilitiesComponent && facilityEquipmentConfig.showEquipmentComponent">|
+    </div>
+    <div class="left-panel-tab" *ngIf="facilityEquipmentConfig.showEquipmentComponent"
+         [ngClass]="{'tab-selected': !isExpandFacilityEquipment}"
+         (click)="tabClick(facilityEquipmentType.equipmentTypeTitle)">
+      <div class="text-content"
+           title="{{facilityEquipmentConfig.equipmentTitleName}}">{{facilityEquipmentConfig.equipmentTitleName}}</div>
+    </div>
+
+    <div class="left-panel-tab" *ngIf="facilityEquipmentConfig.showWorkOrderStatusComponent">
+      <div class="text-content-order"
+           title="{{facilityEquipmentConfig.workOrderStatusTitleName}}">{{facilityEquipmentConfig.workOrderStatusTitleName}}</div>
+    </div>
+
+    <div class="left-panel-tab" *ngIf="facilityEquipmentConfig.showWorkOrderTypeComponent">
+      <div class="text-content-order"
+           title="{{facilityEquipmentConfig.workOrderTypeTitleName}}">{{facilityEquipmentConfig.workOrderTypeTitleName}}</div>
+    </div>
+  </div>
+
+  <!--设施类型checkbox-->
+  <div class="facility-equipment-type-checkbox" *ngIf="facilityEquipmentConfig.showFacilitiesComponent"
+       [hidden]="!isExpandFacilityEquipment">
+    <div class="checkbox-container">
+      <div class="checkbox">
+        <label nz-checkbox [(ngModel)]="isFacilityTypeAllChecked" (ngModelChange)="facilityTypeChange($event)">
+        </label>
+        <div class="text">{{indexLanguage.allCheck}}</div>
+        <div class="text">{{FacilityCheckNum}}</div>
+      </div>
+      <ng-container *ngFor="let type of setFacilityData">
+        <div class="checkbox">
+          <label nz-checkbox [(ngModel)]="type.checked"
+                 (ngModelChange)="facilityTypeChange($event, type.deviceType)">
+          </label>
+          <div class="text">{{facilityEnum[type.deviceType]}}</div>
+          <div class="text">{{type.count}}</div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!--设备类型checkbox-->
+  <div class="facility-equipment-type-checkbox" *ngIf="facilityEquipmentConfig.showEquipmentComponent"
+       [hidden]="isExpandFacilityEquipment">
+    <div class="tab-container">
+      <div class="checkbox-container">
+        <div class="checkbox">
+          <label nz-checkbox [(ngModel)]="isEquipmentTypeAllChecked" (ngModelChange)="equipmentTypeChange($event)">
+          </label>
+          <div class="text">{{indexLanguage.allCheck}}</div>
+          <div class="text">{{EquipmentCheckNum}}</div>
+        </div>
+        <ng-container *ngFor="let type of setEquipmentData">
+          <div class="checkbox">
+            <label nz-checkbox [(ngModel)]="type.checked"
+                   (ngModelChange)="equipmentTypeChange($event, type.equipmentType)">
+            </label>
+            <div class="text">{{equipmentEnum[type.equipmentType]}}</div>
+            <div class="text">{{type.count}}</div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <!--工单状态checkbox-->
+  <div class="facility-equipment-type-checkbox" *ngIf="facilityEquipmentConfig.workOrderStatusTitleName">
+    <div class="checkbox-container">
+      <div class="checkbox">
+        <label nz-checkbox [(ngModel)]="isWorkOrderStatusAllChecked" (ngModelChange)="workOrderStatusChange($event)">
+        </label>
+        <div class="text">{{indexLanguage.allCheck}}</div>
+        <div class="text">{{FacilityCheckNum}}</div>
+      </div>
+      <ng-container *ngFor="let type of setWorkOrderStatusData">
+        <div class="checkbox">
+          <label nz-checkbox [(ngModel)]="type.checked"
+                 (ngModelChange)="workOrderStatusChange($event, type.procType)">
+          </label>
+          <div class="text">{{workOrderStatusEnum[type.procType]}}</div>
+          <div class="text">{{type.count}}</div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <!--工单类型-->
+  <div class="app-order-state-radio" *ngIf="facilityEquipmentConfig.showWorkOrderTypeComponent">
+    <div class="order-state-type-radio">
+      <nz-radio-group [(ngModel)]="orderTypeRadioValue" class="radio-container"
+                      (ngModelChange)="workOrderTypeChange($event)">
+        <ng-container *ngFor="let type of setWorkOrderData">
+          <div class="radio">
+            <label class="radio-content" nz-radio [nzValue]="type.procType"></label>
+            <div class="radio-text">{{workOrderTypeEnum[type.procType]}}</div>
+            <div class="radio-text">{{type.count}}</div>
+          </div>
+        </ng-container>
+      </nz-radio-group>
+    </div>
+  </div>
+
+</div>
+
+

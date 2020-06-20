@@ -1,0 +1,71 @@
+<div class="lighting-details">
+  <div>
+    <app-steps-details
+      [lightingData]="releaseData"
+      [isOperation]="isOperation"
+      (downNotify)="handleDown()"
+      (editNotify)="handEdit()"
+      (deleteNotify)="handDelete()">
+    </app-steps-details>
+  </div>
+  <div class="details">
+    <h3>策略详情</h3>
+    <div class="details-content">
+      <div class="content-list">
+        <div class="volume-adjust" *ngIf="middleData.strategyPlayPeriodRefList.length && middleData.instructInfo">
+          <span>
+            <span style="margin-right: 20px">播放时段:</span>
+            <span>{{timeFmt(middleData.strategyPlayPeriodRefList)}}</span>
+          </span>
+          <span>
+            <span style="margin-right: 20px">音量:</span>
+            <span>{{middleData.instructInfo.volume}}</span>
+          </span>
+        </div>
+        <div class="brightness-adjust">
+          <span>
+            <span style="margin-right: 20px">循环模式:</span>
+            <span>{{middleData.instructInfo.playType}}</span>
+          </span>
+          <span>
+            <span style="margin-right: 20px">亮度:</span>
+            <span>{{middleData.instructInfo.light}}</span>
+          </span>
+        </div>
+      </div>
+      <nz-table #smallTable nzBordered [nzData]="data" style="width: 100%;padding: 15px">
+        <thead>
+        <tr>
+          <th>序号</th>
+          <th>节目名称</th>
+          <th>节目用途</th>
+          <th>时长</th>
+          <th>格式</th>
+          <th>分辨率</th>
+          <th>节目文件
+          <th>
+        </tr>
+        </thead>
+        <tbody *ngIf="middleData && middleData.strategyProgRelationList">
+        <tr *ngFor="let item of middleData.strategyProgRelationList">
+          <td>{{ item.playTime }}</td>
+          <td>{{ item.playTime }}</td>
+          <td>{{ item.playTime }}</td>
+          <td>{{ item.playTime }}</td>
+          <td>{{ item.playTime }}</td>
+          <td>{{ item.playTime }}</td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>
+
+<nz-modal
+  [(nzVisible)]="isStrategy"
+  nzTitle="删除策略"
+  nzWidth="500"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()">
+  <p>是否确定删除?</p>
+</nz-modal>

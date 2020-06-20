@@ -1,0 +1,109 @@
+<div class="user-detail">
+  <div>
+    <span class="pageTitle">
+      {{pageTitle}}
+    </span>
+  </div>
+  <div>
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+    <div style="padding-left: 20px;padding-top:40px; padding-bottom:10px;">
+      <button class="link-button" nz-button nzType="primary" style="margin-right: 20px" (click)="submit()" [nzLoading]="isLoading" [disabled]="!formStatus.getValid()">{{language.confirm}}</button>
+      <button class="link-button" nz-button nzType="danger" (click)="goBack()">{{language.cancel}}</button>
+    </div>
+  </div>
+</div>
+<!-- 权限生效时间 -->
+<ng-template #effectiveTimeTemp let-data="data">
+  <nz-date-picker
+      nzShowTime
+      [(ngModel)]="authEffectiveTime"
+      nzPlaceHolder=""
+      (ngModelChange)="effectiveOnChange($event)"
+      (nzOnOk)="effectiveOnOk($event)"
+    ></nz-date-picker>
+</ng-template>
+<!-- 权限失效时间 -->
+<ng-template #expirationTimeTemp let-data="data">
+  <nz-date-picker
+  nzShowTime
+  [(ngModel)]="authExpirationTime"
+  nzPlaceHolder=""
+  (ngModelChange)="expirationOnChange($event)"
+  (nzOnOk)="expirationOnOk($event)"
+></nz-date-picker>
+</ng-template>
+
+<!-- 被授权用户 -->
+<ng-template #userTemp let-formGroup="formGroup" let-col="col">
+  <div>
+    <span class="area-name" [title]="selectUserName">{{selectUserName}}</span>
+    <button type="button" class="open-button" (click)="showUserListModal()">
+      <i  class="icon-fiLink fiLink-search-index iconfont"></i></button>
+  </div>
+</ng-template>
+<ng-template #userListTemp>
+  <div style="margin-top: -35px;">
+    <xc-table #xCTableComp
+              [dataSet]="userDataSet"
+              [pageBean]="userPageBean"
+              [tableConfig]="userTableConfig"
+              (pageChange)="userPageChange($event)">
+    </xc-table>
+  </div>
+</ng-template>
+
+
+<!-- 统一授权范围 -->
+<ng-template #authRangeTemp let-formGroup="formGroup" let-col="col">
+  <form [formGroup]="formGroup">
+    <button type="button" class="buttonStyle"  nz-button (click)="showFacilityListModal()">
+      <i class="icon-fiLink-l iconfont fiLink-authority"></i>
+      <span style="vertical-align: middle;margin-left: 5px">{{language.unifiedScopeAuthority}}</span>
+    </button>
+  </form>
+</ng-template>
+<ng-template #facilityListTemp>
+  <div style="margin-top: -35px;">
+    <xc-table #authXcTableComp
+              [dataSet]="facilityDataSet"
+              [pageBean]="facilityPageBean"
+              [tableConfig]="facilityTableConfig"
+              (pageChange)="facilityPageChange($event)">
+    </xc-table>
+  </div>
+</ng-template>
+
+<ng-template #deviceStatusTemp let-data="data">
+  <div class="area-level">
+    <i [class]="'icon-fiLink-l iconfont '+data['deviceStatusIconClass']+' '+data['deviceStatusColorClass']"
+    ></i>
+    <span class="status-text" [title]="data['deviceStatus']">{{data['deviceStatus']}}</span>
+  </div>
+</ng-template>
+<ng-template #deviceTypeTemp let-data="data">
+  <i [ngClass]="data['iconClass']" class="device-type-icon"></i>
+  <span class="status-text" [title]="data['deviceType']">{{data['deviceType']}}</span>
+</ng-template>
+
+<!-- 门锁 -->
+<ng-template #thTemplate>
+  <p style="text-align: center;border-bottom: 1px solid #ccc">{{language.doorLock}}</p>
+  <span class="door">{{language.one}}</span>
+  <span class="door">{{language.two}}</span>
+  <span class="door">{{language.three}}</span>
+  <span class="door">{{language.four}}</span>
+</ng-template>
+
+<ng-template #doorLocksTemp let-data="data">
+    <div *ngFor="let item of data._lockList">
+        <label nz-checkbox [(ngModel)]="item.checked" [title]="item.value" style="float: left;" class="labelStyle" (click)="checkOptions(item)" (ngModelChange)="checkOptionChange(item)">{{item.label}}</label>
+    </div>
+</ng-template>
+
+<!-- 用户单选框 -->
+<ng-template #radioTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedUserId" (ngModelChange)="selectedUserChange($event, data)">
+    <label nz-radio [nzValue]="data.id"></label>
+  </nz-radio-group>
+</ng-template>
+

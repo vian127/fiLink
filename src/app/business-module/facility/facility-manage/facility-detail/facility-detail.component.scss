@@ -1,0 +1,68 @@
+.area-detail-title {
+  border-left: 2px solid #7cb0dd;
+  padding-left: 18px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.facility-detail {
+  padding: 10px;
+}
+
+.address-p {
+  color: #36cfc9;
+  padding: 0 10px;
+
+  &:hover {
+    border-color: #36cfc9;
+  }
+
+  span {
+    vertical-align: middle;
+    margin-left: 5px
+  }
+}
+
+.area-name {
+  display: inline-block;
+  width: 50%;
+  border: 1px solid #ccc;
+  height: 32px;
+  padding: 4px 11px;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.open-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #ffffff;
+}
+
+.open-button[disabled] {
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.25);
+  background-color: #f5f5f5;
+  border-color: #d9d9d9;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.25);
+  background-color: #f5f5f5;
+  border-color: #d9d9d9;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.city-input {
+  width: 31%;
+}

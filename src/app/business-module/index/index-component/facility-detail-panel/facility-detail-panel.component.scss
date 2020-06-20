@@ -1,0 +1,585 @@
+.facility-detail-panel-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-height: calc(100vh - 175px);
+  font-size: 12px;
+  padding: 0 15px;
+
+  .heartbeat-info-more {
+    cursor: pointer;
+    color: #36cfca;
+  }
+
+  .bottom-distance {
+    margin-bottom: 5px;
+  }
+
+
+  // 设施设备详情
+  .detail {
+    .detail-top {
+      display: flex;
+
+      .info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        .title {
+          display: flex;
+          height: 30px;
+          flex: 1;
+          align-items: center;
+
+          .facility-type-and-name {
+            font-size: 15px;
+            word-break: break-all;
+            width: 200px;
+          }
+        }
+
+        .facility-status {
+          @extend .item;
+
+          .facility-type-icon {
+            width: 16px;
+            height: 20px;
+            margin-right: 3px;
+            //background: url("../../../../assets/img/index/icon-test.png") no-repeat center;
+            background: no-repeat center;
+            background-size: 100% 100%;
+          }
+
+          .online-status {
+            margin-right: 10px;
+
+            .icon {
+              @extend .icon-size;
+              @extend .icon-online;
+              margin-right: 3px;
+            }
+          }
+
+          .facility-status-text {
+            padding: 0 9px;
+            color: white;
+            margin-right: 10px;
+            border-radius: 2px;
+          }
+
+          .deploy-status {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .icon {
+              margin-right: 3px;
+            }
+          }
+        }
+
+        .facility-number {
+          @extend .item;
+
+          .facility-number-title {
+            width: 100px;
+            color: #b3b3b3;
+          }
+        }
+      }
+
+      .pic {
+        width: 130px;
+        height: 85px;
+        position: relative;
+        background-color: #eee;
+        cursor: pointer;
+
+        .collection {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          height: 20px;
+          width: 20px;
+          font-size: 20px;
+          cursor: pointer;
+        }
+
+        .info-img {
+          height: 100%;
+          display: inline-block;
+          width: 100%;
+        }
+      }
+    }
+
+    .detail-bottom {
+      .detail-bottom-item {
+        @extend .item;
+
+        .detail-bottom-item-title {
+          width: 100px;
+          color: #b3b3b3;
+        }
+
+        .detail-bottom-item-value {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  // 监控信息
+
+  .monitor-info {
+    margin-top: 20px;
+
+    .monitor-info-title {
+      display: flex;
+      margin-bottom: 3px;
+
+      .line {
+        flex: 1;
+        margin-left: 5px;
+        border-bottom: 1px solid #e8e8e8;
+      }
+    }
+
+    .monitor-info-list {
+      display: flex;
+      flex-wrap: wrap;
+
+      height: 110px;
+      overflow-y: scroll;
+
+      .monitor-info-item {
+        width: 50%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+
+        .monitor-info-title {
+          width: 100px;
+          color: #b3b3b3;
+        }
+
+        .monitor-info-icon {
+          @extend .icon-size;
+        }
+
+        .monitor-info-text {
+          flex: 1;
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+
+  // 设备信息
+  .facility-info {
+    margin-top: 20px;
+
+    .facility-info-title {
+      display: flex;
+      margin-bottom: 3px;
+
+      .line {
+        flex: 1;
+        margin-left: 5px;
+        border-bottom: 1px solid #e8e8e8;
+
+        .line-tabs {
+          flex: 1;
+          display: flex;
+          position: absolute;
+          right: 10px;
+
+          .line-tab {
+            text-align: center;
+
+            .text-content {
+              cursor: pointer;
+              float: left;
+              width: 60px;
+            }
+          }
+        }
+      }
+    }
+
+    .facility-info-list {
+      display: flex;
+      flex-wrap: wrap;
+
+      .facility-info-item {
+        width: 20%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+
+        .facility-info-title {
+          width: 30px;
+          color: #b3b3b3;
+        }
+
+        .facility-info-icon {
+          color: #fff;
+          background: no-repeat center #4fc5ea;;
+          background-size: 100% 100%;
+          cursor: default;
+          width: 24px;
+          height: 24px;
+          text-align: center;
+        }
+
+        .facility-info-text {
+          flex: 1;
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+
+  // 设备操作
+  .options-type {
+    margin-top: 20px;
+
+    .title-text {
+      display: flex;
+      margin-bottom: 3px;
+
+      .line {
+        flex: 1;
+        margin-left: 5px;
+        border-bottom: 1px solid #e8e8e8;
+      }
+    }
+
+    .options-title {
+      margin-top: 15px;
+      width: 100%;
+
+      .button-title {
+        margin-right: 10px;
+        width: 100px;
+      }
+    }
+
+    .options-tiltle {
+      margin-top: 10px;
+
+      .options-name {
+        margin-top: 10px;
+      }
+    }
+
+
+  }
+
+
+  .energy-statistics {
+    margin-top: 20px;
+
+    .energy-statistics-title {
+      display: flex;
+      margin-bottom: 3px;
+
+      .line {
+        flex: 1;
+        margin-left: 5px;
+        border-bottom: 1px solid #e8e8e8;
+
+        .line-tabs {
+          flex: 1;
+          display: flex;
+          position: absolute;
+          right: 10px;
+
+          .line-tab {
+            text-align: center;
+
+            .text-content {
+              cursor: pointer;
+              float: left;
+              width: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    .energy-statistics-content {
+      height: 200px;
+      border-bottom: 1px solid #e8e8e8;
+
+      .padding-t {
+        padding-top: 35px;
+      }
+
+      .chart-style {
+        height: 200px;
+      }
+    }
+  }
+
+  .lock-status {
+    margin-top: 20px;
+
+    .lock-status-title-name {
+      display: flex;
+      margin-bottom: 3px;
+
+      .line {
+        flex: 1;
+        margin-left: 5px;
+        border-bottom: 1px solid #e8e8e8;
+      }
+    }
+
+    .lock-status-list {
+      display: flex;
+      flex-wrap: wrap;
+
+      .lock-status-item {
+        width: 50%;
+        display: flex;
+        height: 30px;
+        align-items: center;
+
+        .lock-status-title {
+          width: 97px;
+          color: #b3b3b3;
+        }
+
+        .lock-status-icon {
+          @extend .icon-size;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .lock-info {
+    margin-top: 20px;
+
+    .lock-info-title-name {
+      display: flex;
+      margin-bottom: 3px;
+
+      .line {
+        flex: 1;
+        margin-left: 5px;
+        border-bottom: 1px solid #e8e8e8;
+      }
+    }
+
+    .facility-item {
+      width: 50%;
+      display: flex;
+      float: left;
+      padding-top: 5px;
+
+      .label {
+        color: #b3b3b3;
+        max-width: 85px;
+        min-width: 60px;
+      }
+
+      .value {
+        text-align: left;
+      }
+
+      .more {
+        width: 100%;
+        cursor: pointer;
+        color: #36cfca;
+        float: right;
+        text-align: right;
+      }
+    }
+  }
+
+  .heartbeat-info {
+    display: flex;
+    height: 30px;
+    align-items: center;
+    padding: 30px 0;
+
+    .heartbeat-info-icon {
+      width: 20px;
+      height: 20px;
+      background-size: 100% 100%;
+      @extend .icon-heartbeat;
+    }
+
+    .heartbeat-info-time {
+      padding-left: 10px;
+      flex: 1;
+    }
+
+  }
+
+  .smartTag {
+    margin-top: 20px;
+
+    .smart-tag-title-name {
+      display: flex;
+      margin-bottom: 3px;
+
+      .line {
+        flex: 1;
+        margin-left: 5px;
+        border-bottom: 1px solid #e8e8e8;
+      }
+    }
+
+    .facility-item {
+      width: 50%;
+      display: flex;
+      float: left;
+      padding-top: 5px;
+
+      .label {
+        color: #b3b3b3;
+        max-width: 85px;
+        min-width: 60px;
+      }
+
+      .value {
+        text-align: left;
+      }
+
+      .more {
+        width: 100%;
+        cursor: pointer;
+        color: #36cfca;
+        float: right;
+        text-align: right;
+      }
+
+    }
+  }
+
+  .portCountChat, .portStatusChat {
+    margin-top: 10px;
+
+    .port-count-title-name {
+      display: flex;
+      margin-bottom: 3px;
+
+      .line {
+        flex: 1;
+        margin-left: 5px;
+        border-bottom: 1px solid #e8e8e8;
+      }
+    }
+  }
+
+  .icon-size {
+    cursor: default;
+    background-size: 100% 100%;
+    width: 20px;
+    height: 20px;
+  }
+
+  .item {
+    display: flex;
+    height: 24px;
+    align-items: center;
+  }
+
+  .m-right {
+    margin-right: 10px;
+  }
+
+  .w-all {
+    width: 100% !important;
+  }
+
+  .chat-height {
+    height: 200px
+  }
+
+  .nz-select-style {
+    width: 120px;
+    margin-top: -10px;
+    float: right;
+    font-size: 12px;
+  }
+
+  // 在线
+  .icon-online {
+    background: url("../../../../../assets/img/index/icon-online.png") no-repeat center;
+  }
+
+  // 离线
+  .icon-offline {
+    background: url("../../../../../assets/img/index/icon-offline.png") no-repeat center;
+  }
+
+  // 布防
+  .icon-vector-object {
+    background: url("../../../../../assets/img/index/icon-vector-object.png") no-repeat center;
+  }
+
+  // 未布防
+  .icon-vector-object-u {
+    background: url("../../../../../assets/img/index/icon-vector-object-u.png") no-repeat center;
+  }
+
+  // 收藏
+  .icon-collection {
+    background: url("../../../../../assets/img/index/icon-collection.png") no-repeat center;
+  }
+
+  // 已收藏
+  .icon-collection-o {
+    background: url("../../../../../assets/img/index/icon-collection-o.png") no-repeat center;
+  }
+
+  // 充电（太阳能板）
+  .icon-charging {
+    background: url("../../../../../assets/img/index/icon-charging.gif") no-repeat center;
+  }
+
+  // 放电（太阳能板）
+  .icon-discharge {
+    background: url("../../../../../assets/img/index/icon-discharging.gif") no-repeat center;
+  }
+
+  // 门正常
+  .icon-door-normal {
+    background: url("../../../../../assets/img/index/icon-door-normal.png") no-repeat center;
+  }
+
+  // 门异常
+  .icon-door-opening {
+    background: url("../../../../../assets/img/index/icon-door-opening.gif") no-repeat center;
+  }
+
+  // 锁正常
+  .icon-lock-normal {
+    cursor: pointer !important;
+    background: url("../../../../../assets/img/index/icon-lock-normal.png") no-repeat center;
+  }
+
+  // 锁异常
+  .icon-lock-opening {
+    background: url("../../../../../assets/img/index/icon-lock-opening.gif") no-repeat center;
+  }
+
+  // 锁失效
+  .icon-lock-invalid {
+    background: url("../../../../../assets/img/index/icon-lock-invalid.png") no-repeat center;
+  }
+
+  // 心跳
+  .icon-heartbeat {
+    background: url("../../../../../assets/img/index/icon-heart.png") no-repeat center;
+  }
+}
+
+.tab-selected {
+  color: #13c2c2;
+}

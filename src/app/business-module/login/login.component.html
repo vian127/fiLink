@@ -1,0 +1,57 @@
+<!--登录页组件-->
+<div class="login-container">
+  <div class="login">
+    <div class="login-form">
+      <div class="login-form-left">
+        <img alt="{{language.agreement.loginImage}}" src="../../../assets/img/login/earth.png">
+      </div>
+      <div class="login-form-right">
+        <div class="login-tab" >
+          <div>{{loginTitle}}</div>
+          <img (click)="changeAutoLoginType()" *ngIf="autoLoginType" alt="{{language.agreement.mobileLogin}}"
+               src="../../../assets/img/login/icon_login_phone.png">
+          <img (click)="changeAutoLoginType()" *ngIf="!autoLoginType" alt="{{language.agreement.userLogin}}"
+               src="../../../assets/img/login/icon_login_user.png">
+        </div>
+        <div class="login-title">
+          <img src="../../../assets/img/login/icon_log_rec.svg">
+          <i class="fiLink-FiLink iconfont"></i>
+        </div>
+        <div class="login-user">
+          <app-user-login [hidden]="!autoLoginType"></app-user-login>
+          <app-phone-login [hidden]="autoLoginType"></app-phone-login>
+          <span (click)="showModal()" *ngIf="showBtn" class="show-btn">{{language.agreement.uploadCertificate}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="login-footer">
+    <p>copyright &copy; 2019 {{language.agreement.fiberHome}} All rights Reserved</p>
+  </div>
+</div>
+<nz-modal [(nzVisible)]="isVisible"
+          [nzMaskClosable]="false"
+          [nzFooter]="tplFooter"
+          [nzTitle]="title"
+          (nzOnCancel)="modalCancel()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>{{language.agreement.fileName}}</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input *ngIf="isVisible" type="file" style="display: none" id="file" (change)="fileChange($event)">
+      <p *ngIf="fileName" [title]="fileName"
+         style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden; float: left">{{fileName}}</p>
+      <button style="margin-left: 10px" nz-button (click)="upload()" type="button">
+        <i nz-icon type="upload"></i><span>{{language.agreement.uploadALicenseFile}}</span>
+      </button>
+
+    </nz-form-control>
+  </nz-form-item>
+
+</nz-modal>
+<!--弹出框底部-->
+<ng-template #tplFooter>
+  <button class="link-button" [nzLoading]="submitLoading" nz-button nzType="primary" (click)="submit()">
+    {{language.table.okText}}
+  </button>
+  <button class="link-button" nz-button nzType="danger" (click)="modalCancel()">{{language.table.cancelText}}</button>
+</ng-template>

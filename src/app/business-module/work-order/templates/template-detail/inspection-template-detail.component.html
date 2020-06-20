@@ -1,0 +1,61 @@
+<div class="in-container">
+  <div>
+    <span class="area-detail-title">
+      {{pageTitle}}
+    </span>
+  </div>
+  <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+  <div class="pl20">
+    <button class="link-button mr20" nz-button nzType="primary"
+            [nzLoading]="isLoading"
+            [disabled]="!confirmButtonIsGray()"
+            (click)="saveData()">{{InspectionLanguage.handleOk}}
+    </button>
+    <button class="link-button" nz-button nzType="danger"
+            (click)="goBack()">{{InspectionLanguage.handleCancel}}</button>
+  </div>
+  <ng-template #tempTable>
+    <nz-table #editRowTable nzBordered [nzData]="listOfData" [nzShowPagination]="false" style="width: 450px;">
+      <thead>
+        <tr>
+          <th nzWidth="12%">{{InspectionLanguage.number}}</th>
+          <th nzWidth="35%">{{InspectionLanguage.inspectionItem}}</th>
+          <th nzWidth="40%">{{InspectionLanguage.remark}}</th>
+          <th>{{InspectionLanguage.operate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of editRowTable.data; let i = index;" class="editable-row">
+        <td>{{i + 1}}</td>
+        <td>
+          <div class="editable-cell" *ngIf="editId !== data.templateId; else editName">
+            <div class="editable-cell-value-wrap" (click)="startEdit(data.templateId, $event)">
+              {{ data.templateItemName }}
+            </div>
+          </div>
+          <ng-template #editName>
+            <input type="text" nz-input [(ngModel)]="data.templateItemName" />
+          </ng-template>
+        </td>
+        <td>
+          <div class="editable-cell" *ngIf="editId !== data.templateId; else editRemark">
+            <div class="editable-cell-value-wrap" (click)="startEdit(data.templateId, $event)">
+              {{ data.remark }}
+            </div>
+          </div>
+          <ng-template #editRemark>
+            <input type="text" nz-input [(ngModel)]="data.remark" />
+          </ng-template>
+        </td>
+        <td>
+          <a class="temp-delete" nz-tooltip [nzTitle]="data.option" (click)="deleteRow(data.id)">
+            <i class="icon-fiLink iconfont fiLink-delete red-icon"></i>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+    <div class="lineAdd" (click)="addRow()" [ngClass]="addBtnClass?'':'addBtnClass'">+ {{InspectionLanguage.addOption}}</div>
+  </ng-template>
+
+</div>

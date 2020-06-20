@@ -1,0 +1,29 @@
+<div class="in-container">
+  <!--  标题-->
+  <div>
+    <span class="area-detail-title">
+      {{pageTitle}}
+    </span>
+  </div>
+  <!--  表单-->
+  <xc-form [column]="formColumn"
+           (formInstance)="formInstance($event)">
+  </xc-form>
+
+  <!--  文件上传模板-->
+  <ng-template #upload>
+    <button (click)="onUploadClick()">上传文件</button>
+  </ng-template>
+
+  <!--按钮-->
+  <div style="padding-left: 20px">
+    <button class="link-button" nz-button nzType="primary" style="margin-right: 20px"
+            [nzLoading]="isLoading"
+            (click)="onConfirm()"
+            [disabled]="false">确认
+    </button>
+    <button class="link-button" nz-button nzType="danger" (click)="onCancel()">取消</button>
+  </div>
+</div>
+
+

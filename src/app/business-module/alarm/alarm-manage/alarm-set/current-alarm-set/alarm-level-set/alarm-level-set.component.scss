@@ -1,0 +1,57 @@
+.alarm-level {
+  display: inline-block;
+  text-align: center;
+  width: 32px;
+  height: 20px;
+  color: #333;
+}
+
+.alarm-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  font-family: 'Microsoft YaHei', sans-serif;
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+
+
+.box-warp {
+  padding: 0px 10px 10px 10px;
+}
+
+.box-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  align-self: center;
+}
+
+.alarm-red {
+  background: #e61017
+}
+
+.alarm-orange {
+  background: #ff6600;
+}
+
+.alarm-yellow {
+  background: #f1c620;
+}
+
+.alarm-blue {
+  background: #58c1f0
+}
+
+.alarm-green {
+  background: #0bda0b;
+}
+
+.alarm-byellow {
+  background: #ffea01;
+}
+
+.alarm-deepblue {
+  background: #0068b7;
+}

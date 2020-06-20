@@ -1,0 +1,83 @@
+<div class="box-warp">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</div>
+
+<ng-template #alarmLevelTemp let-data="data">
+  <div *ngIf="data.alarmLevelCode === '1'" style="display: flex"><span style="margin-left: 5px">{{language.urgent}}</span></div>
+  <div *ngIf="data.alarmLevelCode === '2'" style="display: flex"><span style="margin-left: 5px">{{language.main}}</span></div>
+  <div *ngIf="data.alarmLevelCode === '3'" style="display: flex"><span style="margin-left: 5px">{{language.secondary}}</span></div>
+  <div *ngIf="data.alarmLevelCode === '4'" style="display: flex"><span style="margin-left: 5px">{{language.prompt}}</span></div>
+</ng-template>
+
+<ng-template #alarmColorTemp let-data="data">
+  <div *ngIf="data.alarmLevelColor === '111'"><div class="box-icon alarm-red"></div><span style="margin-left: 5px">{{language.red}}</span></div>
+  <div *ngIf="data.alarmLevelColor === '222'"><div class="box-icon alarm-orange"></div><span style="margin-left: 5px">{{language.orange}}</span></div>
+  <div *ngIf="data.alarmLevelColor === '333'"><div class="box-icon alarm-yellow"></div><span style="margin-left: 5px">{{language.yellow}}</span></div>
+  <div *ngIf="data.alarmLevelColor === '444'"><div class="box-icon alarm-blue"></div><span style="margin-left: 5px">{{language.blue}}</span></div>
+  <div *ngIf="data.alarmLevelColor === '555'"><div class="box-icon alarm-byellow"></div><span style="margin-left: 5px">{{language.brightYellow}}</span></div>
+  <div *ngIf="data.alarmLevelColor === '666'"><div class="box-icon alarm-deepblue"></div><span style="margin-left: 5px">{{language.deepBlue}}</span></div>
+  <div *ngIf="data.alarmLevelColor === '777'"><div class="box-icon alarm-green"></div><span style="margin-left: 5px">{{language.green}}</span></div>
+</ng-template>
+
+<ng-template #isPlayTemp let-data="data">
+  <div *ngIf="data.isPlay ===1">{{language.yes}}</div>
+  <div *ngIf="data.isPlay ===0">{{language.no}}</div>
+</ng-template>
+
+<!-- 编辑告警设置 -->
+<nz-modal [(nzVisible)]="isVisible"
+          [nzTitle]="modalTitle"
+          [nzContent]="modalContent"
+          [nzMaskClosable]="false"
+          [nzFooter]="modalFooter"
+          (nzOnCancel)="editHandleCancel()">
+  <ng-template #modalTitle>
+    {{language.editAlarmLevel}}
+  </ng-template>
+  <ng-template #modalContent>
+    <xc-form [column]="tableColumnEdit" (formInstance)="formInstance($event)"></xc-form>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="editHandle()" [nzLoading]="isLoading" class="link-button" [disabled]="isDisabled()">{{language.okText}}</button>
+    <button nz-button nzType="danger" (click)="editHandleCancel()" class="link-button">{{language.cancelText}}</button>
+  </ng-template>
+</nz-modal>
+
+<!-- 音乐开关 -->
+<ng-template #musicSwitchTemp let-data="data">
+  <div style="display: flex">
+    <i style="align-self: center" class="icon icon_alarm_play" (click)="playMusic(data)"></i>
+    <span style="margin-left: 8px">{{data.alarmLevelSound}}</span>
+  </div>
+</ng-template>
+
+<!-- 播放次数 -->
+<ng-template #playCountTemp let-formGroup="formGroup" let-col="col">
+  <div style="display: flex">
+    <input nz-input  nzSize="default" [(ngModel)]="countValue" (keyup)="onKey($event)" oninput="value=value.replace(/^[1-5]\d*$/g,'')" maxlength="1">
+    <span style="margin-left: 6px" (click)="plus()"><i style="align-self: center" class="icon icon_plus"></i></span>
+    <span style="margin-left: 10px" (click)="minus()"><i style="align-self: center" class="icon icon_minus"></i></span>
+  </div>
+</ng-template>
+
+<ng-template #selectOptionsTemp let-formGroup="formGroup" let-col="col">
+  <nz-select [(ngModel)]="selectedColor">
+    <ng-container *ngFor="let option of selectOptions">
+      <nz-option nzCustomContent  [nzValue]="option.value" [nzLabel]="option.label">
+          <span class="box-color-icon"
+                style="display: inline-block;margin-right: 5px;"
+                [ngStyle]="option.style">
+          </span>
+        <span>{{option.label}}</span>
+      </nz-option>
+    </ng-container>
+  </nz-select>
+</ng-template>
+
+<!-- 音频 -->
+<audio id="music" hidden="true"></audio>
+<audio id="audio" hidden="true"></audio>

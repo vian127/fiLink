@@ -1,0 +1,38 @@
+<div>
+  <nz-tabset [nzTabPosition]="'top'" [nzSelectedIndex]="selectedIndex"
+             (nzSelectedIndexChange)="selectedIndexChange($event)">
+
+    <nz-tab [nzTitle]="indexLanguage.facilityDetailPanelTitle">
+      <ng-template nz-tab>
+        <app-facility-detail-panel #facilityDetailPanelComponent
+                                   [facilityId]="facilityId"
+                                   [facilityPowerCode]="facilityPowerCode"
+                                   [isShowBusinessPicture]="isShowBusinessPicture"
+                                   [facilityType]="facilityType"
+                                   *ngIf="isShowFacilityDetailTab">
+        </app-facility-detail-panel>
+      </ng-template>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="indexLanguage.facilityAlarmPanelTitle">
+      <ng-template nz-tab>
+        <app-facility-alarm-panel [facilityId]="facilityId"
+                                  ></app-facility-alarm-panel>
+      </ng-template>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="indexLanguage.facilityLogAndOrderPanelTitle">
+      <ng-template nz-tab>
+        <app-log-order-panel [facilityId]="facilityId"
+                             ></app-log-order-panel>
+      </ng-template>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="indexLanguage.facilityRealScenePicture">
+      <ng-template nz-tab>
+        <app-business-picture [deviceID]="facilityId" canSelectFrame="false"></app-business-picture>
+      </ng-template>
+    </nz-tab>
+
+  </nz-tabset>
+</div>

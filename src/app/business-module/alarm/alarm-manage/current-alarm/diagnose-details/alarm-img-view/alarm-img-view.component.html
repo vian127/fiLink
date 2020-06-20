@@ -1,0 +1,16 @@
+<nz-card nzTitle="{{language.alarmPic}}">
+  <div class="alarm-img-container">
+    <div  class="alarm-img-item" *ngFor="let item of alarmPicInfo">
+      <img [src]="item.picUrlBase" (click)="clickImage(item)" alt=""/>
+      <div class="info-item">
+        <span>{{language.picDate}}</span> <span>{{item.ctime | dynamic: 'date' : null}}</span>
+      </div>
+      <div class="info-item">
+        <span>{{language.picSize}}</span> <span>{{language.picSize}}</span>
+      </div>
+      <div class="info-item">
+        <span>{{language.picResource}}</span> <span>{{language.picResource}}</span>
+      </div>
+    </div>
+  </div>
+</nz-card>

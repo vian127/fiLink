@@ -1,0 +1,55 @@
+<div class="resources">
+  <span class="select-area" [title]="areaName?areaName: language.selectArea"
+        [class.placeholder]="areaName?false:true"
+        (click)="showAreaSelect()">{{areaName ? areaName : language.selectArea}}</span>
+  <!--设施选择-->
+  <check-select-input *ngIf="_sineDeviceType === 'normal' || _sineDeviceType === 'alarmIncrement'"
+                      class="alarm-statistical"
+                      [checkList]="selectInfo"
+                      [isAllChecked]="true"
+                      [placeholder]="language.alarmSourceType"
+                      [(ngModel)]="deviceTypeListValue"></check-select-input>
+
+  <!--设施类型单选  (nzOnSearch)="disabledResources()"-->
+  <nz-select *ngIf="_sineDeviceType === 'areaAlarm' "
+             nzPlaceHolder="{{language.alarmSourceType}}"
+             title="{{deviceTypeListValue}}"
+             [(ngModel)]="deviceTypeListValue">
+    <nz-option *ngFor="let option of selectInfo" [nzLabel]="option.label"
+               [nzValue]="option.code"></nz-option>
+  </nz-select>
+  <nz-range-picker [(ngModel)]="firstTimeModel"
+                   [nzDisabledDate]="disabledEndDate"
+                   (nzOnOpenChange)="nzOnOpenChange($event)"
+  ></nz-range-picker>
+
+  <!--统计-->
+  <button type="button" class="link-button" [disabled]="disabledResources()"
+          nz-button nzType="primary" (click)="resources()">{{ language.statistical }}</button>
+  <!--按模板统计-->
+  <button *ngIf="_sineDeviceType !== 'alarmIncrement'" type="button" class="link-button" nz-button nzType="primary"
+          (click)="display.templateTable=true">{{ language.statisticsByTemplate }}</button>
+</div>
+
+<div class="deviceSelect" *ngIf="_sineDeviceType === 'normal'">
+  <ul>
+    <li *ngFor="let item of selsetDeviceTypeList"
+        [class.active]="item == deviceAactive"
+        (click)="clickDeviceSelect(item)">
+      {{ item.label }}
+    </li>
+  </ul>
+</div>
+
+<!--区域选择器-->
+<xc-tree-selector
+  [(xcVisible)]="isVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-selector>
+
+<!-- 按照模板查询 -->
+<div class="box-warp" *ngIf="display.templateTable">
+  <app-template [currentPage]="_currentPage"
+                (resultAndClose)="templateTable($event)"></app-template>
+</div>

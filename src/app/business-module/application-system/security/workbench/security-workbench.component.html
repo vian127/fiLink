@@ -1,0 +1,24 @@
+<div class="security-workbench">
+<!-- 配置按钮-->
+  <div class="title-list">
+    <button nz-button nzType="primary" class="passageway" (click)="goPassageway()">通道配置</button>
+    <button nz-button nzType="primary" class="basics" (click)="isBasics = true">基础配置</button>
+  </div>
+
+  <nz-row>
+    <!--分屏设置-->
+    <nz-col nzSpan="16">
+      <app-split-screen #splitScreen></app-split-screen>
+    </nz-col>
+    <!-- 调整摄像头设置-->
+    <nz-col nzSpan="8">
+      <app-camera-settings *ngIf="splitScreen.equipmentId" [equipmentId]="splitScreen.equipmentId"></app-camera-settings>
+    </nz-col>
+  </nz-row>
+</div>
+
+<!--基础配置模态框-->
+<nz-modal [(nzVisible)]="isBasics" nzTitle="基础配置" nzWidth="70%" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <app-basics-model #basicsModel></app-basics-model>
+</nz-modal>
+

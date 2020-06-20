@@ -1,0 +1,130 @@
+<div class="in-container">
+<!-- 标题 -->
+  <div>
+    <span class="area-detail-title">{{pageTitle}}</span>
+  </div>
+  <!-- 表单 -->
+  <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+  <!-- 底部按钮  -->
+  <div class="pl20">
+    <button class="link-button" nz-button nzType="primary"
+            [nzLoading]="isLoading"
+            [disabled]="!confirmButtonIsGray()"
+            (click)="saveData()">{{InspectionLanguage.handleOk}}
+    </button>
+    <button class="link-button" nz-button nzType="danger" (click)="goBack()">{{InspectionLanguage.handleCancel}}</button>
+  </div>
+</div>
+
+<!--起始时间-->
+<ng-template #inspectionStartDate let-formGroup="formGroup" let-col="col">
+  <form [formGroup]="formGroup">
+    <nz-date-picker [nzDisabledDate]="disabledDate" nzShowTime formControlName="inspectionStartTime"></nz-date-picker>
+  </form>
+</ng-template>
+
+<!--结束时间-->
+<ng-template #inspectionEndDate let-formGroup="formGroup" let-col="col">
+  <form [formGroup]="formGroup">
+    <nz-date-picker [nzDisabledDate]="disabledEndDate" [nzDisabledTime]="disabledDateTime" nzShowTime formControlName="inspectionEndTime"></nz-date-picker>
+  </form>
+</ng-template>
+
+<!--区域选择模板-->
+<ng-template #areaSelector let-formGroup="formGroup" let-col="col">
+  <div>
+    <input readonly="readonly" class="area-name" [title]="areaName" [(ngModel)]="areaName" [disabled]="disabledIf">
+    <button type="button" class="open-button" [disabled]="areaDisabled"><i>
+      <span class="icon-fiLink fiLink-search-index iconfont" (click)="showAreaSelectorModal()">
+    </span></i></button>
+  </div>
+</ng-template>
+<!-- 区域树 -->
+<xc-tree-area-selector
+  [(xcVisible)]="areaSelectVisible"
+  [treeSelectorConfig]="areaSelectorConfig"
+  (selectDataChange)="areaSelectChange($event)"
+>
+</xc-tree-area-selector>
+
+<!--责任人单位模板-->
+<ng-template #departmentSelector let-formGroup="formGroup" let-col="col">
+  <div>
+    <input readonly="readonly" class="area-name" [title]="departmentSelectorName" [(ngModel)]="departmentSelectorName"
+           [disabled]="disabledIf">
+    <button type="button" class="open-button" [disabled]="departmentSelectorDisabled"
+            (click)="showDepartmentSelectorModal()">
+      <i><span class="icon-fiLink fiLink-search-index iconfont">
+    </span></i></button>
+  </div>
+</ng-template>
+<!--责任人单位-->
+<xc-tree-area-selector
+  [(xcVisible)]="isUnitVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-area-selector>
+
+<!--巡检设施模板-->
+<ng-template #inspectionFacilitiesSelector let-formGroup="formGroup" let-col="col">
+  <div>
+    <input readonly="readonly" class="area-name" [title]="inspectionFacilitiesSelectorName"
+           [(ngModel)]="inspectionFacilitiesSelectorName" [disabled]="disabledIf">
+    <button type="button" class="open-button" [hidden]="inspectionFacilitiesSelectorDisabled"
+            (click)="showInspectionFacilitiesSelectorModal()"><i><span
+      class="icon-fiLink fiLink-search-index iconfont"></span></i></button>
+  </div>
+</ng-template>
+<!--巡检设施-->
+<xc-map-selector-inspection
+  #mapSelectorInspection
+  [(xcVisible)]="mapVisible"
+  [areaId]="areaId || inspectAreaIdDevice"
+  [deviceType]="inspectDeviceType"
+  [selectorType]="'inspection'"
+  [isSelectAll]="isSelectAll"
+  [deviceSet]="deviceSet"
+  (selectDataChange)="mapSelectDataChange($event)"
+  [mapSelectorConfig]="mapSelectorConfig"
+>
+</xc-map-selector-inspection>
+<!--巡检设备模板-->
+<ng-template #inspectionEquipmentSelector let-formGroup="formGroup" let-col="col">
+  <div>
+    <input readonly="readonly" class="area-name" [title]="inspectEquipmentName"
+           [(ngModel)]="inspectEquipmentName" [disabled]="disabledIf">
+    <button type="button" class="open-button" [hidden]="inspectEquipmentDisabled"
+            (click)="showInspectEquipmentSelectorModal()"><i><span
+      class="icon-fiLink fiLink-search-index iconfont"></span></i></button>
+  </div>
+</ng-template>
+<!--巡检设备-->
+<!--<equipment-map-selector-inspection
+  #mapEquipmentSelectorInspection
+  [(xcVisible)]="mapEquipmentVisible"
+  [areaId]="areaId || inspectAreaIdDevice"
+  [deviceType]="inspectDeviceType"
+  [selectorType]="'inspection'"
+  [isSelectAll]="isSelectAll"
+  [deviceSet]="deviceSet"
+  (selectDataChange)="mapEquipmentSelectDataChange($event)"
+  [mapSelectorConfig]="mapEquipmentSelectorConfig"
+>
+</equipment-map-selector-inspection>-->
+
+<!-- 巡检模板 -->
+<ng-template #inspectionTemplate let-formGroup="formGroup" let-col="col">
+  <div>
+    <span class="area-name" [title]="tempName">{{tempName}}</span>
+    <button class="open-button"  [disabled]="tempNameDisabled"  type ="button" ><i><span
+      class="icon-fiLink fiLink-search-index iconfont"  (click)="showTemplate()"></span> </i>
+    </button>
+  </div>
+</ng-template>
+<!--选择模板-->
+<app-select-inspection-template *ngIf="tempSelectVisible"
+                                [(xcVisible)]="tempSelectVisible"
+                                [modalParams]="modalData"
+                                (selectDataChange)="selectTemplate($event)">
+</app-select-inspection-template>
+

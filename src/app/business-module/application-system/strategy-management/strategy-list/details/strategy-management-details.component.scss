@@ -1,0 +1,33 @@
+.strategy{
+  padding: 0 20px;
+  width: 500px;
+  .trigger{
+    display: flex;
+    justify-content: space-between;
+    .facilities{
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .application-input{
+
+    }
+  }
+  .perform-action{
+    .action{
+      margin: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      .action-add{
+        cursor: pointer;
+      }
+    }
+  }
+  .instructions{
+    margin-top: 10px;
+    .switch-btn{
+      .switch-opera{
+        margin-left: 20px;
+      }
+    }
+  }
+}

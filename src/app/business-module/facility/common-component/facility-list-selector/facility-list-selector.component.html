@@ -1,0 +1,56 @@
+<!--设施列表组件-->
+<nz-modal nzWidth="70%"
+          [(nzVisible)]="facilityVisible"
+          [nzTitle]="title"
+          [nzFooter]="modalFooter"
+          [nzMaskClosable]="false"
+          (nzOnCancel)="facilityVisible=false">
+  <xc-table #tableComponent
+            [dataSet]="_dataSet"
+            [pageBean]="_pageBean"
+            [tableConfig]="_tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+  <ng-template #modalFooter>
+    <button nz-button class="link-button" nzType="primary" (click)="handleOk()">{{_commonLanguage.confirm}}</button>
+    <button nz-button class="link-button" nzType="danger"
+            (click)="facilityVisible=false;">{{_commonLanguage.cancel}}</button>
+  </ng-template>
+</nz-modal>
+
+<!--设施状态模板-->
+<ng-template #deviceStatusTemp let-data="data">
+  <div class="area-level">
+    <i [class]="'icon-fiLink-l iconfont '+data['deviceStatusIconClass']+' '+data['deviceStatusColorClass']"
+    ></i>
+    <span class="status-text" [title]="data['deviceStatus']">{{data['deviceStatus']}}</span>
+  </div>
+</ng-template>
+
+<!--设施类型模板-->
+<ng-template #deviceTypeTemp let-data="data">
+  <i [ngClass]="data['iconClass']" class="device-type-icon"></i>
+  <span class="status-text" [title]="data['deviceType']">{{data['deviceType']}}</span>
+</ng-template>
+
+<!-- 列表 单选框 -->
+<ng-template #radioTemp let-data="data">
+  <nz-radio-group [(ngModel)]="_selectFacilityId" (ngModelChange)="onFacilityChange($event, data)">
+    <label nz-radio [nzValue]="data.deviceId"></label>
+  </nz-radio-group>
+</ng-template>
+<!-- 设备数量过滤 -->
+<ng-template #equipmentNumTemp let-filterValue="filterValue">
+  <span class="input-box">
+    <input type="text" class="filter-num-width num-input"
+           [placeholder]="_language.pleaseEnter"
+           [(ngModel)]="filterValue.filterValue" oninput="value=value.replace(/\D/g,'')">
+    <xc-nz-select style="width: 110px;"
+                  [(ngModel)]="_equipmentNumSelectValue"
+                  [disabled]="!filterValue.filterValue">
+      <xc-nz-option nzValue="{{_filterOperateEnum.gt}}" nzLabel="{{_filterSelectEnum.gt}}"></xc-nz-option>
+      <xc-nz-option nzValue="{{_filterOperateEnum.eq}}" nzLabel="{{_filterSelectEnum.eq}}"></xc-nz-option>
+      <xc-nz-option nzValue="{{_filterOperateEnum.lt}}" nzLabel="{{_filterSelectEnum.lt}}"></xc-nz-option>
+    </xc-nz-select>
+  </span>
+</ng-template>

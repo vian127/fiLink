@@ -1,0 +1,46 @@
+<!-- 派单销障 -->
+<nz-modal
+  [(nzVisible)]="isCancelAccount"
+  [nzTitle]="modalTitle"
+  [nzMaskClosable]="false"
+  [nzContent]="modalCancelAccount"
+  [nzFooter]="modalFooterCancelAccount"
+  (nzOnCancel)="closePopUp()">
+  <ng-template #modalTitle>
+    {{language.ordersCancelAccount}}
+  </ng-template>
+  <ng-template #modalCancelAccount>
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+  </ng-template>
+  <ng-template #modalFooterCancelAccount>
+    <button class="link-button" nz-button nzType="primary"
+            [nzLoading]="isLoading"
+            (click)="submit()" [disabled]="!formStatus.getValid()">{{language.okText}}
+    </button>
+    <button class="link-button" nz-button nzType="danger" (click)="closePopUp()">{{language.cancelText}}</button>
+  </ng-template>
+</nz-modal>
+<!--期望完工时间-->
+<ng-template #ecTimeTemp let-formGroup="formGroup" let-col="col">
+  <form [formGroup]="formGroup">
+    <nz-date-picker [nzDisabledDate]="disabledEndDate"
+                    [(ngModel)]="ecTimeModel"
+                    (nzOnOpenChange)="ecTimeOnOk($event)"
+                    nzShowTime formControlName="expectedCompletedTime"></nz-date-picker>
+  </form>
+</ng-template>
+<!--责任单位点击按钮-->
+<ng-template #accountabilityUnit let-formGroup="formGroup" let-col="col">
+  <div style="width: 300px">
+    <span class="area-name" [class.disabled]="unitDisabled" [title]="selectUnitName">{{selectUnitName}}</span>
+    <button type="button" class="open-button" [disabled]="unitDisabled" (click)="showModal()"><i
+      class="icon-fiLink fiLink-search-index iconfont"></i></button>
+  </div>
+</ng-template>
+
+<!--责任单位选择器-->
+<xc-tree-area-selector #unitTreeSelector
+                       [(xcVisible)]="isVisible"
+                       (selectDataChange)="selectDataChange($event)"
+                       [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-area-selector>

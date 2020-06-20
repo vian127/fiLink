@@ -1,0 +1,22 @@
+<div class="detail-height">
+  <!--  告警分析-->
+  <app-alarm-analysis [alarmCode] = "alarmCode"></app-alarm-analysis>
+  <div class="view-item">
+    <!--基本告警操作-->
+    <app-alarm-operation [pageType]="pageType" [areaId]="areaId" [alarmId] = "alarmId"></app-alarm-operation>
+  </div>
+  <div class="view-item">
+  <!--转派信息-->
+    <app-redeploy-info [alarmId] = "alarmId"></app-redeploy-info>
+  </div>
+  <div class="view-item">
+    <!--相关性告警-->
+    <app-correlation-alarm></app-correlation-alarm>
+  </div>
+  <div class="view-item">
+    <!--告警照片-->
+    <app-alarm-img-view></app-alarm-img-view>
+  </div>
+</div>
+
+

@@ -1,0 +1,11 @@
+<!--设备信息上报状态-->
+<nz-card nzTitle="{{language.reportStatusInformation}}">
+  <div  class="device-detail-info">
+    <ul class="device-ul">
+      <li class="facility-item" *ngFor="let item of performanceList">
+        <span class="label">{{item.indexName}}:</span>
+        <span class="value hidden" [title]="item.indexValue">{{item.indexValue}}</span>
+      </li>
+    </ul>
+  </div>
+</nz-card>

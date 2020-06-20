@@ -1,0 +1,16 @@
+<div class="policy-details">
+  <div class="table-row">
+    <div>时段</div>
+    <div>事件源</div>
+    <div>光照强度</div>
+    <div>开关</div>
+    <div>调光</div>
+  </div>
+  <div class="table-content" *ngFor="let item of strategyDetails">
+    <div>{{methodFun.dateFmt(item.startTime)}}~{{methodFun.dateFmt(item.endTime)}}</div>
+    <div>{{item.sensor}}</div>
+    <div>{{item.lightIntensity}}</div>
+    <div>{{methodFun.switchLight(item.switchLight)}}</div>
+    <div>{{item.light}}</div>
+  </div>
+</div>

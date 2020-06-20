@@ -1,0 +1,158 @@
+<div class="box-warp">
+  <!-- 卡片展示 build2开发 先注释 -->
+  <xc-statistical-slider [sliderConfig]="sliderConfig" (selectChange)="sliderChange($event)"
+                         (slideShowChange)="slideShowChange($event)" class="slide-card">
+  </xc-statistical-slider>
+  <!--底部表格-->
+  <div class="table-container" id="warp">
+    <xc-table #workTable
+              [dataSet]="tableDataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)">
+    </xc-table>
+  </div>
+</div>
+<!--退单重新生成底部按钮-->
+<ng-template #footerTemp>
+  <div class="btn-container">
+    <button class="link-button-order" nz-button nzType="primary" style="margin-right: 10px"
+            (click)="singleBackConfirm(this.returnID)">{{InspectionLanguage.handleOk}}
+    </button>
+    <button class="link-button-order" nz-button nzType="primary" style="margin-right: 10px"
+            (click)="regenerate()">{{InspectionLanguage.regenerate}}
+    </button>
+    <button class="link-button-order" nz-button nzType="danger"
+            (click)="closeSingleBackConfirmModal()">{{InspectionLanguage.handleCancel}}</button>
+  </div>
+</ng-template>
+
+<!--查看关联工单-->
+<nz-modal [(nzVisible)]="isVisible"
+          [nzMaskClosable]="false"
+          [nzWidth]="1200"
+          [nzTitle]="title"
+          (nzOnCancel)="close()"
+          [nzFooter]="null">
+
+  <xc-table #tableComponent
+            [dataSet]="see_dataSet"
+            [pageBean]="seePageBean"
+            [tableConfig]="seeTableConfig"
+            (pageChange)="seePageChange($event)">
+  </xc-table>
+
+  <ng-template #modalFooter>
+    <button class="link-button" nz-button nzType="primary" (click)="close()">{{InspectionLanguage.handleOk}}</button>
+    <button class="link-button" nz-button nzType="danger" (click)="close()">{{InspectionLanguage.handleCancel}}</button>
+  </ng-template>
+</nz-modal>
+
+<!--进度弹框-->
+<nz-modal [(nzVisible)]="scheduleIsVisible"
+          [nzMaskClosable]="false"
+          [nzWidth]="1200"
+          [nzTitle]="title"
+          (nzOnCancel)="close()"
+          [nzFooter]="scheduleModalFooter">
+  <xc-table [dataSet]="schedule_dataSet"
+            [pageBean]="schedulePageBean"
+            [tableConfig]="scheduleTableConfig"
+            (pageChange)="schedulePageChange($event)">
+  </xc-table>
+
+  <ng-template #scheduleModalFooter>
+    <button class="link-button" nz-button nzType="primary" (click)="close()">{{InspectionLanguage.handleOk}}</button>
+    <button class="link-button" nz-button nzType="danger" (click)="close()">{{InspectionLanguage.handleCancel}}</button>
+  </ng-template>
+</nz-modal>
+
+<!--进度-->
+<ng-template #schedule let-data="data">
+  <div title="{{data.progressSpeed}}">
+    <a (click)="showCompleted(data)">
+      <nz-progress [nzPercent]="data.progressSpeed" nzSize="small"></nz-progress>
+    </a>
+  </div>
+</ng-template>
+
+<!--责任人单位-->
+<xc-tree-area-selector
+  [(xcVisible)]="isUnitVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-area-selector>
+<!--工单类型-->
+<ng-template #statusTemp let-data="data">
+  <div class="hidden" title="{{data.statusName}}" [ngStyle]="data.rowStyle">
+    <span [ngClass]="data.statusClass" style="margin-right: 5px;"></span>
+    {{data.statusName}}
+  </div>
+</ng-template>
+
+<!--筛选部门-->
+<ng-template #UnitNameSearch let-filterValue="filterValue">
+  <!--<span class="area-name" (click)="showModal(filterValue)" [title]="selectUnitName" aria-placeholder="请输入">{{selectUnitName}}</span>-->
+  <input class="area-name" (click)="showModal(filterValue)"
+         [title]="selectUnitName" type="text" [placeholder]="InspectionLanguage.pleaseChoose"
+         [(ngModel)]="selectUnitName">
+</ng-template>
+<!--区域选择-->
+<xc-tree-area-selector
+  [(xcVisible)]="responsibleUnitIsVisible"
+  (selectDataChange)="departmentSelectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-area-selector>
+
+<!-- 责任人 -->
+<ng-template #roleTemp let-data="data">
+  <span class="widthStyle" title="{{data.assign?.userName}}">{{data.assign?.userName}}</span>
+</ng-template>
+
+<!--点击退单modal主体内容-->
+<ng-template #SingleBackTemp>
+  <p style="height: 100px">{{InspectionLanguage.doYouConfirmTheRefundOfThisWorkOrder}}</p>
+</ng-template>
+
+<!--剩余天数筛选-->
+<ng-template #remainingDaysFilter let-filterValue="filterValue">
+  <div style="display: flex;justify-content: space-between">
+    <input class="input_temp" type="text" [placeholder]="InspectionLanguage.pleaseEnter"
+           [(ngModel)]="filterValue.filterValue" oninput="setInputValue(value)">
+    <xc-nz-select [(ngModel)]="lastDaySelectValue" [disabled]="!filterValue.filterValue">
+      <xc-nz-option *ngFor="let item of searchNumber" [nzLabel]="item.label" [nzValue]="item.value"></xc-nz-option>
+    </xc-nz-select>
+  </div>
+</ng-template>
+
+<!--巡检数量筛选-->
+<ng-template #inspectionQuantityFilter let-filterValue="filterValue">
+  <div style="display: flex;justify-content: space-between">
+    <input class="input_temp" type="text" [placeholder]="InspectionLanguage.pleaseEnter"
+           [(ngModel)]="filterValue.filterValue" oninput="setInputValue(value)">
+    <xc-nz-select [(ngModel)]="deviceCountSelectValue" [disabled]="!filterValue.filterValue">
+      <xc-nz-option *ngFor="let item of searchNumber" [nzLabel]="item.label" [nzValue]="item.value"></xc-nz-option>
+    </xc-nz-select>
+  </div>
+</ng-template>
+
+
+<!--巡检区域弹框-->
+<ng-template #AreaSearch let-filterValue="filterValue">
+  <input type="text" nz-input placeholder="{{InspectionLanguage.pleaseChoose}}"
+         (click)="showArea(filterValue)" [(ngModel)]="filterObj.areaName">
+</ng-template>
+<!--区域选择-->
+<xc-tree-area-selector
+  [(xcVisible)]="areaSelectVisible"
+  [pageType]="InspectionLanguage.area"
+  [treeSelectorConfig]="areaSelectorConfig"
+  (selectDataChange)="areaSelectChange($event)">
+</xc-tree-area-selector>
+
+<!-- checklist 选择器-->
+<xc-list-tree-selector #unitTreeSelector
+                       [(xcVisible)]="listIsVisible"
+                       (selectDataChange)="selectListDataChange($event)"
+                       [treeSelectorConfig]="listTreeSelectorConfig">
+</xc-list-tree-selector>

@@ -1,0 +1,39 @@
+.lighting-details{
+  padding: 20px;
+  width: 100%;
+  .details{
+    border: 1px solid #ccc;
+    width: 800px;
+    h3{
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 30px;
+      height: 25px;
+    }
+    .details-content{
+      padding: 0 20px;
+      border: 1px solid #666;
+      .content-list{
+        .volume-adjust{
+          display: flex;
+          justify-content: space-between;
+        }
+        .brightness-adjust{
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+  .button-list{
+    width: 800px;
+    text-align: right;
+    margin-top: 20px;
+    .prev-step{
+      margin-right: 10px;
+    }
+    .next-step{
+      margin-right: 10px;
+    }
+  }
+}

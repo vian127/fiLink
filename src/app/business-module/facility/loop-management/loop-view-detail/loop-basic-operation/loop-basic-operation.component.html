@@ -1,0 +1,13 @@
+<nz-card nzTitle="{{language.loopBasicOperation}}">
+  <!--拉闸-->
+  <button class="operate-btn " (click)="loopBrake()"
+          [appAccessPermission]="''">
+    <i class="icon-fiLink-l iconfont fiLink-edit-facility facility-edit"></i>
+    <span class="facility-edit">{{language.brake}}</span>
+  </button>
+  <!--合闸-->
+  <button class="operate-btn " (click)="loopClosing()" [appAccessPermission]="''">
+    <i class="icon-fiLink-l iconfont fiLink-edit-facility facility-edit"></i>
+    <span class="facility-edit">{{language.closing}}</span>
+  </button>
+</nz-card>

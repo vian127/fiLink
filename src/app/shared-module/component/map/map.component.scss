@@ -1,0 +1,347 @@
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.select-container {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 400px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+
+  .map-select {
+    width: 110px;
+    padding-right: 5px;
+    text-align: center;
+    border-right: 1px solid #e0dbdb;
+  }
+
+  .map-search {
+    flex: 1;
+    position: relative;
+    height: 100%;
+
+    .map-search-name {
+      position: absolute;
+      left: 10px;
+      top: 0;
+
+      input {
+        border: none;
+      }
+    }
+
+    .b-map-location-search {
+      position: absolute;
+      left: 10px;
+      top: 0;
+
+      #r-result {
+        margin-top: 5px;
+
+        input {
+          border: none;
+          outline: none;
+          width: 270px;
+          padding-left: 11px;
+        }
+
+        input::placeholder {
+          color: #cbcbcb;
+        }
+      }
+
+      #searchResultPanel {
+        border: 1px solid #C0C0C0;
+        margin-top: 10px;
+        width: 150px;
+        height: auto;
+        display: none;
+      }
+    }
+
+    .g-map-location-search {
+      position: absolute;
+      left: 10px;
+      top: 0;
+      margin-top: 5px;
+
+      input {
+        border: none;
+        outline: none;
+        width: 270px;
+        padding-left: 11px;
+      }
+
+      input::placeholder {
+        color: #cbcbcb;
+      }
+
+      .location-icon {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 10px;
+      }
+    }
+  }
+}
+
+.info-window-container {
+  position: absolute;
+  z-index: 100;
+  transform: translate(-50%, -100%);
+  margin-top: -10px;
+  white-space: nowrap;
+
+  .info-window-c {
+    display: flex;
+    max-width: 270px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: rgba(256, 256, 256, 0.8);
+    box-shadow: 5px 5px 5px #d0c9c9;
+
+    .info-window-item {
+      width: 120px;
+      height: 25px;
+      align-items: center;
+      font-size: 14px;
+      display: flex;
+
+      .info-window-item-icon {
+        margin-right: 5px;
+      }
+
+      .info-window-item-name {
+        flex: 1;
+      }
+
+      .info-window-item-count {
+        color: #b3b3b3;
+      }
+    }
+  }
+
+  .info-window-m {
+    position: relative;
+    font-size: 12px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: rgba(256, 256, 256, 0.8);
+    box-shadow: 5px 5px 5px #d0c9c9;
+
+    .info-window-m-name {
+      display: flex;
+      height: 25px;
+      align-items: center;
+      font-size: 14px;
+
+      .info-window-m-icon {
+        width: 20px;
+        margin: 5px 20px 0 0;
+        border-radius: 2px;
+        text-align: center;
+      }
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      width: 0;
+      height: 0;
+      margin-left: -4px;
+      border-left: 4px solid transparent;
+      border-top: 6px solid;
+      border-right: 4px solid transparent;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      width: 0;
+      height: 0;
+      margin-left: -3px;
+      border-left: 3px solid transparent;
+      border-top: 5px solid #fff;
+      border-right: 5px solid transparent;
+    }
+  }
+
+  .info-window-r {
+    position: relative;
+    font-size: 12px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: rgba(256, 256, 256, 0.8);
+    box-shadow: 5px 5px 5px #d0c9c9;
+    cursor: pointer;
+  }
+}
+
+.info-window-a {
+  position: relative;
+  font-size: 10px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: rgba(256, 256, 256, 0.8);
+  box-shadow: 5px 5px 5px #d0c9c9;
+
+  .info-window-a-name {
+    display: flex;
+    height: 25px;
+    align-items: center;
+    font-size: 14px;
+
+    .info-window-a-title {
+      margin-right: 15px;
+    }
+
+    .info-window-a-count {
+      color: #1296db;
+    }
+  }
+
+
+  .info-window-a-device {
+    display: inline-block;
+  }
+
+  .info-window-a-iocn {
+    width: 20px;
+    height: 24px;
+    margin-right: 20px;
+    background: no-repeat center;
+    background-size: 100% 100%;
+  }
+
+}
+
+.info-data-w {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  margin-right: 10px;
+  font-size: 10px;
+}
+
+.search {
+  position: absolute;
+  width: 100px;
+  left: 70px;
+  top: 15px;
+  height: 30px;
+  background-color: #36cfc9;
+  border-radius: 15px;
+  display: flex;
+  padding: 1px;
+  align-items: center;
+
+  input {
+    outline: none;
+    border: 1px solid #37d0cb;
+    border-radius: 15px;
+    width: 100%;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    padding: 5px 30px 5px 10px;
+  }
+
+  .location-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+  }
+}
+
+.width-items {
+  width: 270px;
+}
+
+// 地图类型切换选择器
+.map-type-control {
+  bottom: 10px;
+  right: 10px;
+  top: auto;
+  left: auto;
+  white-space: nowrap;
+  cursor: pointer;
+  position: absolute;
+  z-index: 10;
+  text-size-adjust: none;
+  display: flex;
+  // 地图类型选中样式
+  .map-type-title {
+    box-shadow: rgba(0, 0, 0, 0.35) 2px 2px 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(139, 164, 220);
+    background: rgb(255, 255, 255);
+    padding: 2px 6px;
+    font-style: normal;
+    font-variant: normal;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 1.3em;
+    font-family: arial, sans-serif;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 0px 3px 3px 0px;
+    color: rgb(0, 0, 0);
+  }
+
+  // 地图类型默认样式
+  .map-type-title-s {
+    box-shadow: rgba(0, 0, 0, 0.35) 2px 2px 3px;
+    border-left: 1px solid rgb(139, 164, 220);
+    border-top: 1px solid rgb(139, 164, 220);
+    border-bottom: 1px solid rgb(139, 164, 220);
+    background: rgb(142, 168, 224);
+    padding: 2px 6px;
+    font: bold 12px/1.3em arial, sans-serif;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 3px 0px 0px 3px;
+    color: rgb(255, 255, 255);
+  }
+}
+
+.zoom-control {
+  bottom: 40px;
+  right: 10px;
+  top: auto;
+  left: auto;
+  white-space: nowrap;
+  cursor: pointer;
+  position: absolute;
+  z-index: 10;
+  $size: 32px;
+
+  .zoom-control-item {
+    width: $size;
+    height: $size;
+    text-align: center;
+    line-height: $size;
+    font-size: 20px;
+    background-color: white;
+    border: solid 1px #efeaea;
+  }
+}
+
+.clusterer-table-table {
+  position: absolute;
+  z-index: 100;
+  left: calc(50% + 30px);
+  top: calc(50% - 25px);
+}

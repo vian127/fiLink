@@ -1,0 +1,140 @@
+<div class="unfinished-table">
+  <!--表格-->
+  <xc-table
+    #tableComponent
+    [dataSet]="_dataSet"
+    [pageBean]="pageBean"
+    [tableConfig]="tableConfig"
+    (pageChange)="pageChange($event)">
+  </xc-table>
+  <!--状态模板-->
+  <ng-template #statusTemp let-data="data">
+    <div class="hidden" title="{{data.statusName}}" [ngStyle]="data.rowStyle">
+      <span [ngClass]="data.statusClass" style="margin-right: 5px;"> </span>
+      {{data.statusName}}
+    </div>
+  </ng-template>
+
+  <!--单位选择-->
+  <ng-template #selectorModalTemp>
+    <div class="facility-type-config-box">
+      <div class="facility-type-config-item facility-type-config-title">
+        <div class="checkbox">
+          <label nz-checkbox [(ngModel)]="isAllChecked" [nzIndeterminate]="isIndeterminate"
+                 (ngModelChange)="checkAll($event)">
+          </label>
+        </div>
+        <div class="split-line"></div>
+        <div class="text">
+          {{workOrderLanguage.accountabilityUnitName}}
+        </div>
+      </div>
+      <div class="accountabilityUnit-list">
+        <div class="facility-type-config-item" *ngFor="let item of accountabilityUnitList">
+          <div class="checkbox">
+            <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="change()">
+            </label>
+          </div>
+          <div class="text hidden" [title]="item.label">{{item.label}}</div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <!--退单重新生成底部按钮-->
+  <ng-template #footerTemp>
+    <div class="btn-container">
+      <button class="link-button-order" nz-button nzType="primary"
+              (click)="singleBackConfirm()">{{commonLanguage.confirm}}
+      </button>
+      <button class="link-button-order" nz-button nzType="primary"
+              (click)="rebuild()">{{commonLanguage.rebuild}}
+      </button>
+      <button class="link-button-order" nz-button nzType="danger"
+              (click)="closeSingleBackConfirmModal()">{{commonLanguage.cancel}}</button>
+    </div>
+  </ng-template>
+  <!--单位查询-->
+  <ng-template #UnitNameSearch let-filterValue="filterValue">
+    <span class="area-name" (click)="showModal(filterValue)" [title]="selectUnitName?selectUnitName:''"
+          [class.placeholder]="!selectUnitName">{{selectUnitName ? selectUnitName : commonLanguage.clickSelect}}</span>
+  </ng-template>
+  <!--树组件-->
+  <xc-tree-selector
+    [(xcVisible)]="isVisible"
+    (selectDataChange)="selectDataChange($event)"
+    [treeSelectorConfig]="treeSelectorConfig">
+  </xc-tree-selector>
+
+  <!--关联告警-->
+  <ng-template #refAlarmTemp let-data="data">
+    <div (click)="showRefAlarmModal(data)" class="hidden" [title]="data.refAlarmFaultName" style="cursor: pointer"
+         [ngStyle]="data.rowStyle">{{data.refAlarmFaultName}}</div>
+  </ng-template>
+
+  <!--关联告警modal框内容-->
+  <ng-template #showAlarmTemp>
+    <app-ref-alarm [refAlarmMessage]="alarmData"></app-ref-alarm>
+  </ng-template>
+
+  <!--剩余时间过滤-->
+  <ng-template #remainingDaysFilter let-filterValue="filterValue">
+    <div class="last-time">
+      <input class="input_1" type="text" style="" [placeholder]="'请输入'"
+             [(ngModel)]="filterValue.filterValue" oninput="setValue(value)"
+      >
+      <xc-nz-select [(ngModel)]="lastDaySelectValue" [disabled]="!filterValue.filterValue">
+        <xc-nz-option *ngFor="let item of searchNumber" [nzLabel]="item.label" [nzValue]="item.value"></xc-nz-option>
+      </xc-nz-select>
+    </div>
+  </ng-template>
+
+  <!--点击退单modal主体内容-->
+  <ng-template #singleBackTemp>
+    <p style="height: 100px">{{workOrderLanguage.isSureReturnWorkOrder}}</p>
+  </ng-template>
+
+  <!--设施名称弹框-->
+  <ng-template #DeviceNameSearch let-filterValue="filterValue">
+    <app-alarm-object class="pic-device-selector"
+                      [placeholder]="workOrderLanguage.pleaseSelect"
+                      [alarmObjectConfig]="deviceObjectConfig"
+                      [filterValue]="filterValue"></app-alarm-object>
+  </ng-template>
+  <!--设施区域弹框-->
+  <ng-template #AreaSearch let-filterValue="filterValue">
+    <input type="text" nz-input placeholder="{{workOrderLanguage.pleaseSelect}}"
+           (click)="showArea(filterValue)" [(ngModel)]="filterObj.areaName">
+  </ng-template>
+  <!--区域选择-->
+  <xc-tree-area-selector
+    [(xcVisible)]="areaSelectVisible"
+    [pageType]="'区域'"
+    [treeSelectorConfig]="areaSelectorConfig"
+    (selectDataChange)="areaSelectChange($event)">
+  </xc-tree-area-selector>
+  <!--运维建议-->
+  <ng-template #suggestModalTemp>
+    <div class="suggest-warp">
+      <div class="suggest-type">
+        <div class="type-title">{{alarmTitle}}</div>
+        <div class="title-warp">
+          <div class="title-flex">{{workOrderLanguage.planSuggest}}</div>
+          <div class="title-flex">{{workOrderLanguage.resourceSuggest}}</div>
+        </div>
+      </div>
+      <nz-tabset class="sugg-tabset">
+        <nz-tab [nzTitle]="item.name" *ngFor="let item of suggestList">
+          <div class="item-content">
+            <div class="item-warp line">
+              <li *ngFor="let type of item.planSuggest; let i = index;">{{i + 1}}、 {{type}}</li>
+            </div>
+            <div class="item-warp">
+              <li *ngFor="let type of item.resourcesSuggest; let i = index;">{{i + 1}}、 {{type}}</li>
+            </div>
+          </div>
+        </nz-tab>
+      </nz-tabset>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,29 @@
+<div class="allocation-warp">
+    <div class="allocation-title">{{language.resourceAllocation}}</div>
+  <div class="allocation-box">
+    <div class="allocation-item">
+          <p>{{language.personnelAssignment}}</p>
+          <xc-table [dataSet]="personData"
+                    [pageBean]="personRecordPageBean"
+                    [tableConfig]="personTableConfig"
+                    (pageChange)="personRecordPageChange($event)">
+          </xc-table>
+    </div>
+    <div class="allocation-item">
+          <p>{{language.carAllocate}}</p>
+          <xc-table [dataSet]="carData"
+                    [pageBean]="carRecordPageBean"
+                    [tableConfig]="carTableConfig"
+                    (pageChange)="carRecordPageChange($event)">
+          </xc-table>
+    </div>
+    <div class="allocation-item">
+          <p>{{language.applyEquipment}}</p>
+          <xc-table [dataSet]="applyData"
+                    [pageBean]="applyRecordPageBean"
+                    [tableConfig]="applyTableConfig"
+                    (pageChange)="applyRecordPageChange($event)">
+          </xc-table>
+    </div>
+  </div>
+</div>

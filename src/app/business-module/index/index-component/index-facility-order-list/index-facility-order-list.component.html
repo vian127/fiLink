@@ -1,0 +1,58 @@
+<!--工单列表-->
+<div class="facility-list-container">
+  <div class="facility-list-title">
+    <div class="icon-facility-list" title="{{indexLanguage.inspectionWorkOrderTitle}}"></div>
+    <div [hidden]="!isSelect" class="facility-list-title-text" title="{{indexLanguage.inspectionWorkOrderTitle}}">
+      <nz-dropdown>
+        <a nz-dropdown><span [ngClass]="{'select-tab-color':isStyleSwitch }" class="select-default-tab">{{searchWorkOrderName}}</span>
+          <i nz-icon type="down" [ngClass]="{'select-tab-color':isStyleSwitch }" class="select-default-tab"></i> </a>
+        <ul class="facility-list-ul" nz-menu nzSelectable>
+          <li class="facility-list-ul-li" nz-menu-item (click)="searchCheckingWorkOrder()">
+            <span>{{indexLanguage.inspectionWorkOrderTitle}}</span>
+          </li>
+          <li class="facility-list-ul-li" nz-menu-item (click)="searchPinDisabledWorkOrder()">
+            <span>{{indexLanguage.clearBarrierWorkOrderTitle}}</span>
+          </li>
+        </ul>
+      </nz-dropdown>
+    </div>
+
+    <!--列表头样式-->
+    <div [hidden]="isSelect" class="facility-list-title-text" title="{{indexLanguage.wordOrderList}}">
+      <div class="text">{{indexLanguage.wordOrderList}}</div>
+    </div>
+
+    <!--更多按钮-->
+    <div [hidden]="isShowMore" [ngClass]="{'facility-list-title-more-color':isStyleSwitch }"
+         class="facility-list-title-more" title="{{more}}" (click)="goToWorkOrderPage()">{{more}}<span>>></span></div>
+
+  </div>
+
+  <!--巡检工单列表-->
+  <div [hidden]="!defaultShowTable" [ngClass]="{'facility-table-card':isStyleSwitch }" class="facility-table">
+    <xc-table [dataSet]="inspectionWorkOrderDataSet"
+              [pageBean]="inspectionWorkOrderPageBean"
+              [tableConfig]="inspectionWorkOrderTableConfig"
+    >
+    </xc-table>
+  </div>
+
+  <!--销障工单列表-->
+  <div [hidden]="defaultShowTable" [ngClass]="{'facility-table-card':isStyleSwitch }" class="facility-table">
+    <xc-table [dataSet]="clearBarrierWorkOrderDataSet"
+              [pageBean]="clearBarrierWorkOrderPageBean"
+              [tableConfig]="clearBarrierWorkOrderTableConfig"
+    >
+    </xc-table>
+  </div>
+</div>
+
+<!--工单状态装换模板-->
+<ng-template #statusTemp let-data="data">
+  <div class="hidden" title="{{data.statusName}}">
+    <span [ngClass]="data.statusClass"></span>
+    {{data.statusName}}
+  </div>
+</ng-template>
+
+

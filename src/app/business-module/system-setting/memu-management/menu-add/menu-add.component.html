@@ -1,0 +1,60 @@
+<!--菜单添加-->
+<app-detail-title [pageTitle]="pageTitle"></app-detail-title>
+<div class="mune-form">
+  <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+  <div class="button-group">
+    <button class="link-button" [nzLoading]="submitLoading" [disabled]="!formStatus.getValid()" *ngIf="!templateId"
+            nz-button nzType="primary" style="margin-right: 20px"
+            (click)="addMenuTemplate()">{{language.table.okText}}</button>
+    <button class="link-button" [nzLoading]="submitLoading" [disabled]="!formStatus.getValid()" *ngIf="templateId"
+            nz-button nzType="primary" style="margin-right: 20px"
+            (click)="updateMenuTemplate()">{{language.table.okText}}</button>
+    <button class="link-button" nz-button nzType="danger" style="margin-right: 20px"
+            (click)="cancel()">{{language.table.cancelText}}</button>
+    <button class="link-button" nz-button nzType="danger" (click)="showMenu()">{{language.table.preview}}</button>
+  </div>
+</div>
+
+<ng-template #menuTree let-formGroup="formGroup" let-col="col">
+  <app-menu-tree [nodes]="treeData" #tree></app-menu-tree>
+</ng-template>
+<!--预览菜单-->
+<nz-modal class="modalBox"
+          [(nzVisible)]="isVisible"
+          [nzTitle]="modalTitle"
+          [nzContent]="modalContent"
+          [nzFooter]="modalFooter"
+          [nzWidth]="500"
+          [nzBodyStyle]="{'overflow':'hidden','overflow-y': 'auto','display': 'flex','margin-left': '15px','height': '400px'}"
+          (nzOnCancel)="handleCancel()">
+  <ng-template #modalTitle>
+    <div>{{indexLanguage.menuPreview}}</div>
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div class="first-view">
+      <nz-sider
+        nzWidth="190"
+        nzCollapsedWidth="50">
+        <!--todo 左侧菜单-->
+        <app-view-first-menu
+          [menuList]="menuNodeList"
+          (changeThreeMenu)="showThreeMenu($event)"
+        ></app-view-first-menu>
+
+      </nz-sider>
+    </div>
+    <div class="three-view">
+      <app-view-three-menu *ngIf="threeMenuInfo.menuName"
+                           [threeMenuList]="threeMenuInfo.children"
+                           [title]="threeMenuInfo.menuName"
+                           #threeMenu
+      ></app-view-three-menu>
+    </div>
+
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="handleCancel()">{{indexLanguage.confirm}}</button>
+  </ng-template>
+</nz-modal>

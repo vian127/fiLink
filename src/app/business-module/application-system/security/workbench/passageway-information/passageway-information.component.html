@@ -1,0 +1,79 @@
+<div>
+  <span class="area-detail-title">通道配置</span>
+</div>
+<button (click)="openPassageway()">新增</button>
+<nz-row>
+  <div class="passageway" nz-col nzSpan="11" *ngFor="let passagewayData of passagewayList;let index = index">
+    <div class="config-list">
+      <!-- 基础配置卡片列表  头部-->
+      <div class="title">
+        <div class="t-left">通道{{index + 1}}</div>
+        <div class="t-right">
+        <span class="switch-btn">
+          <nz-switch [ngModel]="passagewayData.onvifStatus" nzCheckedChildren="开" nzUnCheckedChildren="关"></nz-switch>
+        </span>
+          <span class="config-btn" (click)="openPassageway(index,true)">
+          <i nz-icon nzType="poweroff" nzTheme="outline"></i>
+        </span>
+        </div>
+      </div>
+      <!-- 基础配置卡片列表-->
+      <div class="content">
+        <nz-row>
+          <nz-col nzSpan="12">通道号:</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.channelId}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">摄像机接入类型：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.cameraType}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">是否启用ONVIF探测：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.onvifStatus}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">探测ONVIF IP：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.onvifIp}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">探测ONVIF 用户名：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.onvifAccount}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">探测ONVIF密码：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.onvifPassword}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">摄像机接入RTSP地址：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.rtspAddr}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">摄像机接入ONVIF地址：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.onvifAddr}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">摄像机用户名：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.cameraAccount}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">摄像机密码：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.cameraPassword}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">录像保留天数（天）：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.videoRetentionDays}}</nz-col>
+        </nz-row>
+        <nz-row>
+          <nz-col nzSpan="12">其它设置：</nz-col>
+          <nz-col nzSpan="12">{{passagewayData.audioSwitch}}</nz-col>
+        </nz-row>
+      </div>
+
+    </div>
+  </div>
+</nz-row>
+
+<!--通道配置模态框-->
+<nz-modal [(nzVisible)]="isBasics" nzTitle="通道配置" nzWidth="70%" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <app-channelConfiguration *ngIf="isBasics" #channelConfiguration [passagewayData]="passagewayData" ></app-channelConfiguration>
+</nz-modal>

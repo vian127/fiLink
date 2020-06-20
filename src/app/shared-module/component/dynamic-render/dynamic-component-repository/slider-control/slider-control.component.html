@@ -1,0 +1,18 @@
+<nz-row>
+  <div nz-col nzSpan="4" class="options-name">{{sliderConfig.name}}</div>
+  <nz-col nzSpan="14">
+    <nz-slider [nzMin]="1"
+               [nzMax]="100"
+               [(ngModel)]="sliderConfig.value"
+               (ngModelChange)="change(sliderConfig.code,sliderConfig.url)">
+    </nz-slider>
+  </nz-col>
+  <div nz-col nzSpan="4">
+    <nz-input-number
+      [nzMin]="1"
+      [nzMax]="100"
+      [ngStyle]="{ marginLeft: '16px' }"
+      [(ngModel)]="sliderConfig.value"
+    ></nz-input-number>
+  </div>
+</nz-row>

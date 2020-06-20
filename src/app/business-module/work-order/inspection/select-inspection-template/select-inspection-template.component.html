@@ -1,0 +1,75 @@
+<nz-modal [(nzVisible)]="xcVisible"
+          [nzWidth]="800"
+          [nzTitle]="modalTitle"
+          [nzFooter]="modalFooter"
+          [nzMaskClosable]="false"
+          (nzOnCancel)="handleCancel()">
+  <ng-template #modalTitle>
+    {{language.selectTemplate}}
+  </ng-template>
+  <div class="tempTop">
+    <div class="tempLeft">
+      <ul>
+        <li class="liItem first">{{language.existingTemplate}}</li>
+        <nz-radio-group [(ngModel)]="radioValue" (ngModelChange)="selectValue()">
+          <li class="liItem"
+              *ngFor="let item of templateList; let i = index;"
+              [ngClass]="(i == templateList.length-1)?'last':''">
+            <label nz-radio [nzValue]="item.templateId" >{{item.templateName}}</label>
+          </li>
+        </nz-radio-group>
+      </ul>
+    </div>
+    <div class="tempRight">
+      <div class="li-warp">
+        <li class="temp-li first">
+          <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="updateAllChecked()" [nzIndeterminate]="indeterminate"></label>
+          <span class="names">{{language.inspectionItem}}</span>
+          <span class="remark">{{language.remarks}}</span>
+        </li>
+        <div style="height: 228px;overflow-y: auto">
+          <li *ngFor="let item of listData" class="temp-li">
+            <i><label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="updateSingleChecked(item)"></label></i>
+            <span class="names ml8">
+              <span>{{item.templateItemName}}</span>
+            </span>
+            <span class="remark" (click)="editTemplate(item)">
+              <span>{{item.remark}}</span>
+            </span>
+            <a  *ngIf="item.isAdd" class="temp-delete" nz-tooltip [nzTitle]="language.delete" (click)="deleteRow(item.templateItemId)">
+              <i class="icon-fiLink iconfont fiLink-delete red-icon"></i>
+            </a>
+          </li>
+        </div>
+      </div>
+      <!--<div class="addRow" (click)="addTemplateRow()">+ {{language.addOption}}</div>-->
+    </div>
+  </div>
+  <div class="tempBottom">
+    <div class="last-edit">{{language.lastEdit}}</div>
+    <div style="padding: 8px 16px;">
+      <span class="item-inspect" *ngFor="let item of lastInspection; let i = index;">
+        {{item.templateItemName}}<i (click)="deleteItem(item, i)" class="icon-fiLink fiLink-close iconfont"></i>
+      </span>
+    </div>
+  </div>
+  <div class="temp-add">
+    <div class="add-btn"><span (click)="saveRow()" class="cursor"><span class="icon-fiLink fiLink-pic-to-big iconfont"></span> {{language.addInspectItem}}</span></div>
+    <div class="add-form" *ngIf="isCreat">
+      <div>
+        <label class="input-label">{{language.inspectionItem}}</label>
+        <div class="input-val"><input [placeholder]="language.pleaseEnter" nz-input [(ngModel)]="inputItemValue" maxlength="50" /></div>
+      </div>
+      <div class="mt15">
+        <label class="input-label">{{language.remark}}</label>
+        <div class="input-text"><textarea rows="4" [placeholder]="language.pleaseEnter" nz-input [(ngModel)]="inputRemarkValue" maxlength="200"></textarea></div>
+        <button nz-button class="link-button" nzType="primary" (click)="addTemplateRow()">{{language.saveData}}</button>
+      </div>
+      <span (click)="closeAdd()" class="icon-fiLink fiLink-close iconfont"></span>
+    </div>
+  </div>
+</nz-modal>
+<ng-template #modalFooter>
+  <button nz-button class="link-button" nzType="primary" (click)="handleOk()">{{language.handleOk}}</button>
+  <button nz-button class="link-button" nzType="danger" (click)="handleCancel()">{{language.handleCancel}}</button>
+</ng-template>

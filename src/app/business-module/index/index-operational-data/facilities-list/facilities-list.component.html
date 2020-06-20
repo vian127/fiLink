@@ -1,0 +1,42 @@
+<div class="facility-list-panel">
+  <!--选择区域-->
+  <div class="app-logic-area">
+    <app-logic-area
+      (areaDataEvent)="areaDataChange($event)"
+      [treeName]="'zTree'"
+      [isShowNoData]="isShowNoData"></app-logic-area>
+  </div>
+
+  <!--设施和设备选择-->
+  <div class="app-facility-type">
+    <app-facility-equipment-type
+      [facilityEquipmentConfig]="facilityEquipmentComponent"
+      [areaData]="areaData"
+      [setFacilityData]="facilityTypeList"
+      [setEquipmentData]="equipmentTypeList"
+      (facilitiesData)="facilitiesSelect($event)"
+      (equipmentData)="equipmentSelect($event)"
+      (facilitiesOrEquipment)="showLeasee($event)"
+    ></app-facility-equipment-type>
+  </div>
+
+  <!--分组-->
+  <div class="app-facility-group">
+    <app-index-facility-group (selectGroupItemEmit)="selectGroupItem($event)"></app-index-facility-group>
+  </div>
+  <!--租赁方-->
+  <!--<div class="app-facility-group">-->
+    <!--<app-index-leasee-group-->
+      <!--[isShowLeasee]="isShowLeasee"-->
+    <!--&gt;</app-index-leasee-group>-->
+  <!--</div>-->
+  <!--设施和设备列表-->
+  <div class="app-facility-list">
+    <app-facility-equipment-list
+      [areaData]="areaData"
+      [facilityData]="facilityData"
+      [equipmentData]="equipmentData"
+    ></app-facility-equipment-list>
+  </div>
+</div>
+

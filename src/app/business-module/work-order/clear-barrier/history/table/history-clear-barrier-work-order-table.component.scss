@@ -1,0 +1,21 @@
+.area-name {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 11px;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.mr5{
+  margin-right: 5px;
+}
+.cursor-pointer{
+  cursor: pointer;
+}

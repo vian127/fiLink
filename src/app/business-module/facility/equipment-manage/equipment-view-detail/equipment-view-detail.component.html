@@ -1,0 +1,64 @@
+<!--顶部标题-->
+<div class="equipment-view-title" style="">{{language.equipmentDetail}}
+</div>
+<div class="detail-height">
+  <div class="view-item">
+    <!--设备详情-->
+    <app-equipment-infrastructure
+      *ngIf="equipmentDetailCodes.includes(equipmentDetailCardEnum.detail)"
+      [equipmentId]="equipmentId">
+    </app-equipment-infrastructure>
+  </div>
+  <div class="view-item">
+    <!--设备操作按钮-->
+    <app-equipment-basic-operation
+      *ngIf="equipmentDetailCodes.includes(equipmentDetailCardEnum.operate)"
+      [equipmentId]="equipmentId"
+      [equipmentType]="equipmentType">
+    </app-equipment-basic-operation>
+  </div>
+  <!--上报状态信息-->
+  <div class="view-item">
+    <app-report-status-information
+      *ngIf="equipmentDetailCodes.includes(equipmentDetailCardEnum.reportStatus)"
+      [equipmentId]="equipmentId"
+      [equipmentType]="equipmentType">
+    </app-report-status-information>
+  </div>
+  <!--告警-->
+  <div class="view-item">
+    <app-equipment-alarm
+      *ngIf="equipmentDetailCodes.includes(equipmentDetailCardEnum.alarm)"
+      [equipmentId]="equipmentId" [equipmentType]="equipmentType">
+    </app-equipment-alarm>
+  </div>
+  <!--工单-->
+  <div class="view-item">
+    <app-equipment-work-order
+      *ngIf="equipmentDetailCodes.includes(equipmentDetailCardEnum.equipmentOrder)"
+      [equipmentId]="equipmentId"></app-equipment-work-order>
+  </div>
+  <!--设备日志-->
+  <div class="view-item">
+    <app-equipment-log-detail
+      *ngIf="equipmentDetailCodes.includes(equipmentDetailCardEnum.equipmentLog)"
+      [equipmentId]="equipmentId">
+    </app-equipment-log-detail>
+  </div>
+  <!--操作日志-->
+  <div class="view-item">
+    <app-equipment-operate-log
+      *ngIf="equipmentDetailCodes.includes(equipmentDetailCardEnum.equipmentLog)"
+      [equipmentId]="equipmentId"></app-equipment-operate-log>
+  </div>
+  <!--图片-->
+  <div class="view-item">
+    <app-equipment-img-view
+      *ngIf="equipmentDetailCodes.includes(equipmentDetailCardEnum.equipmentImg)"
+      [equipmentId]="equipmentId">
+    </app-equipment-img-view>
+  </div>
+</div>
+
+
+

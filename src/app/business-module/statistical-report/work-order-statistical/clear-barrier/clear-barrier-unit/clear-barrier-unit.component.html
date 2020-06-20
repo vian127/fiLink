@@ -1,0 +1,32 @@
+<div class="box" [appBarProgress]="ProgressShow">
+  <div class="top">
+     <div style="float: left;">
+        <span class="select-unit" [title]="selectUnitName?selectUnitName:wLanguage.selectUnit"
+              [class.placeholder]="selectUnitName?false:true"
+          (click)="showUnitSelector()">{{selectUnitName?selectUnitName:wLanguage.selectUnit}}
+        </span>
+     </div>
+     <div style="float: left;margin-left: 10px;">
+        <nz-range-picker [nzDisabledDate]="disabledEndDate" [(ngModel)]="dateRange" (ngModelChange)="onChange($event)"></nz-range-picker>
+      </div>
+     <div style="float: left;margin-left: 10px;">
+        <button type="button" class="link-button" nz-button nzType="primary" [disabled]="(!(selectUnitIdData.length>0))||(!(dateRange.length>0))" (click)="statistical()">{{wLanguage.statistical}}</button>
+     </div>
+     <div style="clear: both;"></div>
+  </div>
+  <!-- 统计区域 -->
+  <div *ngIf="!hide">
+    <div class="barChart">
+      <app-echart-column
+          (chartInstance)="getBarChartInstance($event)">
+      </app-echart-column>
+    </div>
+    <br>
+  </div>
+</div>
+<!--责任单位选择器-->
+<xc-tree-selector
+  [(xcVisible)]="isVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-selector>

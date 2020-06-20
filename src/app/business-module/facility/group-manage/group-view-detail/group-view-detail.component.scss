@@ -1,0 +1,26 @@
+// 分组详情样式
+.detail-container {
+  .group-detail-info {
+    flex: 1;
+    width: 33%;
+    margin-bottom: 20px;
+    .facility-item {
+      display: flex;
+      margin-left: 20px;
+      .label {
+        width: 30%;
+        display: inline-block;
+        line-height: 34px
+      }
+      .value {
+        max-width: 68%;
+        line-height: 34px;
+      }
+    }
+  }
+}
+// 状态文字和图标之间的样式
+.status-text {
+  margin-left: 6px;
+  vertical-align: middle;
+}

@@ -1,0 +1,16 @@
+<xc-map-selector-inspection
+  [(xcVisible)]="mapVisible"
+  [areaId]="areaId"
+  [noEdit]="true"
+  [selectorType]="'inspectionTask'"
+  [deviceSet]="deviceSet"
+  [isSelectAll]="isSelectAll"
+  [isHiddenButton]="true"
+  [switchHiddenButton]="true"
+  [mapBoxSelect]="true"
+  [selectHiddenButton]="true"
+  (selectDataChange)="mapSelectDataChange($event)"
+  [mapSelectorConfig]="mapSelectorConfig"
+  (xcVisibleChange)="xcVisibleChange($event)"
+>
+</xc-map-selector-inspection>

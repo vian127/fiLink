@@ -1,0 +1,65 @@
+<nz-modal
+  class="alarmFiltration alarmObj"
+  [(nzVisible)]="display.rule"
+  [nzTitle]="language.alarmFiltrationRule"
+  [nzContent]="modalContent"
+  [nzMaskClosable]="false"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="closeTable()">
+  <ng-template #modalTitle>
+    {{language.alarmFiltrationRule}}
+  </ng-template>
+  <ng-template #modalContent>
+    <xc-table
+      [dataSet]="_dataSet"
+      [pageBean]="pageBean"
+      [tableConfig]="tableConfig"
+      (pageChange)="pageChange($event)">
+    </xc-table>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="okText();closeTable()">{{language.okText}}</button>
+    <button nz-button nzType="default" (click)="closeTable()">{{language.cancelText}}</button>
+  </ng-template>
+</nz-modal>
+<!-- 列表 单选框 -->
+<ng-template #radioTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedAlarmId" (ngModelChange)="selectedAlarmChange( data)">
+    <label nz-radio [nzValue]="data.id"></label>
+  </nz-radio-group>
+</ng-template>
+
+<!-- 启用状态 -->
+<ng-template #isNoStartTemp let-data="data">
+  <nz-switch [ngModel]="data.status==='1'"
+             [nzControl]="true"
+             (click)="data.status = data.status"
+  >
+    <!-- (click)="clickSwitch(data)" -->
+  </nz-switch>
+  <span *ngIf="data.status === '2'" style="margin-left: 15px">{{language.disable}}</span>
+  <span *ngIf="data.status === '1'" style="margin-left: 15px" >{{language.enable}}</span>
+</ng-template>
+<!-- (click)="clickIsNoStorageTemp(data, 1)" (click)="clickIsNoStorageTemp(data, 2)" -->
+<!-- 是否存库 -->
+<ng-template #isNoStorageTemp let-data="data">
+  <nz-radio-group class="remoteTable" [ngModel]="data.stored" >
+    <label nz-radio nzValue="1" [nzDisabled]="true">{{language.yes}}</label>
+    <label nz-radio nzValue="2" [nzDisabled]="true">{{language.no}}</label>
+  </nz-radio-group>
+</ng-template>
+
+<!-- 过滤条件 点击事件 -->
+<!--
+<ng-template #filtrationConditionTemp let-data="data">
+  <span class="filtration-condition" [title]="data.alarmName">{{data.alarmName}}</span>
+</ng-template>
+-->
+<ng-template #filtrationConditionTemp let-data="data">
+  <span class="filtration-condition" [title]="data.alarmName" (click)="clickFiltration(data)">{{data.alarmName}}</span>
+</ng-template>
+
+<!-- 告警名称 -->
+<ng-template #alarmName let-filterValue = "filterValue">
+  <app-alarm-name [alarmNameConfig]='alarmNameConfig' [filterValue]="filterValue" ></app-alarm-name>
+</ng-template>

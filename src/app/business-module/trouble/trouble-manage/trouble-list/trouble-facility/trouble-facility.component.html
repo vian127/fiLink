@@ -1,0 +1,50 @@
+<!-- 当在表单提交时 使用 -->
+<div *ngIf="_type === 'form'" class="screenRender {{ _type }}">
+  <span class="area-name" [title]="checkObject.deviceName">{{checkObject.deviceName}}</span>
+  <button class="open-button" (click)="isVisible=true;refreshData();">
+    <i class="icon-fiLink fiLink-search-index iconfont"></i></button>
+</div>
+<!-- 当在列表 筛选时 使用 -->
+<div *ngIf="_type === 'table'" class="screenRender {{ _type }}">
+  <span class="area-name" [title]="checkObject.deviceName"
+        (click)="isVisible=true;refreshData();">
+  <span class="title" *ngIf="!checkObject.deviceName">{{placeholder||language.clickSelect}}</span>
+    {{checkObject.deviceName}}</span>
+</div>
+
+<!-- icon-l icon-search  -->
+<nz-modal
+  class="alarmFiltration alarmObj"
+  [(nzVisible)]="isVisible"
+  [nzTitle]="title||language.troubleFacility"
+  [nzContent]="modalContent"
+  [nzMaskClosable]="false"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="closeObj()">
+  <ng-template #modalContent>
+    <xc-table [dataSet]="_dataSet"
+              [pageBean]="pageBeanObject"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)">
+    </xc-table>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" class="link-button" (click)="objConfirm()">{{language.okText}}</button>
+    <button nz-button nzType="danger" class="link-button" (click)="closeObj()">{{language.cancelText}}</button>
+    <button nz-button nzType="danger" class="link-button" (click)="clearSelectData()">{{commonLanguage.cleanUp}}</button>
+  </ng-template>
+</nz-modal>
+
+<!--故障设施单选框-->
+<ng-template #radioTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedId" (ngModelChange)="selectedChange($event, data)">
+    <label nz-radio [nzValue]="data.deviceId"></label>
+  </nz-radio-group>
+</ng-template>
+<!--  状态 -->
+<!--<ng-template #statusTemp let-data="data">-->
+<!--  <div style="display: flex">-->
+<!--    <div class="box-icon" [ngClass]="data.statusClass"></div>-->
+<!--    <span style="margin-left: 5px">{{ data.statusName }} </span>-->
+<!--  </div>-->
+<!--</ng-template>-->

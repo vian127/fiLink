@@ -1,0 +1,93 @@
+<!--地图框选-->
+<div class="select-grouping">
+  <div
+    (click)="groupingShow()"
+    class="select-grouping-show iconfont icon-fiLink fiLink-map-selection"
+    title="{{indexLanguage.mapBoxToChoose}}">
+    <!--地图框选-->
+  </div>
+  <div (click)="showModal()" *ngIf="addGrouping" class="add-grouping-show">
+    {{indexLanguage.addToGroup}}
+  </div>
+  <!--添加分组弹框-->
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    [nzTitle]="modalTitle"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    [nzWidth]="1100"
+    (nzOnCancel)="closeModal()">
+
+    <ng-template #modalTitle>
+      {{indexLanguage.addToGroup}}
+    </ng-template>
+
+    <ng-template #modalContent>
+      <!--弹框主体内容-->
+      <div class="content">
+        <!--步骤条-->
+        <div class="step">
+          <nz-steps [nzCurrent]="stepIndex" [nzStartIndex]="0" nzDirection="vertical">
+            <nz-step class="one" nzTitle="{{indexLanguage.selectFacility}}"></nz-step>
+            <nz-step class="two" nzTitle="{{indexLanguage.addGroup}}"></nz-step>
+          </nz-steps>
+        </div>
+        <!--第一步显示表格-->
+        <div class="table" [hidden]="showTable">
+          <div class="title">
+            <span class="title-text">{{indexLanguage.theFirstStep}}</span>
+          </div>
+          <xc-table [dataSet]="dataSet"
+                    [pageBean]="pageBean"
+                    [tableConfig]="tableConfig"
+                    (pageChange)="pageChange($event)">
+          </xc-table>
+        </div>
+        <!--第二步操作内容-->
+        <div class="addGroup" [hidden]="showAddGroup">
+          <div class="title">
+            <span class="title-text">{{indexLanguage.theSecondStep}}</span>
+          </div>
+          <!--单选切换-->
+          <div class="addGroup-radio">
+            <span>{{indexLanguage.groupType}}：</span>
+            <nz-radio-group [(ngModel)]="radioValue" (ngModelChange)="groupRadioChange($event)">
+              <label nz-radio nzValue="{{groupTypeEnum.current}}">{{indexLanguage.selectExistingGroups}}</label>
+              <label nz-radio nzValue="{{groupTypeEnum.create}}">{{indexLanguage.createGroup}}</label>
+            </nz-radio-group>
+          </div>
+          <!--下拉选择分组-->
+          <div class="addGroup-select" *ngIf="selectExistingGroup">
+            <span>{{indexLanguage.selectGroup}}</span>
+            <nz-select
+              class="addGroup-select-option"
+              [nzMaxTagCount]="3"
+              [nzMaxTagPlaceholder]="5"
+              nzMode="default"
+              nzPlaceHolder="{{indexLanguage.pleaseSelectGroup}}"
+              [(ngModel)]="selectValue">
+              <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label"
+                         [nzValue]="option.value"></nz-option>
+            </nz-select>
+          </div>
+
+          <xc-form class="group-input" *ngIf="selectAddGroup" [column]="formColumn"
+                   (formInstance)="formInstance($event)"></xc-form>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" *ngIf="showBack" (click)="handleBack()">{{indexLanguage.lastStep}}</button>
+      <button nz-button nzType="primary" *ngIf="showNext" (click)="handleNext()">{{indexLanguage.nextStep}}</button>
+      <button nz-button nzType="primary" *ngIf="showOk" (click)="handleOk()">{{indexLanguage.confirm}}</button>
+      <button nz-button nzType="default" (click)="closeModal()">{{indexLanguage.cancel}}</button>
+    </ng-template>
+
+    <!-- 备注富文本框 -->
+    <ng-template #textAreaTemp>
+      <textarea rows="3" nz-input [(ngModel)]="remarkValue"></textarea>
+    </ng-template>
+
+  </nz-modal>
+</div>

@@ -1,0 +1,284 @@
+<nz-modal [(nzVisible)]="isVisible"
+          [nzTitle]="modalTitle"
+          [nzMaskClosable]="false"
+          [nzContent]="modalContent"
+          [nzFooter]="modalFooter"
+          (nzOnCancel)="handleCancel()"
+          [nzWidth]=modelWith>
+  <ng-template #modalTitle>
+    {{title}}
+  </ng-template>
+
+  <ng-template #modalContent>
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button *ngIf="ipV6submitErrors" class="link-button" nz-button nzType="primary"
+            [disabled]="maskErrors || startIpV6Errors || endIpV6Errors"
+            (click)="handleOk()"
+            [nzLoading]="submitLoading">{{language.table.okText}}</button>
+    <button *ngIf="ipV4submitErrors" class="link-button" nz-button nzType="primary"
+            [disabled]="startIpV4Errors || endIpV4Errors || maskIpV4Errors"
+            (click)="handleOk()"
+            [nzLoading]="submitLoading">{{language.table.okText}}</button>
+    <button class="link-button" nz-button nzType="default"
+            (click)="handleCancel()">{{language.table.cancelText}}</button>
+  </ng-template>
+</nz-modal>
+<ng-template #startIPV4>
+  <div #startIPV4Value>
+    <nz-input-group [nzSize]="'large'">
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input id="startIp41" name='startIp41' maxlength=3
+               style="height: 32px"
+               type="text" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">.</span>
+      </div>
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input id="startIp42" name='startIp42' maxlength=3
+               style="height: 32px"
+               type="text" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">.</span>
+      </div>
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input id="startIp43" name='startIp43' maxlength=3
+               style="height: 32px"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">.</span>
+      </div>
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input id="startIp44" name='startIp44' maxlength=3
+               style="height: 32px"
+               nz-input>
+      </div>
+    </nz-input-group>
+    <nz-form-explain *ngIf="startIpV4Errors" style="color: red">
+      {{language.systemSetting.pleaseEnterTheCorrectIPAddress}}
+    </nz-form-explain>
+  </div>
+</ng-template>
+<ng-template #endIPV4>
+  <div #endIPV4Value>
+    <nz-input-group [nzSize]="'large'">
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input id="endIp41" name='endIp41' maxlength=3 style="height: 32px"
+               type="text" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">.</span>
+      </div>
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input id="endIp42" name='endIp42' maxlength=3 style="height: 32px"
+               type="text" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">.</span>
+      </div>
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input id="endIp43" name='endIp43' maxlength=3 style="height: 32px"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">.</span>
+      </div>
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input id="endIp44" name='endIp44' maxlength=3 style="height: 32px"
+               nz-input>
+      </div>
+    </nz-input-group>
+    <nz-form-explain *ngIf="endIpV4Errors" style="color: red">
+      {{language.systemSetting.pleaseEnterTheCorrectIPAddress}}
+    </nz-form-explain>
+  </div>
+</ng-template>
+<ng-template #endIPV6>
+  <div #endIPV6Value>
+    <nz-input-group [nzSize]="'large'">
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="endIpv6" id="endIp61" name='endIp61' maxlength=4 style="height: 32px"
+               type="text"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width:90px">
+        <input class="endIpv6" id="endIp62" name='endIp62' maxlength=4 style="height: 32px"
+               type="text"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="endIpv6" id="endIp63" name='endIp63' maxlength=4 style="height: 32px"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="endIpv6" id="endIp64" name='endIp64' maxlength=4 style="height: 32px"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="endIpv6" id="endIp65" name='endIp65' maxlength=4 style="height: 32px"
+               type="text"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="endIpv6" id="endIp66" name='endIp66' maxlength=4 style="height: 32px"
+               type="text"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="endIpv6" id="endIp67" name='endIp67' maxlength=4 style="height: 32px"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="endIpv6" id="endIp68" name='endIp68' maxlength=4 style="height: 32px"
+               nz-input>
+      </div>
+    </nz-input-group>
+    <nz-form-explain *ngIf="endIpV6Errors" style="color: red">
+      {{language.systemSetting.pleaseEnterTheCorrectIPAddress}}
+    </nz-form-explain>
+  </div>
+</ng-template>
+<ng-template #startIPV6>
+  <div #startIPV6Value>
+    <nz-input-group [nzSize]="'large'">
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="startIpv6" id="startIp61" name='startIp61' maxlength=4
+               style="height: 32px"
+               type="text"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="startIpv6" id="startIp62" name='startIp62' maxlength=4
+               style="height: 32px"
+               type="text"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="startIpv6" id="startIp63" name='startIp63' maxlength=4
+               style="height: 32px" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="startIpv6" id="startIp64" name='startIp64' maxlength=4
+               style="height: 32px" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="startIpv6" id="startIp65" name='startIp65' maxlength=4
+               style="height: 32px"
+               type="text" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="startIpv6" id="startIp66" name='startIp66' maxlength=4
+               style="height: 32px"
+               type="text" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="startIpv6" id="startIp67" name='startIp67' maxlength=4
+               style="height: 32px" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">:</span>
+      </div>
+      <div nz-col nzSpan="5" style="width: 90px">
+        <input class="startIpv6" id="startIp68" name='startIp68' maxlength=4
+               style="height: 32px"
+               nz-input>
+      </div>
+    </nz-input-group>
+    <nz-form-explain *ngIf="startIpV6Errors" style="color: red">
+      {{language.systemSetting.pleaseEnterTheCorrectIPAddress}}
+    </nz-form-explain>
+  </div>
+</ng-template>
+<ng-template #maskIpv6>
+  <div #ipV6Mask>
+    <input style="width: 300px;" name="maskIpV6" id="maskIpV6" nz-input (keyup)="endKeyMaskIpV6UpEvent($event)"/>
+    <nz-form-explain *ngIf="maskErrors" style="color: red">
+      {{language.systemSetting.pleaseEnterAPureNumberBetween0And128}}
+    </nz-form-explain>
+  </div>
+</ng-template>
+<ng-template #maskIpv4>
+  <div #maskIp>
+    <nz-input-group [nzSize]="'large'">
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input class="maskIp" id="maskIp1" name='maskIp1' maxlength=3
+               style="height: 32px"
+               type="text" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">.</span>
+      </div>
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input class="maskIp" id="maskIp2" name='maskIp2' maxlength=3
+               style="height: 32px"
+               type="text" nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">.</span>
+      </div>
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input class="maskIp" id="maskIp3" name='maskIp3' maxlength=3
+               style="height: 32px"
+               nz-input>
+      </div>
+      <div nz-col nzSpan="1" style="width: 5px">
+        <span style="display: inline-block; margin-top: 5px">.</span>
+      </div>
+      <div nz-col nzSpan="6" style="width: 92px">
+        <input class="maskIp" id="maskIp4" name='maskIp4' maxlength=3
+               style="height: 32px"
+               nz-input>
+      </div>
+    </nz-input-group>
+    <nz-form-explain *ngIf="maskIpV4Errors" style="color: red">
+      {{language.systemSetting.pleaseEnterTheCorrectIPAddress}}
+    </nz-form-explain>
+  </div>
+
+</ng-template>
+
+

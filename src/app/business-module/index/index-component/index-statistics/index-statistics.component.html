@@ -1,0 +1,67 @@
+<div class="index-statistics-container">
+  <div class="statistics-title">
+    {{title}}
+  </div>
+<!--  设施总数-->
+  <div class="statistics-total-count" *ngIf="type === cardType.deviceCount">
+    <ul>
+      <li *ngFor="let item of statisticsNumber">
+        <div class="statistics-total-bottom">
+          <div class="statistics-total-center iconfont icon-fiLink-xl" [ngClass]="'fiLink-number-'+ item"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!--  不同类型的设施总数-->
+  <div class="statistics-total-count" *ngIf="type === cardType.typeCount">
+     <ul style="width: 100%;display: flex;">
+       <li *ngFor="let item of statisticsCount">
+         <div class="statistics-total-name hidden">{{item.label}}</div>
+         <span class="icon-fiLink-l" [ngClass]="item.iconClass"></span>
+         <div class="statistics-total-number hidden" [ngClass]="item.textClass">{{item.sum}}</div>
+       </li>
+     </ul>
+  </div>
+<!--  设施状态-->
+  <div class="statistics-content" *ngIf="type === cardType.deviceStatus">
+    <div echarts [options]="deviceStatusChartOption" class="chart-style" *ngIf="!noDeviceStatusChart"></div>
+    <div class="padding-t" *ngIf="noDeviceStatusChart">
+      <nz-empty class="empty"></nz-empty>
+    </div>
+  </div>
+<!--  当前告警总数-->
+  <div class="statistics-content" *ngIf="type === cardType.alarmCount">
+    <div echarts [options]="alarmCurrentLevelGroupOption" class="chart-style" *ngIf="!noAlarmCurrentLevelGroup"></div>
+    <div class="padding-t" *ngIf="noAlarmCurrentLevelGroup">
+      <nz-empty class="empty"></nz-empty>
+    </div>
+  </div>
+<!--  告警增量-->
+  <div class="statistics-content" *ngIf="type === cardType.alarmIncrement">
+    <div echarts [options]="alarmDateStatisticsOption" class="chart-style" *ngIf="!noAlarmDateStatistics"></div>
+    <div class="padding-t" *ngIf="noAlarmDateStatistics">
+      <nz-empty class="empty"></nz-empty>
+    </div>
+  </div>
+<!--  工单增量-->
+  <div class="statistics-content" *ngIf="type === cardType.workIncrement">
+    <div echarts [options]="procAddListCountOption" class="chart-style" *ngIf="!noProcAddListCount"></div>
+    <div class="padding-t" *ngIf="noProcAddListCount">
+      <nz-empty class="empty"></nz-empty>
+    </div>
+  </div>
+<!--  繁忙设施TOP-->
+  <div class="statistics-content" *ngIf="type === cardType.busyTop">
+    <div echarts [options]="userUnlockingTopOption" class="chart-style" *ngIf="!noUserUnlockingTop"></div>
+    <div class="padding-t" *ngIf="noUserUnlockingTop">
+      <nz-empty class="empty"></nz-empty>
+    </div>
+  </div>
+<!--  告警设施TOP-->
+  <div class="statistics-content" *ngIf="type === cardType.alarmTop">
+    <div echarts [options]="screenDeviceIdsGroupOption" class="chart-style" *ngIf="!noScreenDeviceIdsGroup"></div>
+    <div class="padding-t" *ngIf="noScreenDeviceIdsGroup">
+      <nz-empty class="empty"></nz-empty>
+    </div>
+  </div>
+</div>

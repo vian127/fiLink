@@ -1,0 +1,43 @@
+@import "config";
+
+ul, p {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.hidden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  //white-space: nowrap;
+  white-space: pre !important;
+  word-break: keep-all;
+}
+
+.show-hidden {
+  display: none;
+}
+
+.text-pre {
+  white-space: pre;
+  word-break: keep-all;
+}
+
+.box-color-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  align-self: center;
+}
+
+.bg-c {
+  background-color: $bg-c;
+}
+
+.bg-c-w {
+  background-color: $bg-c-w;
+}

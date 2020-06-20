@@ -1,0 +1,83 @@
+<div class="whole">
+<!--  卡片 工单基本信息-->
+  <nz-card nzTitle="工单基本信息"  nz-row>
+    <nz-row>
+      <nz-col nzSpan="3">工单名称：</nz-col>
+      <nz-col nzSpan="20">{{informationData.workOrderName}}</nz-col>
+    </nz-row>
+    <nz-row>
+      <nz-col nzSpan="3">责任人：</nz-col>
+      <nz-col nzSpan="20">{{informationData.personLiable}}</nz-col>
+    </nz-row>
+    <nz-row>
+      <nz-col nzSpan="3">工单状态：</nz-col>
+      <nz-col nzSpan="20">{{informationData.workOrderStatus}}</nz-col>
+    </nz-row>
+    <nz-row>
+      <nz-col nzSpan="3">期望完工时间：</nz-col>
+      <nz-col nzSpan="20">{{informationData.expectCompTime}}</nz-col>
+    </nz-row>
+    <nz-row>
+      <nz-col nzSpan="3">实际完工时间：</nz-col>
+      <nz-col nzSpan="20">{{informationData.actualCompTime}}</nz-col>
+    </nz-row>
+    <nz-row>
+      <nz-col nzSpan="3">创建时间：</nz-col>
+      <nz-col nzSpan="20">{{informationData.createTime}}</nz-col>
+    </nz-row>
+    <nz-row>
+      <nz-col nzSpan="3">备注：</nz-col>
+      <nz-col nzSpan="20">{{informationData.remark}}</nz-col>
+    </nz-row>
+  </nz-card>
+
+  <!--  卡片 操作-->
+  <nz-card nzTitle="操作" class="card-operation" nz-row>
+    <button nz-col  nzSpan="2" nz-button [nzType]="'primary'" (click)="onWorkOrderOperation(0)" ><span>删除</span></button>
+    <button nz-col  nzSpan="2" nz-button [nzType]="'primary'" (click)="onWorkOrderOperation(1)" ><span>取消</span></button>
+    <button nz-col  nzSpan="2" nz-button [nzType]="'primary'" (click)="onChargeback(2)" ><span>转派</span></button>
+    <button nz-col  nzSpan="2" nz-button [nzType]="'primary'" (click)="onChargeback(3)" ><span>退单</span></button>
+  </nz-card>
+  <!--  卡片 内容审核-->
+  <nz-card nzTitle="内容审核">
+    <div nz-row>
+      <!-- 内容审核左边部分-->
+      <div nz-col  nzSpan="12" >
+        <P class="rows">节目申请人：</P>
+        <p class="rows">{{informationData?.program?.applyUser}}</p>
+        <P>节目用途： {{informationData?.program?.programPurpose}}</P>
+        <div nz-row>
+          <P nz-col  nzSpan="4">审核结果：</P>
+          <nz-radio-group nz-col  nzSpan="12" [(ngModel)]="workOrderData.auditResults">
+            <label nz-radio nzValue="0">通过</label>
+            <label nz-radio nzValue="1">不通过</label>
+          </nz-radio-group>
+        </div>
+        <nz-row>
+          <P nz-col  nzSpan="4">审核意见：</P>
+          <textarea nz-col [(ngModel)]="workOrderData.examineAdvise" nzSpan="4" rows="4" class="text-input" nz-input  ></textarea>
+        </nz-row>
+
+        <p class="btn-submit" (click)="onWorkOrderOperation(4)">提交</p>
+      </div>
+      <!-- 内容审核右边部分-->
+
+      <div nz-col nzSpan="12">
+        <video src="/i/movie.ogg" controls="controls"></video>
+      </div>
+    </div>
+  </nz-card>
+</div>
+<!-- 退单模态框-->
+<nz-modal [(nzVisible)]="isChargeBack" nzTitle="退单原因" (nzOnCancel)="onHandleCancel()" (nzOnOk)="onHandleOk(3)">
+  <textarea  [(ngModel)]="workOrderData.causeReason" rows="4" nz-input></textarea>
+</nz-modal>
+
+<!-- 转派模态框-->
+<nz-modal [(nzVisible)]="isTransfer" nzTitle="转派原因" (nzOnCancel)="onHandleCancel()" (nzOnOk)="onHandleOk(2)">
+  <span class="examine">指定人:</span>
+  <nz-select  [(ngModel)]="designee">
+    <nz-option *ngFor="let data of designeeArr" [nzValue]="data.id" [nzLabel]="data.name"></nz-option>
+  </nz-select>
+  <textarea  [(ngModel)]="workOrderData.transferReason" rows="4" nz-input></textarea>
+</nz-modal>

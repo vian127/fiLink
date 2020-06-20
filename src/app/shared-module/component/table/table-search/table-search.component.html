@@ -1,0 +1,86 @@
+<div>
+  <form novalidate (submit)="handleSearch()">
+    <ng-container [ngSwitch]="config.searchConfig.type"
+    >
+      <div *ngSwitchCase="'input'">
+        <input name="{{config.key}}" type="text" [(ngModel)]="queryTerm.get(config.key).filterValue" nz-input
+               placeholder="{{language.form.inputPlaceholder}}">
+      </div>
+      <div *ngSwitchCase="'select'">
+        <nz-select *ngIf="config.searchConfig.selectType==='multiple'" name="{{config.key}}"
+                   style="width: 100%;line-height: 1"
+                   [nzMaxTagCount]="0"
+                   [nzMaxTagPlaceholder]="tagPlaceHolder"
+                   [(ngModel)]="queryTerm.get(config.key).filterValue"
+                   (ngModelChange)="selectChange.emit({value:$event,selectInfo:config.searchConfig.selectInfo})"
+                   [nzMode]="config.searchConfig.selectType||'default'"
+                   [nzAllowClear]="(!config.searchConfig.notAllowClear)"
+                   [nzPlaceHolder]="language.form.selectPlaceholder">
+          <ng-container *ngFor="let option of config.searchConfig.selectInfo">
+            <nz-option [nzValue]="option[config.searchConfig.value]||option.value"
+                       [nzLabel]="option[config.searchConfig.label]||option.label">
+            </nz-option>
+          </ng-container>
+        </nz-select>
+        <xc-nz-select *ngIf="config.searchConfig.selectType!=='multiple'" name="{{config.key}}" style="width: 100%;"
+                      [(ngModel)]="queryTerm.get(config.key).filterValue"
+                      [nzMode]="config.searchConfig.selectType||'default'"
+                      [nzAllowClear]="(!config.searchConfig.notAllowClear)"
+                      [nzPlaceHolder]="language.form.selectPlaceholder">
+          <ng-container *ngFor="let option of config.searchConfig.selectInfo">
+            <xc-nz-option [nzValue]="option[config.searchConfig.value]||option.value"
+                          [nzLabel]="option[config.searchConfig.label]||option.label">
+            </xc-nz-option>
+          </ng-container>
+        </xc-nz-select>
+        <ng-template #tagPlaceHolder let-selectedList>
+        <span [title]="selectedList | selectValue:config.searchConfig">
+          {{selectedList | selectValue:config.searchConfig}}
+        </span>
+        </ng-template>
+      </div>
+      <div *ngSwitchCase="'date'" style="display: flex">
+        <div style="flex: 1">
+          <nz-date-picker [nzShowTime]="true" style="width: 100%" [(ngModel)]="searchDate[config.key]"
+                          (ngModelChange)="onChange.emit({value:$event, key:config.key})"></nz-date-picker>
+        </div>
+        <div style="width: 70px;">
+          <nz-select style="width: 100%" [(ngModel)]="queryTerm.get(config.key).operator">
+            <nz-option nzValue="gt" nzLabel="{{language.table.gt}}"></nz-option>
+            <nz-option nzValue="lt" nzLabel="{{language.table.lt}}"></nz-option>
+            <nz-option nzValue="eq" nzLabel="{{language.table.eq}}"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div *ngSwitchCase="'dateRang'">
+        <nz-range-picker
+          nzShowTime
+          [name]="config.key"
+          [(ngModel)]="rangDateValue[config.key]"
+          (ngModelChange)="rangValueChange.emit({value:$event,key:config.key})"
+          (nzOnOpenChange) = "onOpenChange.emit({value:$event,key:config.key})"
+        ></nz-range-picker>
+      </div>
+      <div *ngSwitchCase="'render'">
+        <ng-template [ngTemplateOutlet]="config.searchConfig.renderTemplate"
+                     [ngTemplateOutletContext]="{filterValue:queryTerm.get(config.key)}"
+        ></ng-template>
+      </div>
+      <div *ngSwitchCase="'operate'">
+      <span style="margin-right: 10px;cursor: pointer" nz-tooltip [nzTitle]="language.table.search"
+            (click)="handleSearch()">
+        <i class="icon-fiLink iconfont fiLink-search"></i>
+      </span>
+        <span *ngIf="config.searchConfig.customSearchHandle" style="margin-right: 10px;cursor: pointer" nz-tooltip
+              [nzTitle]="language.table.searchTemp"
+              (click)="config.searchConfig.customSearchHandle()">
+        <i class="icon-fiLink iconfont fiLink-search-template"></i>
+      </span>
+        <span style="margin-right: 10px;cursor: pointer" (click)="handleRest()" nz-tooltip
+              [nzTitle]="language.table.reset">
+        <i class="icon-fiLink iconfont fiLink-reset"></i></span>
+      </div>
+    </ng-container>
+  </form>
+</div>
+

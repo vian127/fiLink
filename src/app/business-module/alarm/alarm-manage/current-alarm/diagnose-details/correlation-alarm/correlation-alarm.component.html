@@ -1,0 +1,7 @@
+<nz-card nzTitle="{{language.correlationAlarm}}">
+  <xc-table [dataSet]="correlationData"
+            [pageBean]="alarmPageBean"
+            [tableConfig]="alarmTableConfig"
+            (pageChange)="alarmPageChange($event)">
+  </xc-table>
+</nz-card>

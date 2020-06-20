@@ -1,0 +1,74 @@
+.outer-box {
+  //width: 100%;
+  //height:100%;
+  //background-color: #0ac929;
+  //z-index: 4000;
+  //text-align: center;
+  //line-height: 100%;
+
+  .over-box {
+    width: 94%;
+    height: 580px;
+    z-index: 100;
+    position: absolute;
+    cursor: not-allowed;
+  }
+  .loadStatus {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+  }
+
+  .content {
+    margin-bottom: 10px;
+
+    .switch-icon-interval {
+      margin-left: 40px;
+    }
+
+    .part-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .detail-content {
+      display: flex;
+    }
+
+    .content-left {
+      margin-bottom: 10px;
+      width: 94%;
+    }
+
+    .content-right {
+      line-height: 36px;
+      text-align: center;
+      margin-right: 5px;
+      font-size: 14px;
+    }
+
+    .camera-button {
+
+      button {
+        margin-right: 20px;
+      }
+    }
+
+    .footer {
+      height: 32px;
+      line-height: 32px;
+
+      .footer-content {
+        display: inline-block;
+        border-radius: 4px;
+        height: 32px;
+        padding: 0 15px;
+        border: 1px solid #8080806b;
+        margin-right: 20px;
+      }
+    }
+  }
+
+
+}

@@ -1,0 +1,29 @@
+@import "../../css/config";
+//工单类型选择样式
+.facility-group {
+  border: none;
+  width: $left-panel-width;
+  .facility-group-title {
+    padding: 5px 4px;
+    height: 65px;
+    align-items: center;
+    .facility-group-title-text {
+      width: 65px;
+      margin: 0px 5px 5px 5px;
+      color: #ff6027;
+    }
+    .facility-group-title-select {
+      width: 370px;
+    }
+  }
+  //checkbox选择器样式
+  .select-container {
+    display: flex;
+    .select {
+      text-align: center;
+      font-size: 12px;
+      height: 30px;
+      width: 55px;
+    }
+  }
+}

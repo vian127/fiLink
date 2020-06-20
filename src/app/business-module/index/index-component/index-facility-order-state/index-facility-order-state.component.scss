@@ -1,0 +1,73 @@
+@import "../../css/config";
+
+//工单状态和工单类型tab切换的样式
+.facility-order-panel {
+  position: absolute;
+  max-height: calc(100vh - 85px);
+  .left-panel-tabs {
+    display: flex;
+    background-color: white;
+    .left-panel-border {
+      border-right: 1px solid #e0dbdb;
+    }
+    .left-panel-tab {
+      text-align: center;
+      line-height: 30px;
+      height: 30px;
+      .icon-type {
+        width: 20px;
+        height: 20px;
+        float: left;
+        margin-left: 20px;
+        color: #ff6027;
+      }
+      .text-content{
+        cursor: pointer;
+        float: left;
+        width: 70px;
+      }
+    }
+  }
+
+  //单选按钮和多选按钮的样式
+  .order-state-type-checkbox{
+    border: none;
+    .checkbox-container{
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      justify-content: space-between;
+      width: 380px;
+      .checkbox {
+        text-align: center;
+        font-size: 12px;
+        width: 60px;
+        .checkbox-text {
+          white-space: pre-wrap;
+          width: 50px;
+          margin: 0 7px;
+          color: black;
+        }
+      }
+      .radio {
+        text-align: center;
+        font-size: 12px;
+        .radio-text {
+          white-space: pre-wrap;
+          width: 50px;
+          margin: 0 5px;
+          color: black;
+        }
+        .radio-content{
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+
+//选中的tab样式
+.tab-selected {
+  color: #13c2c2;
+}

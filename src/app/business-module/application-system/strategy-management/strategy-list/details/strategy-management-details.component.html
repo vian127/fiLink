@@ -1,0 +1,198 @@
+<div class="strategy">
+  <div>触发条件</div>
+  <div class="trigger">
+    <div class="application">
+      <span class="application-input">
+        <input
+          [(ngModel)]="selectEquipment.equipmentName"
+          nz-input [disabled]="true" style="width: 190px"/>
+      </span>
+      <span class="facilities">
+          <i nz-icon nzType="plus-circle" nzTheme="outline" (click)="handleEquipment()"></i>
+        </span>
+    </div>
+    <div class="source">
+      <span class="source-input">
+        <input
+          [(ngModel)]="selectReport.alarmLevelName"
+          nz-input [disabled]="true" style="width: 190px"/>
+      </span>
+      <span class="facilities">
+          <i nz-icon nzType="plus-circle" nzTheme="outline" (click)="handleReport()"></i>
+      </span>
+    </div>
+  </div>
+  <div class="perform-action">
+    <div class="action">
+      <span>添加设备</span>
+      <span class="action-add" (click)="handleAddEquipment()">添加</span>
+    </div>
+    <div class="action-list" *ngIf="multiEquipmentData && multiEquipmentData.length">
+      <xc-table [dataSet]="multiEquipmentData"
+                [pageBean]="pageBean"
+                [tableConfig]="equipmentTable"
+                (pageChange)="pageChange($event)">
+      </xc-table>
+    </div>
+    <div>
+      <nz-radio-group [(ngModel)]="targetType">
+        <label nz-radio nzValue="002">单控</label>
+        <label nz-radio nzValue="003">多控</label>
+        <label nz-radio nzValue="004">信息屏</label>
+      </nz-radio-group>
+    </div>
+    <div class="action-table">
+      列表
+    </div>
+  </div>
+  <div style="margin: 10px 0">设置指令</div>
+  <div class="instructions" *ngIf="targetType !== '004'">
+    <div style="margin: 10px 0">灯</div>
+    <div class="switch-btn">
+      <span>开关</span>
+      <span class="switch-opera">
+        <nz-switch [ngModel]="instructLightBase.switchLight" nzCheckedChildren="开" nzUnCheckedChildren="关"></nz-switch>
+      </span>
+    </div>
+    <div class="dimming">
+      <div>调光</div>
+      <nz-row>
+        <nz-col nzSpan="12">
+          <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="instructInfoBase.light"></nz-slider>
+        </nz-col>
+        <div nz-col nzSpan="4">
+          <nz-input-number
+            [nzMin]="1"
+            [nzMax]="20"
+            [ngStyle]="{ marginLeft: '16px' }"
+            [(ngModel)]="instructInfoBase.light"
+          ></nz-input-number>
+        </div>
+      </nz-row>
+    </div>
+  </div>
+  <div class="screen" *ngIf="targetType === '004'">
+    <div style="margin: 10px 0">信息屏</div>
+    <div>
+      <span style="margin-right: 20px">节目名称</span>
+      <span class="application-input">
+        <input
+          [(ngModel)]="programName"
+          nz-input [disabled]="true" style="width: 190px"/>
+      </span>
+      <span class="facilities">
+          <i nz-icon nzType="plus-circle" nzTheme="outline" (click)="isShowProgram = true"></i>
+        </span>
+    </div>
+    <div>
+      <span>音量</span>
+      <span>
+        <nz-row>
+        <nz-col nzSpan="12">
+          <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="instructInfoBase.volume"></nz-slider>
+        </nz-col>
+        <div nz-col nzSpan="4">
+          <nz-input-number
+            [nzMin]="1"
+            [nzMax]="20"
+            [ngStyle]="{ marginLeft: '16px' }"
+            [(ngModel)]="instructInfoBase.volume"
+          ></nz-input-number>
+        </div>
+      </nz-row>
+      </span>
+    </div>
+    <div>
+      <span>亮度</span>
+      <span>
+        <nz-row>
+        <nz-col nzSpan="12">
+          <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="instructInfoBase.light"></nz-slider>
+        </nz-col>
+        <div nz-col nzSpan="4">
+          <nz-input-number
+            [nzMin]="1"
+            [nzMax]="20"
+            [ngStyle]="{ marginLeft: '16px' }"
+            [(ngModel)]="instructInfoBase.light"
+          ></nz-input-number>
+        </div>
+      </nz-row>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!--节目列表-->
+<nz-modal [(nzVisible)]="isShowProgram"
+          nzTitle="节目列表"
+          (nzOnOk)="handleProgramOk()"
+          nzWidth="70%" (nzOnCancel)="isShowProgram = false">
+  <xc-table [dataSet]="programData"
+            [pageBean]="pageBean"
+            (pageChange)="pageChange($event)"
+            [tableConfig]="tableProgram">
+  </xc-table>
+</nz-modal>
+<!--设备选择-->
+<nz-modal [(nzVisible)]="isStrategy"
+          nzTitle="选择设备"
+          nzWidth="70%" (nzOnCancel)="handleCancel()" (nzOnOk)="handleEquipmentOk()">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableEquipment"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</nz-modal>
+
+<!--告警选择-->
+<nz-modal [(nzVisible)]="isSource" nzWidth="70%" (nzOnCancel)="handleCancel()" (nzOnOk)="handleReportOk()">
+  <nz-tabset>
+    <nz-tab nzTitle="告警列表">
+      <xc-table [dataSet]="reportData"
+                [pageBean]="pageBean"
+                (pageChange)="pageChange($event)"
+                [tableConfig]="tableConfig">
+      </xc-table>
+    </nz-tab>
+    <nz-tab nzTitle="事件列表">
+
+    </nz-tab>
+  </nz-tabset>
+</nz-modal>
+<!--设备列表单选框-->
+<ng-template #radioTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedEquipmentId" (ngModelChange)="selectedEquipmentChange($event, data)">
+    <label nz-radio [nzValue]="data.equipmentId"></label>
+  </nz-radio-group>
+</ng-template>
+
+<!--事件源单选框-->
+<ng-template #radioReportTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedReportId" (ngModelChange)="selectedReportChange($event, data)">
+    <label nz-radio [nzValue]="data.id"></label>
+  </nz-radio-group>
+</ng-template>
+
+<!--设备选择-->
+<nz-modal [(nzVisible)]="isMultiEquipment"
+          [nzFooter]="null"
+          nzTitle="选择设备"
+          nzWidth="70%" (nzOnCancel)="isMultiEquipment = false">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="equipmentTable"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</nz-modal>
+
+
+<!--设备列表单选框-->
+<ng-template #radioProgramTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedProgramId" (ngModelChange)="selectedProgramChange($event, data)">
+    <label nz-radio [nzValue]="data.programId"></label>
+  </nz-radio-group>
+</ng-template>
+
+
+

@@ -1,0 +1,73 @@
+<div class="box-warp">
+  <xc-table
+    [dataSet]="_dataSet"
+    [pageBean]="pageBean"
+    [tableConfig]="tableConfig"
+    (pageChange)="pageChange($event)">
+  </xc-table>
+  <button nz-button nzType="default" (click)="toAlarmDiagnose()">{{language.alarmDiagnose}}</button>
+</div>
+<!--告警级别-->
+<ng-template #alarmFixedLevelTemp let-data="data">
+  <div style="display: flex">
+    <div class="box-icon" [ngStyle]="data.style"></div>
+    <span style="margin-left: 5px">{{ data.alarmFixedLevelName }} </span>
+  </div>
+</ng-template>
+
+<ng-template #alarmCleanStatusTemp let-data="data">
+  <div>{{ data.alarmCleanStatusName }}</div>
+</ng-template>
+
+<ng-template #alarmConfirmStatusTemp let-data="data">
+  <div>{{ data.alarmConfirmStatusName }}</div>
+</ng-template>
+<ng-template #alarmSourceTypeTemp let-data="data">
+  <div>{{ data.alarmSourceTypeName }}</div>
+</ng-template>
+
+<!-- 修改备注弹框 -->
+<nz-modal
+  class="updateRemarkPopUp"
+  [(nzVisible)]="display.remarkTable"
+  [nzTitle]="language.updateRemark"
+  [nzMaskClosable]="false"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="display.remarkTable=false">
+  <ng-template #modalTitle>
+    {{language.updateRemark}}
+  </ng-template>
+  <ng-template #modalContent>
+    <!-- <textarea rows="4" nz-input [(ngModel)]="remarkValue"></textarea> -->
+    <xc-form  [column]="formColumnRemark" (formInstance)="formInstanceRemark($event)"></xc-form>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" [disabled]="!formStatusRemark.getValid()" (click)="updateAlarmRemark();display.remarkTable=false">{{language.okText}}</button>
+    <button nz-button nzType="default" (click)="display.remarkTable=false">{{language.cancelText}}</button>
+  </ng-template>
+</nz-modal>
+
+<!-- 告警名称 -->
+<ng-template #alarmName let-filterValue = "filterValue">
+  <app-alarm-name [alarmNameConfig]='alarmNameConfig' [filterValue]="filterValue"></app-alarm-name>
+</ng-template>
+
+<!-- 区域 -->
+<ng-template #areaSelector let-data="data" let-filterValue = "filterValue">
+  <app-area [areaConfig]='areaConfig' [filterValue]="filterValue"></app-area>
+</ng-template>
+
+<!-- 告警对象 -->
+<ng-template #department let-filterValue = "filterValue">
+  <app-alarm-object [alarmObjectConfig]="alarmObjectConfig" [filterValue]="filterValue"></app-alarm-object>
+</ng-template>
+
+<!-- 责任单位 -->
+<!--<ng-template #unitTemp let-filterValue = "filterValue">-->
+<!--<app-unit [unitConfig]='unitConfig' [filterValue]='filterValue'></app-unit>-->
+<!--</ng-template>-->
+
+<div class="box-warp" *ngIf="display.historyAlarmTemplateTable">
+  <app-template-table (resultAndClose)="templateTable($event)" [isHistoryAlarmTemplateTable]="true"></app-template-table>
+</div>

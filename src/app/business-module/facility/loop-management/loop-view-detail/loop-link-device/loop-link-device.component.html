@@ -1,0 +1,19 @@
+<!--回路详情关联设施概览列表-->
+<nz-card nzTitle="{{language.loopLinkDevice}}" >
+  <div class="box-warp">
+    <xc-table #tableComponent
+              [dataSet]="dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)">
+    </xc-table>
+  </div>
+</nz-card>
+
+<!--移入回路列表弹框-->
+<app-move-into-loop-list
+  [title]="moveInLoopTitle"
+  [(xcVisible)]="isVisible"
+  (selectListDataChange)="selectLoopData($event)"
+>
+</app-move-into-loop-list>

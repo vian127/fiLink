@@ -1,0 +1,58 @@
+<div class="box-warp">
+  <div>
+    <span class="pageTitle">
+      {{ pageTitle }}
+    </span>
+  </div>
+  <div style="padding-bottom: 60px;">
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+    <div style="padding-left: 20px">
+      <button class="link-button" nz-button nzType="primary"
+              style="margin-right: 20px" (click)="submit()" [disabled]="confirmButtonIsGray()">{{language.okText}}
+      </button>
+      <button class="link-button" nz-button nzType="danger" (click)="cancel()">{{language.cancelText}}</button>
+    </div>
+  </div>
+
+</div>
+<!-- 责任单位 -->
+<ng-template #department let-formGroup="formGroup" let-col="col">
+  <div>
+    <span class="area-name" [title]="assignDeptName">{{assignDeptName}}</span>
+    <button type="button" class="open-button"
+            (click)="showAreaSelectorModal()" [disabled]="isDisable"><i
+      class="icon-fiLink fiLink-search-index iconfont"></i></button>
+  </div>
+</ng-template>
+
+<!--单位选择器-->
+<xc-tree-area-selector
+  [(xcVisible)]="unitSelectVisible"
+  [treeSelectorConfig]="unitSelectorConfig"
+  [canClear]="false"
+  (selectDataChange)="unitSelectChange($event)"
+>
+  <!--责任人-->
+  <ng-template #departNameTemp let-formGroup="formGroup" let-col="col">
+    <div>
+      <input readonly="readonly" class="area-name" [title]="assignUserName" [(ngModel)]="assignUserName"
+      >
+      <button type="button" class="open-button" (click)="showDutyNameSelectorModal()" [disabled]="isDisable">
+        <i class="icon-fiLink fiLink-search-index iconfont"></i></button>
+    </div>
+  </ng-template>
+  <!--责任人-->
+    <xc-tree-area-selector
+      [(xcVisible)]="isPersonVisible"
+      (selectDataChange)="selectDataChange($event)"
+      [treeSelectorConfig]="personSelectorConfig">
+    </xc-tree-area-selector>
+</xc-tree-area-selector>
+<!--遮罩层-->
+<div *ngIf="ifSpin" class="ifSpin" style="position: absolute;top: 0px;left: 0px;background-color: gray;opacity: 0.4;z-index: 20;width: 100%;height: 100%;"></div>
+<nz-spin [nzSimple]="true"
+         *ngIf="ifSpin"
+         style="position: absolute; top: 400px; left: 50%; z-index: 999;"
+         [nzSpinning]="true"
+         [nzSize]="'large'"
+></nz-spin>

@@ -1,0 +1,39 @@
+<div *ngIf="_type === 'form'" class="screenRender {{ _type }}">
+    <span class="area-name" [title]="checkAlarmNotifier.name">{{checkAlarmNotifier.name}}</span>
+    <button class="open-button" [disabled]="display.disabled"
+    (click)="openUserSelector()">
+    <i class="icon-fiLink fiLink-search-index iconfont"></i></button>
+  </div>
+
+  <div *ngIf="_type === 'table'" class="screenRender {{ _type }}">
+      <span class="area-name" [title]="checkAlarmNotifier.name"
+      (click)="display.userTable=true;refreshUserData();">
+      <span class="title" *ngIf="!checkAlarmNotifier.name">{{language.clickSelect}}</span>
+      {{checkAlarmNotifier.name}}</span>
+    </div>
+
+  <nz-modal
+    class="alarmFiltration alarmUser"
+    [(nzVisible)]="display.userTable"
+    [nzTitle]="language.notifier"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    (nzOnCancel)="close()">
+  <ng-template #modalTitle>
+    {{language.notifier}}
+  </ng-template>
+  <ng-template #modalContent>
+    <span class="selected-count">{{commonLanguage.selected}}：{{checkAlarmNotifierBackups.ids.length}} {{commonLanguage.count}}</span>
+    <xc-table #xCTableComp
+      [dataSet]="_dataSetUser"
+      [pageBean]="pageBeanUser"
+      [tableConfig]="tableConfigUser"
+      (pageChange)="pageUserChange($event)">
+    </xc-table>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" class="link-button" (click)="showUser()">{{language.okText}}</button>
+    <button nz-button nzType="danger" class="link-button" (click)="close()">{{language.cancelText}}</button>
+    <button nz-button nzType="danger" class="link-button" (click)="clearSelectData()">{{commonLanguage.cleanUp}}</button>
+  </ng-template>
+  </nz-modal>

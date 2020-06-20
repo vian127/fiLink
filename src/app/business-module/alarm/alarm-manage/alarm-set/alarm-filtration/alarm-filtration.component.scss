@@ -1,0 +1,77 @@
+.alarm-level {
+  display: inline-block;
+  text-align: center;
+  width: 32px;
+  height: 20px;
+  color: #333;
+}
+
+.alarm-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  font-family: 'Microsoft YaHei';
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+
+.box-warp {
+  padding: 0px 10px 10px 10px;
+}
+
+
+.box-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  align-self: center;
+}
+
+.alarm-urgent {
+  background: #e61017
+}
+
+.alarm-main {
+  background: #ff6600;
+}
+
+.alarm-secondary {
+  background: #f1c620;
+}
+
+.alarm-prompt {
+  background: #58c1f0
+}
+
+.particulars-popUp > p > span {
+  margin-left: 10px;
+}
+
+.filtration-condition{
+  cursor: pointer;
+  width: 100%;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+div.particulars-popUp > p > span:nth-child(2) {
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 350px;
+  line-height: 13px;
+}
+
+// 单选框样式
+::ng-deep nz-radio-group.remoteTable .ant-radio {
+  bottom: 1px;
+  left: 0;
+}
+
+::ng-deep nz-radio-group.remoteTable .ant-radio + span {
+  padding-left: 15px;
+}

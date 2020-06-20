@@ -1,0 +1,28 @@
+<div class="viewer-js">
+  <div class="viewer-js-timer">
+    <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="selectAll()"></label>
+    <span>{{timeStr}}</span>
+  </div>
+  <ul class="images" [id]="timeStr">
+    <li *ngFor="let item of photoList"><img (click)="viewBigPic(item)" [src]="item.picUrlThumbnail" [alt]="item.picName">
+        <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="checkItem(item)"></label>
+        <div class="operate" (click)="$event.stopPropagation();">
+          <i class="icon iconfont fiLink-overview ml-15"
+             (click)="$event.stopPropagation(); clickItem($event, item)"
+             (mouseover)="showPicInfo($event, item)"
+             (mouseleave)="hidePicInfo()"
+          ></i>
+          <a  (click)="$event.stopPropagation(); download(item.picUrlBase)"><i class="icon iconfont fiLink-download-file" [title]="" ></i></a>
+          <i class="icon iconfont fiLink-delete mr-15" (click)="$event.stopPropagation();delete(item)"></i>
+        </div>
+    </li>
+  </ul>
+</div>
+
+<ng-template let-picInfo="picInfo" #picInfo>
+  <div class="hover-info">
+    <p><span class="label">{{language.picInfo.name}}</span><span class="value">{{picInfo.picName}}</span></p>
+    <p><span class="label">{{language.picInfo.imgType}}</span><span class="value">{{picInfo.type}}</span></p>
+    <p><span class="label">{{language.picInfo.time}}</span><span class="value">{{picInfo.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</span></p>
+  </div>
+</ng-template>

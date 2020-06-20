@@ -1,0 +1,105 @@
+<div class="refAlarm">
+  <div>
+    <label>{{language.alarm.alarmName}}</label><span [title]="refAlarmMessage.alarmName">{{refAlarmMessage.alarmName}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmFixedLevel}}</label>
+    <span *ngIf="refAlarmMessage.alarmFixedLevel === '1'"
+          [title]="language.alarm.urgent">{{language.alarm.urgent}}</span>
+    <span *ngIf="refAlarmMessage.alarmFixedLevel === '2'"
+          [title]="language.alarm.main">{{language.alarm.main}}</span>
+    <span *ngIf="refAlarmMessage.alarmFixedLevel === '3'"
+          [title]="language.alarm.secondary">{{language.alarm.secondary}}</span>
+    <span *ngIf="refAlarmMessage.alarmFixedLevel === '4'"
+          [title]="language.alarm.prompt">{{language.alarm.prompt}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmobject}}</label><span [title]="refAlarmMessage.alarmObject">{{refAlarmMessage.alarmObject}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.area}}</label><span [title]="refAlarmMessage.areaName">{{refAlarmMessage.areaName}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.address}}</label><span [title]="refAlarmMessage.address">{{refAlarmMessage.address}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.responsibleDepartment}}</label><span
+    [title]="refAlarmMessage.responsibleDepartment">{{refAlarmMessage.responsibleDepartment}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmSourceType}}</label>
+    <span *ngIf="refAlarmMessage.alarmSourceTypeId === deviceType.Optical_Box"
+          [title]="language.facility.config.Optical_Box">{{language.facility.config.Optical_Box}}</span>
+    <span *ngIf="refAlarmMessage.alarmSourceTypeId === deviceType.Well"
+          [title]="language.facility.config.Well">{{language.facility.config.Well}}</span>
+    <span *ngIf="refAlarmMessage.alarmSourceTypeId === deviceType.Distribution_Frame"
+          [title]="language.facility.config.Distribution_Frame">{{language.facility.config.Distribution_Frame}}</span>
+    <span *ngIf="refAlarmMessage.alarmSourceTypeId === deviceType.Junction_Box"
+          [title]="language.facility.config.Junction_Box">{{language.facility.config.Junction_Box}}</span>
+    <span *ngIf="refAlarmMessage.alarmSourceTypeId === deviceType.OUTDOOR_CABINET"
+          [title]="language.facility.config.Splitting_Box">{{language.facility.config.OUTDOOR_CABINET}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmHappenCount}}</label><span [title]="refAlarmMessage.alarmHappenCount">{{refAlarmMessage.alarmHappenCount}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmCleanStatus}}</label>
+    <span *ngIf="refAlarmMessage.alarmCleanStatus ===constNumber.THREE"
+          [title]="language.alarm.noClean">{{language.alarm.noClean}}</span>
+    <span *ngIf="refAlarmMessage.alarmCleanStatus ===constNumber.ONE"
+          [title]="language.alarm.isClean">{{language.alarm.isClean}}</span>
+    <span *ngIf="refAlarmMessage.alarmCleanStatus ===constNumber.TWO"
+          [title]="language.alarm.deviceClean">{{language.alarm.deviceClean}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmBeginTime}}</label>
+    <span
+      [title]="refAlarmMessage.alarmBeginTime | date: 'yyyy-MM-dd HH:mm:ss'">{{refAlarmMessage.alarmBeginTime
+      | date: 'yyyy-MM-dd HH:mm:ss'}}
+    </span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmNearTime}}</label>
+    <span [title]="refAlarmMessage.alarmNearTime | date: 'yyyy-MM-dd HH:mm:ss'">{{refAlarmMessage.alarmNearTime
+      | date: 'yyyy-MM-dd HH:mm:ss'}}
+    </span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmContinousTime}}</label><span
+    [title]="refAlarmMessage.alarmContinousTime">{{refAlarmMessage.alarmContinousTime}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmConfirmTime}}</label>
+    <span [title]="refAlarmMessage.alarmConfirmTime | date: 'yyyy-MM-dd HH:mm:ss'">{{refAlarmMessage.alarmConfirmTime
+      | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmCleanTime}}</label>
+    <span [title]="refAlarmMessage.alarmCleanTime | date: 'yyyy-MM-dd HH:mm:ss'">{{refAlarmMessage.alarmCleanTime
+      | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmConfirmStatus}}</label>
+    <span *ngIf="refAlarmMessage.alarmConfirmStatus ===constNumber.ONE"
+          [title]="language.alarm.isConfirm">{{language.alarm.isConfirm}}</span>
+    <span *ngIf="refAlarmMessage.alarmConfirmStatus ===constNumber.TWO"
+          [title]="language.alarm.noConfirm">{{language.alarm.noConfirm}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmConfirmPeopleNickname}}</label>
+    <span [title]="refAlarmMessage.alarmConfirmPeopleNickname">{{refAlarmMessage.alarmConfirmPeopleNickname}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmAdditionalInformation}}</label>
+    <span [title]="refAlarmMessage.extraMsg">{{refAlarmMessage.extraMsg}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.alarmTreatmentRecommendations}}</label>
+    <span [title]="refAlarmMessage.alarmProcessing">{{refAlarmMessage.alarmProcessing}}</span>
+  </div>
+  <div>
+    <label>{{language.alarm.remark}}</label>
+    <span [title]="refAlarmMessage.remark">{{refAlarmMessage.remark}}</span>
+  </div>
+
+</div>

@@ -1,0 +1,19 @@
+<!--列表-->
+<div class="policy-warp">
+  <xc-table [dataSet]="dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</div>
+<!--预览框-->
+<nz-modal [(nzVisible)]="isPreview" nzTitle="预览" (nzOnCancel)="onPreviewCancel()" (nzOnOk)="onPreviewOk()">
+  <video [src]="filePath" controls="controls"></video>
+</nz-modal>
+<!--发起审核框-->
+<nz-modal [(nzVisible)]="isToExamine" nzTitle="发起审核" (nzOnCancel)="onToExamineCancel()" (nzOnOk)="onToExamineOk()">
+  <span class="examine">审核人:</span>
+  <nz-select  [(ngModel)]="reviewedBy">
+    <nz-option *ngFor="let data of reviewedByArr" [nzValue]="data.id" [nzLabel]="data.name"></nz-option>
+  </nz-select>
+</nz-modal>

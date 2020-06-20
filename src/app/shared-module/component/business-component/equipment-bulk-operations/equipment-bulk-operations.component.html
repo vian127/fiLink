@@ -1,0 +1,152 @@
+<!--批量控制设备组件-->
+  <nz-modal  [(nzVisible)]="xcVisible"
+             [nzTitle]="title"
+             [nzWidth]="600"
+             [nzMaskClosable]="false"
+             (nzAfterOpen)="afterModelOpen()"
+             (nzAfterClose)="afterModelClose()"
+             (nzOnCancel)="handleCancel()"
+             [nzFooter]="footer">
+
+    <div class="outer-box" >
+      <!--  加载中遮罩-->
+      <div class="over-box" *ngIf="isShowOver">
+        <nz-spin nzSimple  [nzSize]="'large'" class="loadStatus "></nz-spin>
+      </div>
+
+      <!--  公共操作-->
+      <div class="content">
+        <p class="part-title">{{commonLanguage.publicOperation}}</p>
+        <div  class="camera-button">
+          <button  nz-button nzType="primary" type="button" class="link-button"
+                   (click)="commonSwitchChange('open')"
+          >{{commonLanguage.open}}</button>
+          <button  nz-button nzType="primary" type="button" class="link-button"
+                   (click)="commonSwitchChange('close')"
+          >{{commonLanguage.close}}</button>
+          <button  nz-button nzType="primary" type="button" class="link-button"
+                   (click)="commonSwitchChange('up')"
+          >{{commonLanguage.powerOn}}</button>
+          <button  nz-button nzType="primary" type="button" class="link-button"
+                   (click)="commonSwitchChange('down')"
+          >{{commonLanguage.powerOff}}</button>
+        </div>
+
+      </div>
+
+
+      <!-- 照明控制-->
+      <div class="content" *ngIf="isHasLight">
+        <p class="part-title">{{commonLanguage.illumination}}</p>
+        <div class="detail-content">
+          <div class="content-right">{{commonLanguage.brightness}}</div>
+          <nz-row class="content-left">
+            <nz-col nzSpan="18">
+              <nz-slider [nzMin]="1"
+                         [nzMax]="100"
+                         [(ngModel)]="lightValue"
+                         (ngModelChange)="slideLightChange($event)"
+              ></nz-slider>
+            </nz-col>
+            <div nz-col nzSpan="4">
+              <nz-input-number
+                [nzMin]="1"
+                [nzMax]="100"
+                [(ngModel)]="lightValue"
+              ></nz-input-number>
+            </div>
+          </nz-row>
+        </div>
+      </div>
+
+      <!--  信息屏控制-->
+      <div class="content" *ngIf="isHasScreen">
+        <!-- 信息屏-->
+        <p class="part-title">{{commonLanguage.informationScreen}}</p>
+        <div class="detail-content">
+          <div class="content-right">{{commonLanguage.brightness}}</div>
+          <nz-row class="content-left">
+            <nz-col nzSpan="18">
+              <nz-slider [nzMin]="1"
+                         [nzMax]="100"
+                         [(ngModel)]="screenLightValue"
+                         (ngModelChange)="slideScreenLightChange($event)"
+              ></nz-slider>
+            </nz-col>
+            <div nz-col nzSpan="4">
+              <nz-input-number
+                [nzMin]="1"
+                [nzMax]="100"
+                [(ngModel)]="screenLightValue"
+              ></nz-input-number>
+            </div>
+          </nz-row>
+        </div>
+        <!-- 音量-->
+        <div class="detail-content">
+          <div class="content-right">{{commonLanguage.volume}}</div>
+          <nz-row class="content-left">
+            <nz-col nzSpan="18">
+              <nz-slider [nzMin]="1"
+                         [nzMax]="100"
+                         [(ngModel)]="screenVolumeValue"
+                         (ngModelChange)="slideScreenVolumeChange($event)"
+              ></nz-slider>
+            </nz-col>
+            <div nz-col nzSpan="4">
+              <nz-input-number
+                [nzMin]="1"
+                [nzMax]="100"
+                [(ngModel)]="screenVolumeValue"
+              ></nz-input-number>
+            </div>
+          </nz-row>
+        </div>
+        <div class="footer">
+          <span class="footer-content">{{screenContent}}</span>
+          <button  nz-button nzType="primary" type="button" (click)="screenPlayChange()">
+            {{commonLanguage.playContentSimultaneously}}
+          </button>
+          <span></span>
+        </div>
+      </div>
+
+      <!--广播控制-->
+      <div class="content" *ngIf="isHasBroadcast">
+        <p class="part-title">{{commonLanguage.broadcast}}</p>
+        <div class="detail-content">
+          <div class="content-right">{{commonLanguage.volume}}</div>
+          <nz-row class="content-left">
+            <nz-col nzSpan="18">
+              <nz-slider
+                [nzMin]="1"
+                [nzMax]="100"
+                [(ngModel)]="broadcastValue"
+                (ngModelChange)="slideBroadcastVolumeChange($event)"
+              ></nz-slider>
+            </nz-col>
+            <div nz-col nzSpan="4">
+              <nz-input-number
+                [nzMin]="1"
+                [nzMax]="100"
+                [(ngModel)]="broadcastValue"
+              ></nz-input-number>
+            </div>
+          </nz-row>
+        </div>
+        <div class="footer">
+          <span class="footer-content" >{{broadcastContent}}</span>
+          <button  nz-button nzType="primary" type="button" (click)="broadcastPlayChange()">
+            {{commonLanguage.playContentSimultaneously}}
+          </button>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <!-- 底部按钮-->
+    <ng-template #footer>
+      <button class="link-button" nz-button nzType="danger" type="button" (click)="handleCancel()">{{commonLanguage.cancel}}</button>
+    </ng-template>
+  </nz-modal>
+
+

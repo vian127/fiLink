@@ -1,0 +1,17 @@
+export default {
+  serialNumber: 'No.',
+  operate: 'Operate',
+  programName: 'Program name',
+  state: 'state',
+  programPurpose: 'Program purpose',
+  duration: 'Duration',
+  format: 'Format',
+  resolvingPower: 'Resolving power',
+  applicant: 'Applicant',
+  addBy: 'Add by',
+  addTime: 'Add time',
+  checker: 'Checker',
+  auditTime: 'Audit time',
+  programFiles: 'Program files',
+  remarks: 'Remarks',
+};

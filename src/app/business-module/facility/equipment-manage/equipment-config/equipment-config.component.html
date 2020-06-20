@@ -1,0 +1,10 @@
+<!--设备配置动态表单-->
+<div class="config-f">
+  <div class="config-s" *ngFor="let item of formColumnData;let index = index">
+    <xc-form
+      [column]="item.formColumn"
+      (formInstance)="formInstance($event,index)">
+    </xc-form>
+  </div>
+
+</div>

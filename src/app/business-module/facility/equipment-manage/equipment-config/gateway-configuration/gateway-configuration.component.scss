@@ -1,0 +1,45 @@
+// 拓扑画布大小
+.graph-size {
+  width: 90%;
+  height: 700px;
+  margin-top: 20px;
+
+  //点击端口按钮样式
+  .button-box {
+    position: absolute;
+    z-index: 10;
+    display: none;
+
+    .button-ul {
+      display: inline-block;
+
+      li{
+        padding: 5px 15px;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+      }
+
+      li:hover{
+        cursor: pointer;
+      }
+
+    }
+  }
+}
+
+
+
+
+
+//页面底部按钮
+.page-footer {
+
+  > button {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+
+}
+
+

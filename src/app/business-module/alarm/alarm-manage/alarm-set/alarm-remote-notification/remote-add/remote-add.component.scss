@@ -1,0 +1,101 @@
+.pageTitle {
+  border-left: 2px solid #7cb0dd;
+  padding-left: 18px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.user-detail{
+  padding: 10px;
+}
+
+.area-name {
+  display: inline-block;
+  width: 50%;
+  border: 1px solid #ccc;
+  height: 32px;
+  padding: 4px 11px;
+  border-radius: 4px;
+  // margin-right: 10px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.open-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #ffffff;
+  padding: 0 6px;
+}
+
+
+.alarm-level {
+  display: inline-block;
+  text-align: center;
+  width: 32px;
+  height: 20px;
+  color: #333;
+}
+
+.alarm-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  font-family: 'Microsoft YaHei';
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+
+
+.box-warp {
+  padding: 0px 10px 10px 10px;
+}
+
+.box-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  align-self: center;
+}
+
+
+::ng-deep nz-modal.alarmFiltration .ant-modal-body {
+  padding: 0 5px;
+}
+
+::ng-deep nz-modal.alarmFiltration .table-top-button {
+  padding: 8px 0 5px;
+}
+
+::ng-deep nz-modal.alarmFiltration .ant-table-pagination.ant-pagination {
+  float: none;
+  text-align: center;
+  margin: 0;
+}
+// 设施设备
+::ng-deep nz-modal.deviceEquipment .ant-modal-body {
+  padding: 0;
+}
+::ng-deep nz-modal.deviceEquipment .ant-tabs-nav-wrap{
+  padding: 0 20px;
+}
+::ng-deep nz-modal.deviceEquipment .ant-tabs-bar{
+  margin: 0;
+}
+::ng-deep nz-modal.deviceEquipment .ant-tabs-tabpane{
+  padding: 0 20px;
+}
+::ng-deep #remoteAreaTree {
+  overflow-x: auto;
+  height: 300px;
+}
+
+button.open-button[disabled] > i{
+  color: #ccc;
+  cursor: not-allowed;
+}

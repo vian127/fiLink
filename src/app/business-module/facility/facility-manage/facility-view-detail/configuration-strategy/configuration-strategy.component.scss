@@ -1,0 +1,39 @@
+.config-container {
+  padding-left: 10px;
+
+  div {
+    margin-bottom: 26px;
+  }
+}
+
+.config-f {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.area-detail-title {
+  border-left: 2px solid #7cb0dd;
+  padding-left: 18px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.config-s {
+  width: 50%;
+
+  .config-item-container {
+    margin: 0 20px;
+    border-bottom: 1px solid #cccccc;
+    width: 75%
+  }
+}
+
+.config-item-title {
+  display: inline-block;
+  color: #fff;
+  background: #36cfc9;
+  width: 68px;
+  height: 22px;
+  padding-left: 3px;
+}

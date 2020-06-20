@@ -1,0 +1,25 @@
+<div class='upload-img-wrapper'>
+  <nz-upload
+    #upload
+    class="avatar-uploader"
+    nzListType="picture-card"
+    [(nzFileList)]="fileList"
+    [nzShowUploadList]="true"
+    [nzShowButton]="fileList.length < 1"
+    [nzPreview]="handlePreview"
+    [nzBeforeUpload]="beforeUpload"
+  >
+    <ng-container>
+      <i class="upload-icon" nz-icon nzType="plus"></i>
+      <div class="ant-upload-text">{{language.upload}}</div>
+    </ng-container>
+    <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+              (nzOnCancel)="previewVisible = false">
+      <ng-template #modalContent>
+        <img [src]="previewUrl" [ngStyle]="{ width: '100%' }"/>
+      </ng-template>
+    </nz-modal>
+  </nz-upload>
+  <span class='upload-img-text'>图片大小不能超过100KB，支持JPG、JPEG、PNG、GIF格式</span>
+</div>
+

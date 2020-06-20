@@ -1,0 +1,115 @@
+<div class="user-detail">
+  <div>
+    <span class="pageTitle">
+      {{ title }}
+    </span>
+  </div>
+  <div>
+    <!--appAccessPermission="02-4-4-1"-->
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+    <div style="padding-left: 20px;padding-top:40px; padding-bottom:10px;">
+      <button class="link-button" nz-button nzType="primary"
+              [nzLoading]="isLoading" style="margin-right: 20px"
+              (click)="submit()" [disabled]="!formStatus.getValid()"
+      >{{language.okText}}
+      </button>
+      <button class="link-button" nz-button nzType="danger" (click)="cancel()">{{language.cancelText}}</button>
+    </div>
+  </div>
+</div>
+
+<!-- 是否启用 -->
+<ng-template #isNoStartUsing let-data="data">
+  <nz-switch [ngModel]="isNoStartData"
+             [nzControl]="true"
+             (click)="isNoStartData = !isNoStartData">
+  </nz-switch>
+</ng-template>
+
+<!-- 设施设备-->
+<ng-template #deviceEquipmentTemp let-formGroup="formGroup" let-col="col">
+  <div>
+<!--    <input class="area-name" readonly [(ngModel)]="deviceEquipmentName" >-->
+    <span class="area-name" [title]="deviceEquipmentName">{{deviceEquipmentName}}</span>
+    <span class="open-button"  (click)="showDeviceEquipmentTemp()"><i
+      class="icon-fiLink fiLink-search-index iconfont"></i></span>
+  </div>
+</ng-template>
+
+<!-- 通知人 -->
+<ng-template #notifierTemp let-formGroup="formGroup" let-data="data">
+  <xc-app-user [alarmUserConfig]="alarmUserConfig"></xc-app-user>
+</ng-template>
+
+<!-- 区域 -->
+<ng-template #areaSelector let-formGroup="formGroup" let-data="data">
+  <app-area [areaConfig]='areaConfig'></app-area>
+</ng-template>
+
+<!-- 告警级别 下拉多选   (nzBlur)="changeLevel()"  [nzMaxTagPlaceholder]="tagPlaceHolder"-->
+<ng-template #alarmFixedLevelListTemp let-formGroup="formGroup" let-selectedList>
+  <nz-select
+    [nzMaxTagCount]="5"
+    style="width: 100%"
+    nzMode="multiple"
+    nzPlaceHolder="{{language.pleaseChoose}}"
+    (nzBlur)="changeLevel()"
+    (ngModelChange)="onChangeLevel()"
+    [(ngModel)]="alarmFixedLevelListValue">
+    <nz-option *ngFor="let option of alarmFixedLevelList" [nzLabel]="option.label"
+               [nzValue]="option.code"></nz-option>
+  </nz-select>
+</ng-template>
+
+<!-- 设施类型 -->
+<ng-template #deviceTypeTemp let-formGroup="formGroup" let-selectedList>
+  <nz-select
+    [nzMaxTagCount]="5"
+    style="width: 100%"
+    [disabled]="display.deviceTypeDisplay"
+    nzMode="multiple"
+    nzPlaceHolder="{{language.pleaseChoose}}"
+    (nzBlur)="changeDeviceType()"
+    (ngModelChange)="onSearchDeviceType()"
+    [(ngModel)]="deviceTypeListValue"
+  >
+    <nz-option *ngFor="let option of deviceTypeList" [nzLabel]="option.label"
+               [nzValue]="option.code"></nz-option>
+  </nz-select>
+</ng-template>
+
+<!--设施设备-->
+<nz-modal [(nzVisible)]="isVisible"
+          [nzTitle]="language.packetContent"
+          [nzContent] = "tableComponent"
+          [nzMaskClosable]="false"
+          [nzWidth]="1200"
+          (nzOnCancel)="close()"
+          [nzFooter]="modalFooter"
+          class="deviceEquipment">
+  <ng-template #tableComponent>
+    <nz-tabset nzSize="large">
+      <nz-tab nzTitle="{{language.deviceList}}">
+        <xc-table #deviceComponent
+                  [dataSet]="deviceData"
+                  [pageBean]="devicePageBean"
+                  [tableConfig]="deviceTableConfig"
+                  (pageChange)="devicePageChange($event)">
+        </xc-table>
+      </nz-tab>
+      <nz-tab nzTitle="{{language.equipmentList}}">
+        <xc-table #equipmentComponent
+                  [dataSet]="equipmentData"
+                  [pageBean]="equipmentPageBean"
+                  [tableConfig]="equipmentTableConfig"
+                  (pageChange)="equipmentPageChange($event)">
+        </xc-table>
+      </nz-tab>
+    </nz-tabset>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" class="link-button" (click)="sureClick()">{{language.okText}}</button>
+    <button nz-button nzType="danger" class="link-button" (click)="cancelModal()">{{language.cancelText}}</button>
+    <button nz-button nzType="danger" class="link-button">{{language.empty}}</button>
+  </ng-template>
+</nz-modal>

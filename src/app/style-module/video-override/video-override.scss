@@ -1,0 +1,22 @@
+.vjs-control-bar {
+  justify-content: center;
+
+  .vjs-paused, .vjs-playing {
+    left: 40px;
+  }
+
+  .register-btn {
+    font-size: 1.8em;
+    width: 40px !important;
+    cursor: pointer;
+  }
+
+  .register-prev-btn {
+    position: relative;
+    left: -40px;
+  }
+
+  .register-btn-hidden {
+    visibility: hidden;
+  }
+}

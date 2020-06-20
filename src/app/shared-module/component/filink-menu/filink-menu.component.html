@@ -1,0 +1,18 @@
+  <ng-container *ngFor="let item of menuList">
+    <li *ngIf="item.children && item.children.length > 0" nz-submenu>
+      <span title>
+         <i nz-icon [type]="'appstore'"></i>
+         <span>{{item.menuName}}</span>
+      </span>
+      <ul>
+        <app-filink-menu *ngIf="item.children && item.children.length > 0" [menuList]="item.children"></app-filink-menu>
+      </ul>
+    </li>
+
+    <li *ngIf="!(item.children && item.children.length > 0)"  nz-menu-item [routerLink]="item.menuHref">
+      <span title>
+        <i nz-icon [type]="'appstore'"></i>
+        <span>{{item.menuName}}</span>
+      </span>
+    </li>
+  </ng-container>

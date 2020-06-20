@@ -1,0 +1,15 @@
+<!--关于-->
+<xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+<div class="app-download">
+  <span>{{language.systemSetting.AppDownload}}</span>
+  <div class="app-download-img">
+    <div style="margin-right: 20px;width: 150px;height: 150px;">
+      <img [src]="'../../assets/img/log/android.png'" alt="">
+      <p>Android</p>
+    </div>
+    <div style="margin-right: 20px;width: 150px;height: 150px;">
+      <img [src]="'../../assets/img/log/ios.jpg'" alt="">
+      <p>ios</p>
+    </div>
+  </div>
+</div>

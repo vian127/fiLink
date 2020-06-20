@@ -1,0 +1,133 @@
+.in-container {
+  padding-bottom: 20px;
+  .area-detail-title {
+    border-left: 2px solid #7cb0dd;
+    padding-left: 18px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 900;
+    &.tabTitle{
+      margin-left: -20px;
+    }
+  }
+  .area-content{
+    padding: 10px 20px;
+    position: relative;
+    .last-button{
+      position: relative;
+      height: 32px;
+      margin-top: 5px;
+    }
+    .clear{
+      clear: both;
+    }
+    .detail-table{
+      margin-top: -20px;
+    }
+  }
+  .row-content{
+    .grid-row{
+    height: 40px;
+    line-height: 40px;
+    .progress-content{
+      display: inline-block;
+      width: 75%;
+      .row-progress{
+        display: inline-block;
+        width: 50%;
+        margin-left: 5px;
+        ::ng-deep .ant-progress-line{
+          top: -2px;
+        }
+      }
+      .fiLink-processed{
+        margin-left: 5px;
+        position: absolute;
+      }
+    }
+  }
+  }
+  ::ng-deep .table-top-button{
+    width: 100%;
+  }
+  .row-label{
+    display: inline-block;
+    width: 30%;
+    height: 40px;
+    line-height: 40px;
+    &.wb23{
+      width: 23%;
+    }
+  }
+  .row-progress{
+    display: inline-block;
+    width: 75%;
+  }
+  .report-warp{
+    height: 450px;
+    .report-left{
+      width: 300px;
+      height: 100%;
+      float: left;
+      border: 1px solid #e8e8e8;
+      .tree-title{
+        height: 40px;
+        line-height: 40px;
+        background: #eaedf2;
+        padding-left: 10px;
+      }
+      .device-tree{
+        height: 408px;
+        padding: 10px;
+        position: relative;
+        overflow: hidden;
+        .spins{
+          width: 100%;
+          height: 100%;
+          position: absolute;
+        }
+        ::ng-deep .ant-tree li span.ant-tree-switcher{
+          color: #36cfc9;
+        }
+        .tree-warp{
+          height: calc(100% - 38px);
+          margin-top: 8px;
+          padding: 10px 0;
+          overflow-y: auto;
+          ::ng-deep  .ant-tree .font-highlight{
+            display: inline-block;
+            color: #333333;
+            background: #CCCCCC;
+          }
+        }
+      }
+    }
+    .report-right{
+      float: left;
+      margin-left: 30px;
+      width: calc(100% - 350px);
+      .ant-table-content{
+        height: 450px;
+      }
+    }
+  }
+  .colorRed{
+    color: #f5222d;
+  }
+}
+.unit-name {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 11px;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+

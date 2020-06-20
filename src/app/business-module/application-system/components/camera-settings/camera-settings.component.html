@@ -1,0 +1,65 @@
+<div class="camera-config">
+  <div class="camera-img">
+    <!-- 这是方向 -->
+    <div class="img-content">
+      <div>
+        <!--向上，北-->
+        <i nz-icon nzType="arrow-up" (click)="onCloudControl('TILT_UP')" class="icon-up logo" nzTheme="outline"></i>
+        <!--向上旋转，东北-->
+        <i nz-icon nzType="arrow-up" (click)="onCloudControl('UP_RIGHT')" class="icon-up logo rotate-up" nzTheme="outline"></i>
+        <!--向右，东-->
+        <i nz-icon nzType="arrow-right" (click)="onCloudControl('PAN_RIGHT')" class="icon-right logo" nzTheme="outline"></i>
+        <!--向右旋转，东南-->
+        <i nz-icon nzType="arrow-right" (click)="onCloudControl('DOWN_RIGHT')" class="icon-right logo rotate-right" nzTheme="outline"></i>
+        <!--向下，南-->
+        <i nz-icon nzType="arrow-down" (click)="onCloudControl('TILT_DOWN')" class="icon-down logo" nzTheme="outline"></i>
+        <!--向下旋转，西南-->
+        <i nz-icon nzType="arrow-down" (click)="onCloudControl('DOWN_LEFT')" class="icon-down logo rotate-down" nzTheme="outline"></i>
+        <!--向左，西-->
+        <i nz-icon nzType="arrow-left" (click)="onCloudControl('PAN_LEFT')" class="icon-left logo" nzTheme="outline"></i>
+        <!--向左旋转，西北-->
+        <i nz-icon nzType="arrow-left" (click)="onCloudControl('UP_LEFT')" class="icon-left logo rotate-left" nzTheme="outline"></i>
+      </div>
+    </div>
+    <!-- 设置焦点-->
+    <div class="configure">
+      <div class="box">
+        <span><i nz-icon nzType="minus-square" nzTheme="outline"></i></span>
+        <span>调焦</span>
+        <span><i nz-icon nzType="plus-square" nzTheme="outline"></i></span>
+      </div>
+      <div class="box">
+        <span><i nz-icon nzType="minus-square" nzTheme="outline"></i></span>
+        <span>聚焦</span>
+        <span><i nz-icon nzType="plus-square" nzTheme="outline"></i></span>
+      </div>
+      <div class="box">
+        <span><i nz-icon nzType="minus-square" nzTheme="outline"></i></span>
+        <span>光圈</span>
+        <span><i nz-icon nzType="plus-square" nzTheme="outline"></i></span>
+      </div>
+    </div>
+  </div>
+  <!--预置位设置-->
+  <div class="camera-details">
+    <h5>预置位设置</h5>
+    <div class="details">
+      <span>预置位1</span>
+      <span>查看预置点</span>
+      <span>设置预置点</span>
+      <span>删除预置点</span>
+    </div>
+    <div class="details">
+      <span>预置位1</span>
+      <span>查看预置点</span>
+      <span>设置预置点</span>
+      <span>删除预置点</span>
+    </div>
+    <div class="details">
+      <span>预置位1</span>
+      <span>查看预置点</span>
+      <span>设置预置点</span>
+      <span>删除预置点</span>
+    </div>
+  </div>
+</div>

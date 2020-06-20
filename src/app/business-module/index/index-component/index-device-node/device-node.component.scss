@@ -1,0 +1,40 @@
+.facility-list-container {
+  background-color: white;
+  $text-margin: 0 5px;
+  .facility-list-title {
+    display: flex;
+    padding: 5px;
+    height: 30px;
+    align-items: center;
+    .text {
+      margin: $text-margin;
+      color: #ff6027;
+      flex: 1;
+    }
+  }
+  ul {
+    padding: 5px 0;
+    li {
+      padding-left: 30px;
+      height: 30px;
+      line-height: 30px;
+      &:hover {
+        background-color: #ebf9f9;
+      }
+    }
+  }
+  .facility-table {
+    padding: 5px 10px 10px 10px;
+  }
+}
+
+.c-selected {
+  background-color: #EBFAF8;
+}
+
+.checkbox-facility-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -3px;
+  margin-right: 5px;
+}

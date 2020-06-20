@@ -1,0 +1,45 @@
+.area-level {
+  display: inline-block;
+  text-align: center;
+  width: 48px;
+  height: 20px;
+  color: #ffffff;
+}
+
+.level-one {
+  background: #72ddd9;
+}
+
+.level-two {
+  background-color: #78e3af;
+}
+
+.level-three {
+  background-color: #56c2ea;
+}
+
+.level-four {
+  background-color: #ffc878;
+}
+
+.level-five {
+  background-color: #ff8a73;
+}
+
+.box-warp{
+  padding: 10px;
+}
+.area-name {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 22px;
+  line-height: 20px;
+  padding: 0 11px;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

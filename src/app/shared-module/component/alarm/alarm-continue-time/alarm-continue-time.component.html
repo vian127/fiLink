@@ -1,0 +1,11 @@
+
+<nz-input-group nzCompact class="alarmContinueTime">
+    <input type="text" nz-input [(ngModel)]="inputValue" style="width:50%;" (keyup)="keyupInput()"
+    onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  
+    onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}"/>
+    <nz-select [(ngModel)]="selectType" (ngModelChange)="keyupInput()">
+      <nz-option [nzLabel]="'大于'" [nzValue]="'gt'"></nz-option>
+      <nz-option [nzLabel]="'等于'" [nzValue]="'eq'"></nz-option>
+      <nz-option [nzLabel]="'小于'" [nzValue]="'lt'"></nz-option>
+    </nz-select>
+</nz-input-group>

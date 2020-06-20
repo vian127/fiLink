@@ -1,0 +1,113 @@
+.workbench-warp {
+  .workbench-header{
+    .card-content{
+      padding:30px;
+      /deep/ .ant-card-head{
+        border: 1px solid #e8e8e8;
+        height: 100px;
+      }
+      .card-right{
+        display: flex;
+        margin-top: 10px;
+        .equipment-number{
+          width: 100px;
+          text-align: center;
+          border-right: 1px solid #e8e8e8;
+          .content{
+            font-size: 12px;
+          }
+          .number{
+            font-size: 20px;
+            font-weight: 500;
+          }
+        }
+        .border-display{
+          border-right: none;
+        }
+      }
+
+      .card-box{
+        display: flex;
+        align-items: center;
+        .box-left{
+          width: 75%;
+          .equipment-title{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .title{
+              display: flex;
+              align-items: center;
+              .text{
+                font-weight: 600;
+                font-size: 14px;
+              }
+              .equipment-add{
+                font-size: 30px;
+                margin-left: 10px;
+                margin-top: -5px;
+                font-weight: 600;
+              }
+            }
+          }
+          .equipment-content{
+            display: flex;
+            flex-wrap: wrap;
+            cursor:pointer;
+            .equipment-card{
+              width:32%;
+              margin: 5px;
+              .content{
+                display: flex;
+                .img-icon{
+                  font-size: 16px;
+                  margin-top: 2px;
+                }
+                .details{
+                  margin: 0 10px;
+                }
+              }
+            }
+          }
+          .pagination{
+            display: flex;
+            margin-top: 20px;
+            justify-content: center;
+            align-items: center;
+            /deep/ .ant-pagination .ant-pagination-options{
+              padding-top: 0;
+            }
+          }
+        }
+        .box-right{
+          margin-left: 0.5%;
+          width: 24.5%;
+          .convenient{
+            height: 240px;
+          }
+          .checked{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+    .chart-list{
+      .charts-content{
+        display: flex;
+        flex-wrap: wrap;
+        .statistics{
+          padding: 0 10px;
+          width: 50%;
+          .electricity{
+            display: flex;
+            .radio-select{
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

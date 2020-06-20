@@ -1,0 +1,333 @@
+<div class="facility-detail-panel-container">
+  <!--设施详情  1-->
+  <div class="detail bottom-distance">
+    <!--*ngIf="facilityPowerCode.includes(powerCode.infrastructureDetails)">-->
+    <div class="detail-top">
+      <div class="info">
+        <div class="title">
+          <div class="facility-type-and-name hidden" title="{{facilityInfo['deviceName']}}">
+            {{facilityInfo['deviceName']}}
+          </div>
+        </div>
+        <div class="facility-status">
+          <div class="facility-type-icon" [ngClass]="facilityInfo['facilityTypeClassName']">
+          </div>
+          <div class="m-right">
+            {{facilityInfo['facilityTypeName']}}
+          </div>
+          <div class="facility-status-text"
+               title="{{facilityInfo['deviceName']}}"
+               [ngStyle]="{'background-color': facilityInfo['bgColor']}">
+            {{facilityInfo['text']}}
+          </div>
+        </div>
+        <div class="facility-number" title="{{facilityInfo['deviceCode']}}">
+          <div class="facility-number-title">{{indexLanguage.facilityNumber}}</div>
+          <div style="margin-left: 5px">{{facilityInfo['deviceCode']}}</div>
+        </div>
+      </div>
+      <div class="pic">
+        <img class="info-img" *ngIf="devicePicUrl" [src]="devicePicUrl"
+             alt="">
+        <div [ngClass]="isCollected ? 'fiLink-collected' : 'fiLink-collect'"
+             (click)="collectionChange()"
+             class="iconfont icon-fiLink icon-collection-color collection">
+        </div>
+      </div>
+    </div>
+    <div class="detail-bottom">
+      <div class="detail-bottom-item">
+        <div class="detail-bottom-item-title">{{indexLanguage.area}}</div>
+        <div class="detail-bottom-item-value hidden"
+             title="{{facilityInfo['areaName']}}">
+          {{facilityInfo['areaName']}}
+        </div>
+      </div>
+      <div class="detail-bottom-item">
+        <div class="detail-bottom-item-title">{{indexLanguage.responsibleUnit}}</div>
+        <div class="detail-bottom-item-value hidden" title="{{facilityInfo['accountabilityUnit']}}">
+          {{facilityInfo['accountabilityUnit']}}
+        </div>
+      </div>
+      <div class="detail-bottom-item">
+        <div class="detail-bottom-item-title">{{indexLanguage.address}}</div>
+        <div class="detail-bottom-item-value hidden" title="{{facilityInfo['address']}}">
+          {{facilityInfo['address']}}
+        </div>
+      </div>
+      <div class="detail-bottom-item" *ngIf="indexType==='facility'">
+        <!--业务状态-->
+        <div class="detail-bottom-item-title">{{indexLanguage.businessStatus}}</div>
+        <div class="detail-bottom-item-value hidden" title="{{facilityInfo['businessStatus']}}">
+          {{facilityInfo['businessStatus']}}
+        </div>
+        <div class="heartbeat-info-more" (click)="goToFacilityDetailById()">{{commonLanguage.more}}>></div>
+      </div>
+      <div class="detail-bottom-item" *ngIf="indexType!=='facility'">
+        <!--挂载点-->
+        <div class="detail-bottom-item-title">{{indexLanguage.mountPosition}}</div>
+        <div class="detail-bottom-item-value hidden" title="{{facilityInfo['mountPosition']}}">
+          {{facilityInfo['mountPosition']}}
+        </div>
+        <div class="heartbeat-info-more" (click)="goToDeviceDetailById()">{{commonLanguage.more}}>></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--监控信息-->
+  <div class="monitor-info bottom-distance"
+       *ngIf="indexType==='facility'">
+    <div class="monitor-info-title">
+      <div>{{indexLanguage.monitorInfo}}</div>
+      <div class="line">
+        <nz-select *ngIf="isShowSelect"
+                   class="nz-select-style"
+                   [(ngModel)]="selectedControlId"
+                   (ngModelChange)="changeControl($event)"
+                   nzSize="small"
+                   nzAllowClear="false"
+                   [nzPlaceHolder]="indexLanguage.pleaseSelect">
+          <nz-option *ngFor="let control of controlOption" [nzValue]="control.equipmentId"
+                     [nzLabel]="control.equipmentName"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div class="monitor-info-list">
+      <ng-container *ngFor="let item of monitorInfoList">
+        <div class="monitor-info-item">
+          <div class="monitor-info-title">{{item.indexName}}</div>
+          <div class="monitor-info-text">{{item.indexValue}}</div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!--监控状态-->
+  <div class="monitor-info bottom-distance"
+       *ngIf="indexType!=='facility'">
+    <div class="monitor-info-title">
+      <div>{{indexLanguage.monitorStatus}}</div>
+      <div class="line"></div>
+    </div>
+    <div class="monitor-info-list">
+      <ng-container *ngFor="let item of monitorInfoList">
+        <div class="monitor-info-item">
+          <div class="monitor-info-title">{{item.indexName}}</div>
+          <div class="monitor-info-text">{{item.indexValue}}</div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+
+  <!--设备信息-->
+  <div class="facility-info bottom-distance" *ngIf="indexType==='facility'">
+    <div class="facility-info-title">
+      <div>{{indexLanguage.equipmentInfo}}</div>
+      <div class="line">
+        <div class="line-tabs">
+          <div class="line-tab" [ngClass]="{'tab-selected': isHandleInstallNum}"
+               (click)="tabClick(installNumEnum.installNum)">
+            <div class="text-content hidden" title="{{indexLanguage.installNum}}">{{indexLanguage.installNum}}</div>
+          </div>
+          <!--<div class="line-tab" [ngClass]="{'tab-selected': !isHandleInstallNum}"-->
+          <!--(click)="tabClick(installNumEnum.freeNum)">-->
+          <!--<div class="text-content hidden" title="{{indexLanguage.freeNum}}">{{indexLanguage.freeNum}}</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+    <div class="facility-info-list">
+      <ng-container *ngFor="let item of facilityInfoList">
+        <div class="facility-info-item">
+          <!--<div class="facility-info-icon" [ngClass]="item.iconClass"></div>-->
+          <div class="facility-info-icon" [ngClass]="item.facilityName"></div>
+          <div class="facility-info-text">{{item.value}}</div>
+          <!--<div [hidden]="!isHandleInstallNum" class="facility-info-text">{{item.hiddenValue}}</div>-->
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!--设备单个操作-->
+  <div class="options-type" *ngIf="indexType!=='facility'">
+    <div class="title-text">{{indexLanguage.operation}}
+      <div class="line"></div>
+    </div>
+    <div *ngIf="optionsBtn.allBtn" class="options-title">
+      <nz-row>
+        <div *ngFor="let item of optionsBtn.allBtn">
+          <nz-col nzSpan="6">
+            <button nz-button nzType="default"
+                    class="button-title"
+                    (click)="testInstruction(item.code,item.url)"
+                    [disabled]="item.disable">{{item.name}}
+            </button>
+          </nz-col>
+        </div>
+      </nz-row>
+    </div>
+    <div *ngIf="options.allBtn" class="options-tiltle">
+      <div *ngFor="let item of options.allBtn">
+        <nz-row>
+          <div nz-col nzSpan="4" class="options-name">{{item.name}}</div>
+          <nz-col nzSpan="14">
+            <nz-slider [nzMin]="1"
+                       [nzMax]="100"
+                       [(ngModel)]="item.value"
+                       (ngModelChange)="testInstruction(item.code,item.url)">
+            </nz-slider>
+          </nz-col>
+          <div nz-col nzSpan="4">
+            <nz-input-number
+              [nzMin]="1"
+              [nzMax]="100"
+              [ngStyle]="{ marginLeft: '16px' }"
+              [(ngModel)]="item.value"
+            ></nz-input-number>
+          </div>
+        </nz-row>
+      </div>
+    </div>
+  </div>
+
+  <!--&lt;!&ndash;能耗统计&ndash;&gt;-->
+  <!--<div class="energy-statistics bottom-distance">-->
+  <!--<div class="energy-statistics-title">-->
+  <!--<div>{{indexLanguage.energyStatistics}}</div>-->
+  <!--<div class="line">-->
+  <!--<div class="line-tabs">-->
+  <!--<div class="line-tab"  [ngClass]="{'tab-selected':isHandleEnergyStatistics == energyStatisticsEnum.year}" (click)="tabClickByEnergy(energyStatisticsEnum.year)">-->
+  <!--<div class="text-content" title="{{indexLanguage.year}}">{{indexLanguage.year}}</div>-->
+  <!--</div>-->
+
+  <!--<div class="line-tab" [ngClass]="{'tab-selected': isHandleEnergyStatistics == energyStatisticsEnum.month}" (click)="tabClickByEnergy(energyStatisticsEnum.month)">-->
+  <!--<div class="text-content" title="{{indexLanguage.month}}">{{indexLanguage.month}}</div>-->
+  <!--</div>-->
+
+  <!--<div class="line-tab" [ngClass]="{'tab-selected': isHandleEnergyStatistics == energyStatisticsEnum.day}" (click)="tabClickByEnergy(energyStatisticsEnum.day)">-->
+  <!--<div class="text-content" title="{{indexLanguage.day}}">{{indexLanguage.day}}</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="energy-statistics-content">-->
+  <!--<div echarts [options]="energyStatisticsOption" class="chart-style" ></div>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <!--门锁状态 有源锁 3-->
+  <!--<div class="lock-status bottom-distance"-->
+  <!--*ngIf="facilityPowerCode.includes(powerCode.intelligentEntranceGuard)">-->
+  <!--<div class="lock-status-title-name">-->
+  <!--<div>{{indexLanguage.lockStatus}}</div>-->
+  <!--<div class="line"></div>-->
+  <!--</div>-->
+  <!--<div class="lock-status-list">-->
+  <!--<ng-container *ngFor="let item of doorAndLockList">-->
+  <!--<div class="lock-status-item">-->
+  <!--<div class="lock-status-title hidden" title="{{item.doorName}}">{{item.doorName}}</div>-->
+  <!--<div class="lock-status-icon"-->
+  <!--[ngClass]="item.doorStatusClassName">-->
+  <!--</div>-->
+  <!--<div class="lock-status-icon"-->
+  <!--*ngIf="item.doorNum !== wellType.outCover || facilityInfo['deviceType'] !== dvType.manWell"-->
+  <!--[appAccessPermission]="'03-1-11'"-->
+  <!--[ngClass]="item.lockStatusClassName"-->
+  <!--(click)="clickLock(item)">-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</ng-container>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--&lt;!&ndash;门锁详情 无源锁 0&ndash;&gt;-->
+  <!--<div class="lock-info bottom-distance"-->
+  <!--*ngIf="facilityPowerCode.includes(powerCode.passiveLock)">-->
+  <!--<div class="lock-info-title-name">-->
+  <!--<div>{{indexLanguage.lockInfo}}</div>-->
+  <!--<div class="line"></div>-->
+  <!--</div>-->
+  <!--<div class="facility-item" *ngFor="let item of doorAndLockList,let i=index">-->
+  <!--<span class="label">{{language.door}}{{i+1}}:</span>-->
+  <!--<span class="value hidden">{{item.doorName}}</span>-->
+  <!--</div>-->
+  <!--<div class="facility-item">-->
+  <!--<span class="label">{{language.lockType}}：</span>-->
+  <!--<span class="value hidden">{{language.config.PASSIVE_LOCK}}</span>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--&lt;!&ndash;心跳时间 有源锁 3&ndash;&gt;-->
+  <!--<div class="heartbeat-info bottom-distance"-->
+  <!--*ngIf="facilityPowerCode.includes(powerCode.intelligentEntranceGuard)">-->
+  <!--<div class="heartbeat-info-icon"></div>-->
+  <!--<div class="heartbeat-info-time">{{heartbeatTime}}</div>-->
+  <!--<div class="heartbeat-info-more" (click)="goToFacilityDetailById()">{{commonLanguage.more}}>></div>-->
+  <!--</div>-->
+  <!--&lt;!&ndash;智能标签信息 8 9&ndash;&gt;-->
+  <!--<div class="smartTag bottom-distance"-->
+  <!--*ngIf="facilityPowerCode.includes(powerCode.intelligentLabelDetail)&&facilityPowerCode.includes(powerCode.intelligentLabelSetting)">-->
+  <!--<div class="smart-tag-title-name">-->
+  <!--<div>{{language.intelligenceLabelInfo}}</div>-->
+  <!--<div class="line"></div>-->
+  <!--</div>-->
+  <!--<ul *ngIf="isShowSmartTag">-->
+  <!--<li class="facility-item">-->
+  <!--&lt;!&ndash;设备ID&ndash;&gt;-->
+  <!--<span class="label">{{language.tagID}}：</span>-->
+  <!--<span class="value hidden" [title]="smartLabelInfo.boxLabel">{{smartLabelInfo.boxLabel}}</span>-->
+  <!--</li>-->
+  <!--<li class="facility-item">-->
+  <!--&lt;!&ndash;标签类型&ndash;&gt;-->
+  <!--<span class="label">{{language.labelType}}：</span>-->
+  <!--<span class="value hidden" [title]="smartLabelInfo.labelType">{{smartLabelInfo.labelType}}</span>-->
+  <!--</li>-->
+  <!--<li class="facility-item">-->
+  <!--&lt;!&ndash;标签状态&ndash;&gt;-->
+  <!--<span class="label">{{language.labelState}}：</span>-->
+  <!--<span class="value hidden" [title]="smartLabelInfo.labelState">{{smartLabelInfo.labelState}}</span>-->
+  <!--</li>-->
+  <!--<li class="facility-item">-->
+  <!--&lt;!&ndash;制造商&ndash;&gt;-->
+  <!--<span class="label">{{language.manufacturer}}：</span>-->
+  <!--<span class="value hidden" [title]="smartLabelInfo.producer">{{smartLabelInfo.producer}}</span>-->
+  <!--</li>-->
+  <!--<li class="facility-item">-->
+  <!--&lt;!&ndash;备注&ndash;&gt;-->
+  <!--<span class="label">{{language.remarks}}：</span>-->
+  <!--<span class="value hidden" [title]="smartLabelInfo.memo">{{smartLabelInfo.memo}}</span>-->
+  <!--</li>-->
+  <!--<li class="facility-item">-->
+  <!--&lt;!&ndash;最近更新时间&ndash;&gt;-->
+  <!--<span class="label">{{language.updateTime}}：</span>-->
+  <!--<span class="value hidden">{{smartLabelInfo.lastUpdateTime.toString()| dynamic: 'date' : null}}</span>-->
+  <!--</li>-->
+  <!--<li class="facility-item w-all" (click)="goToFacilityDetailById()">-->
+  <!--<span class="more">{{commonLanguage.more}}>></span>-->
+  <!--</li>-->
+  <!--</ul>-->
+  <!--</div>-->
+  <!--&lt;!&ndash;端口状态统计图 8 9&ndash;&gt;-->
+  <!--<div class="portStatusChat bottom-distance"-->
+  <!--*ngIf="isShowBusinessPicture && facilityPowerCode.includes(powerCode.intelligentLabelDetail) && facilityPowerCode.includes(powerCode.intelligentLabelSetting)">-->
+  <!--<div class="port-count-title-name">-->
+  <!--<div>{{language.portStatus}}</div>-->
+  <!--<div class="line"></div>-->
+  <!--</div>-->
+  <!--<div *ngIf="isShowPortStatus">-->
+  <!--<div echarts [options]="pieChartOption" class="chat-height"></div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--&lt;!&ndash;端口使用率 8 9&ndash;&gt;-->
+  <!--<div class="portCountChat bottom-distance"-->
+  <!--*ngIf="isShowBusinessPicture && facilityPowerCode.includes(powerCode.intelligentLabelDetail) && facilityPowerCode.includes(powerCode.intelligentLabelSetting)">-->
+  <!--<div class="port-count-title-name">-->
+  <!--<div>{{language.portUtilization}}</div>-->
+  <!--<div class="line"></div>-->
+  <!--</div>-->
+  <!--<div *ngIf="isShowPortRate">-->
+  <!--<div echarts [options]="portChartOption" class="chat-height"></div>-->
+  <!--</div>-->
+  <!--</div>-->
+</div>

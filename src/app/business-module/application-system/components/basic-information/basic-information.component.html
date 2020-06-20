@@ -1,0 +1,60 @@
+<div class="in-container">
+  <xc-form [column]="formColumn"
+           (formInstance)="formInstance($event)">
+  </xc-form>
+</div>
+
+<!-- 部门选择 -->
+<ng-template #applicationScope let-formGroup="formGroup" let-col="col">
+  <div style="width: 300px">
+    <span class="area-name" [title]="selectUnitName">{{selectUnitName}}</span>
+    <button class="open-button" (click)="showModal()"><i
+      class="icon-l icon-search"></i></button>
+  </div>
+</ng-template>
+<ng-template #startEndTime let-formGroup="formGroup" let-col="col">
+  <div class="start-end">
+    <span><nz-date-picker
+      [nzDisabledDate]="disabledEndDate"
+      [(ngModel)]="effectivePeriodStart"
+      [nzSize]="size"></nz-date-picker></span>
+    <span class="border-time"></span>
+    <span><nz-date-picker
+      [nzDisabledDate]="disabledEndDate"
+      [(ngModel)]="effectivePeriodEnd" [nzSize]="size"></nz-date-picker></span>
+  </div>
+</ng-template>
+
+<ng-template #enableStatus let-formGroup="formGroup" let-col="col">
+  <label nz-checkbox [(ngModel)]="strategyStatus">立即启用</label>
+</ng-template>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="应用范围"
+  nzWidth="70%"
+  [nzFooter]="null">
+  <nz-tabset>
+    <nz-tab nzTitle="设备列表">
+      <xc-table [dataSet]="_dataSet"
+                [pageBean]="pageBean"
+                [tableConfig]="tableConfig"
+                (pageChange)="pageChange($event)">
+      </xc-table>
+    </nz-tab>
+    <nz-tab nzTitle="分组列表">
+<!--      <xc-table [dataSet]="_dataSet"-->
+<!--                [pageBean]="pageBean"-->
+<!--                [tableConfig]="tableConfig"-->
+<!--                (pageChange)="pageChange($event)">-->
+<!--      </xc-table>-->
+    </nz-tab>
+    <nz-tab nzTitle="回路列表">
+<!--      <xc-table [dataSet]="_dataSet"-->
+<!--                [pageBean]="pageBean"-->
+<!--                [tableConfig]="tableConfig"-->
+<!--                (pageChange)="pageChange($event)">-->
+<!--      </xc-table>-->
+    </nz-tab>
+  </nz-tabset>
+</nz-modal>

@@ -1,0 +1,23 @@
+<!--分组-->
+<div class="facility-group">
+  <div class="facility-group-title" title="{{indexLanguage.selectGroup}}">
+    <div class="facility-group-title-text">{{indexLanguage.selectGroup}}</div>
+    <div class="facility-group-title-text">
+      <nz-select class="facility-group-title-select"  [nzSize]="'small'"
+                 nzShowSearch
+                 nzAllowClear
+                 [nzMaxTagCount]="2"
+                 [nzMaxTagPlaceholder]="tagPlaceHolder"
+                 nzMode="multiple"
+                 [(ngModel)]="selectGroupValue"
+                 (ngModelChange)="selectItemOption()"
+                 nzPlaceHolder="{{indexLanguage.pleaseSelect}}">
+        <nz-option *ngFor="let item of selectGroupItem"  [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+
+  <ng-template #tagPlaceHolder let-selectedList>{{ selectedList.length }} more </ng-template>
+</div>
+
+

@@ -1,0 +1,137 @@
+@import "../../css/config";
+// 设施设备类型选择器类型
+.facility-equipment-type-panel {
+  position: absolute;
+  max-height: calc(100vh - 85px);
+
+  .left-panel-tabs {
+    display: flex;
+    background-color: white;
+
+    .segmentation {
+      font-size: 12px;
+      margin-top: 5px;
+      color: #bcbaba;
+    }
+
+    .left-panel-border {
+      border-right: 1px solid #e0dbdb;
+    }
+
+    .left-panel-tab {
+      cursor: pointer;
+      text-align: center;
+      line-height: 30px;
+      height: 30px;
+
+      .icon-type {
+        width: 20px;
+        height: 20px;
+        float: left;
+        margin-left: 20px;
+        color: #ff6027;
+      }
+
+      .text-content {
+        float: left;
+        width: 70px;
+      }
+      .text-content-order {
+        color: #ff6027;
+        float: left;
+        width: 70px;
+      }
+
+    }
+  }
+
+  // 设施设备类型checkbox样式
+  .facility-equipment-type-checkbox {
+    border: none;
+
+    .checkbox-container {
+      overflow-y: auto;
+      height: 70px;
+      width: 390px;
+
+      .checkbox {
+        text-align: center;
+        font-size: 12px;
+        width: 75px;
+        height: 80px;
+        display: inline-block;
+        padding-top: 10px;
+
+        .checkboxChild {
+
+          nz-checkbox-group {
+            margin-left: 20px;
+
+            .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+              margin-left: 20px !important;
+            }
+
+          }
+        }
+
+        .checkboxIndex {
+          display: inline-block;
+        }
+
+        .text {
+          white-space: pre-wrap;
+          width: 70px;
+          //margin: 0 7px;
+          color: black;
+        }
+      }
+    }
+  }
+
+  .app-order-state-radio {
+    height: 85px;
+    border-bottom: 1px solid #e0dbdb;
+
+    .text-content {
+      margin: 0px 5px;
+      color: #ff6027;
+      flex: 1;
+    }
+
+    //单选按钮和多选按钮的样式
+    .order-state-type-radio {
+      border: none;
+
+      .radio-container {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        // justify-content: space-between;
+        width: 380px;
+
+        .radio {
+          text-align: center;
+          font-size: 12px;
+
+          .radio-text {
+            white-space: pre-wrap;
+            width: 50px;
+            margin: 0 5px;
+            color: black;
+          }
+
+          .radio-content {
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+//选中的tab样式
+.tab-selected {
+  color: #ff6027;
+}

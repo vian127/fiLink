@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+@import "app/style-module/index";
+
+/*滚动条样式美化*/
+::-webkit-scrollbar-track-piece {
+  background-color: #f2f2f2;
+  border-left: 1px solid #d2d2d2;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d7d7d7;
+  background-clip: padding-box;
+  border: 1px solid #e9eaec;
+  min-height: 28px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border: 1px solid #979797;
+  background-color: #c2c2c2;
+}
+
+.city_content_top {
+  box-sizing: content-box;
+}
+
+#selCityWd {
+  height: 24px!important;
+}
+
+.BMap_cpyCtrl{
+  display:none;
+}
+
+.gmnoprint {
+  display: none;
+}

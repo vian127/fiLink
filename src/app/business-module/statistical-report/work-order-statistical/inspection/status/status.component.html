@@ -1,0 +1,58 @@
+<div class="box" [appBarProgress]="ProgressShow">
+  <div class="top">
+    <div style="float: left;margin-right: 10px;">
+        <span class="select-area" [title]="areaName?areaName:wLanguage.selectArea"
+              [class.placeholder]="areaName?false:true"
+              (click)="showAreaSelector()">{{areaName ? areaName : wLanguage.selectArea}}
+        </span>
+    </div>
+    <div style="float: left;">
+      <check-select-input [placeholder]="wLanguage.deviceType" [isAllChecked]="true" [checkList]="selectInfo"
+                          [(ngModel)]="deviceTypeList"></check-select-input>
+    </div>
+    <div style="float: left;margin-left: 10px;">
+      <nz-range-picker [nzDisabledDate]="disabledEndDate" [(ngModel)]="dateRange" (ngModelChange)="onChange($event)"></nz-range-picker>
+    </div>
+    <div style="float: left;margin-left: 10px;">
+      <button type="button" class="link-button" nz-button nzType="primary"
+              [disabled]="(!(areaData.length>0))||(!(deviceTypeList.length>0))||(!(dateRange.length>0))"
+              (click)="statistical()">{{wLanguage.statistical}}</button>
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+  <!-- tab栏 -->
+  <div class="deviceSelect">
+    <ul>
+      <li *ngFor="let item of selsetDeviceTypeList"
+          [class.active]="item === deviceAactive"
+          (click)="getDeviceType(item);deviceAactive = item">
+        {{item.label}}
+      </li>
+    </ul>
+  </div>
+  <!-- 统计区域 -->
+  <div *ngIf="!hide">
+    <div class="barChart">
+      <app-echart-column style="flex: 1;background-color: #f7f7f7;padding: 10px; margin-right: 10px;"
+                         (chartInstance)="getRingChartInstance($event)">
+      </app-echart-column>
+      <app-echart-column style="flex: 1;background-color: #f7f7f7;padding: 10px;"
+                         (chartInstance)="getBarChartInstance($event)">
+      </app-echart-column>
+    </div>
+    <br>
+    <xc-table
+      [dataSet]="_dataSet"
+      [pageBean]="pageBean"
+      [tableConfig]="tableConfig"
+      (pageChange)="pageChange($event)">
+    </xc-table>
+  </div>
+
+</div>
+<!--区域选择器-->
+<xc-tree-selector
+  [(xcVisible)]="isVisible"
+  (selectDataChange)="selectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-selector>

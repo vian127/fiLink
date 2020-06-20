@@ -1,0 +1,38 @@
+<!--设备列表选择器-->
+<nz-modal nzWidth="70%"
+          [(nzVisible)]="equipmentVisible"
+          nzTitle="{{_language.equipmentList}}"
+          [nzFooter]="modalFooter"
+          [nzMaskClosable]="false"
+          (nzOnCancel)="equipmentVisible=false">
+  <xc-table #tableComponent
+            [dataSet]="_dataSet"
+            [pageBean]="_pageBean"
+            [tableConfig]="_tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+  <ng-template #modalFooter>
+    <button nz-button class="link-button" nzType="primary" (click)="handleOk()">{{_commonLanguage.confirm}}</button>
+    <button nz-button class="link-button" nzType="danger" (click)="equipmentVisible=false">{{_commonLanguage.cancel}}</button>
+  </ng-template>
+</nz-modal>
+<!--设备状态模板-->
+<ng-template #_equipmentStatusTemp let-data="data">
+  <div class="area-level">
+    <i [class]="'icon-fiLink-l iconfont '+data.statusIconClass+' '+data.statusColorClass"
+    ></i>
+    <span class="status-text" [title]="data.equipmentStatusName">{{data.equipmentStatusName}}</span>
+  </div>
+</ng-template>
+<!--设备类型模板-->
+<ng-template #_equipmentTypeTemp let-data="data">
+  <i [ngClass]="data.iconClass" class="device-type-icon"></i>
+  <span class="status-text" [ngStyle]="data.rowStyle"
+        [title]="data.equipmentTypeName">{{data.equipmentTypeName}}</span>
+</ng-template>
+<!-- 列表 单选框 -->
+<ng-template #radioTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectEquipmentId" (ngModelChange)="onEquipmentChange($event, data)">
+    <label nz-radio [nzValue]="data.equipmentId"></label>
+  </nz-radio-group>
+</ng-template>

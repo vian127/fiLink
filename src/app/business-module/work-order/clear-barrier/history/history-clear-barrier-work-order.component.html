@@ -1,0 +1,57 @@
+<div class="box-warp bg-c-w">
+  <div class="statistics">
+  <!--  故障原因环形图  -->
+    <div class="statistics-item">
+      <div class="statistics-item-title bg-c">{{workOrderLanguage.errorReason}}</div>
+      <div class="statistics-item-chart">
+        <div *ngIf="errorReasonStatisticsChartType === 'chart'" echarts [options]="ringChartOption" class="pie-chart"></div>
+        <div *ngIf="errorReasonStatisticsChartType === 'text'" class="no-data">{{commonLanguage.noData}}</div>
+      </div>
+    </div>
+    <!--  处理方案饼图  -->
+    <div class="statistics-item">
+      <div class="statistics-item-title bg-c">{{workOrderLanguage.processingScheme}}</div>
+      <div class="statistics-item-chart">
+        <div *ngIf="processingSchemeStatisticsChartType === 'chart'" echarts [options]="pieChartOption" class="pie-chart"></div>
+        <div *ngIf="processingSchemeStatisticsChartType === 'text'" class="no-data">{{commonLanguage.noData}}</div>
+      </div>
+    </div>
+    <!--  设施类型柱状图  -->
+    <div class="statistics-item">
+      <div class="statistics-item-title bg-c">{{workOrderLanguage.facilityType}}</div>
+      <div class="statistics-item-chart">
+        <div *ngIf="deviceTypeStatisticsChartType === 'chart'" echarts [options]="barChartOption" class="demo-chart chart"></div>
+        <div *ngIf="deviceTypeStatisticsChartType === 'text'" class="no-data">{{commonLanguage.noData}}</div>
+      </div>
+    </div>
+    <!--  工单状态环形进度  -->
+    <div class="statistics-item">
+      <div class="statistics-item-title bg-c">{{workOrderLanguage.status}}</div>
+      <div class="statistics-item-chart">
+        <div class="circle-container" *ngIf="statusStatisticsChartType === 'chart'">
+          <div class="circle">
+            <canvas id="canvas_completed" width="{{canvasLength}}" height="{{canvasLength}}"></canvas>
+            <div class="text">
+              <div class="title">{{workOrderLanguage.completed}}</div>
+              <div class="number">{{completedPercent}}</div>
+            </div>
+          </div>
+          <div class="circle">
+            <canvas id="canvas_singleBack" width="{{canvasLength}}" height="{{canvasLength}}"></canvas>
+            <div class="text">
+              <div class="title">{{workOrderLanguage.singleBack}}</div>
+              <div class="number">{{singleBackPercent}}</div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="statusStatisticsChartType === 'text'" class="no-data">{{commonLanguage.noData}}</div>
+      </div>
+    </div>
+  </div>
+  <!-- 表格部分 -->
+  <div class="table-container bg-c-w">
+    <app-history-clear-barrier-work-order-table></app-history-clear-barrier-work-order-table>
+  </div>
+</div>
+
+

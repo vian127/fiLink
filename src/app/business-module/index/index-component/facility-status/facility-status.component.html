@@ -1,0 +1,20 @@
+<!--设施状态-->
+<div class="facility-status-checkbox">
+  <div class="checkbox">
+    <label nz-checkbox [(ngModel)]="isFacilityStatusAllChecked" (ngModelChange)="facilityStatusChange($event, 0)">
+      <span class="text">{{indexLanguage.allCheck}}</span>
+    </label>
+  </div>
+  <ng-container *ngFor="let status of list">
+    <div class="checkbox">
+      <label nz-checkbox [(ngModel)]="status.checked" (ngModelChange)="facilityStatusChange($event, status.value)">
+        <span class="text c-w" [ngStyle]="{'backgroundColor': status.bgColor}">{{status.label}}</span>
+      </label>
+    </div>
+  </ng-container>
+  <div class="facility-status-title"
+       (click)="fold()"
+       title="{{indexLanguage.facilityStatusTitle}}">
+    <div class="icon-facility-status"></div>
+  </div>
+</div>

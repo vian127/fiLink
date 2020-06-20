@@ -1,0 +1,15 @@
+<!--设施节点-->
+<div class="facility-list-container">
+  <div class="facility-list-title">
+    <div class="icon-facility-list" title="{{title}}" (click)="close()"></div>
+    <div class="text" title="{{title}}" (click)="close()">{{title}}</div>
+  </div>
+  <div class="facility-table">
+    <xc-table [dataSet]="_dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)"
+              #xcTable>
+    </xc-table>
+  </div>
+</div>

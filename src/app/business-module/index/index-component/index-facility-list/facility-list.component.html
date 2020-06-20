@@ -1,0 +1,16 @@
+<!--设施列表-->
+<div class="facility-list-container">
+  <div class="facility-list-title">
+    <div class="icon-facility-list" title="{{title}}"></div>
+    <div class="text" title="{{title}}">{{title}}</div>
+    <div *ngIf="isShowMore" class="more" title="{{more}}" (click)="goToFacilityList()">{{more + '>>'}}</div>
+  </div>
+  <div class="facility-table">
+    <xc-table [dataSet]="_dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)"
+              #xcTable>
+    </xc-table>
+  </div>
+</div>

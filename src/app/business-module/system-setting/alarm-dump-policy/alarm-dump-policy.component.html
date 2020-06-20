@@ -1,0 +1,48 @@
+<!--转储设置-->
+<div class="dump-policy">
+  <div>
+    <span class="dump-policy-title">
+      {{pageTitle}}
+    </span>
+  </div>
+  <div>
+    <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+    <div style="padding-left: 20px">
+      <button class="link-button" nz-button [disabled]="!formStatus.getValid()"
+              nzType="primary" style="margin-right: 20px" (click)="updateDump()"
+              [nzLoading]="btnLoading">{{DumpLanguage.systemSetting.determine}}
+      </button>
+      <button class="link-button" nz-button nzType="danger" style="margin-right: 20px"
+              (click)="cancel()">{{DumpLanguage.systemSetting.cancel}}</button>
+      <button class="link-button" nz-button nzType="danger" style="margin-right: 20px"
+              (click)="restoreDefault()">{{DumpLanguage.systemSetting.reset}}
+      </button>
+      <button class="link-button" nz-button nzType="danger" style="margin-right: 20px"
+              (click)="implementation()">{{DumpLanguage.systemSetting.executeImmediately}}
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #implementationTemp>
+  <xc-form [column]="formColumnImplementation" (formInstance)="formInstanceImplementation($event)"></xc-form>
+</ng-template>
+
+<ng-template #progressTemp>
+  <div style="width: 98%">
+    <nz-progress [nzPercent]="progress" nzSize="small" [nzShowInfo]="true"></nz-progress>
+  </div>
+</ng-template>
+
+<ng-template #footerTemp>
+  <div class="btn-container">
+    <button nz-button nzType="primary" class="btn-implement"
+            [disabled]="this.formStatusImplementation.group.controls['nowStatus'].value === DumpLanguage.systemSetting.executeImmediately"
+            style="margin-right: 10px"
+            (click)="nowImplementation()">{{DumpLanguage.systemSetting.executeImmediately}}
+    </button>
+    <button nz-button nzType="danger"
+            (click)="nowCancel()">{{DumpLanguage.systemSetting.cancel}}
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,80 @@
+.index-statistics-container {
+  .statistics-title {
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+    font-size: 14px;
+    padding-left: 10px;
+    font-weight: bold;
+    color: #000;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  // 统计总数
+  .statistics-total-count{
+    height: 118px;
+    line-height: 30px;
+    padding: 25px 10px 0 10px;
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    li{
+      float: left;
+      margin: 0 auto;
+      text-align: center;
+      list-style: none;
+      font-size: 16px;
+      color: #333;
+      .statistics-total-name {
+        font-weight: bold;
+        font-size: 14px;
+      }
+      .statistics-total-numbers{
+        font-weight: 400;
+        font-size: 16px;
+      }
+      .statistics-total-bottom{
+        height: 68px;
+        background: url("../../../../../assets/img/index/icon-right-empty.png") no-repeat center;
+        width: 52px;
+        border-radius: 3px;
+        .statistics-total-center{
+          height: 68px;
+          line-height: 68px;
+        }
+        .icon-fiLink-xl {
+          font-size: 40px !important;
+          color: #78c446;
+          vertical-align: middle;
+        }
+      }
+    }
+    .pic-arrow {
+      margin-top: 20px;
+    }
+  }
+  .statistics-content {
+    height: 200px;
+    border-bottom: 1px solid #e8e8e8;
+    .padding-t{
+      padding-top: 35px;
+    }
+    .chart-style{
+      height: 200px;
+    }
+  }
+  .opticalBox-color {
+      color: #5ed8a9;
+  }
+  .manWell-color {
+    color: #f39705;
+  }
+  .patchPanel-color {
+    color: #4fc5ea;
+  }
+  .jointClosure-color {
+    color: #f7d205;
+  }
+  .all-facility-color {
+    color: #fa6308;
+  }
+}
+

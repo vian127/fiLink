@@ -1,0 +1,24 @@
+<!--控制对象表格弹框-->
+<nz-modal [(nzVisible)]="xcVisible"
+          [nzTitle]="title"
+          [nzWidth]="1024"
+          [nzMaskClosable]="false"
+          (nzAfterOpen)="afterModelOpen()"
+          (nzAfterClose)="afterModelClose()"
+          (nzOnCancel)="handleCancel()"
+          [nzFooter]="footer">
+
+  <xc-table [dataSet]="dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+
+  <!-- 底部按钮-->
+  <ng-template #footer let-data='data'>
+    <button class="link-button" nz-button nzType="primary" type="button"
+            (click)="handleOk()">{{language.handleOk}}</button>
+    <button class="link-button" nz-button nzType="danger" type="button"
+            (click)="handleCancel()">{{language.handleCancel}}</button>
+  </ng-template>
+</nz-modal>

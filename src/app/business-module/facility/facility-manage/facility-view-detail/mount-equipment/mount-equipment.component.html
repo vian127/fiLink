@@ -1,0 +1,21 @@
+<!--挂载设备列表-->
+<nz-card nzTitle="挂载设备详情">
+  <div class="box-warp">
+    <xc-table #tableComponent
+              [dataSet]="dataSet"
+              [pageBean]="pageBean"
+              [tableConfig]="tableConfig"
+              (pageChange)="pageChange($event)">
+    </xc-table>
+  </div>
+</nz-card>
+
+<!--设备状态模板-->
+<ng-template #equipmentStatusTemplate let-data="data">
+  <div title="{{data.equipmentStatus}}">
+    <span class="box-color-icon"
+          [ngStyle]="{backgroundColor: 'red'}">
+    </span>
+    {{data.equipmentStatus}}
+  </div>
+</ng-template>

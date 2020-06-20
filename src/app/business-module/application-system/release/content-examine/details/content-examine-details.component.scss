@@ -1,0 +1,28 @@
+.whole{
+  padding: 0 10px;
+}
+/**
+ * 块级元素转行内元素
+ */
+.rows{
+  display: inline-block;
+}
+/**
+ * 提交按钮
+ */
+.btn-submit{
+  width: 72px;
+  height: 24px;
+  background: #20a0ff;
+  color: white;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 4px;
+  margin: 20px 100px;
+}
+.card-operation{
+  margin: 24px 0;
+}
+.text-input{
+  width: 50%;
+}

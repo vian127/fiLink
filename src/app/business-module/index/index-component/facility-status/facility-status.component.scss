@@ -1,0 +1,28 @@
+@import "../../css/config";
+.facility-status-checkbox {
+  @include filter-top-filter;
+  display: flex;
+  border: none;
+  .facility-status-title {
+    display: flex;
+    padding: 0 5px;
+    height: 30px;
+    align-items: center;
+    .icon-facility-status {
+      width: 20px;
+      height: 20px;
+      background: url("../../../../../assets/img/index/icon-facility-status.png") no-repeat center 100%;
+    }
+  }
+  .text {
+    font-size: 12px;
+    padding: 0 10px;
+  }
+  .c-w {
+    color: white;
+  }
+  .checkbox {
+    @include top-checkbox;
+    padding: 3px 5px;
+  }
+}

@@ -1,0 +1,52 @@
+.open-icon {
+  transition: all 0.4s;
+  display: inline-block;
+  position: absolute;
+  cursor: pointer;
+  left: -25px;
+  top: 7px;
+  width: 20px;
+  height: 20px;
+  &::after {
+    font-family: "anticon" !important;
+    font-style: normal;
+    vertical-align: baseline;
+    text-align: center;
+    text-transform: none;
+    text-rendering: auto;
+    position: absolute;
+    content: "\e61d";
+    right: 4px;
+    top: -7px;
+    display: inline-block;
+    font-size: 12px;
+    font-size: 8px;
+    transform: scale(0.66666667) rotate(0deg);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=1, M12=0, M21=0, M22=1)";
+    zoom: 1;
+  }
+}
+
+.background {
+  background: rgba(219, 131, 21, 0.39);
+}
+
+.close {
+  transition: all 0.4s;
+  transform: rotate(90deg);
+
+}
+
+.tree {
+  list-style: none;
+  margin: 0;
+}
+
+.tree-icon {
+  cursor: pointer;
+
+}
+
+.tree-title {
+  cursor: pointer;
+}

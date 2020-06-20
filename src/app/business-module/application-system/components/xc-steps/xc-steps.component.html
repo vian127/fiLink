@@ -1,0 +1,10 @@
+<div class="steps-box">
+  <div
+    class="steps-list"
+    *ngFor="let item of setData"
+    [ngClass]="item.activeClass">
+    <span class="steps-number" (click)="handChangeSteps(item)">{{item.number}}</span>
+    <span class="steps-title" (click)="handChangeSteps(item)">{{item.title}}</span>
+    <span class="steps-border"></span>
+  </div>
+</div>

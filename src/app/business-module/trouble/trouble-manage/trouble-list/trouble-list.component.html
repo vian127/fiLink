@@ -1,0 +1,103 @@
+<div class="ifSpin">
+  <!-- 故障卡片 -->
+  <xc-statistical-slider
+    [sliderConfig]="sliderConfig"
+    (slideShowChange)="slideShowChange($event)"
+    (selectChange)="sliderChange($event)">
+  </xc-statistical-slider>
+  <div class="box-warp">
+    <div class="content-warp">
+      <!-- 显示方式下拉框 -->
+      <div class="selectTrouble">
+        <span>{{ this.language.displayUsage }}</span>
+        <nz-select
+          nzPlaceHolder="{{language.pleaseChoose}}"
+          [(ngModel)]="troubleHintValue"
+          (ngModelChange)="troubleHintValueModelChange()">
+          <nz-option *ngFor="let option of troubleHintList" [nzLabel]="option.label"
+                     [nzValue]="option.code"></nz-option>
+        </nz-select>
+      </div>
+      <!-- 故障列表 -->
+      <xc-table #table
+                *ngIf="isShowTable"
+                [dataSet]="_dataSet"
+                [pageBean]="pageBean"
+                [tableConfig]="tableConfig"
+                (pageChange)="pageChange($event)">
+      </xc-table>
+    </div>
+  </div>
+
+  <!--  处理状态  -->
+  <ng-template #handleStatusTemp let-data="data">
+    <div>{{ data.handleStatusName }}</div>
+  </ng-template>
+
+  <!--  故障级别 -->
+  <ng-template #troubleLevelTemp let-data="data">
+    <div class="flex">
+      <div class="box-icon" [ngStyle]="data.style"></div>
+      <span class="ml5">{{ data.troubleLevelName }} </span>
+    </div>
+  </ng-template>
+
+  <!--  故障类型  -->
+  <ng-template #troubleTypeTemp let-data="data">
+    <div>{{ typeStatus[data.troubleType] }}</div>
+  </ng-template>
+
+  <!--  故障来源  -->
+  <ng-template #troubleSourceTemp let-data="data">
+    <div>{{ data.troubleSourceTypeName }}</div>
+  </ng-template>
+
+  <!-- 故障设施 -->
+  <ng-template #facilityTemp let-filterValue="filterValue">
+    <app-trouble-facility [troubleFacilityConfig]="troubleFacilityConfig" [filterValue]="filterValue"></app-trouble-facility>
+  </ng-template>
+  <!-- 故障设备 -->
+  <ng-template #equipmentTemp let-filterValue="filterValue">
+<!--    <app-trouble-equipment [troubleFacilityConfig]="troubleFacilityConfig" [filterValue]="filterValue"></app-trouble-equipment>-->
+  </ng-template>
+
+  <!-- 修改备注弹框 -->
+  <nz-modal
+    class="updateRemarkPopUp"
+    [(nzVisible)]="display.remarkTable"
+    [nzTitle]="modalTitle"
+    [nzMaskClosable]="false"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    (nzOnCancel)="display.remarkTable=false">
+    <ng-template #modalTitle>
+      {{language.updateRemark}}
+    </ng-template>
+    <ng-template #modalContent>
+      <xc-form [column]="formColumnRemark" (formInstance)="formInstanceRemark($event)"></xc-form>
+    </ng-template>
+    <ng-template #modalFooter>
+      <button nz-button nzType="primary" class="link-button" [disabled]="!formStatusRemark.getValid()"
+              (click)="troubleRemark();display.remarkTable=false">{{language.okText}}
+      </button>
+      <button nz-button nzType="danger" class="link-button" (click)="display.remarkTable=false">{{language.cancelText}}</button>
+    </ng-template>
+  </nz-modal>
+
+<!-- 责任单位 -->
+  <ng-template #UnitNameSearch let-filterValue = "filterValue">
+  <span class="area-name" (click)="showModal(filterValue)" [title]="selectUnitName?selectUnitName:''"
+        [class.placeholder]="!selectUnitName">{{selectUnitName?selectUnitName:commonLanguage.clickSelect}}</span>
+  </ng-template>
+<!-- 责任单位树 -->
+  <xc-tree-selector
+    [(xcVisible)]="isVisible"
+    (selectDataChange)="selectDataChange($event)"
+    [treeSelectorConfig]="treeSelectorConfig">
+  </xc-tree-selector>
+</div>
+
+<!--遮罩层-->
+<div *ngIf="ifSpin" class="ifSpin" class="mask"></div>
+<nz-spin [nzSimple]="true" *ngIf="ifSpin" class="loading" [nzSpinning]="true" [nzSize]="'large'"></nz-spin>
+

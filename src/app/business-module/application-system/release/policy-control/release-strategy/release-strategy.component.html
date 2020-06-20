@@ -1,0 +1,104 @@
+<div class="release-strategy">
+  <div class="play">
+    <div class="play-title">
+      <span>播放时段</span>
+      <span class="btn-pattern" (click)="isShowPattern = true">添加</span>
+    </div>
+    <div class="play-border">
+      <div *ngIf="strategyPlayPeriodRefList && strategyPlayPeriodRefList.length">
+        <div class="play-list" *ngFor="let item of strategyPlayPeriodRefList;let idx = index">
+          <div class="program-title">{{item.playStartTime}}
+            -{{item.playEndTime}}</div>
+          <div class="program-operation">
+            <span class="operation-edit btn-pattern" (click)="isShowPattern = true">编辑</span>
+            <span class="operation-delete btn-pattern" (click)="handleDeletePlay(idx)">删除</span>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!isShowPattern && strategyPlayPeriodRefList.length === 0">暂无数据</div>
+      <div *ngIf="isShowPattern">
+        <nz-range-picker
+          style="width: 400px"
+          [(ngModel)]="dateRange"
+          (ngModelChange)="onChange($event)" nzShowTime></nz-range-picker>
+      </div>
+    </div>
+  </div>
+  <div class="play">
+    <div class="play-title">
+      <span>节目选择</span>
+      <span class="btn-pattern" (click)="isShowProgram = true">添加</span>
+    </div>
+    <div class="play-border">
+      <div *ngIf="strategyProgRelationList && strategyProgRelationList.length>0">
+        <div class="play-list" *ngFor="let item of strategyProgRelationList;let idx = index">
+          <div class="program-title">{{item.playTime}}</div>
+          <div class="program-operation">
+            <span class="operation-edit btn-pattern" (click)="isShowProgram = true">编辑</span>
+            <span class="operation-delete btn-pattern" (click)="handleDeleteProgram(idx)">删除</span>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="strategyProgRelationList.length === 0">暂无数据</div>
+    </div>
+  </div>
+  <div class="cycle-mode">
+    <div>循环模式</div>
+    <nz-radio-group [(ngModel)]="instructInfo.playType" style="margin-top: 10px">
+      <label nz-radio nzValue="1">循环</label>
+      <label nz-radio nzValue="0">不循环</label>
+    </nz-radio-group>
+  </div>
+  <div class="volume">
+    <div>音量(%)</div>
+    <nz-row>
+      <nz-col nzSpan="19">
+        <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="instructInfo.volume"></nz-slider>
+      </nz-col>
+      <div nz-col nzSpan="4">
+        <nz-input-number
+          [nzMin]="1"
+          [nzMax]="20"
+          [ngStyle]="{ marginLeft: '16px' }"
+          [(ngModel)]="instructInfo.volume"
+        ></nz-input-number>
+      </div>
+    </nz-row>
+  </div>
+  <div class="brightness">
+    <div>亮度(%)</div>
+    <nz-row>
+      <nz-col nzSpan="19">
+        <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="instructInfo.light"></nz-slider>
+      </nz-col>
+      <div nz-col nzSpan="4">
+        <nz-input-number
+          [nzMin]="1"
+          [nzMax]="20"
+          [ngStyle]="{ marginLeft: '16px' }"
+          [(ngModel)]="instructInfo.light"
+        ></nz-input-number>
+      </div>
+    </nz-row>
+  </div>
+</div>
+
+<nz-modal
+  [(nzVisible)]="isShowProgram"
+  nzTitle="节目列表"
+  nzWidth="70%"
+  (nzOnCancel)="handleProgramCancel()"
+  (nzOnOk)="handleProgramOk()">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</nz-modal>
+
+<!--设备列表单选框-->
+<ng-template #radioTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedProgramId" (ngModelChange)="selectedProgramChange($event, data)">
+    <label nz-radio [nzValue]="data.programId"></label>
+  </nz-radio-group>
+</ng-template>

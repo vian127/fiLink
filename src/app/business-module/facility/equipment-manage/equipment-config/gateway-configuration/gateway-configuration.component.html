@@ -1,0 +1,95 @@
+<!--网关配置-->
+<div id="gateway-canvas" class='graph-size'>
+  <!--  端口点击出现按钮-->
+  <div class="button-box" id="buttonMenu">
+    <ul class="button-ul" *ngIf="addButtonPart">
+      <li type="button" (click)="existEquipment()">已有设备</li>
+      <li type="button" (click)="addEquipment()">新增设备</li>
+    </ul>
+
+    <ul class="button-ul" *ngIf="editButtonPart">
+      <li type="button" (click)="editConfig()">修改当前配置</li>
+      <li type="button" (click)="clearConfig()">清除当前配置</li>
+    </ul>
+  </div>
+
+</div>
+
+<!--页面底部按钮-->
+<div class='page-footer'>
+  <button class="link-button" nz-button nzType="primary" type="button"
+          (click)="save()">{{language.handleOk}}</button>
+  <button class="link-button" nz-button nzType="danger" type="button"
+          (click)="goBack()">{{language.handleCancel}}</button>
+</div>
+
+
+<!--已有设备弹框-->
+<equipment-list-selector-component
+  [(equipmentVisible)]="existEquipmentVisible"
+  [filterConditions]="equipmentFilter"
+  [isGatewayConfig]="true"
+  (selectDataChange)="equipmentDataChange($event)">
+</equipment-list-selector-component>
+
+<!--新增设备弹框-->
+<nz-modal [(nzVisible)]="xcVisible"
+          nzTitle="新增设备"
+          [nzMask]="true"
+          [nzWidth]="1024"
+          [nzMaskClosable]="false"
+          (nzOnCancel)="handleCancel('add')"
+          [nzFooter]="footer">
+
+  <nz-tabset>
+    <nz-tab nzTitle="设备信息" (nzClick)="changeTab('add')">
+      <!--  新增设备表单-->
+      <app-equipment-detail #addEquipmentTemp
+                            [isHasTitle]="false"
+                            [isHasButton]="false"
+                            [isAddOperate]="true"
+                            (getFormStatus)="getFormStatus($event)"
+      ></app-equipment-detail>
+    </nz-tab>
+    <nz-tab nzTitle="配置信息" (nzClick)="changeTab('config')">
+      <!--设备配置-->
+      <app-equipment-config></app-equipment-config>
+    </nz-tab>
+  </nz-tabset>
+  <!-- 底部按钮-->
+  <ng-template #footer let-data='data'>
+    <!--    <button class="link-button" nz-button nzType="primary" type="button" *ngIf="isAddOrConfig"-->
+    <!--            (click)="handleOk('add')">{{language.handleOk}}+"1"-->
+    <!--    </button>-->
+    <button class="link-button margin-right20" *ngIf="isAddOrConfig"
+            nz-button nzType="primary"
+            [nzLoading]="isLoading"
+            [disabled]="!isValid"
+            (click)="handleOk('add')">
+      {{language.handleOk}}+"1"
+    </button>
+    <button class="link-button" nz-button nzType="primary" type="button" *ngIf="!isAddOrConfig"
+            (click)="handleOk('config')">{{language.handleOk}}</button>
+    <button class="link-button" nz-button nzType="danger" type="button"
+            (click)="handleCancel('add')">{{language.handleCancel}}</button>
+  </ng-template>
+</nz-modal>
+
+
+<!--修改设备配置弹框-->
+<nz-modal [(nzVisible)]="editXcVisible"
+          nzTitle="配置信息"
+          [nzWidth]="1024"
+          [nzMaskClosable]="false"
+          (nzOnCancel)="handleCancel('edit')"
+          [nzFooter]="EditFooter">
+  <!--设备配置-->
+  <app-equipment-config></app-equipment-config>
+  <!-- 底部按钮-->
+  <ng-template #EditFooter let-data='data'>
+    <button class="link-button" nz-button nzType="primary" type="button"
+            (click)="handleOk('edit')">{{language.handleOk}}</button>
+    <button class="link-button" nz-button nzType="danger" type="button"
+            (click)="handleCancel('edit')">{{language.handleCancel}}</button>
+  </ng-template>
+</nz-modal>

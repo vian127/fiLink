@@ -1,0 +1,49 @@
+.in-container{
+  .area-detail-title {
+    border-left: 2px solid #7cb0dd;
+    padding-left: 18px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 900;
+  }
+  .editable-row{
+    .editable-cell {
+      position: relative;
+    }
+    .editable-cell-value-wrap {
+      padding: 5px 0;
+      cursor: pointer;
+    }
+    &:hover .editable-cell-value-wrap {
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+      padding: 4px 0;
+      height: 29px;
+    }
+  }
+
+  .lineAdd{
+    text-align: center;
+    height: 28px;
+    line-height: 26px;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #36cfc9;
+    &:hover{
+      cursor: pointer;
+      background: #fafafa;
+    }
+    .noCount:hover{
+      cursor: not-allowed;
+      background: #FFFFFF;
+    }
+  }
+  .mr20{
+    margin-right: 20px;
+  }
+  .pl20{
+    padding-left: 20px;
+  }
+}

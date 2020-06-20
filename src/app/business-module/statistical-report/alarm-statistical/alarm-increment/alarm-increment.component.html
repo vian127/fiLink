@@ -1,0 +1,8 @@
+
+<!--筛选条件-->
+<app-screening-condition [currentPage]="'alarmIncrement'"
+                         (search)="search($event)"
+                         [appBarProgress]="ProgressShow"></app-screening-condition>
+
+<div *ngIf="!display.brokenLine" id="brokenLine" class="brokenLine"></div>
+<div *ngIf="display.brokenLine" class="brokenLine noData">{{ this.language.noData }}</div>

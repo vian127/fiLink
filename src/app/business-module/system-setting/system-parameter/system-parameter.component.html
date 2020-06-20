@@ -1,0 +1,61 @@
+<!--系统参数-->
+<app-detail-title [pageTitle]="pageTitle"></app-detail-title>
+<div class="security-policy-form">
+  <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+  <div *ngIf="urlType==='5'" class="telephone">
+    <p>
+      {{language.systemSetting.testCall}}
+    </p>
+    <app-telephone-input #telephone (telephoneInit)="telephoneInit($event)"
+                         (phoneChange)="phoneChange()"></app-telephone-input>
+  </div>
+  <div class="button-group">
+    <button *ngIf="urlType!=='6'" class="link-button"
+            [disabled]="!formStatus.getValid()"
+            nz-button nzType="primary"
+            [appAccessPermission]="code"
+            style="margin-right: 20px" (click)="formHandleOk()">{{language.table.okText}}</button>
+
+    <button *ngIf="urlType==='6'" class="link-button"
+            [disabled]="!formStatus.getValid('accessKeyId')||!formStatus.getValid('accessKeySecret')"
+            nz-button nzType="primary"
+            [appAccessPermission]="code"
+            style="margin-right: 20px" (click)="formHandleOk()">{{language.table.okText}}</button>
+    <button class="link-button" nz-button nzType="danger" (click)="formHandleCancel()"
+            style="margin-right: 20px">{{language.table.cancelText}}</button>
+    <button class="link-button" nz-button nzType="danger" (click)="formHandleReset()">{{language.form.reset}}</button>
+    <button *ngIf="urlType==='6'" class="link-button"
+            nz-button nzType="danger"
+            [disabled]="!formStatus.getValid('toAddress')"
+            [appAccessPermission]="code"
+            style="margin-left: 20px" (click)="formTestEMail()">{{language.systemSetting.test}}
+    </button>
+    <button *ngIf="urlType==='5'" class="link-button"
+            nz-button nzType="danger"
+            [disabled]="!phoneError"
+            [appAccessPermission]="code"
+            style="margin-left: 20px" (click)="formTestPhone()">{{language.systemSetting.test}}
+    </button>
+    <button *ngIf="urlType==='10'" class="link-button"
+            nz-button nzType="danger"
+            [disabled]="!formStatus.getValid()"
+            [appAccessPermission]="code"
+            [nzLoading]="submitLoading"
+            style="margin-left: 20px" (click)="formTestFTP()">{{language.systemSetting.test}}
+    </button>
+
+  </div>
+</div>
+
+<ng-template #logo>
+  <input #uploadImg *ngIf="isVisible"  type="file" style="display: none" id="file" (change)="fileChange($event)">
+  <button nz-button (click)="upload()" style="float: left">
+    <i nz-icon type="upload"></i><span>{{language.systemSetting.uploadPictures}}</span>
+  </button>
+  <div class="data-img" style="float: left">
+    <img id="img" name="img" alt="" [src]="src">
+  </div>
+</ng-template>
+<!-- 音频 -->
+<audio id="music" hidden="true"></audio>
+

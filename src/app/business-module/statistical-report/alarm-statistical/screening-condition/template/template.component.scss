@@ -1,0 +1,27 @@
+
+::ng-deep .alarmFiltration .ant-modal-wrap > .ant-modal {
+  width: 780px !important;
+}
+
+::ng-deep .addAlarmTemplate .ant-modal-wrap > .ant-modal {
+  width: 650px !important;
+}
+
+::ng-deep nz-modal.alarmFiltration .ant-modal-body {
+  padding: 0 5px;
+}
+
+::ng-deep nz-modal.alarmFiltration .table-top-button {
+  padding: 8px 0 5px;
+}
+
+::ng-deep nz-modal.alarmFiltration .ant-table-pagination.ant-pagination {
+  float: none;
+  text-align: center;
+  margin: 0;
+}
+
+::ng-deep nz-range-picker.templateList span.ant-calendar-picker {
+  width: 420px !important;
+}
+

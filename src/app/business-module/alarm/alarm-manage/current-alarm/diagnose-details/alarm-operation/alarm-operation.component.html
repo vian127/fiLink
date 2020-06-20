@@ -1,0 +1,46 @@
+<nz-card nzTitle="{{language.basicOperation}}">
+  <div *ngIf="pageType === 'alarm'">
+    <!--派单核实-->
+    <button class="operate-btn" (click)="ordersVerify()">
+      <i class="icon-fiLink-l iconfont fiLink-send-verify verify"></i>
+      <span class="verify" >{{language.ordersVerify}}</span>
+    </button>
+    <!--派单销障-->
+    <button class="operate-btn" (click)="clickOrdersCancelAccount()">
+      <i class="icon-fiLink-l iconfont fiLink-send-pin cancel-account"></i>
+      <span class="cancel-account" >{{language.ordersCancelAccount}}</span>
+    </button>
+    <!--转故障处理-->
+    <button class="operate-btn" (click)="turnTrouble()">
+      <i class="icon-fiLink-l iconfont fiLink-turn-trouble turn-trouble"></i>
+      <span class="turn-trouble" >{{language.passTroubleDispose}}</span>
+    </button>
+    <!--查看类似案例-->
+    <button class="operate-btn" (click)="lookSimilarCases()">
+      <i class="icon-fiLink-l iconfont fiLink-view-case similar-cases"></i>
+      <span class="similar-cases" >{{language.lookSimilarCases}}</span>
+    </button>
+    <!--误判-->
+    <button class="operate-btn" (click)="erroneousJudgement()">
+      <i class="icon-fiLink-l iconfont fiLink-view-optical-cable mis-judgement"></i>
+      <span class="mis-judgement" >{{language.erroneousJudgement }}</span>
+    </button>
+    <!--已处理-->
+    <button class="operate-btn" (click)="processed()">
+      <i class="icon-fiLink-l iconfont fiLink-processed-trouble process"></i>
+      <span class="process" >{{language.processed}}</span>
+    </button>
+  </div>
+  <!--保存到知识库-->
+  <button class="operate-btn" (click)="saveRepository()" *ngIf="pageType === 'Repository'">
+    <i class="icon-fiLink-l iconfont fiLink-view-optical-cable repository"></i>
+    <span class="repository" >{{language.saveRepository}}</span>
+  </button>
+</nz-card>
+<!-- 派单销障 -->
+<app-orders-cancel-account
+  *ngIf="isVisible"
+  [areaId] = "areaId"
+  [alarmId] = "alarmId"
+  (close)="isVisible=false">
+</app-orders-cancel-account>

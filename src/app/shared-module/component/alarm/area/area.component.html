@@ -1,0 +1,21 @@
+    <!-- 当在表单提交时 使用 -->
+   <div *ngIf="_type === 'form'" class="screenRender {{ _type }}">
+    <span class="area-name" [title]="areaList.name">{{areaList.name}}</span>
+    <button class="open-button"   (click)="showAreaSelectorModal()"><i
+      class="icon-fiLink fiLink-search-index iconfont"></i></button>
+    </div>
+    <!-- [disabled]="display.areadisplay" -->
+    <!-- 当在列表 筛选时 使用 -->
+    <div *ngIf="_type === 'table'" class="screenRender {{ _type }}">
+        <span class="area-name" [title]="areaList.name" 
+        (click)="showAreaSelectorModal()">
+        <span class="title" *ngIf="!areaList.name">{{language.clickSelect}}</span>
+        {{areaList.name}}</span>
+    </div>
+
+  <xc-tree-selector #unitTreeSelector
+      class="areaTree"
+      [(xcVisible)]="display.areaSelectVisible"
+      (selectDataChange)="selectDataChange($event)"
+      [treeSelectorConfig]="treeSelectorConfig">
+  </xc-tree-selector>

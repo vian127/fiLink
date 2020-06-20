@@ -1,0 +1,13 @@
+<div class="leasee-group" *ngIf="isShowLeasee">
+  <div class="leasee-group-title" title="{{indexLanguage.selectRent}}">
+    <div class="leasee-group-title-text">租赁方</div>
+    <div class="leasee-group-title-text">
+      <nz-select class="leasee-group-title-select" [nzSize]="'small'" nzShowSearch nzAllowClear
+                 nzMode="multiple"
+                 [ngModel]="selectRentValue"
+                 nzPlaceHolder="{{indexLanguage.pleaseSelect}}">
+        <nz-option *ngFor="let item of selectRentItem" nzLabel="{{item.value}}" nzValue="{{item.key}}"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+</div>

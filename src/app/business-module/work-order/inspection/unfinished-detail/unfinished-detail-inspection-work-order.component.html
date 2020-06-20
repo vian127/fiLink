@@ -1,0 +1,102 @@
+<div class="in-container">
+<!--标题-->
+  <div><span class="area-detail-title"> {{pageTitle}} </span></div>
+<!--内容-->
+  <div class="area-content">
+    <div class="row-content">
+      <div nz-col nzSpan="8" *ngFor="let item of formList">
+        <label class="row-label" [ngClass]="className">{{item.label}}：</label>
+        <span *ngIf="!item.isProgress">{{item.value}}</span>
+        <div *ngIf="item.isProgress" [title]="item.value+'%'" class="row-progress">
+          <nz-progress [nzPercent]="item.value" nzSize="small"></nz-progress>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div><span class="area-detail-title tabTitle" *ngIf="inspectTable || orderTable"> {{InspectionLanguage.completeInspectionInformation}} </span></div>
+    <!-- 任务详情表格 -->
+    <div class="detail-table" *ngIf="inspectTable">
+      <xc-table #deviceTable
+                [dataSet]="device_dataSet"
+                [pageBean]="devicePageBean"
+                [tableConfig]="deviceTableConfig"
+                (pageChange)="devicePageChange($event)">
+      </xc-table>
+    </div>
+    <!-- 工单详情表格 -->
+    <div class="detail-table" *ngIf="orderTable">
+      <xc-table #orderTable
+                [dataSet]="order_dataSet"
+                [pageBean]="orderPageBean"
+                [tableConfig]="orderTableConfig"
+                (pageChange)="orderPageChange($event)">
+      </xc-table>
+    </div>
+    <!-- checklist 巡检报告-->
+    <div class="report-warp" *ngIf="showReport">
+      <div class="report-left">
+        <div class="tree-title">{{InspectionLanguage.setDevice}}</div>
+        <div class="device-tree">
+          <nz-spin class="spins" [nzSpinning]="isSpinning" *ngIf="isSpinning"></nz-spin>
+          <nz-input-group [nzSuffix]="suffixIcon">
+            <input type="text" nz-input placeholder="Search" [(ngModel)]="searchValue" (input)="onInputValue($event.target)" [nzAutocomplete]="auto" />
+            <nz-autocomplete nzBackfill #auto>
+              <nz-auto-option *ngFor="let option of resultOptions" [nzValue]="option.key" (click)="changeResult(option)">{{option.title }}</nz-auto-option>
+            </nz-autocomplete>
+          </nz-input-group>
+          <ng-template #suffixIcon>
+            <span class="icon-fiLink fiLink-search-index iconfont"></span>
+          </ng-template>
+          <div class="tree-warp" id="tree-warp">
+            <nz-tree [nzData]="reportNodes"
+                     [nzSearchValue]="searchValue"
+                     (nzClick)="clickNodes($event)">
+            </nz-tree>
+          </div>
+        </div>
+      </div>
+      <div class="report-right" *ngIf="showReport">
+        <xc-table [dataSet]="reportDataSet"
+                  [pageBean]="reportPageBean"
+                  [tableConfig]="reportTableConfig"
+                  (pageChange)="reportPageChange($event)">
+        </xc-table>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <!--返回按钮-->
+    <div class="last-button">
+      <button type="button" class="link-button" nz-button nzType="danger" (click)="goBack()">{{btnName}}</button>
+    </div>
+  </div>
+  <!--状态模板-->
+  <ng-template #statusTemp let-data="data">
+    <div class="hidden" title="{{data.statusName}}" [ngStyle]="data.rowStyle">
+      <span [ngClass]="data.statusClass" style="margin-right: 5px;"></span>
+      {{data.statusName}}
+    </div>
+  </ng-template>
+  <!--单位名称选择-->
+  <ng-template #UnitNameSearch let-filterValue="filterValue">
+    <input class="unit-name" (click)="showModal(filterValue)"
+           [title]="selectUnitName" type="text" [placeholder]="InspectionLanguage.pleaseChoose"
+           [(ngModel)]="selectUnitName">
+  </ng-template>
+  <!-- 单位树 -->
+  <xc-tree-area-selector
+    [(xcVisible)]="responsibleUnitIsVisible"
+    (selectDataChange)="departmentSelectDataChange($event)"
+    [treeSelectorConfig]="treeSelectorConfig">
+  </xc-tree-area-selector>
+  <!-- 责任人 -->
+  <ng-template #roleTemp let-data="data">
+    <span class="widthStyle" title="{{data.assign?.userName}}">{{data.assign?.userName}}</span>
+  </ng-template>
+  <!--是否通过-->
+  <ng-template #resultTemp let-data="data">
+    <div class="hidden" title="{{data.statusName}}" [ngStyle]="data.rowStyle">
+      <span [ngClass]="data.statusClass" style="margin-right: 5px;"></span>
+      {{data.statusName}}
+    </div>
+  </ng-template>
+</div>

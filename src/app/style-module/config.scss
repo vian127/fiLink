@@ -1,0 +1,151 @@
+/**
+* global
+*/
+// 主体颜色 明青色
+$color: #36cfc9;
+$deleteBtn-color: #fb7257;
+$bg-c: #f0f2f5;
+$bg-c-w: #fff;
+// 状态图标颜色
+$status-success: #25b6b6;
+$status-failure: #959595;
+$status-danger: #e71f19;
+$status-common: #5297d2;
+$status-prompt: #ee761b;
+
+// 告警
+$status-alarm: #FB7356;
+// 未配置
+$status-unknown: #35AACE;
+// 失联
+$status-lost: #F8C032;
+// 离线
+$status-offline: #959595;
+// 正常
+$status-normal: #36D1C9;
+
+// 表格上方操作按钮
+$table-topBtn-width: 20px;
+$table-topBtn-height: 20px;
+$table-topBtn-size: 20px!important;
+// 表格筛选内操作按钮
+$table-operateBtn-width: 16px;
+$table-operateBtn-height: 16px;
+$table-operateBtn-size: 16px!important;
+// 表单内操作图标
+$form-operateBtn-width: 16px;
+$form-operateBtn-height: 16px;
+$form-operateBtn-size: 16px!important;
+// 状态图标
+$status-icon-width: 16px;
+$status-icon-height: 16px;
+$status-icon-size: 16px!important;
+// 统计面板图标
+$statistics-icon-width: 40px;
+$statistics-icon-height: 40px;
+$statistics-icon-size: 40px!important;
+
+// 设施详情内图标
+$facility-info-width: 18px;
+$facility-info-height: 18px;
+$facility-info-size: 18px!important;
+// 弹框内图标
+$prompt-icon-width: 18px;
+$prompt-icon-height: 18px;
+$prompt-icon-size: 18px!important;
+// 设施图标
+$index-facility-s-width: 18px;
+$index-facility-s-height: 24px;
+// 设施图标
+$index-facility-m-width: 24px;
+$index-facility-m-height: 32px;
+
+// index
+$left-color: #ff5f27;
+$left-top-color: #f1c746;
+$communication-model-color: #248cca;
+$offline-color: #959595;
+$collection-color: #fb7257;
+$signal-intensity-color: #4ab134;
+$tilt-color: #fb7275;
+$index-facility-selected: #8588e7;
+$index-facility-alarm: #fb7275;
+$index-facility-normal: #36cfc9;
+$index-facility-offline: #959595;
+$index-facility-lost: #f8be32;
+$index-facility-unknown: #36a9cf;
+
+// facility
+$facility-setting-color: #05c028;
+$facility-authorize-color: #fcbe02;
+$facility-edit-color: #0985fd;
+$facility-delete-color: #fe1a02;
+$facility-disabled-color: #a8a9a8;
+$facility-protection-color: #36cfc9;
+$facility-protection-u-color: #fb7257;
+
+
+// prompt
+$prompt-prompting: #f39800;
+$prompt-ok: #52c41a;
+$prompt-alarm: #ff0000;
+$prompt-close: #36cfc9;
+
+// statistics
+// 设施图标
+$statistics-facility-all: #78c446;
+$statistics-opticalBox: #5ed8a9;
+$statistics-patchPanel: #4fc5ea;
+$statistics-fiberBox: #fa6308;
+$statistics-manWell: #f39705;
+$statistics-jointClosure: #f7d205;
+$statistics-outdoorCabinet:#ab690f;
+$statistics-wisdom: #e70f05;
+$statistics-distributionPanel:#8265ff;
+// 工单状态图标
+$statistics-all: #8265ff;
+$statistics-assigned: #29d9a5;
+$statistics-add: #fb5005;
+$statistics-pending: #8de056;
+$statistics-processing: #ffc63d;
+$statistics-completed: #3279f0;
+$statistics-singleBack: #e70f05;
+$statistics-turnProcessing: #1296db;
+// 告警状态图标
+$statistics-alarm-all: #8265ff;
+$statistics-alarm-urgent: #e61017;
+$statistics-alarm-serious: #ff6600;
+$statistics-alarm-secondary: #fbd418;
+$statistics-alarm-prompt: #009dda;
+// 设备图标颜色
+$statistics-gateway: #ff6600;
+$statistics-singlelightcon: #fbd418;
+$statistics-informationboard: #1296db;
+$statistics-camera: $color;
+$statistics-centralwlancon: #8588e7;
+
+// 表格样式变量
+$table-border-top-color: #cae4e3;
+$table-border-color: #e8e8e8;
+$table-header-height: 32px;
+$table-bg-color: #eaedf1;
+$table-tr-height: 30px;
+$table-font-size: 13px;
+$table-font-color: #333333;
+$table-tr-border-bottom-color: #cae4e3;
+
+// 分页样式变量
+$table-pagination-hover-color: $color;
+$table-pagination-height: 25px;
+
+// form 表单样式变量
+$input-hover-color: $color;
+$switch-bg-color: #bbbbbb;
+$form-error-color: #fb7257;
+
+// 按钮样式变量
+$button-color: $color;
+$button-hover-color: #08979c;
+$button-danger-color: #ffffff;
+$button-danger-hover-color: #d9d9d9;
+$button-danger-font-color: #626262;

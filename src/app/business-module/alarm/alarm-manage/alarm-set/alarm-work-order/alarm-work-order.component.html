@@ -1,0 +1,64 @@
+<div class="box-warp">
+  <xc-table
+    [dataSet]="_dataSet"
+    [pageBean]="pageBean"
+    [tableConfig]="tableConfig"
+    (pageChange)="pageChange($event)">
+  </xc-table>
+</div>
+
+<!-- 启用状态 -->
+<ng-template #isNoStartTemp let-data="data">
+  <nz-switch [ngModel]="data.status==='1'" [appAccessPermission]="data.appAccessPermission"
+             [nzControl]="true"
+             (click)="clickSwitch(data)">
+  </nz-switch>
+  <span *ngIf="data.status === '2'" style="margin-left: 15px">{{language.disable}}</span>
+  <span *ngIf="data.status === '1'" style="margin-left: 15px" >{{language.enable}}</span>
+</ng-template>
+
+<!-- 设施类型 -->
+<ng-template #deviceTypeTemp let-data="data">
+  <span *ngFor="let type of data.alarmOrderRuleDeviceTypeList" class="deviceType">
+      <!--<i [ngClass]="type['iconClass']" class="device-type-icon"></i>-->
+      <span class="status-text" [title]="type['deviceType']">{{type['deviceType']}}</span>
+  </span>
+</ng-template>
+
+<!-- 区域 -->
+<ng-template #areaSelector  let-filterValue = "filterValue" >
+  <app-area [areaConfig]='areaConfig'  [filterValue]="filterValue" ></app-area>
+</ng-template>
+
+<!-- 告警名称 -->
+<ng-template #alarmName let-filterValue = "filterValue">
+  <app-alarm-name [isFilter]="true" [alarmNameConfig]='alarmNameConfig' [filterValue]="filterValue" ></app-alarm-name>
+</ng-template>
+
+
+<!-- 期待完工时长 -->
+<ng-template #completionTime let-filterValue = "filterValue">
+  <span class="inputBox">
+    <input  type="text" class="widthStyle" class = "numberInput"
+            [placeholder]="inspectionLanguage.pleaseEnter"
+                     [(ngModel)]="filterValue.filterValue" oninput="value=value.replace(/\D/g,'')">
+    <xc-nz-select style="width: 110px;" [(ngModel)]="completionTimeSelectedValue" [disabled]="!filterValue.filterValue">
+       <xc-nz-option nzValue="gt" [nzLabel]="'>'"></xc-nz-option>
+       <xc-nz-option nzValue="eq" [nzLabel]="'='"></xc-nz-option>
+       <xc-nz-option nzValue="lt" [nzLabel]="'<'"></xc-nz-option>
+    </xc-nz-select>
+  </span>
+</ng-template>
+
+<!--筛选部门-->
+<ng-template #UnitNameSearch let-filterValue = "filterValue">
+  <input class="area-name" (click)="showModal(filterValue)"
+         [title]="selectUnitName" type="text" [placeholder]="inspectionLanguage.pleaseChoose"
+         [(ngModel)]="selectUnitName">
+</ng-template>
+
+<xc-tree-area-selector
+  [(xcVisible)]="responsibleUnitIsVisible"
+  (selectDataChange)="departmentSelectDataChange($event)"
+  [treeSelectorConfig]="treeSelectorConfig">
+</xc-tree-area-selector>

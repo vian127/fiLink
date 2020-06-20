@@ -1,0 +1,56 @@
+<div class="box-warp">
+  <xc-table
+    [dataSet]="_dataSet"
+    [pageBean]="pageBean"
+    [tableConfig]="tableConfig"
+    (pageChange)="pageChange($event)">
+  </xc-table>
+</div>
+
+<!-- 启用状态 -->
+<ng-template #isNoStartTemp let-data="data">
+  <nz-switch [ngModel]="data.status==='1'" [appAccessPermission]="data.appAccessPermission"
+             [nzControl]="true"
+             (click)="clickSwitch(data)">
+  </nz-switch>
+  <span  style="margin-left: 15px">{{data.statusName}}</span>
+  <!--<span *ngIf="data.status === '2'" style="margin-left: 15px">{{language.disable}}</span>-->
+  <!--<span *ngIf="data.status === '1'" style="margin-left: 15px" >{{language.enable}}</span>-->
+</ng-template>
+
+<!-- 推送方式 -->
+<ng-template #isNoStorageTemp let-data="data">
+  <nz-radio-group class="remoteTable" [ngModel]="data.pushType" >
+    <label nz-radio nzValue="2" (click)="clickIsNoStorageTemp(data, 2)">{{language.mail}}</label>
+    <label nz-radio nzValue="1" (click)="clickIsNoStorageTemp(data, 1)">{{language.note}}</label>
+  </nz-radio-group>
+</ng-template>
+
+<!-- 告警级别 -->
+<ng-template #alarmDefaultLevelTemp let-data="data">
+  <div *ngFor="let item of data.alarmForwardRuleLevels" class="alarmLevels">
+    <div *ngIf="item.alarmDefaultLevel === '1'" style="display: flex"><div class="box-icon" [ngStyle]="item.defaultStyle"></div><span style="margin-left: 5px">{{this.language.urgent}}</span></div>
+    <div *ngIf="item.alarmDefaultLevel === '2'" style="display: flex"><div class="box-icon" [ngStyle]="item.defaultStyle"></div><span style="margin-left: 5px">{{this.language.main}}</span></div>
+    <div *ngIf="item.alarmDefaultLevel === '3'" style="display: flex"><div class="box-icon" [ngStyle]="item.defaultStyle"></div><span style="margin-left: 5px">{{this.language.secondary}}</span></div>
+    <div *ngIf="item.alarmDefaultLevel === '4'" style="display: flex"><div class="box-icon" [ngStyle]="item.defaultStyle"></div><span style="margin-left: 5px">{{this.language.prompt}}</span></div>
+  </div>
+</ng-template>
+
+<!-- 设施类型 -->
+<ng-template #deviceTypeTemp let-data="data">
+    <span *ngFor="let type of data.alarmForwardRuleDeviceTypeList" class="deviceType">
+        <!--<i [ngClass]="type['iconClass']" class="device-type-icon"></i>-->
+        <span class="status-text" [title]="type['deviceType']">{{type['deviceType']}}</span>
+    </span>
+</ng-template>
+
+<!-- 区域 -->
+<ng-template #areaSelector let-data="data"  let-filterValue = "filterValue" >
+  <app-area [areaConfig]='areaConfig' [filterValue]="filterValue" ></app-area>
+</ng-template>
+
+<!-- 通知人 -->
+<ng-template #notifierTemp let-filterValue = "filterValue" let-data="data">
+  <xc-app-user [alarmUserConfig]="alarmUserConfig" [filterValue]="filterValue"></xc-app-user>
+</ng-template>
+

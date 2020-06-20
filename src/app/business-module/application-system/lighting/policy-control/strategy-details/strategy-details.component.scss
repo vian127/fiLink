@@ -1,0 +1,46 @@
+.context-list{
+  width: 500px;
+  padding: 0 20px;
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  div{
+    width: 20%;
+  }
+}
+.strategy-content{
+  padding: 20px;
+  box-shadow: 1px 1px 1px 1px #ccc;
+  margin: 0 20px;
+  width: 500px;
+  .strategy-form{
+    margin-bottom: 20px;
+    .strength-input{
+      .facilities{
+        margin: 0 3px;
+        cursor: pointer;
+      }
+    .interval{
+      text-align: left;
+    }
+    .strength{
+      text-align: left;
+        span{
+          display: inline-block;
+        }
+      }
+    }
+    .source{
+      text-align: left;
+    }
+  }
+  .group-btn{
+    .save-btn{
+      margin-top: 20px;
+      margin-right: 10px;
+    }
+  }
+}
+.strategy-add{
+  padding: 20px;
+}

@@ -1,0 +1,69 @@
+.operation-btn{
+  width: 800px;
+  margin-bottom: 20px;
+  text-align: right;
+}
+.information{
+  width: 800px;
+  border: 1px solid #ccc;
+  margin-bottom: 30px;
+  .title{
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 30px;
+    height: 25px;
+  }
+  .information-content{
+    display: flex;
+    .content-left{
+      text-align: center;
+      width: 50%;
+      border: 1px solid #666;
+      .details-info{
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
+        .info-title{
+          width: 80px;
+          margin-left: 40px;
+          text-align: right;
+        }
+        .info-content{
+          width: 220px;
+          margin-left: 30px;
+          text-align: left;
+        }
+      }
+    }
+    .content-right{
+      width: 50%;
+    }
+  }
+}
+.operation{
+  margin-bottom: 30px;
+  h3{
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .operation-content{
+    padding-left: 30px;
+    .operation-btn{
+      margin-right: 30px;
+    }
+  }
+}
+.application{
+  width: 800px;
+  border: 1px solid #ccc;
+  margin-bottom: 30px;
+  h3{
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 30px;
+    height: 25px;
+  }
+  .application-content{
+    border: 1px solid #666;
+  }
+}

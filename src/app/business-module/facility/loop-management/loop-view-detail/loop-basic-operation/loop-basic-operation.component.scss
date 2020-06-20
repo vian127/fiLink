@@ -1,0 +1,98 @@
+.operate-btn {
+  text-align: left;
+  width: 170px;
+  border: none;
+  outline: none;
+  margin-right: 12px;
+  padding: 0 10px;
+  cursor: pointer;
+  box-shadow: none;
+  background: #ffffff;
+  i {
+    margin-right: 12px;
+  }
+  span {
+    vertical-align: middle;
+  }
+  .authorization {
+    color: #67d275;
+  }
+  .configuration {
+    color: #fcd068;
+  }
+  .facility-edit {
+    color: #0987fd;
+  }
+  .facility-delete {
+    color: #fb7356;
+  }
+  .deploy{
+    color: #36cfc9;
+  }
+  .removal {
+    color: #fb7356;
+  }
+  .facility-off{
+    color: #a9a9a9;
+  }
+  .view-cable{
+    color:#ac06ef;
+  }
+  .fiber-socket-item{
+    color: #EF9A21;
+  }
+  .view-fiber-socket{
+    color: #9a6e3a;
+  }
+  .view-facilities{
+    color: #0a29cf;
+  }
+}
+.operate-btn[disabled]{
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.25);
+  background-color: #f5f5f5;
+  border-color: #d9d9d9;
+  text-shadow: none;
+  box-shadow: none;
+}
+// 授权
+.icon-authorization {
+  background-image: url("../../../../../../assets/facility-icon/icon_authorization.png");
+}
+
+// 配置
+.icon-configuration {
+  background-image: url("../../../../../../assets/facility-icon/icon_configuration.png");
+}
+
+// 编辑设施
+.icon-facility-edit {
+  background-image: url("../../../../../../assets/facility-icon/icon_facility_edit.png");
+}
+
+// 删除设施
+.icon-facility-delete {
+  background-image: url("../../../../../../assets/facility-icon/icon_facility_delete.png");
+}
+
+// 停用
+.icon-facility-off {
+  background-image: url("../../../../../../assets/facility-icon/icon_facility_off.png");
+}
+
+// 撤防
+.icon-removal {
+  background-image: url("../../../../../../assets/facility-icon/icon_removal.png");
+}
+
+
+:host ::ng-deep .ant-card-head .ant-card-head-title {
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+:host ::ng-deep .ant-card-body {
+  padding: 20px 32px;
+}

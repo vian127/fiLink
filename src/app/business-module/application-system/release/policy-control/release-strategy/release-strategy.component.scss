@@ -1,0 +1,38 @@
+.release-strategy{
+  padding: 20px;
+  .play{
+    width: 500px;
+    margin-bottom: 20px;
+    .play-title{
+      margin-bottom: 5px;
+      padding: 0 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .play-border{
+      padding: 10px;
+      border: 1px solid #ccc;
+      .play-list{
+        display: flex;
+        justify-content: space-between;
+        .program-operation{
+          .operation-edit{
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+  .cycle-mode{
+    margin-bottom: 20px;
+  }
+  .volume{
+    width: 500px;
+  }
+  .brightness{
+    width: 500px;
+  }
+}
+.btn-pattern{
+  cursor: pointer;
+}

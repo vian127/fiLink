@@ -1,0 +1,55 @@
+<nz-modal [nzWidth]="900"
+          [(nzVisible)]="listVisible"
+          [nzTitle]="titleTemplate"
+          [nzContent]="treeModalContent"
+          [nzFooter]="treeModalFooter"
+          [nzMaskClosable]="false"
+          (nzOnCancel)="handleCancel()">
+  <ng-template #titleTemplate>
+    <span>{{treeTitle}}</span>
+  </ng-template>
+  <!--树主体-->
+  <ng-template #treeModalContent>
+    <div [ngStyle]="{width:treeSelectorConfig.width}" class="tree-warp">
+      <div>
+        <div class="input-search">
+          <xc-search-input
+            [selectInfo]="selectInfo"
+            [searchValue] = "searchValue"
+            (modelChange)="modelValueChange($event)"
+            (inputChange)="inputValueChange($event)"
+          ></xc-search-input>
+        </div>
+        <nz-card class="tree-card">
+          <div class="tree-con">
+            <ul [id]="treeId" class="ztree link-tree selector-table-tree"></ul>
+          </div>
+        </nz-card>
+
+      </div>
+      <div class="table-left">
+        <div class="table-title">
+          <span>{{commonLanguage.selected}}：{{selectData.length}}/{{treeNodeSum}}{{commonLanguage.count}}</span>
+        </div>
+        <div class="table-content">
+          <div>
+            <nz-card class="card-tab">
+              <xc-table class="list-tab" [dataSet]="selectData"
+                        [pageBean]="selectPageBean"
+                        [tableConfig]="selectorConfig"
+                        (pageChange)="selectPageValueChange($event)">
+              </xc-table>
+            </nz-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+  <!--弹窗底部按钮-->
+  <ng-template #treeModalFooter >
+    <!--<button [hidden]="isHiddenButton" class="link-button" nz-button nzType="primary" (click)="handleSure()">{{commonLanguage.confirm}}</button>-->
+    <button [hidden]="isHiddenButton" class="link-button" nz-button nzType="danger" (click)="handleCancel()">{{commonLanguage.cancel}}</button>
+    <!--<button [hidden]="isHiddenButton" class="link-button" nz-button nzType="danger" (click)="restSelectData()">{{commonLanguage.reset}}</button>-->
+  </ng-template>
+</nz-modal>

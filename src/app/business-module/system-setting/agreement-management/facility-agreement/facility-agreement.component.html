@@ -1,0 +1,43 @@
+<!--设施协议-->
+<div class="facility-list">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableConfig"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+
+  <!--TODO 弹出框底部-->
+  <ng-template #tplFooter>
+    <button class="link-button" nz-button nzType="primary" [nzLoading]="submitLoading" (click)="submit()"
+            [disabled]="(!fileName || !formStatus.getValid())">{{language.table.okText}}</button>
+    <button class="link-button" nz-button nzType="danger" (click)="modalCancel()">{{language.table.cancelText}}</button>
+  </ng-template>
+
+  <!--TODO 文件下载-->
+  <ng-template #fileNameRef let-data="data">
+    <a href="javascript:void (0);" (click)="download(data)" class="table-text-td">
+      <span  [title]="data.fileName">{{data.fileName}}</span>
+    </a>
+  </ng-template>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible"
+          [nzMaskClosable]="false"
+          [nzFooter]="tplFooter"
+          [nzTitle]="title"
+          (nzOnCancel)="modalCancel()">
+  <xc-form [column]="formColumn" (formInstance)="formInstance($event)"></xc-form>
+</nz-modal>
+<ng-template #uploads>
+  <nz-form-control [nzSm]="14" [nzXs]="24" style="width: 300px">
+    <input *ngIf="isVisible" type="file" style="display: none" id="file" (change)="fileChange($event)">
+    <p *ngIf="fileName" [title]="fileName"
+       style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">{{fileName}}</p>
+    <button nz-button (click)="upload()" type="button">
+      <i nz-icon type="upload"></i><span>{{language.systemSetting.uploadScriptFiles}}</span>
+    </button>
+  </nz-form-control>
+</ng-template>
+
+
+

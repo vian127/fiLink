@@ -1,0 +1,120 @@
+<div *ngIf="instructLightList && instructLightList.length > 0">
+  <div class="context-list" *ngFor="let item of instructLightList">
+    <div style="width: 30%">{{methodFun.dateFmt(item.startTime) }}~{{methodFun.dateFmt(item.endTime)}}</div>
+    <div>{{item.sensor}}</div>
+    <div>{{item.lightIntensity}}</div>
+    <div>{{methodFun.switchLight(item.switchLight)}}</div>
+    <div>{{item.light}}</div>
+  </div>
+</div>
+<div class="strategy-content" *ngIf="isShowDetails">
+  <h5>提示：以下条件和动作至少各输入一项</h5>
+  <h4>条件</h4>
+  <div class="strategy-form">
+    <div class="interval">
+      时段
+    </div>
+    <div>
+      <nz-range-picker
+        style="width: 400px"
+        [(ngModel)]="dateRange"
+        (ngModelChange)="onChange($event)" nzShowTime></nz-range-picker>
+    </div>
+  </div>
+  <div class="strategy-form">
+    <div class="strength">光照强度</div>
+    <div class="strength-input">
+      <span><input nz-input
+                   [disabled]="true"
+                   [(ngModel)]="params.sensor" style="width: 190px"/></span>
+      <span class="facilities">
+        <i nz-icon nzType="plus-circle" nzTheme="outline" (click)="handleClickStrategy()"></i>
+      </span>
+      <span><input nz-input [(ngModel)]="params.lightIntensity" style="width: 190px"/></span>
+    </div>
+  </div>
+  <div class="strategy-form">
+    <div class="source">其他事件源</div>
+    <div>
+      <input nz-input
+             [disabled]="true"
+             [(ngModel)]="alarmName" style="width: 400px"/>
+      <i nz-icon nzType="plus-circle" nzTheme="outline" (click)="handleSource()"></i>
+    </div>
+  </div>
+  <div class="lighting">
+    <h3>动作</h3>
+    <div>
+      <span style="margin-right: 10px">开关</span>
+      <nz-switch [ngModel]="params.switchLight === '1' ? true : false" nzCheckedChildren="开"
+                 nzUnCheckedChildren="关"></nz-switch>
+    </div>
+    <div>
+      <nz-row>
+        <nz-col nzSpan="12">
+          <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="params.light"></nz-slider>
+        </nz-col>
+        <div nz-col nzSpan="4">
+          <nz-input-number
+            [nzMin]="1"
+            [nzMax]="20"
+            [ngStyle]="{ marginLeft: '16px' }"
+            [(ngModel)]="params.light"
+          ></nz-input-number>
+        </div>
+      </nz-row>
+    </div>
+  </div>
+  <div class="group-btn">
+    <button nz-button nzType="primary" class="save-btn" (click)="handSave()">保存</button>
+    <button class="link-button" nz-button nzType="danger">取消</button>
+  </div>
+</div>
+<div class="strategy-add">
+  <button nz-button nzType="default" nzBlock style="width: 500px" (click)="isShowDetails = true">添加</button>
+</div>
+
+<nz-modal [(nzVisible)]="isStrategy"
+          nzTitle="选择设备"
+          nzWidth="70%" (nzOnCancel)="handleCancel()" (nzOnOk)="handleEquipmentOk()">
+  <xc-table [dataSet]="_dataSet"
+            [pageBean]="pageBean"
+            [tableConfig]="tableEquipment"
+            (pageChange)="pageChange($event)">
+  </xc-table>
+</nz-modal>
+<nz-modal [(nzVisible)]="isSource" nzWidth="70%" (nzOnCancel)="handleCancel()" (nzOnOk)="handleReportOk()">
+  <nz-tabset>
+    <nz-tab nzTitle="告警列表">
+      <xc-table [dataSet]="reportData"
+                [pageBean]="pageBean"
+                (pageChange)="pageChange($event)"
+                [tableConfig]="tableConfig">
+      </xc-table>
+    </nz-tab>
+    <nz-tab nzTitle="事件列表">
+      <!--      <xc-table [dataSet]="reportData"-->
+      <!--                [pageBean]="pageBean"-->
+      <!--                [tableConfig]="tableConfig"-->
+      <!--                (pageChange)="pageChange($event)">-->
+      <!--      </xc-table>-->
+    </nz-tab>
+  </nz-tabset>
+</nz-modal>
+
+
+<!--设备列表单选框-->
+<ng-template #radioTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedEquipmentId" (ngModelChange)="selectedEquipmentChange($event, data)">
+    <label nz-radio [nzValue]="data.equipmentId"></label>
+  </nz-radio-group>
+</ng-template>
+
+<!--事件源单选框-->
+<ng-template #radioReportTemp let-data="data">
+  <nz-radio-group [(ngModel)]="selectedReportId" (ngModelChange)="selectedReportChange($event, data)">
+    <label nz-radio [nzValue]="data.id"></label>
+  </nz-radio-group>
+</ng-template>
+
+

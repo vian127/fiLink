@@ -1,0 +1,49 @@
+<!--工单状态和类型-->
+<div class="facility-order-panel">
+
+  <!--tab页切换-->
+  <div class="left-panel-tabs">
+
+    <div class="left-panel-tab"  [ngClass]="{'tab-selected': isExpandOrderStateAndType}"  (click)="tabClick(OrderStateAndTypeEnum.workOrderState)">
+      <div class="text-content" title="{{indexLanguage.workOrderStatus}}">{{indexLanguage.workOrderStatus}}</div>
+    </div>
+
+    <div class="left-panel-tab" [ngClass]="{'tab-selected': !isExpandOrderStateAndType}"  (click)="tabClick(OrderStateAndTypeEnum.workOrderType)">
+      <div class="text-content" title="{{indexLanguage.workOrderType}}">{{indexLanguage.workOrderType}}</div>
+    </div>
+
+  </div>
+
+  <!--工单状态-->
+  <div class="order-state-type-checkbox" [hidden]="!isExpandOrderStateAndType">
+    <div class="checkbox-container">
+      <div class="checkbox">
+        <label nz-checkbox [(ngModel)]="isOrderStateAllChecked" (ngModelChange)="wordOrderTypeChange($event)">
+        </label>
+        <div class="checkbox-text">{{indexLanguage.allCheck}}</div>
+        <div class="checkbox-text">{{0}}</div>
+      </div>
+      <ng-container *ngFor="let type of WorkOrderTypeList">
+        <div class="checkbox">
+          <label nz-checkbox [(ngModel)]="type.checked" (ngModelChange)="wordOrderTypeChange($event, type.value)" >
+          </label>
+          <div class="checkbox-text">{{type.label}}</div>
+          <div class="checkbox-text">{{type.count}}</div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!--工单类型-->
+  <div class="order-state-type-checkbox" [hidden]="isExpandOrderStateAndType">
+        <nz-radio-group [(ngModel)]="orderTypeRadioValue" class="checkbox-container">
+        <ng-container *ngFor="let type of WorkOrderStateList">
+          <div class="radio">
+            <label class="radio-content"  nz-radio [nzValue]="type.value"></label>
+            <div class="radio-text">{{type.label}}</div>
+            <div class="radio-text">{{type.count}}</div>
+          </div>
+        </ng-container>
+        </nz-radio-group>
+      </div>
+</div>

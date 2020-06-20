@@ -1,0 +1,65 @@
+.box-warp {
+  padding: 10px;
+
+  .map-box-warp {
+    position: relative;
+    width: calc(100% - 10px);
+    height: auto;
+
+
+    .map-right-button {
+      position: absolute;
+      bottom: 90px;
+      right: 45px;
+      z-index: 10;
+      cursor: pointer;
+      background-color: white;
+      //border: solid 1px #f40808;
+
+      .button-ul {
+        text-align: center;
+
+        li {
+          padding: 5px 10px;
+          //border: 1px solid rgba(0, 0, 0, 0.15);
+          //border-radius: 4px;
+        }
+
+        li:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+
+    .map-icon-part {
+      width: 100%;
+      height: 10px;
+      text-align: center;
+      position: absolute;
+      bottom: 5px;
+    }
+
+
+    .zoom-control-item {
+      width: 32px;
+      height: 32px;
+      text-align: center;
+      line-height: 32px;
+      font-size: 20px;
+      background-color: white;
+      border: solid 1px #efeaea;
+      position: absolute;
+      bottom: 120px;
+      right: 10px;
+      cursor: pointer;
+    }
+
+  }
+
+
+  .table-container {
+    width: 100%;
+  }
+
+}

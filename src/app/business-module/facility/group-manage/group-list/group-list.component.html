@@ -1,0 +1,33 @@
+<!--设备列表-->
+<div class="box-warp">
+  <div class="table-container">
+    <xc-table
+      [dataSet]="dataSet"
+      [pageBean]="pageBean"
+      [tableConfig]="tableConfig"
+      (pageChange)="pageChange($event)"
+    ></xc-table>
+  </div>
+</div>
+
+<!-- 分组详情-->
+<nz-modal *ngIf="showGroupViewDetail" [(nzVisible)]="showGroupViewDetail"
+          nzTitle="{{language.groupDetail}}"
+          nzWidth="60%"
+          [nzFooter]="modalFooter"
+          (nzOnCancel)="showGroupViewDetail = false;"
+>
+  <app-group-view-detail [groupModel]="currentGroup"></app-group-view-detail>
+  <ng-template #modalFooter>
+    <button nz-button class="link-button"
+            nzType="danger"
+            (click)="showGroupViewDetail = false;">
+      {{commonLanguage.cancel}}</button>
+  </ng-template>
+</nz-modal>
+
+<!--分组控制-->
+<app-equipment-bulk-operations title="{{assetLanguage.groupControl}}"
+                               [isShowOver]="false"
+                               [(xcVisible)]="showGroupControlView">
+</app-equipment-bulk-operations>
